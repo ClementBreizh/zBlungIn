@@ -5,10 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import com.apsidepoei.projetpoei.mysql.database.contracts.EntrepriseContract;
-import com.apsidepoei.projetpoei.mysql.entities.Entreprise;
+import com.apsidepoei.projetpoei.database.contracts.EntrepriseContract;
+import com.apsidepoei.projetpoei.entities.Entreprise;
+import com.apsidepoei.projetpoei.database.dao.BaseDao;
 
-public class EntrepriseDao {
+public class EntrepriseDao extends BaseDao<Entreprise> {
 	public EntrepriseDao() {
         super(new EntrepriseContract());
     }
