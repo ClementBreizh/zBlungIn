@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Matiere;
@@ -24,7 +24,10 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
          adressTests();
-         degreeTests ();
+         
+//         degreeTests ();
+//         DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//         DegreeGenerator.getInstance().deleteDatas();
     }
 
 
@@ -96,6 +99,8 @@ public final class ProjetPoeiApplication {
           System.out.println(obj.toString());
       }
   }
+    
+    
 
 
     // librairie
