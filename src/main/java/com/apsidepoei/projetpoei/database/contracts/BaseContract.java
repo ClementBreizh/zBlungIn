@@ -32,7 +32,7 @@ public class BaseContract {
         COLS = cols;
         CREATE_TABLE = createTable;
         ALIASED_COL_ID = TABLE + "." + COL_ID;
-        DROP_TABLE = "DROP TABLE " + TABLE;
+        DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE;
 
         ALIASED_COLS = aliasedCols();
         INSERT = insert();

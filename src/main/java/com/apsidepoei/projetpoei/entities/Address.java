@@ -7,43 +7,43 @@ package com.apsidepoei.projetpoei.entities;
  * @author vianney
  *
  */
-public class Adress extends EntityDb{
+public class Address extends EntityDb{
 
-    private String adress;
+    private String address;
     private String postalCode;
     private String town;
 
 
-    public Adress() {
+    public Address() {
     }
 
-    public Adress(String adress, String postalCode, String town) {
+    public Address(String address, String postalCode, String town) {
         super();
-        this.adress = adress;
+        this.address = address;
         this.postalCode = postalCode;
         this.town = town;
     }
 
     @Override
     public String toString() {
-        return "Adress [AdressName=" + adress + ", postalCode=" + postalCode + ", town=" + town + "]";
+        return "Adresse [Address=" + address + ", postalCode=" + postalCode + ", town=" + town + "]";
     }
 
     // GETTER/SETTER
 
 
     /**
-     * @return the adress
+     * @return the address
      */
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     /**
-     * @param adress the adress to set
+     * @param address the address to set
      */
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     /**
