@@ -47,7 +47,8 @@ public final class ProjetPoeiApplication {
 
         Adress adress2 = new Adress("31 rue de la rabine", "35530", "noyal sur vilaine");
         DbManager.getInstance().getAdressDao().insert(adress2);
-        
+
+
         for (Object obj : DbManager.getInstance().getAdressDao().select()) {
             System.out.println(obj.toString());
         }

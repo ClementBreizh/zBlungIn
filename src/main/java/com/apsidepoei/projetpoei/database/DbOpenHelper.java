@@ -15,8 +15,7 @@ public class DbOpenHelper {
         datasource.setUser("vianney");
         datasource.setPassword("root");
         datasource.setServerName("127.0.0.1");
-        datasource.setPort(8889);
-        datasource.setDatabaseName("zblungin");
+        datasource.setDatabaseName("zbleugin");
 
         try {
             datasource.setServerTimezone("UTC");
