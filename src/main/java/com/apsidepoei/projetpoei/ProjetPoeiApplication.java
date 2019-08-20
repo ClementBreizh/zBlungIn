@@ -6,6 +6,7 @@ import java.text.ParseException;
 import com.apsidepoei.projetpoei.database.DbManager;
 
 import com.apsidepoei.projetpoei.entities.Address;
+import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -23,6 +24,7 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
          adressTests();
+         degreeTests ();
     }
 
 
@@ -66,6 +68,34 @@ public final class ProjetPoeiApplication {
             System.out.println(obj.toString());
         }
     }
+    
+    private static final void degreeTests () throws SQLException {
+
+      DbManager.getInstance().getDegreeDao().drop();
+      DbManager.getInstance().getDegreeDao().create();
+      Degree degree1 = new Degree("BTS Informatique", "BAC + 2");
+      DbManager.getInstance().getDegreeDao().insert(degree1);
+
+      Degree degree2 = new Degree("BTS Systèmes Numériques", "BAC + 2");
+      DbManager.getInstance().getDegreeDao().insert(degree2);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+      
+      DbManager.getInstance().getDegreeDao().delete(degree1);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+      
+      degree2.setName("BTS Systèmes Numériques Option A");
+      DbManager.getInstance().getDegreeDao().update(degree2);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+  }
 
 
     // librairie
