@@ -15,6 +15,7 @@ local.properties
 *.jar
 !gradle/wrapper/*.jar
 build/
+!libs/ConsoleLoggerLib.jar
 
 
 # External tool builders
