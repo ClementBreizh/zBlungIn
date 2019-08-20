@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.apsidepoei.projetpoei.mysql.entities.Degree;
+import com.apsidepoei.projetpoei.entities.Degree;
 
 public class DegreeDao extends BaseDao<Degree> {
 
@@ -24,7 +24,7 @@ public class DegreeDao extends BaseDao<Degree> {
     protected void javaToSqlUpdate(Degree item, PreparedStatement ps) throws SQLException {
         ps.setString(1, item.getName());
         ps.setString(2, item.getLevel());
-        ps.setString(3, item.getId());
+        ps.setInt(3, item.getId());
     }
 
     @Override
