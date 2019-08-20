@@ -18,6 +18,7 @@ build/
 !libs/ConsoleLoggerLib.jar
 src/main/java/com/apsidepoei/projetpoei/database/DbOpenHelper.java
 
+
 # External tool builders
 .externalToolBuilders/
 

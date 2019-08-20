@@ -85,7 +85,7 @@ public class MatiereDaoUpdateTest {
         Matiere matiere = matieres.get(0);
 
         StringBuilder data = new StringBuilder();
-        for (int i = 0; i < 255; i++) {
+        for (int i = 0; i < 50; i++) {
             data.append("x");
         }
         matiere.setName(data.toString());
