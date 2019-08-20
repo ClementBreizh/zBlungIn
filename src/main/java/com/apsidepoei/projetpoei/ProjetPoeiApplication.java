@@ -9,6 +9,7 @@ import com.tactfactory.consolelogger.GlobalLogger;
 import com.tactfactory.consolelogger.Options;
 
 import com.apsidepoei.projetpoei.entities.Adress;
+import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
 
@@ -25,6 +26,7 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
         // adressTests();
+        matiereTests();
     }
 
 
@@ -44,6 +46,26 @@ public final class ProjetPoeiApplication {
         DbManager.getInstance().getAdressDao().delete(adress1);
 
         for (Object obj : DbManager.getInstance().getAdressDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
+
+    private static final void matiereTests () throws SQLException {
+
+        DbManager.getInstance().getMatiereDao().drop();
+        DbManager.getInstance().getMatiereDao().create();
+        Matiere matiere1 = new Matiere("Physique Quantique");
+        DbManager.getInstance().getMatiereDao().insert(matiere1);
+
+        Matiere matiere2 = new Matiere("Glandage");
+        DbManager.getInstance().getMatiereDao().insert(matiere2);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(obj.toString());
+        }
+        DbManager.getInstance().getMatiereDao().delete(matiere1);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
             System.out.println(obj.toString());
         }
     }
