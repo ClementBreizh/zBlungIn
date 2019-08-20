@@ -27,6 +27,13 @@ public class Degree extends EntityDb{
         this.level = level;
     }
 
+	public Degree(int id, String name, String level) {
+        super();
+        this.setId(id);
+        this.name = name;
+        this.level = level;
+    }
+
 	public Degree() {
 
     }
