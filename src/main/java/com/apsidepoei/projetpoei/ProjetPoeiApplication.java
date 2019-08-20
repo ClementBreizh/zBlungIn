@@ -8,7 +8,7 @@ import com.tactfactory.consolelogger.ConsoleLogger;
 import com.tactfactory.consolelogger.GlobalLogger;
 import com.tactfactory.consolelogger.Options;
 
-import com.apsidepoei.projetpoei.entities.Adress;
+import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -33,10 +33,10 @@ public final class ProjetPoeiApplication {
 
 //        DbManager.getInstance().getAdressDao().drop();
         DbManager.getInstance().getAdressDao().create();
-        Adress adress1 = new Adress("51 rue de l'alma", "35000", "rennes");
+        Address adress1 = new Address("51 rue de l'alma", "35000", "rennes");
         DbManager.getInstance().getAdressDao().insert(adress1);
 
-        Adress adress2 = new Adress("31 rue de la rabine", "35530", "noyal sur vilaine");
+        Address adress2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
         DbManager.getInstance().getAdressDao().insert(adress2);
 
         for (Object obj : DbManager.getInstance().getAdressDao().select()) {
