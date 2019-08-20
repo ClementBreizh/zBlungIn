@@ -50,6 +50,7 @@ public final class ProjetPoeiApplication {
         }
     }
 
+    // Test of database function for matiere class
     private static final void matiereTests () throws SQLException {
 
         DbManager.getInstance().getMatiereDao().drop();
