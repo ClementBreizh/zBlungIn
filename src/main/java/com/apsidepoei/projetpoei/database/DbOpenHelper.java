@@ -12,9 +12,10 @@ public class DbOpenHelper {
     /** Constructeur privé */
     private DbOpenHelper() {
         MysqlDataSource datasource = new MysqlDataSource();
-        datasource.setUser("user");
-        datasource.setPassword("password");
+        datasource.setUser("root");
+        datasource.setPassword("root");
         datasource.setServerName("127.0.0.1");
+        datasource.setPort(8889);
         datasource.setDatabaseName("zblungin");
 
         try {
