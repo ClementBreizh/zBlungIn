@@ -26,7 +26,6 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
         // adressTests();
-        matiereTests();
     }
 
 
