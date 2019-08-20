@@ -24,24 +24,14 @@ public final class ProjetPoeiApplication {
     */
     public static void main(String[] args) throws ParseException, SQLException {
 
-//        GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
-//        GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
-//
-//        ConsoleLogger.LogForce("3eme data", Options.WARNING);
-//
-//        ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
-//
-//        logger.Log("3eme data", Options.WARNING);
-
-        adressTests();
-
+        // adressTests();
     }
+
 
     private static final void adressTests () throws SQLException {
 
         DbManager.getInstance().getAdressDao().drop();
         DbManager.getInstance().getAdressDao().create();
-
         Adress adress1 = new Adress("51 rue de l'alma", "35000", "rennes");
         DbManager.getInstance().getAdressDao().insert(adress1);
 
@@ -59,5 +49,14 @@ public final class ProjetPoeiApplication {
     }
 
 
+    // librairie
 
+//  GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
+//  GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
+//
+//  ConsoleLogger.LogForce("3eme data", Options.WARNING);
+//
+//  ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
+//
+//  logger.Log("3eme data", Options.WARNING);
 }
