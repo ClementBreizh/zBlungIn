@@ -11,12 +11,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.database.DbOpenHelper;
 import com.apsidepoei.projetpoei.database.contracts.MatiereContract;
 import com.apsidepoei.projetpoei.entities.Matiere;
 import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
+
+
 
 public class MatiereDaoCreateDropTest {
 
@@ -56,7 +58,7 @@ public class MatiereDaoCreateDropTest {
         DbManager.getInstance().getMatiereDao().create();
         try {
             DbManager.getInstance().getMatiereDao()
-                    .insert(new Matiere("role1"));
+                    .insert(new Matiere("matiere1"));
         } catch (Exception e) {
             fail("Insertion failure");
         }
@@ -77,7 +79,7 @@ public class MatiereDaoCreateDropTest {
     public void testGetMatiereDaoDropCannotInsert() throws SQLException, ParseException {
         DbManager.getInstance().getMatiereDao().drop();
         DbManager.getInstance().getMatiereDao()
-                .insert(new Matiere("role1"));
+                .insert(new Matiere("matiere1"));
     }
 
     @Test
@@ -85,7 +87,7 @@ public class MatiereDaoCreateDropTest {
         DbManager.getInstance().getMatiereDao().drop();
         try {
             DbManager.getInstance().getMatiereDao()
-                    .insert(new Matiere("role1"));
+                    .insert(new Matiere("matiere1"));
         } catch (SQLException e) {
             assertTrue(e.getMessage().equals("Table 'zblungi." + MatiereContract.TABLE + "' doesn't exist"));
         }
