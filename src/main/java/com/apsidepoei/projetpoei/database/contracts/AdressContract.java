@@ -21,7 +21,7 @@ public class AdressContract  extends BaseContract {
             COL_ID,
             COL_ADRESS,
             COL_POSTAL_CODE,
-            COL_TOWN,
+            COL_TOWN
     };
 
     public final static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "+ TABLE +"(" +

@@ -26,7 +26,7 @@ public class Adress extends EntityDb{
 
     @Override
     public String toString() {
-        return "Adress [AdressName=" + adress + ", postalCode=" + postalCode + ", town=" + town + "]";
+        return "Adresse [adresse postale =" + adress + ", code postal =" + postalCode + ", ville =" + town + "]";
     }
 
     // GETTER/SETTER

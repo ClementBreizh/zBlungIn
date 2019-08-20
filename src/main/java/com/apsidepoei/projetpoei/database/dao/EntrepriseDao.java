@@ -9,7 +9,7 @@ import com.apsidepoei.projetpoei.mysql.database.contracts.EntrepriseContract;
 import com.apsidepoei.projetpoei.mysql.entities.Entreprise;
 
 public class EntrepriseDao {
-	public EntrepriseDao() {
+    public EntrepriseDao() {
         super(new EntrepriseContract());
     }
 
