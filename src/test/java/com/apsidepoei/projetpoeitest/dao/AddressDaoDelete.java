@@ -31,19 +31,19 @@ public class AddressDaoDelete {
 
     @Before
     public void dropCreate() {
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
+        DbManager.getInstance().getAddressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
     }
 
     @Test
     public void testAdressDaoDeleteSimple() throws SQLException, ParseException {
         Address Adress = new Address("AdressTest", "Test", "villeTest");
-        DbManager.getInstance().getAdressDao().insert(Adress);
+        DbManager.getInstance().getAddressDao().insert(Adress);
 
         Adress.setId(1);
-        DbManager.getInstance().getAdressDao().delete(Adress);
+        DbManager.getInstance().getAddressDao().delete(Adress);
 
-        assertNull(DbManager.getInstance().getAdressDao().select(1));
+        assertNull(DbManager.getInstance().getAddressDao().select(1));
     }
 
     @Test
@@ -53,15 +53,15 @@ public class AddressDaoDelete {
         for (int i = 1; i <= 10; i++) {
             Address Adress = new Address("Adress" + i, "cod" + i, "ville" + i);
             Adress.setId(i);
-            DbManager.getInstance().getAdressDao().insert(Adress);
+            DbManager.getInstance().getAddressDao().insert(Adress);
 
             if (i == 5) {
-                DbManager.getInstance().getAdressDao().delete(Adress);
+                DbManager.getInstance().getAddressDao().delete(Adress);
             }
         }
 
         for (int i = 1; i <= 10; i++) {
-            if (i == 5 && DbManager.getInstance().getAdressDao().select(i) == null) {
+            if (i == 5 && DbManager.getInstance().getAddressDao().select(i) == null) {
                 statut = true;
             }
         }
@@ -76,15 +76,15 @@ public class AddressDaoDelete {
         for (int i = 17; i <= 102; i += 17) {
             Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
             Adress.setId(i);
-            DbManager.getInstance().getAdressDao().insert(Adress);
+            DbManager.getInstance().getAddressDao().insert(Adress);
 
             if (i == 51) {
-                DbManager.getInstance().getAdressDao().delete(Adress);
+                DbManager.getInstance().getAddressDao().delete(Adress);
             }
         }
 
         for (int i = 17; i <= 102; i += 17) {
-            if (i == 51 && DbManager.getInstance().getAdressDao().select(i) == null) {
+            if (i == 51 && DbManager.getInstance().getAddressDao().select(i) == null) {
                 statut = true;
             }
         }
@@ -99,11 +99,11 @@ public class AddressDaoDelete {
         for (int i = 17; i <= 102; i += 17) {
             Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
             Adress.setId(i);
-            DbManager.getInstance().getAdressDao().insert(Adress);
+            DbManager.getInstance().getAddressDao().insert(Adress);
 
             if (i == 102) {
-              DbManager.getInstance().getAdressDao().delete(Adress);
-              statut = DbManager.getInstance().getAdressDao().delete(Adress);
+              DbManager.getInstance().getAddressDao().delete(Adress);
+              statut = DbManager.getInstance().getAddressDao().delete(Adress);
             }
         }
 
@@ -112,7 +112,7 @@ public class AddressDaoDelete {
 
     @AfterClass
     public static void dropAfter() {
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
+        DbManager.getInstance().getAddressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
     }
 }

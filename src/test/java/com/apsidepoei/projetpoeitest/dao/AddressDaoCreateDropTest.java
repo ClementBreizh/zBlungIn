@@ -30,8 +30,8 @@ public class AddressDaoCreateDropTest {
     @Test
     public void testGetAdressCreateTableMatchingFields() throws SQLException {
 
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
+        DbManager.getInstance().getAddressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
 
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
                 .executeQuery("DESCRIBE " + AddressContract.TABLE);
@@ -61,10 +61,10 @@ public class AddressDaoCreateDropTest {
 
     @Test
     public void testgetAdressDaoCreateTableInsertWorking() {
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
+        DbManager.getInstance().getAddressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
         try {
-            DbManager.getInstance().getAdressDao().insert(new Address("Adress1", "code1", "ville1"));
+            DbManager.getInstance().getAddressDao().insert(new Address("Adress1", "code1", "ville1"));
         } catch (Exception e) {
             fail("Insertion failure");
         }
@@ -72,7 +72,7 @@ public class AddressDaoCreateDropTest {
 
     @Test
     public void testgetAdressDaoDropTableRemoved() throws SQLException {
-        DbManager.getInstance().getAdressDao().drop();
+        DbManager.getInstance().getAddressDao().drop();
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
         while (rs.next()) {
             if (rs.getString(1).equals(AddressContract.TABLE)) {
@@ -83,15 +83,15 @@ public class AddressDaoCreateDropTest {
 
     @Test(expected = MySQLSyntaxErrorException.class)
     public void testgetAdressDaoDropCannotInsert() throws SQLException, ParseException {
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().insert(new Address("Adress1", "code1", "ville1"));
+        DbManager.getInstance().getAddressDao().drop();
+        DbManager.getInstance().getAddressDao().insert(new Address("Adress1", "code1", "ville1"));
     }
 
     @Test
     public void testgetAdressDaoDropCannotInsertGoodMessage() {
-        DbManager.getInstance().getAdressDao().drop();
+        DbManager.getInstance().getAddressDao().drop();
         try {
-            DbManager.getInstance().getAdressDao()
+            DbManager.getInstance().getAddressDao()
             .insert(new Address("Adress1", "code1", "ville1"));
         } catch (SQLException e) {
             assertTrue(e.getMessage().equals("Table 'zbleugin." + AddressContract.TABLE + "' doesn't exist"));
