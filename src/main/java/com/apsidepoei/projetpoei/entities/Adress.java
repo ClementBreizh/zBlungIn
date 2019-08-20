@@ -29,49 +29,52 @@ public class Adress extends EntityDb{
         return "Adress [AdressName=" + adress + ", postalCode=" + postalCode + ", town=" + town + "]";
     }
 
-
     // GETTER/SETTER
+
+
     /**
      * @return the adress
      */
-    public String getadress() {
+    public String getAdress() {
         return adress;
     }
 
     /**
      * @param adress the adress to set
      */
-    public void setadress(String adress) {
+    public void setAdress(String adress) {
         this.adress = adress;
     }
 
     /**
      * @return the postalCode
      */
-    public String getpostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
     /**
      * @param postalCode the postalCode to set
      */
-    public void setpostalCode(String postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
     /**
      * @return the town
      */
-    public String gettown() {
+    public String getTown() {
         return town;
     }
 
     /**
      * @param town the town to set
      */
-    public void settown(String town) {
+    public void setTown(String town) {
         this.town = town;
     }
+
+
 
 
 
