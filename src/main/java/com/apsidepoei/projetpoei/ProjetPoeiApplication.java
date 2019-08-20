@@ -24,13 +24,13 @@ public final class ProjetPoeiApplication {
     */
     public static void main(String[] args) throws ParseException, SQLException {
 
-        // adressTests();
+         adressTests();
     }
 
 
     private static final void adressTests () throws SQLException {
 
-        DbManager.getInstance().getAdressDao().drop();
+//        DbManager.getInstance().getAdressDao().drop();
         DbManager.getInstance().getAdressDao().create();
         Adress adress1 = new Adress("51 rue de l'alma", "35000", "rennes");
         DbManager.getInstance().getAdressDao().insert(adress1);
