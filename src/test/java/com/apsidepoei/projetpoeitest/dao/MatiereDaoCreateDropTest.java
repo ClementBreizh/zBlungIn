@@ -18,7 +18,7 @@ import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 
-
+// Test CREATE, DROP on database
 public class MatiereDaoCreateDropTest {
 
     @Test
@@ -81,15 +81,5 @@ public class MatiereDaoCreateDropTest {
         DbManager.getInstance().getMatiereDao()
                 .insert(new Matiere("matiere1"));
     }
-
-//	@Test
-//	public void testGetMatiereDaoDropCannotInsertGoodMessage() {
-//		DbManager.getInstance().getMatiereDao().drop();
-//		try {
-//			DbManager.getInstance().getMatiereDao().insert(new Matiere("matiere1"));
-//		} catch (SQLException e) {
-//			assertTrue(e.getMessage().equals("Table 'zblungi." + MatiereContract.TABLE + "' doesn't exist"));
-//		}
-//	 }
 }
 
