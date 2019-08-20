@@ -12,11 +12,11 @@ public class DbOpenHelper {
     /** Constructeur privé */
     private DbOpenHelper() {
         MysqlDataSource datasource = new MysqlDataSource();
-        datasource.setUser("root");
-        datasource.setPassword("root");
-        datasource.setServerName("127.0.0.1");
-        datasource.setPort(8889);
-        datasource.setDatabaseName("zblungin");
+        datasource.setUser("user1");
+        datasource.setPassword("password");
+        datasource.setServerName("192.168.15.95");
+        datasource.setPort(3306);
+        datasource.setDatabaseName("disco");
 
         try {
             datasource.setServerTimezone("UTC");
