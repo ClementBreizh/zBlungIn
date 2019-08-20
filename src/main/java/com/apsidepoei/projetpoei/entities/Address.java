@@ -7,17 +7,17 @@ package com.apsidepoei.projetpoei.entities;
  * @author vianney
  *
  */
-public class Adress extends EntityDb{
+public class Address extends EntityDb{
 
     private String adress;
     private String postalCode;
     private String town;
 
 
-    public Adress() {
+    public Address() {
     }
 
-    public Adress(String adress, String postalCode, String town) {
+    public Address(String adress, String postalCode, String town) {
         super();
         this.adress = adress;
         this.postalCode = postalCode;
