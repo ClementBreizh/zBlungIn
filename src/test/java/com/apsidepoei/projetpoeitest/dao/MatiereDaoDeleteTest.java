@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
+// Test DELETE function on database
 public class MatiereDaoDeleteTest {
 
     @Before

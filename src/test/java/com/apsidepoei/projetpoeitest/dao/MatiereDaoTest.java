@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
+// Test SELECT function on database
 public class MatiereDaoTest {
 
     static List<Matiere> matieres = new ArrayList<Matiere>();
