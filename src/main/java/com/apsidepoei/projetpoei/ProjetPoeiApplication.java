@@ -4,11 +4,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-import com.tactfactory.consolelogger.ConsoleLogger;
-import com.tactfactory.consolelogger.GlobalLogger;
-import com.tactfactory.consolelogger.Options;
 
-import com.apsidepoei.projetpoei.entities.Adress;
+import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -26,30 +23,31 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
         // adressTests();
-        matiereTests();
+        //  matiereTests();
     }
 
 
     private static final void adressTests () throws SQLException {
 
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
-        Adress adress1 = new Adress("51 rue de l'alma", "35000", "rennes");
-        DbManager.getInstance().getAdressDao().insert(adress1);
+//        DbManager.getInstance().getAdressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
+        Address adress1 = new Address("51 rue de l'alma", "35000", "rennes");
+        DbManager.getInstance().getAddressDao().insert(adress1);
 
-        Adress adress2 = new Adress("31 rue de la rabine", "35530", "noyal sur vilaine");
-        DbManager.getInstance().getAdressDao().insert(adress2);
+        Address adress2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
+        DbManager.getInstance().getAddressDao().insert(adress2);
 
-        for (Object obj : DbManager.getInstance().getAdressDao().select()) {
+        for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
-        DbManager.getInstance().getAdressDao().delete(adress1);
+        DbManager.getInstance().getAddressDao().delete(adress1);
 
-        for (Object obj : DbManager.getInstance().getAdressDao().select()) {
+        for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
     }
 
+    // Test of database function for matiere class
     private static final void matiereTests () throws SQLException {
 
         DbManager.getInstance().getMatiereDao().drop();
