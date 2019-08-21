@@ -2,9 +2,14 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.apsidepoei.projetpoei.database.DbManager;
+
+import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
+
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
+
 import com.apsidepoei.projetpoei.entities.Address;
 
 import com.apsidepoei.projetpoei.entities.Degree;
@@ -29,11 +34,13 @@ public final class ProjetPoeiApplication {
 
          matiereTests();
          adressTests();
-         //entrepriseTests();
-         
+         entrepriseTests();
+         degreeTests();
+         testGenerate();
 //         degreeTests ();
 //         DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //         DegreeGenerator.getInstance().deleteDatas();
+
 
     }
 
@@ -77,6 +84,12 @@ public final class ProjetPoeiApplication {
         for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
             System.out.println(obj.toString());
         }
+        matiere2.setName("Mathematique");
+        DbManager.getInstance().getMatiereDao().update(matiere2);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(obj.toString());
+        }
     }
 
     private static final void degreeTests () throws SQLException {
@@ -106,6 +119,7 @@ public final class ProjetPoeiApplication {
           System.out.println(obj.toString());
       }
   }
+
     
     private static final void entrepriseTests () throws SQLException {
 
@@ -136,6 +150,21 @@ public final class ProjetPoeiApplication {
         }
     }
     
+
+
+
+
+    private static void testGenerate() throws SQLException, ParseException {
+
+        MatiereGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
+               for (Matiere matiere : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(matiere);
+        }
+
+               MatiereGenerator.getInstance().deleteDatas();
+    }
+
 
 
     // librairie
