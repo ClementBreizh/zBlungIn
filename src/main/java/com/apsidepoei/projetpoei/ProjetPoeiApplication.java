@@ -41,7 +41,7 @@ public final class ProjetPoeiApplication {
 
         // Tests entité Feedback
 //      feedbackTests();
-      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
       FeedbackGenerator.getInstance().deleteDatas();
 
          // Test entité Entreprise

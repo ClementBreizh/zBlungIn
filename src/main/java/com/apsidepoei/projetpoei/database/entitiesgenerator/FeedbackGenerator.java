@@ -13,8 +13,9 @@ import com.apsidepoei.projetpoei.entities.Feedback;
 import com.github.javafaker.Faker;
 
 /**
- * @author vianney
- * This class generate fake data
+ * @author vianney.
+ *
+ *         This class generate fake data
  */
 public class FeedbackGenerator {
 
@@ -44,8 +45,7 @@ public class FeedbackGenerator {
     /**
      *
      * @return
-     * @throws SQLException
-     * Generate fake data
+     * @throws SQLException Generate fake data
      */
     public List<Feedback> generateDatas() throws SQLException {
         return generateDatas(faker.random().nextInt(100));
@@ -55,59 +55,41 @@ public class FeedbackGenerator {
      *
      * @param nb
      * @return
-     * @throws SQLException
-     * Generate n fake data
+     * @throws SQLException Generate n fake data
      */
     public List<Feedback> generateDatas(int nb) throws SQLException {
         List<Feedback> result = new ArrayList<>();
-        List<String> feedbacks = new ArrayList<String>();
 
         int i = 0;
-        while (i <  nb) {
-            String typeOfContract1 = "CDI";
-            Integer durationOfContract1 = 0;
-            String comment1 = "" + faker.company();
-
-            if (!feedbacks.contains(typeOfContract1)) {
-                feedbacks.add(typeOfContract1);
-
-                Feedback feedback = new Feedback(typeOfContract1, durationOfContract1, comment1);
+        while (i < nb) {
+            if (i%3==0) {
+                String typeOfContract1 = "CDI";
+                Feedback feedback = new Feedback(typeOfContract1, 0, faker.company().name());
                 result.add(feedback);
-            }
-        }
-        while (i <  (nb / 3)) {
-            String typeOfContract2 = "CDD";
-            Integer durationOfContract2 = faker.random().nextInt(6, 24);
-            String comment2 = faker.company().name();
+            }else if(i%3==1) {
+                String typeOfContract2 = "CDD";
+                Integer durationOfContract2 = faker.random().nextInt(6, 24);
+                String comment2 = faker.company().name();
 
-            if (!feedbacks.contains(typeOfContract2)) {
-                feedbacks.add(typeOfContract2);
+                Feedback feedback = new Feedback(typeOfContract2, durationOfContract2, comment2);
+                result.add(feedback);
+            }else if(i%3==2) {
+                String typeOfContract2 = "Intérim";
+                Integer durationOfContract2 = faker.random().nextInt(6, 24);
+                String comment2 = faker.company().name();
 
                 Feedback feedback = new Feedback(typeOfContract2, durationOfContract2, comment2);
                 result.add(feedback);
             }
-        }
-        while (i <  (nb / 3)) {
-            String typeOfContract2 = "Intérim";
-            Integer durationOfContract2 = faker.random().nextInt(6, 24);
-            String comment2 = faker.company().name();
 
-            if (!feedbacks.contains(typeOfContract2)) {
-                feedbacks.add(typeOfContract2);
-
-                Feedback feedback = new Feedback(typeOfContract2, durationOfContract2, comment2);
-                result.add(feedback);
-
-                i++;
-            }
+            i++;
         }
         return result;
     }
 
     /**
      *
-     * @throws SQLException
-     * Generate and insert datas
+     * @throws SQLException Generate and insert datas
      */
     public void generateAndInsertDatas() throws SQLException {
         generateAndInsertDatas(faker.random().nextInt(100));
@@ -116,8 +98,7 @@ public class FeedbackGenerator {
     /**
      *
      * @param nb
-     * @throws SQLException
-     * Generate and insert n datas
+     * @throws SQLException Generate and insert n datas
      */
     public void generateAndInsertDatas(int nb) throws SQLException {
         for (Feedback feedback : generateDatas(nb)) {
@@ -129,8 +110,7 @@ public class FeedbackGenerator {
 
     /**
      *
-     * @throws SQLException
-     * Drop, create table, generate and insert datas
+     * @throws SQLException Drop, create table, generate and insert datas
      */
     public void generateAndInsertDatasDroppingTable() throws SQLException {
         generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -139,8 +119,7 @@ public class FeedbackGenerator {
     /**
      *
      * @param nb
-     * @throws SQLException
-     * Drop, create table, generate and insert n data
+     * @throws SQLException Drop, create table, generate and insert n data
      */
     public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
         DbManager.getInstance().getFeedbackDao().drop();
@@ -153,7 +132,7 @@ public class FeedbackGenerator {
      * delete datas
      */
     public void deleteDatas() {
-        for (Feedback feedback: datas) {
+        for (Feedback feedback : datas) {
             DbManager.getInstance().getFeedbackDao().delete(feedback);
         }
     }
