@@ -10,7 +10,7 @@ import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoei.database.dao.BaseDao;
 
 public class EntrepriseDao extends BaseDao<Entreprise> {
-	public EntrepriseDao() {
+    public EntrepriseDao() {
         super(new EntrepriseContract());
     }
 
