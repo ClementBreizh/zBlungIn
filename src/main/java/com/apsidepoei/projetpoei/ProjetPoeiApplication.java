@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoei;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
@@ -20,6 +21,7 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
+import com.apsidepoei.projetpoei.entities.Appointment;
 import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
@@ -71,6 +73,8 @@ public final class ProjetPoeiApplication {
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //        DegreeGenerator.getInstance().deleteDatas();
 
+          // Tests entité Appointment
+//    	  appointmentTests();
 
 
     }
@@ -102,6 +106,42 @@ public final class ProjetPoeiApplication {
             System.out.println(obj.toString());
         }
     }
+
+	/**
+	 * Functions tests for degree
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	private static void appointmentTests() throws SQLException, ParseException {
+	    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		final Date mySqlDate = sdf.parse("2019-08-20 02:05:00");
+		final Date mySqlDateChg = sdf.parse("2019-09-12 06:05:00");
+
+		DbManager.getInstance().getAppointmentDao().drop();
+		DbManager.getInstance().getAppointmentDao().create();
+		Appointment appointment1 = new Appointment("Information de rendez-vous M. Bon", mySqlDate, "Compte rendu de rendez-vous de M. Jean");
+		DbManager.getInstance().getAppointmentDao().insert(appointment1);
+
+		Appointment appointment2 = new Appointment("Information de rendez-vous M. Jean", mySqlDate, "Compte rendu de rendez-vous de M. Bon");
+		DbManager.getInstance().getAppointmentDao().insert(appointment2);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+
+		DbManager.getInstance().getAppointmentDao().delete(appointment1);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+
+		appointment2.setDateTime(mySqlDateChg);
+		DbManager.getInstance().getAppointmentDao().update(appointment2);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+	}
 
     private static final void feedbackTests () throws SQLException {
 
