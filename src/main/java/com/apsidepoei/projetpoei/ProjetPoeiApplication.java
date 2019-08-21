@@ -9,7 +9,7 @@ import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
 
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
@@ -39,7 +39,8 @@ public final class ProjetPoeiApplication {
 
     	 // Test entité Entreprise
 //    		entrepriseTests();
-
+//			EntrepriseGenerator.getInstance().generateDatas(10);
+    	
          // Tests entité Matiere
 //         matiereTests();
 
@@ -48,7 +49,9 @@ public final class ProjetPoeiApplication {
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //        DegreeGenerator.getInstance().deleteDatas();
+    	
     }
+    
 
 
     private static final void addressTests () throws SQLException {
