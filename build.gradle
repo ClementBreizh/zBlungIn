@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
-targetCompatibility = 1.11
+targetCompatibility = 1.8
 version = '1.0'
 
 def classesJava = "${project.buildDir}/classes/java/main/"
@@ -62,7 +62,7 @@ uploadArchives {
 apply plugin: 'jacoco'
 
 jacoco {
-            toolVersion "0.6.5.201403032054"
+            toolVersion "0.8.4"
         }
 
         jacocoTestReport {
