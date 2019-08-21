@@ -167,6 +167,9 @@ public class DegreeDaoUpdateTest {
 		degree.setName(data.toString());
 
 		DbManager.getInstance().getDegreeDao().update(degree);
+
+		assertTrue(DbManager.getInstance().getDegreeDao().update(degree) == 1);
+
 	}
 
 	/**
@@ -180,6 +183,8 @@ public class DegreeDaoUpdateTest {
 		degree.setName("");
 
 		DbManager.getInstance().getDegreeDao().update(degree);
+
+		assertTrue(DbManager.getInstance().getDegreeDao().update(degree) == 1);
 	}
 
 	/**
@@ -229,6 +234,9 @@ public class DegreeDaoUpdateTest {
 		degree.setLevel(data.toString());
 
 		DbManager.getInstance().getDegreeDao().update(degree);
+
+		assertTrue(DbManager.getInstance().getDegreeDao().update(degree) == 1);
+
 	}
 
 	/**
@@ -242,6 +250,9 @@ public class DegreeDaoUpdateTest {
 		degree.setLevel("");
 
 		DbManager.getInstance().getDegreeDao().update(degree);
+
+		assertTrue(DbManager.getInstance().getDegreeDao().update(degree) == 1);
+
 	}
 
 	/**
@@ -258,26 +269,53 @@ public class DegreeDaoUpdateTest {
 	}
 
 	/**
-	 * Test the update with the wrong id
+	 * Test the name update with the wrong id
 	 * @throws SQLException
 	 */
 	@Test
-	public void updateWrongId() throws SQLException {
+	public void updateNameWrongId() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setId(4);
 		degree.setName(CHANGED_DATA);
 
 		assertEquals(new Integer(0), DbManager.getInstance().getDegreeDao().update(degree));
 	}
+
+	/**
+	 * Test the level update with the wrong id
+	 * @throws SQLException
+	 */
+	@Test
+	public void updatelevelWrongId() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setId(4);
+		degree.setLevel(CHANGED_DATA);
+
+		assertEquals(new Integer(0), DbManager.getInstance().getDegreeDao().update(degree));
+	}
+
 	/**
 	 *
 	 * @throws SQLException
-	 * Test the update with the good id
+	 * Test the name update with the good id
 	 */
 	@Test
-	public void updateGoodId() throws SQLException {
+	public void updateNameGoodId() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setName(CHANGED_DATA);
+
+		assertEquals(new Integer(1), DbManager.getInstance().getDegreeDao().update(degree));
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the level update with the good id
+	 */
+	@Test
+	public void updateLevelGoodId() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setLevel(CHANGED_DATA);
 
 		assertEquals(new Integer(1), DbManager.getInstance().getDegreeDao().update(degree));
 	}
