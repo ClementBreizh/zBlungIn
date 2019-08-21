@@ -1,6 +1,17 @@
 package com.apsidepoei.projetpoei.database;
 
+import com.apsidepoei.projetpoei.database.dao.AddressDao;
+import com.apsidepoei.projetpoei.database.dao.DegreeDao;
+import com.apsidepoei.projetpoei.database.dao.EntrepriseDao;
+import com.apsidepoei.projetpoei.database.dao.MatiereDao;
+
 public class DbManager {
+
+    private AddressDao addressDao = new AddressDao();
+    private DegreeDao degreeDao = new DegreeDao();
+    private EntrepriseDao entrepriseDao = new EntrepriseDao();
+    private MatiereDao matiereDao = new MatiereDao();
+
 
     /** Constructeur privé */
     private DbManager() {
@@ -20,4 +31,34 @@ public class DbManager {
         }
         return INSTANCE;
     }
+
+    // GETTER/SETTER
+    /**
+     * @return the adressDao
+     */
+    public AddressDao getAddressDao() {
+        return addressDao;
+    }
+
+    /**
+     * @return the degreeDao
+     */
+    public DegreeDao getDegreeDao() {
+        return degreeDao;
+    }
+
+    /**
+     * @return the entrepriseDao
+     */
+    public EntrepriseDao getEntrepriseDao() {
+        return entrepriseDao;
+    }
+
+    /**
+     * @return the matiereDao
+     */
+    public MatiereDao getMatiereDao() {
+        return matiereDao;
+    }
+
 }
