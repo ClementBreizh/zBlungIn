@@ -19,6 +19,7 @@
 //    private List<Assessment> assessments = new ArrayList<Assessment>();
 //
 //    @Before
+//		/** drop et create pour test propre */
 //    public void setupAssessment() throws SQLException {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        DbManager.getInstance().getAssessmentDao().create();
@@ -34,6 +35,7 @@
 //    }
 //
 //    @Test
+//		/** comparaison entre données rentrées et présentes en DB */
 //    public void simpleUpdateCompare1() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //    	assessment.setCategory(CHANGED_DATA_CATEGORY);
@@ -65,6 +67,7 @@
 //    }
 //
 //    @Test(expected = MysqlDataTruncation.class)
+//		/** test sur nombre de character saisis */
 //    public void updateMaxValExtended() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //
@@ -78,6 +81,7 @@
 //    }
 //
 //    @Test
+// /** test sur nombre de character saisis */
 //    public void updateMaxValOK() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //
@@ -91,6 +95,7 @@
 //    }
 //
 //    @Test
+// 		/** test sur nombre de character saisis */
 //    public void updateMinValOK() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //    	Assessment.setCategory("");
@@ -99,6 +104,7 @@
 //    }
 //
 //    @Test(expected = MySQLIntegrityConstraintViolationException.class)
+// 		/** test sur nombre de character saisis et attente d'un erreur car valeur = null */
 //    public void updateNullValKO() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //    	assessment.setCategory(null);
@@ -107,6 +113,7 @@
 //    }
 //
 //    @Test
+// 		/** test en rentrant une ID incorrecte */
 //    public void updateWrongId() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //    	assessment.setId(4);
@@ -116,6 +123,7 @@
 //    }
 //
 //    @Test
+//		/** Test avec Id correcte */
 //    public void updateGoodId() throws SQLException {
 //    	Assessment assessment = assessments.get(0);
 //    	assessment.setCategory(CHANGED_DATA_CATEGORY);

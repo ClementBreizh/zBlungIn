@@ -19,6 +19,7 @@
 //public class AssessmentDaoCreateDropTest {
 //
 //    @Test
+// /** Test de create de table avec nombre de cols et raw corrects */
 //    public void testGetAssessmentDaoCreateTableMatchingFields() throws SQLException {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        DbManager.getInstance().getAssessmentDao().create();
@@ -49,6 +50,7 @@
 //    }
 //
 //    @Test
+// /** Test d'insertion des données dans la table apres creation */
 //    public void testGetAssessmentDaoCreateTableInsertWorking() {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        DbManager.getInstance().getAssessmentDao().create();
@@ -61,6 +63,7 @@
 //    }
 //
 //    @Test
+// /** Test de drop de la table */
 //    public void testGetAssessmentDaoDropTableRemoved() throws SQLException {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
@@ -72,6 +75,7 @@
 //    }
 //
 //    @Test(expected = MySQLSyntaxErrorException.class)
+//    /** Test d'insertion dans une table inexistante */
 //    public void testGetAssessmentDaoDropCannotInsert() throws SQLException, ParseException {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        DbManager.getInstance().getAssessmentDao()
@@ -79,6 +83,7 @@
 //    }
 //
 //    @Test
+//   /** Test d'insertion dans une ta	ble inexistante avec message correspond a l'erreur SQL*/
 //    public void testGetAssessmentDaoDropCannotInsertGoodMessage() {
 //        DbManager.getInstance().getAssessmentDao().drop();
 //        try {
