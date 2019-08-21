@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.entities.Appointment;
@@ -30,8 +31,9 @@ public class AppointmentDao extends BaseDao<Appointment> {
      */
     @Override
     protected void javaToSqlInsert(Appointment item, PreparedStatement ps) throws SQLException {
-        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String mySqlDate = sdf.format(item.getDateTime());
+
 
     	ps.setString(2, item.getInformations());
         ps.setString(3, mySqlDate);
@@ -43,7 +45,7 @@ public class AppointmentDao extends BaseDao<Appointment> {
      */
     @Override
     protected void javaToSqlUpdate(Appointment item, PreparedStatement ps) throws SQLException {
-        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String mySqlDate = sdf.format(item.getDateTime());
 
         ps.setString(1, item.getInformations());
@@ -63,10 +65,8 @@ public class AppointmentDao extends BaseDao<Appointment> {
         item.setInformations(rs.getString(rs.findColumn(AppointmentContract.COL_INFORMATIONS)));
 
         String date = rs.getString(rs.findColumn(AppointmentContract.COL_DATETIME));
-        date = date.substring(0, 10);
 
-        item.setDateTime(new SimpleDateFormat("YYYY-MM-DD")
-                .parse(date));
+        item.setDateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date));
 
         item.setReport(rs.getString(rs.findColumn(AppointmentContract.COL_REPORT)));
 

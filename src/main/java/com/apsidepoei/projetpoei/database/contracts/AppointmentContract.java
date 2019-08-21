@@ -47,7 +47,7 @@ public class AppointmentContract extends BaseContract{
     public final static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "+ TABLE +"(" +
             COL_ID + " int NOT NULL AUTO_INCREMENT PRIMARY KEY," +
             COL_INFORMATIONS + " VARCHAR(255)," +
-            COL_DATETIME + " DATE NOT NULL," +
+            COL_DATETIME + " DATETIME NOT NULL," +
             COL_REPORT + " TEXT" +
             ")";
 
