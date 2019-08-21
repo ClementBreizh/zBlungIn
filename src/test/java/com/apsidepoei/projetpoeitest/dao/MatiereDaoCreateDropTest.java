@@ -18,10 +18,11 @@ import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 
-// Test CREATE, DROP on database
+/** Test CREATE, DROP on database */
 public class MatiereDaoCreateDropTest {
 
     @Test
+    /** creation de la table */
     public void testGetMatiereDaoCreateTableMatchingFields() throws SQLException {
 
         DbManager.getInstance().getMatiereDao().drop();
@@ -53,6 +54,7 @@ public class MatiereDaoCreateDropTest {
     }
 
     @Test
+    /** test insertion dans la table une fois creér */
     public void testGetMatiereDaoCreateTableInsertWorking() {
         DbManager.getInstance().getMatiereDao().drop();
         DbManager.getInstance().getMatiereDao().create();
@@ -65,6 +67,7 @@ public class MatiereDaoCreateDropTest {
     }
 
     @Test
+    /** test du drop de la table avec vérification si elle existe toujours apres */
     public void testGetMatiereDaoDropTableRemoved() throws SQLException {
         DbManager.getInstance().getMatiereDao().drop();
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
@@ -76,6 +79,7 @@ public class MatiereDaoCreateDropTest {
     }
 
     @Test(expected = MySQLSyntaxErrorException.class)
+    /** test d'insetion alors que la table n'existe plus/pas */
     public void testGetMatiereDaoDropCannotInsert() throws SQLException, ParseException {
         DbManager.getInstance().getMatiereDao().drop();
         DbManager.getInstance().getMatiereDao()

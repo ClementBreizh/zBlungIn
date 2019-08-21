@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import com.apsidepoei.projetpoei.database.DbManager;
 
 import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
@@ -35,12 +35,14 @@ public final class ProjetPoeiApplication {
 //        testGenerate();
 
         // Tests entité Adress
-//         addressTests();
+//        addressTests();
+//        AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//        AddressGenerator.getInstance().deleteDatas();
 
-    	 // Test entité Entreprise
+         // Test entité Entreprise
 //    		entrepriseTests();
 //			EntrepriseGenerator.getInstance().generateDatas(10);
-    	
+
          // Tests entité Matiere
 //         matiereTests();
 
@@ -49,9 +51,9 @@ public final class ProjetPoeiApplication {
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //        DegreeGenerator.getInstance().deleteDatas();
-    	
+
     }
-    
+
 
 
     private static final void addressTests () throws SQLException {
@@ -107,11 +109,11 @@ public final class ProjetPoeiApplication {
         }
     }
 
-	/**
-	 *
-	 * @throws SQLException
-	 * Functions tests for degree
-	 */
+    /**
+     *
+     * @throws SQLException
+     * Functions tests for degree
+     */
     private static final void degreeTests () throws SQLException {
 
       DbManager.getInstance().getDegreeDao().drop();

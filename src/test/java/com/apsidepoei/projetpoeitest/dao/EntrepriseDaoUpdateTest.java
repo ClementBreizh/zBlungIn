@@ -15,12 +15,21 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 
-//Test UPDATE function on database
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class EntrepriseDaoUpdateTest {
 
 	private static final String CHANGED_DATA = "toto";
     private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Before each test, drop & create the table and add / insert new business
+	 */
     @Before
     public void setupTests() throws SQLException {
         DbManager.getInstance().getEntrepriseDao().drop();
@@ -36,6 +45,11 @@ public class EntrepriseDaoUpdateTest {
         }
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Compare modification with the update
+	 */
     @Test
     public void simpleUpdateCompare1() throws SQLException {
        Entreprise entreprise = entreprises.get(0);
@@ -48,6 +62,11 @@ public class EntrepriseDaoUpdateTest {
         assertTrue(dbEntreprise.getId() == dbEntrepriseUpdated.getId() && !dbEntreprise.getNom().equals(dbEntrepriseUpdated.getNom()) && dbEntrepriseUpdated.getNom().equals(CHANGED_DATA));
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Compare modification with the update
+	 */
     @Test
     public void simpleUpdateCompare2() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -59,6 +78,9 @@ public class EntrepriseDaoUpdateTest {
         assertTrue(entreprise.getId() == dbEntrepriseUpdated.getId() && entreprise.getNom().equals(dbEntrepriseUpdated.getNom()));
     }
 
+	/**
+	 * Compare the modification with the update
+	 */
     @Test
     public void simpleUpdateCompare3() {
     	Entreprise entreprise = entreprises.get(0);
@@ -67,6 +89,11 @@ public class EntrepriseDaoUpdateTest {
         assertTrue(entreprise.getId() == dbEntreprise.getId() && entreprise.getNom().equals(dbEntreprise.getNom()));
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Test if data is truncated when update is too long
+	 */
     @Test(expected = MysqlDataTruncation.class)
     public void updateMaxValExtended() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -80,6 +107,11 @@ public class EntrepriseDaoUpdateTest {
         DbManager.getInstance().getEntrepriseDao().update(entreprise);
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Test update with the max size for the data
+	 */
     @Test
     public void updateMaxValOK() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -93,6 +125,11 @@ public class EntrepriseDaoUpdateTest {
         DbManager.getInstance().getEntrepriseDao().update(entreprise);
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Test the update with the min size of the value
+	 */
     @Test
     public void updateMinValOK() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -101,6 +138,11 @@ public class EntrepriseDaoUpdateTest {
         DbManager.getInstance().getEntrepriseDao().update(entreprise);
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Test the update with null value
+	 */
     @Test(expected = MySQLIntegrityConstraintViolationException.class)
     public void updateNullValKO() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -109,6 +151,10 @@ public class EntrepriseDaoUpdateTest {
         DbManager.getInstance().getEntrepriseDao().update(entreprise);
     }
 
+    /**
+	 * Test the update with the wrong id
+	 * @throws SQLException
+	 */
     @Test
     public void updateWrongId() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);
@@ -118,6 +164,11 @@ public class EntrepriseDaoUpdateTest {
         assertEquals(new Integer(0), DbManager.getInstance().getEntrepriseDao().update(entreprise));
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * Test the update with the good id
+	 */
     @Test
     public void updateGoodId() throws SQLException {
     	Entreprise entreprise = entreprises.get(0);

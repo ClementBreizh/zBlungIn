@@ -14,10 +14,18 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class EntrepriseDaoTest {
 	
 	static List<Entreprise> entreprises = new ArrayList<Entreprise>();
 
+	/**
+	 * Before the tests, create new data
+	 */
     @BeforeClass
     public static void config() {
         Entreprise entreprise1 = new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A");
@@ -31,6 +39,11 @@ public class EntrepriseDaoTest {
         entreprises.add(entreprise3);
     }
 
+    /**
+	 *
+	 * @throws Exception
+	 * Before each test, drop, create and insert new data
+	 */
     @Before
     public void drop() throws Exception{
         DbManager.getInstance().getEntrepriseDao().drop();
@@ -40,11 +53,21 @@ public class EntrepriseDaoTest {
         DbManager.getInstance().getEntrepriseDao().insert(entreprises.get(2));
     }
 
+    /**
+	 *
+	 * @throws Exception
+	 * Test to select all
+	 */
     @Test
     public void selectAll() throws Exception {
         assertNotNull(DbManager.getInstance().getEntrepriseDao().select());
     }
 
+    /**
+	 *
+	 * @throws Exception
+	 * Test select all with a count
+	 */
     @Test
     public void selectAllCount() throws Exception {
         List<Entreprise> listObjects = DbManager.getInstance().getEntrepriseDao().select();
@@ -52,6 +75,11 @@ public class EntrepriseDaoTest {
         assertEquals(3, listObjects.size());
     }
 
+    /**
+	 *
+	 * @throws Exception
+	 * Test the data compare
+	 */
     @Test
     public void dataCompare() throws Exception {
         List<Entreprise> listObjects = DbManager.getInstance().getEntrepriseDao().select();
