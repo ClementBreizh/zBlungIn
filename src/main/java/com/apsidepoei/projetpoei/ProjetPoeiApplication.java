@@ -2,7 +2,6 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
@@ -10,6 +9,7 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
@@ -40,7 +40,7 @@ public final class ProjetPoeiApplication {
 
         // Tests entité Feedback
 //      feedbackTests();
-//      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
 //      FeedbackGenerator.getInstance().deleteDatas();
 
          // Test entité Entreprise

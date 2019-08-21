@@ -29,7 +29,7 @@ public class AddressGenerator {
      */
     public static AddressGenerator getInstance() {
         if (INSTANCE == null) {
-            synchronized (DegreeGenerator.class) {
+            synchronized (AddressGenerator.class) {
                 if (INSTANCE == null) {
                     INSTANCE = new AddressGenerator();
                 }
@@ -133,26 +133,4 @@ public class AddressGenerator {
             DbManager.getInstance().getAddressDao().delete(address);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
