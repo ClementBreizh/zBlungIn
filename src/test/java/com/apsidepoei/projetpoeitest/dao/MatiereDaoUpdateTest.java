@@ -75,7 +75,7 @@ public class MatiereDaoUpdateTest {
         Matiere matiere = matieres.get(0);
 
         StringBuilder data = new StringBuilder();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 255; i++) {
             data.append("x");
         }
         matiere.setName(data.toString());
@@ -97,6 +97,7 @@ public class MatiereDaoUpdateTest {
     }
 
     @Test
+    /** Test que l'on peut bien envoyée une chaine de string vide*/
     public void updateMinValOK() throws SQLException {
         Matiere matiere = matieres.get(0);
         matiere.setName("");
