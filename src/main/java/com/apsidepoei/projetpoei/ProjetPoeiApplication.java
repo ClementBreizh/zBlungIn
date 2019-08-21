@@ -29,7 +29,7 @@ public final class ProjetPoeiApplication {
 
          matiereTests();
          adressTests();
-         
+
 //         degreeTests ();
 //         DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //         DegreeGenerator.getInstance().deleteDatas();
@@ -78,6 +78,11 @@ public final class ProjetPoeiApplication {
         }
     }
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Functions tests for degree
+	 */
     private static final void degreeTests () throws SQLException {
 
       DbManager.getInstance().getDegreeDao().drop();
@@ -105,8 +110,8 @@ public final class ProjetPoeiApplication {
           System.out.println(obj.toString());
       }
   }
-    
-    
+
+
 
 
     // librairie

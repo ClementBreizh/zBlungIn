@@ -19,15 +19,24 @@ import com.apsidepoei.projetpoei.entities.Degree;
 
 /**
  * @author thomas
- *
+ * This class test the delete function of the dao
  */
 public class DegreeDaoDeleteTest {
+	/**
+	 * Drop and create the table before each test
+	 */
 	@Before
 	public void dropCreate() {
 		DbManager.getInstance().getDegreeDao().drop();
 		DbManager.getInstance().getDegreeDao().create();
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test simple delete
+	 */
 	@Test
 	public void testDegreeDaoDeleteSimple() throws SQLException, ParseException {
 		Degree Degree = new Degree("Diplome 1", "Master");
@@ -39,6 +48,12 @@ public class DegreeDaoDeleteTest {
 		assertNull(DbManager.getInstance().getDegreeDao().select(1));
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test multiple delete
+	 */
 	@Test
 	public void testDegreeDaoDeleteMultiple2() throws SQLException, ParseException {
 		boolean statut = false;
@@ -62,6 +77,12 @@ public class DegreeDaoDeleteTest {
 		assertTrue(statut);
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test mutliple delete
+	 */
 	@Test
 	public void testDegreeDaoDeleteNullMultiple() throws SQLException, ParseException {
 		int statut = 0;
@@ -80,6 +101,9 @@ public class DegreeDaoDeleteTest {
 		assertEquals(0, statut);
 	}
 
+	/**
+	 * After all test, drop and create the table
+	 */
 	@AfterClass
 	public static void dropAfter() {
 		DbManager.getInstance().getDegreeDao().drop();
