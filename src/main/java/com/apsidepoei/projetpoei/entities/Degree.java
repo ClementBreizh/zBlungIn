@@ -40,6 +40,6 @@ public class Degree extends EntityDb{
 
 	@Override
 	public String toString() {
-		return "Diplome [nom=" + name + ", niveau=" + level + ", getId()=" + getId() + "]";
+		return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
 	}
 }
