@@ -2,9 +2,10 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
 
 import com.apsidepoei.projetpoei.entities.Degree;
@@ -30,6 +31,7 @@ public final class ProjetPoeiApplication {
          matiereTests();
          adressTests();
          degreeTests();
+         testGenerate();
 
     }
 
@@ -102,6 +104,17 @@ public final class ProjetPoeiApplication {
           System.out.println(obj.toString());
       }
   }
+
+    private static void testGenerate() throws SQLException, ParseException {
+
+        MatiereGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
+               for (Matiere matiere : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(matiere);
+        }
+
+               MatiereGenerator.getInstance().deleteDatas();
+    }
 
 
     // librairie
