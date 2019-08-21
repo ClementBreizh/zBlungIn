@@ -39,7 +39,7 @@ public class Matiere extends EntityDb{
      */
     @Override
     public String toString() {
-        return "Matiere [id=" + this.getId() + ", name=" + name + "]";
+        return "Matiere [id =" + this.getId() + ", name=" + name + "]";
     }
 
 }
