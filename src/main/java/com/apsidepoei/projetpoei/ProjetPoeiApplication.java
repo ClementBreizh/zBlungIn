@@ -2,7 +2,6 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
@@ -41,8 +40,8 @@ public final class ProjetPoeiApplication {
 
         // Tests entité Feedback
 //      feedbackTests();
-      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
-      FeedbackGenerator.getInstance().deleteDatas();
+//      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
+//      FeedbackGenerator.getInstance().deleteDatas();
 
          // Test entité Entreprise
 //    		entrepriseTests();
