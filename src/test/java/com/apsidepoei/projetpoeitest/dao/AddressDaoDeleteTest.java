@@ -16,17 +16,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.database.DbOpenHelper;
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 import com.apsidepoei.projetpoei.entities.Address;
 
 /**
  * @author vianney
  *
  */
-public class AddressDaoDelete {
+public class AddressDaoDeleteTest {
 
 
     @Before

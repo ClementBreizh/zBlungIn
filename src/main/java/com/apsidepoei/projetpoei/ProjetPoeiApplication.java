@@ -7,14 +7,13 @@ import java.text.SimpleDateFormat;
 import com.apsidepoei.projetpoei.database.DbManager;
 
 import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
-
+import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
-
-
+import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -35,10 +34,18 @@ public final class ProjetPoeiApplication {
 //        testGenerate();
 
         // Tests entité Adress
-//         addressTests();
+//        addressTests();
+//        AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//        AddressGenerator.getInstance().deleteDatas();
 
-    	 // Test entité Entreprise
+        // Tests entité Feedback
+//      feedbackTests();
+//      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//      FeedbackGenerator.getInstance().deleteDatas();
+
+         // Test entité Entreprise
 //    		entrepriseTests();
+//			EntrepriseGenerator.getInstance().generateDatas(10);
 
          // Tests entité Matiere
 //         matiereTests();
@@ -48,7 +55,9 @@ public final class ProjetPoeiApplication {
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //        DegreeGenerator.getInstance().deleteDatas();
+
     }
+
 
 
     private static final void addressTests () throws SQLException {
@@ -73,6 +82,32 @@ public final class ProjetPoeiApplication {
 
 
         for (Object obj : DbManager.getInstance().getAddressDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
+
+    private static final void feedbackTests () throws SQLException {
+
+        DbManager.getInstance().getFeedbackDao().drop();
+        DbManager.getInstance().getFeedbackDao().create();
+        Feedback feedback1 = new Feedback("CDI", 0, "en contrat depuis sa fin de formation");
+        DbManager.getInstance().getFeedbackDao().insert(feedback1);
+
+        Feedback feedback2 = new Feedback("CDD", 12, "en contrat");
+        DbManager.getInstance().getFeedbackDao().insert(feedback2);
+
+        Feedback feedback3 = new Feedback("CDD", 18, "en contrat depuis 3 mois");
+        DbManager.getInstance().getFeedbackDao().insert(feedback3);
+
+        for (Object obj : DbManager.getInstance().getFeedbackDao().select()) {
+            System.out.println(obj.toString());
+        }
+        DbManager.getInstance().getFeedbackDao().delete(feedback1);
+        feedback2.setDurationOfContract(24);
+        DbManager.getInstance().getFeedbackDao().update(feedback2);
+
+
+        for (Object obj : DbManager.getInstance().getFeedbackDao().select()) {
             System.out.println(obj.toString());
         }
     }
@@ -104,11 +139,11 @@ public final class ProjetPoeiApplication {
         }
     }
 
-	/**
-	 *
-	 * @throws SQLException
-	 * Functions tests for degree
-	 */
+    /**
+     *
+     * @throws SQLException
+     * Functions tests for degree
+     */
     private static final void degreeTests () throws SQLException {
 
       DbManager.getInstance().getDegreeDao().drop();

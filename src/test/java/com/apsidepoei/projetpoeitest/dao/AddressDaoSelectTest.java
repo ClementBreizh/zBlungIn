@@ -21,7 +21,7 @@ import com.apsidepoei.projetpoei.entities.Address;
  * @author vianney
  *
  */
-public class AddressDaoSelect {
+public class AddressDaoSelectTest {
 
     static List<Address> addresses = new ArrayList<Address>();
 
@@ -69,19 +69,4 @@ public class AddressDaoSelect {
                 (addresses.get(0).getPostalCode().equals(listObjects.get(0).getPostalCode()) &&
                 (addresses.get(0).getTown().equals(listObjects.get(0).getTown()))))));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

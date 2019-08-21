@@ -14,16 +14,18 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
-// Test DELETE function on database
+/** Test DELETE function on database */
 public class MatiereDaoDeleteTest {
 
     @Before
+    /** drop et create avant les tests pour eviter conflits */
     public void dropCreate() {
         DbManager.getInstance().getMatiereDao().drop();
         DbManager.getInstance().getMatiereDao().create();
     }
 
     @Test
+    /** test delete d'une entrée dans les DB */
     public void testMatiereDaoDeleteSimple() throws SQLException, ParseException {
         Matiere matiere = new Matiere("Matiere1");
         DbManager.getInstance().getMatiereDao().insert(matiere);
@@ -35,6 +37,7 @@ public class MatiereDaoDeleteTest {
     }
 
     @Test
+    /** test delete mulitple */
     public void testMatiereDaoDeleteMultiple2() throws SQLException, ParseException {
         boolean statut = false;
 
