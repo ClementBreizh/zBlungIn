@@ -14,13 +14,27 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class EntrepriseDaoDeleteTest {
+	/**
+	 * Drop and create the table before each test
+	 */
 	@Before
     public void dropCreate() {
         DbManager.getInstance().getEntrepriseDao().drop();
         DbManager.getInstance().getEntrepriseDao().create();
     }
 
+	/**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test simple delete
+	 */
     @Test
     public void testEntrepriseDaoDeleteSimple() throws SQLException, ParseException {
     	Entreprise entreprise = new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A");
@@ -32,6 +46,12 @@ public class EntrepriseDaoDeleteTest {
         assertNull(DbManager.getInstance().getEntrepriseDao().select(1));
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test multiple delete
+	 */
     @Test
     public void testEntrepriseDaoDeleteMultiple2() throws SQLException, ParseException {
         boolean statut = false;
@@ -55,6 +75,12 @@ public class EntrepriseDaoDeleteTest {
         assertTrue(statut);
     }
 
+    /**
+	 *
+	 * @throws SQLException
+	 * @throws ParseException
+	 * Test mutliple delete
+	 */
     @Test
     public void testEntrepriseDaoDeleteNullMultiple() throws SQLException, ParseException {
         int statut = 0;
@@ -73,6 +99,9 @@ public class EntrepriseDaoDeleteTest {
         assertEquals(0, statut);
     }
 
+    /**
+	 * After all test, drop and create the table
+	 */
     @AfterClass
     public static void dropAfter() {
         DbManager.getInstance().getEntrepriseDao().drop();

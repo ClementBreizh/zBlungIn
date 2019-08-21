@@ -18,8 +18,17 @@ import com.apsidepoei.projetpoei.database.contracts.EntrepriseContract;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 
-
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class EntrepriseDaoCreateDropTest {
+	
+	/**
+	 *
+	 * @throws SQLException Test the creation of the table
+	 */
 	 @Test
 	    public void testGetEntrepriseDaoCreateTableMatchingFields() throws SQLException {
 	        DbManager.getInstance().getEntrepriseDao().drop();
@@ -50,6 +59,9 @@ public class EntrepriseDaoCreateDropTest {
 	        }
 	    }
 
+	 	/**
+		 * Test the insert for a new business
+		 */
 	    @Test
 	    public void testGetEntrepriseDaoCreateTableInsertWorking() {
 	        DbManager.getInstance().getEntrepriseDao().drop();
@@ -62,6 +74,10 @@ public class EntrepriseDaoCreateDropTest {
 	        }
 	    }
 
+	    /**
+		 *
+		 * @throws SQLException Test the drop of the table
+		 */
 	    @Test
 	    public void testGetEntrepriseDaoDropTableRemoved() throws SQLException {
 	        DbManager.getInstance().getEntrepriseDao().drop();
@@ -73,6 +89,12 @@ public class EntrepriseDaoCreateDropTest {
 	        }
 	    }
 
+	    /**
+		 *
+		 * @throws SQLException
+		 * @throws ParseException
+		 * Test insert is not possible
+		 */
 	    @Test(expected = MySQLSyntaxErrorException.class)
 	    public void testGetEntrepriseDaoDropCannotInsert() throws SQLException, ParseException {
 	        DbManager.getInstance().getEntrepriseDao().drop();
@@ -80,6 +102,9 @@ public class EntrepriseDaoCreateDropTest {
 	                .insert(new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A"));
 	    }
 
+	    /**
+		 * Test insert isn't possible give the good alert
+		 */
 	    @Test
 	    public void testGetEntrepriseDaoDropCannotInsertGoodMessage() {
 	        DbManager.getInstance().getEntrepriseDao().drop();
