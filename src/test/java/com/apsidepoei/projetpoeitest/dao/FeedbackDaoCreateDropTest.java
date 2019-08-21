@@ -16,25 +16,25 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.database.DbOpenHelper;
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
+import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
-import com.apsidepoei.projetpoei.entities.Address;
 
 /**
  * @author vianney
  *
  */
-public class AddressDaoCreateDropTest {
+public class FeedbackDaoCreateDropTest {
 
     @Test
-    public void testGetAddressCreateTableMatchingFields() throws SQLException {
+    public void testGetFeedbackCreateTableMatchingFields() throws SQLException {
 
-        DbManager.getInstance().getAddressDao().drop();
-        DbManager.getInstance().getAddressDao().create();
+        DbManager.getInstance().getFeedbackDao().drop();
+        DbManager.getInstance().getFeedbackDao().create();
 
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
-                .executeQuery("DESCRIBE " + AddressContract.TABLE);
+                .executeQuery("DESCRIBE " + FeedbackContract.TABLE);
         List<DescribeQuery> describeQuery = new ArrayList<DescribeQuery>();
         while (rs.next()) {
             DescribeQuery desc = new DescribeQuery();
@@ -47,12 +47,12 @@ public class AddressDaoCreateDropTest {
             describeQuery.add(desc);
         }
 
-        if (AddressContract.COLS.length != describeQuery.size()) {
+        if (FeedbackContract.COLS.length != describeQuery.size()) {
             fail("not same number of lines");
         }
 
         for (int i = 0; i < describeQuery.size(); i++) {
-            if (!describeQuery.get(i).getField().equals(AddressContract.COLS[i])) {
+            if (!describeQuery.get(i).getField().equals(FeedbackContract.COLS[i])) {
                 fail("Column name do not match");
             }
         }
@@ -60,42 +60,43 @@ public class AddressDaoCreateDropTest {
     }
 
     @Test
-    public void testgetAddressDaoCreateTableInsertWorking() {
-        DbManager.getInstance().getAddressDao().drop();
-        DbManager.getInstance().getAddressDao().create();
+    public void testgetFeedbackDaoCreateTableInsertWorking() {
+        DbManager.getInstance().getFeedbackDao().drop();
+        DbManager.getInstance().getFeedbackDao().create();
         try {
-            DbManager.getInstance().getAddressDao().insert(new Address("Address1", "code1", "ville1"));
+            DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
         } catch (Exception e) {
             fail("Insertion failure");
         }
     }
 
     @Test
-    public void testgetAddressDaoDropTableRemoved() throws SQLException {
-        DbManager.getInstance().getAddressDao().drop();
+    public void testgetFeedbackDaoDropTableRemoved() throws SQLException {
+        DbManager.getInstance().getFeedbackDao().drop();
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
         while (rs.next()) {
-            if (rs.getString(1).equals(AddressContract.TABLE)) {
+            if (rs.getString(1).equals(FeedbackContract.TABLE)) {
                 fail("Table already exists");
             }
         }
     }
 
     @Test(expected = MySQLSyntaxErrorException.class)
-    public void testgetAddressDaoDropCannotInsert() throws SQLException, ParseException {
-        DbManager.getInstance().getAddressDao().drop();
-        DbManager.getInstance().getAddressDao().insert(new Address("Address1", "code1", "ville1"));
+    public void testgetFeedbackDaoDropCannotInsert() throws SQLException, ParseException {
+        DbManager.getInstance().getFeedbackDao().drop();
+        DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
     }
 
     @Test
-    public void testgetAddressDaoDropCannotInsertGoodMessage() {
-        DbManager.getInstance().getAddressDao().drop();
+    public void testgetFeedbackDaoDropCannotInsertGoodMessage() {
+        DbManager.getInstance().getFeedbackDao().drop();
         try {
-            DbManager.getInstance().getAddressDao()
-            .insert(new Address("Address1", "code1", "ville1"));
+            DbManager.getInstance().getFeedbackDao()
+            .insert(new Feedback("Feedback1", 1, "commentaire1"));
         } catch (SQLException e) {
-            assertTrue(e.getMessage().equals("Table 'zbleugin." + AddressContract.TABLE + "' doesn't exist"));
+            assertTrue(e.getMessage().equals("Table 'zbleugin." + FeedbackContract.TABLE + "' doesn't exist"));
         }
     }
+
 
 }

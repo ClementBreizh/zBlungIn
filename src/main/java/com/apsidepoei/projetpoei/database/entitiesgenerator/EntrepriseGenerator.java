@@ -6,29 +6,29 @@ import java.util.List;
 import java.util.Locale;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Degree;
+import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.github.javafaker.Faker;
 
 /**
+ * 
+ * @author benjamin-m
  *
- * @author thomas
- *	This class generate fake data
  */
-public class DegreeGenerator {
-	private DegreeGenerator() {
+public class EntrepriseGenerator {
+	private EntrepriseGenerator() {
 	}
 
-	private static DegreeGenerator INSTANCE = null;
+	private static EntrepriseGenerator INSTANCE = null;
 
 	/**
 	 *
 	 * @return an instance of the constructor
 	 */
-	public static DegreeGenerator getInstance() {
+	public static EntrepriseGenerator getInstance() {
 		if (INSTANCE == null) {
-			synchronized (DegreeGenerator.class) {
+			synchronized (EntrepriseGenerator.class) {
 				if (INSTANCE == null) {
-					INSTANCE = new DegreeGenerator();
+					INSTANCE = new EntrepriseGenerator();
 				}
 			}
 		}
@@ -36,7 +36,7 @@ public class DegreeGenerator {
 	}
 
 	Faker faker = new Faker(Locale.FRENCH);
-	private List<Degree> datas = new ArrayList<Degree>();
+	private List<Entreprise> datas = new ArrayList<Entreprise>();
 
 	/**
 	 *
@@ -44,7 +44,7 @@ public class DegreeGenerator {
 	 * @throws SQLException
 	 * Generate fake data
 	 */
-	public List<Degree> generateDatas() throws SQLException {
+	public List<Entreprise> generateDatas() throws SQLException {
 		return generateDatas(faker.random().nextInt(100));
 	}
 
@@ -55,18 +55,18 @@ public class DegreeGenerator {
 	 * @throws SQLException
 	 * Generate n fake data
 	 */
-	public List<Degree> generateDatas(int nb) throws SQLException {
-		List<Degree> result = new ArrayList<>();
-		List<String> degrees = new ArrayList<String>();
+	public List<Entreprise> generateDatas(int nb) throws SQLException {
+		List<Entreprise> result = new ArrayList<>();
+		List<String> entreprises = new ArrayList<String>();
 
 		int i = 0;
 		while (i < nb) {
-			String deg = faker.educator().course();
-			if (!degrees.contains(deg)) {
-				degrees.add(deg);
+			String ent = faker.company().name();
+			if (!entreprises.contains(ent)) {
+				entreprises.add(ent);
 
-				Degree degree = new Degree(deg, "BAC + " + faker.number().digit());
-				result.add(degree);
+				Entreprise entreprise = new Entreprise(ent, ent  + faker.address().city(), faker.number().digits(14), faker.letterify(faker.number().digits(4) + "?") );
+				result.add(entreprise);
 
 				i++;
 			}
@@ -90,10 +90,10 @@ public class DegreeGenerator {
 	 * Generate and insert n datas
 	 */
 	public void generateAndInsertDatas(int nb) throws SQLException {
-		for (Degree degree : generateDatas(nb)) {
-			DbManager.getInstance().getDegreeDao().insert(degree);
-			System.out.println(degree);
-			datas.add(degree);
+		for (Entreprise entreprise : generateDatas(nb)) {
+			DbManager.getInstance().getEntrepriseDao().insert(entreprise);
+			System.out.println(entreprise);
+			datas.add(entreprise);
 		}
 	}
 
@@ -113,8 +113,8 @@ public class DegreeGenerator {
 	 * Drop, create table, generate and insert n data
 	 */
 	public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
-		DbManager.getInstance().getDegreeDao().drop();
-		DbManager.getInstance().getDegreeDao().create();
+		DbManager.getInstance().getEntrepriseDao().drop();
+		DbManager.getInstance().getEntrepriseDao().create();
 
 		generateAndInsertDatas(nb);
 	}
@@ -123,8 +123,8 @@ public class DegreeGenerator {
 	 * delete datas
 	 */
 	public void deleteDatas() {
-		for (Degree degree : datas) {
-			DbManager.getInstance().getDegreeDao().delete(degree);
+		for (Entreprise entreprise : datas) {
+			DbManager.getInstance().getEntrepriseDao().delete(entreprise);
 		}
 	}
 }
