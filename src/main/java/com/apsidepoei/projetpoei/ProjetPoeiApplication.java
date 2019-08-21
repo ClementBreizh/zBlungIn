@@ -32,7 +32,7 @@ public final class ProjetPoeiApplication {
 //        testGenerate();
 
         // Tests entité Adress
-//         addressTests();
+         addressTests();
 
          // Tests entité Matiere
 //         matiereTests();
@@ -51,13 +51,19 @@ public final class ProjetPoeiApplication {
         Address address1 = new Address("51 rue de l'alma", "35000", "rennes");
         DbManager.getInstance().getAddressDao().insert(address1);
 
-        Address address2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
+        Address address2 = new Address("87 rue nationale", "35130", "chartres");
         DbManager.getInstance().getAddressDao().insert(address2);
+
+        Address address3 = new Address("ZI des basses forges", "35530", "noyal sur vilaine");
+        DbManager.getInstance().getAddressDao().insert(address3);
 
         for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
         DbManager.getInstance().getAddressDao().delete(address1);
+        address2.setPostalCode("35531");
+        DbManager.getInstance().getAddressDao().update(address2);
+
 
         for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
