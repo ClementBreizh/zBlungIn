@@ -8,6 +8,7 @@ import com.apsidepoei.projetpoei.database.dao.FeedbackDao;
 import com.apsidepoei.projetpoei.database.dao.
 MattersDao;
 import com.apsidepoei.projetpoei.database.dao.SessionDao;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 
 public class DbManager {
 
@@ -21,7 +22,8 @@ mattersDao = new
 MattersDao();
     private SessionDao sessionDao = new SessionDao();
     private AssessmentDao assessmentDao = new AssessmentDao();
-
+    private AssessmentGenerator assessmentGenerator = new AssessmentGenerator();
+;
 
 
     /** Constructeur privé */
@@ -94,4 +96,9 @@ mattersDao;
     public AssessmentDao getAssessmentDao() {
         return assessmentDao;
     }
+
+	public AssessmentGenerator getAssessmentGenerator() {
+		return assessmentGenerator;
+	}
+	
 }
