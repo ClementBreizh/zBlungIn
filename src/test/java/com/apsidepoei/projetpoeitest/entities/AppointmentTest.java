@@ -15,6 +15,10 @@ import com.apsidepoei.projetpoei.entities.Appointment;
  */
 public class AppointmentTest {
 
+	/**
+	 * Test the toString()
+	 * @throws ParseException
+	 */
     @Test
     public void testToString() throws ParseException
     {
