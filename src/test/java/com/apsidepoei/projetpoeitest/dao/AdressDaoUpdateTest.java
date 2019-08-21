@@ -348,17 +348,6 @@ public class AdressDaoUpdateTest {
 
         assertEquals(new Integer(1), DbManager.getInstance().getAddressDao().update(address));
     }
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

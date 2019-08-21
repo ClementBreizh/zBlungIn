@@ -69,19 +69,4 @@ public class AddressDaoSelectTest {
                 (addresses.get(0).getPostalCode().equals(listObjects.get(0).getPostalCode()) &&
                 (addresses.get(0).getTown().equals(listObjects.get(0).getTown()))))));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
