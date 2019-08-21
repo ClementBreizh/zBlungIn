@@ -13,7 +13,7 @@ import com.github.javafaker.Faker;
 
 public class AssessmentGenerator {
 
-    private AssessmentGenerator()
+    public AssessmentGenerator()
     {}
 
     private static AssessmentGenerator INSTANCE = null;
@@ -83,4 +83,9 @@ public class AssessmentGenerator {
             DbManager.getInstance().getAssessmentDao().delete(assessment);
         }
     }
+
+	public void insert(Assessment monAssessment) {
+		// TODO Auto-generated method stub
+		
+	}
 }

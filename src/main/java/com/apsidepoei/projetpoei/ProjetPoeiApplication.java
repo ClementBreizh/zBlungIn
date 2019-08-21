@@ -129,10 +129,8 @@ public final class ProjetPoeiApplication {
         }
     }
 
-    /** Test of database function for
-matters class */
-    private static final void
-mattersTests () throws SQLException {
+    /** Test of database function formatters class */
+    private static final void mattersTests () throws SQLException {
 
         DbManager.getInstance().getMattersDao().drop();
         DbManager.getInstance().getMattersDao().create();

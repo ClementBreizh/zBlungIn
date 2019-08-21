@@ -60,10 +60,8 @@ public class MattersGenerator {
 
     public void generateAndInsertDatas(int nb) throws SQLException {
         for (Matters matters : generateDatas(nb)) {
-            DbManager.getInstance().getMattersDao().insert(
-matters);
-            datas.add(
-matters);
+            DbManager.getInstance().getMattersDao().insert(matters);
+            datas.add(matters);
         }
     }
 
