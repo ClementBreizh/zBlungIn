@@ -12,24 +12,26 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.database.DbOpenHelper;
-import com.apsidepoei.projetpoei.database.contracts.MatiereContract;
-import com.apsidepoei.projetpoei.entities.Matiere;
+import com.apsidepoei.projetpoei.database.contracts.
+MattersContract;
+import com.apsidepoei.projetpoei.entities.
+Matters;
 import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
 
 /** Test CREATE, DROP on database */
-public class MatiereDaoCreateDropTest {
+public class MattersDaoCreateDropTest {
 
     @Test
     /** creation de la table */
-    public void testGetMatiereDaoCreateTableMatchingFields() throws SQLException {
+    public void testGetMattersDaoCreateTableMatchingFields() throws SQLException {
 
-        DbManager.getInstance().getMatiereDao().drop();
-        DbManager.getInstance().getMatiereDao().create();
+        DbManager.getInstance().getMattersDao().drop();
+        DbManager.getInstance().getMattersDao().create();
 
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
-                .executeQuery("DESCRIBE " + MatiereContract.TABLE);
+                .executeQuery("DESCRIBE " + MattersContract.TABLE);
         List<DescribeQuery> describeQuery = new ArrayList<DescribeQuery>();
         while (rs.next()) {
             DescribeQuery desc = new DescribeQuery();
@@ -42,12 +44,12 @@ public class MatiereDaoCreateDropTest {
             describeQuery.add(desc);
         }
 
-        if (MatiereContract.COLS.length != describeQuery.size()) {
+        if (MattersContract.COLS.length != describeQuery.size()) {
             fail("not same number of lines");
         }
 
         for (int i = 0; i < describeQuery.size(); i++) {
-            if (!describeQuery.get(i).getField().equals(MatiereContract.COLS[i])) {
+            if (!describeQuery.get(i).getField().equals(MattersContract.COLS[i])) {
                 fail("Column name do not match");
             }
         }
@@ -55,12 +57,12 @@ public class MatiereDaoCreateDropTest {
 
     @Test
     /** test insertion dans la table une fois creér */
-    public void testGetMatiereDaoCreateTableInsertWorking() {
-        DbManager.getInstance().getMatiereDao().drop();
-        DbManager.getInstance().getMatiereDao().create();
+    public void testGetMattersDaoCreateTableInsertWorking() {
+        DbManager.getInstance().getMattersDao().drop();
+        DbManager.getInstance().getMattersDao().create();
         try {
-            DbManager.getInstance().getMatiereDao()
-                    .insert(new Matiere("matiere1"));
+            DbManager.getInstance().getMattersDao()
+                    .insert(new Matters("matters1"));
         } catch (Exception e) {
             fail("Insertion failure");
         }
@@ -68,11 +70,11 @@ public class MatiereDaoCreateDropTest {
 
     @Test
     /** test du drop de la table avec vérification si elle existe toujours apres */
-    public void testGetMatiereDaoDropTableRemoved() throws SQLException {
-        DbManager.getInstance().getMatiereDao().drop();
+    public void testGetMattersDaoDropTableRemoved() throws SQLException {
+        DbManager.getInstance().getMattersDao().drop();
         ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
         while (rs.next()) {
-            if (rs.getString(1).equals(MatiereContract.TABLE)) {
+            if (rs.getString(1).equals(MattersContract.TABLE)) {
                 fail("Table already exists");
             }
         }
@@ -80,10 +82,10 @@ public class MatiereDaoCreateDropTest {
 
     @Test(expected = MySQLSyntaxErrorException.class)
     /** test d'insetion alors que la table n'existe plus/pas */
-    public void testGetMatiereDaoDropCannotInsert() throws SQLException, ParseException {
-        DbManager.getInstance().getMatiereDao().drop();
-        DbManager.getInstance().getMatiereDao()
-                .insert(new Matiere("matiere1"));
+    public void testGetMattersDaoDropCannotInsert() throws SQLException, ParseException {
+        DbManager.getInstance().getMattersDao().drop();
+        DbManager.getInstance().getMattersDao()
+                .insert(new Matters("matters1"));
     }
 }
 
