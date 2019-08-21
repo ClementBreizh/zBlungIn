@@ -11,9 +11,7 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
-
 import com.apsidepoei.projetpoei.entities.Degree;
-
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -30,37 +28,36 @@ public final class ProjetPoeiApplication {
     */
     public static void main(String[] args) throws ParseException, SQLException {
 
+        // Génération de données
+//        testGenerate();
 
+        // Tests entité Adress
+//         addressTests();
 
-         matiereTests();
-         adressTests();
+         // Tests entité Matiere
+//         matiereTests();
 
-         degreeTests();
-         testGenerate();
-
-
-//         degreeTests ();
-//         DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-//         DegreeGenerator.getInstance().deleteDatas();
-
-
+          // Tests entité Degree
+//        degreeTests();
+//        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//        DegreeGenerator.getInstance().deleteDatas();
     }
 
 
-    private static final void adressTests () throws SQLException {
+    private static final void addressTests () throws SQLException {
 
-//        DbManager.getInstance().getAdressDao().drop();
+        DbManager.getInstance().getAddressDao().drop();
         DbManager.getInstance().getAddressDao().create();
-        Address adress1 = new Address("51 rue de l'alma", "35000", "rennes");
-        DbManager.getInstance().getAddressDao().insert(adress1);
+        Address address1 = new Address("51 rue de l'alma", "35000", "rennes");
+        DbManager.getInstance().getAddressDao().insert(address1);
 
-        Address adress2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
-        DbManager.getInstance().getAddressDao().insert(adress2);
+        Address address2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
+        DbManager.getInstance().getAddressDao().insert(address2);
 
         for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
-        DbManager.getInstance().getAddressDao().delete(adress1);
+        DbManager.getInstance().getAddressDao().delete(address1);
 
         for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
