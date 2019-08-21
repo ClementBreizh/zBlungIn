@@ -15,6 +15,7 @@ import com.apsidepoei.projetpoei.database.DbManager;
 
 import com.apsidepoei.projetpoei.database.entitiesgenerator.MattersGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AppointmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
@@ -71,10 +72,10 @@ public final class ProjetPoeiApplication {
           // Tests entité Degree
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-//        DegreeGenerator.getInstance().deleteDatas();
 
           // Tests entité Appointment
 //    	  appointmentTests();
+//    	  AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
 
     }
