@@ -9,6 +9,11 @@ import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.github.javafaker.Faker;
 
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class EntrepriseGenerator {
 	private EntrepriseGenerator() {
 	}
