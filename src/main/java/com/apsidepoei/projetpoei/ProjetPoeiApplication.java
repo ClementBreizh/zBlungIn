@@ -13,6 +13,7 @@ import com.apsidepoei.projetpoei.database.DbManager;
 
 import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
@@ -39,11 +40,11 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
         // Génération de données
-//        testGenerate();
+        // testGenerate();
 
         // Test entité Assessment
         // assessmentTests();
-
+        // AssessmentGenerator.getInstance().generateAndInsertDatas();
 
         // Tests entité Adress
 //        addressTests();
@@ -248,6 +249,14 @@ public final class ProjetPoeiApplication {
         }
 
                MatiereGenerator.getInstance().deleteDatas();
+
+AssessmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
+               for (Assessment assessment : DbManager.getInstance().getAssessmentDao().select()) {
+            System.out.println(assessment);
+        }
+
+               AssessmentGenerator.getInstance().deleteDatas();
     }
 
 
