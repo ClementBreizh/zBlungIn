@@ -15,9 +15,10 @@ import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Assessment;
 
 public class AssessmentDaoInsertTest {
-
+    /**
+     * Test Insert in table
+     */
     @Test
-    /** Test d'insertion dans la table */
     public void testInsertAssessment() throws ParseException, SQLException {
         Assessment monAssessment = new Assessment("Logique", new SimpleDateFormat("yyyy/mm/dd").parse("1980/04/24"));
         DbManager.getInstance().getAssessmentDao().insert(monAssessment);
@@ -25,8 +26,10 @@ public class AssessmentDaoInsertTest {
         assertFalse("Insert ok", false);
     }
 
+    /**
+     * Test Insert with other letter than a-Z
+     */
     @Test
-    /** Test avec lettre en autre que a-z */
     public void testInsertJapaneseLetter() throws ParseException, SQLException {
         Assessment monAssessment2 = new Assessment("亜紀", new SimpleDateFormat("yyyy/mm/dd").parse("1980/04/24"));
         DbManager.getInstance().getAssessmentDao().insert(monAssessment2);
@@ -34,8 +37,11 @@ public class AssessmentDaoInsertTest {
         assertTrue("Insert ok", true);
     }
 
+    /**
+     *
+     * @throws SQLException Test insert with greater than expeted size varchar
+     */
     @Test
-    /** Test sur longueur des saisies */
     public void testInsertCategoryVar50() throws ParseException {
         String data = "";
         for (int i = 0; i < 50; i++) {
@@ -50,8 +56,11 @@ public class AssessmentDaoInsertTest {
         }
     }
 
+    /**
+     *
+     * @throws SQLException Test of valid date
+     */
     @Test
-    /** Test sur la validité de la date */
     public void testInsertWrongDate() throws SQLException {
         try {
             Assessment monAssessment2 = new Assessment("MIROUF",
@@ -64,8 +73,11 @@ public class AssessmentDaoInsertTest {
         }
     }
 
+    /**
+     *
+     * @throws SQLException Test insert via generator
+     */
     @Test
-    /** Test d'insertion dans la table */
     public void testGeneratorInsertAssessment() throws ParseException, SQLException {
         Assessment monAssessment = new Assessment("Logique", new SimpleDateFormat("yyyy/mm/dd").parse("1980/04/24"));
         DbManager.getInstance().getAssessmentGenerator().insert(monAssessment);

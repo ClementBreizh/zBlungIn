@@ -70,9 +70,8 @@ public class AssessmentDao extends BaseDao<Assessment> {
         return item;
     }
 
-	public Object update(List<Assessment> assessments) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Object update(List<Assessment> assessments) {
+                return null;
+    }
 }
 
