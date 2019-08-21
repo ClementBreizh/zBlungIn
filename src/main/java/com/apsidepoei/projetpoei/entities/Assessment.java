@@ -2,10 +2,10 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
 
-public class Test extends EntityDb {
+public class Assessment extends EntityDb {
 
     private String category;
-    private Date majTest;
+    private Date majAssessment;
 
     /**
      * @return the category
@@ -21,25 +21,25 @@ public class Test extends EntityDb {
         this.category = category;
     }
 
-    public Test(String category) {
+    public Assessment(String category) {
         super();
         this.category = category;
     }
 
-    public Test(int id, String category) {
-        super();
-        this.setId(id);
-        this.category = category;
-
-    }
-    public Test(int id, String category, Date majTest) {
+    public Assessment(int id, String category) {
         super();
         this.setId(id);
         this.category = category;
-        this.majTest = majTest;
+
+    }
+    public Assessment(int id, String category, Date majAssessment) {
+        super();
+        this.setId(id);
+        this.category = category;
+        this.majAssessment = majAssessment;
     }
 
-    public Test() {
+    public Assessment() {
     }
 
     /*
@@ -49,7 +49,7 @@ public class Test extends EntityDb {
      */
     @Override
     public String toString() {
-        return "Test [id=" + this.getId() + ", category=" + category + ", date=" + majTest + "]";
+        return "Assessment [id=" + this.getId() + ", category=" + category + ", date=" + majAssessment + "]";
     }
 
 }
