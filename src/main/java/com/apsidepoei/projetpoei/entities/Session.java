@@ -2,6 +2,11 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author benjamin-m
+ *
+ */
 public class Session extends EntityDb {
 	private String name;
 	private Date dateStart;
@@ -10,7 +15,7 @@ public class Session extends EntityDb {
 
 	/**
 	 *
-	 * @return the informations
+	 * @return the name
 	 */
 	public String getName() {
 		return name;
