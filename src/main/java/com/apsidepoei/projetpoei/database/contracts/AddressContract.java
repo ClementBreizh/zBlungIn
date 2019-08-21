@@ -7,7 +7,9 @@ package com.apsidepoei.projetpoei.database.contracts;
  * @author vianney
  *
  */
+
 public class AddressContract  extends BaseContract {
+
 
     public final static String TABLE = "adress";
 

@@ -107,6 +107,6 @@ public class Appointment extends EntityDb {
 	 */
 	@Override
 	public String toString() {
-		return "Rendez-vous [informations=" + informations + ", date=" + dateTime + ", report=" + report + ", getId()=" + getId() + "]";
+		return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + dateTime + ", report=" + report + "]";
 	}
 }
