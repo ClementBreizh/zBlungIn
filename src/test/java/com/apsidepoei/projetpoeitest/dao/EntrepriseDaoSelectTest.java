@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 
-public class EntrepriseDaoTest {
+public class EntrepriseDaoSelectTest {
 	
 	static List<Entreprise> entreprises = new ArrayList<Entreprise>();
 
