@@ -47,7 +47,7 @@ public class AssessmentDao extends BaseDao<Assessment> {
 
         ps.setString(1, item.getCategory());
         ps.setString(2, mySqlDate);
-        ps.setInt(4, item.getId());
+        ps.setInt(3, item.getId());
     }
 
     /**
@@ -63,7 +63,7 @@ public class AssessmentDao extends BaseDao<Assessment> {
         String date = rs.getString(rs.findColumn(AssessmentContract.COL_DATE));
         date = date.substring(0, 10);
 
-        item.setDateTime(new SimpleDateFormat("YYYY-MM-DD")
+        item.setDateTime(new SimpleDateFormat("yyy-MM-dd")
                 .parse(date));
 
         return item;
