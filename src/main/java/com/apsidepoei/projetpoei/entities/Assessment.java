@@ -83,4 +83,14 @@ public class Assessment extends EntityDb {
     public String toString() {
         return "Assessment [Id = " + getId() + "category =" + category + ", date=" + dateTime + "]";
     }
+
+	public Assessment get(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setAssessment(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
