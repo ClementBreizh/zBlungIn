@@ -46,10 +46,10 @@ public class DegreeDaoUpdateTest {
 	/**
 	 *
 	 * @throws SQLException
-	 * Compare modification with the update
+	 * Compare name modification with the update
 	 */
 	@Test
-	public void simpleUpdateCompare1() throws SQLException {
+	public void simpleUpdateCompareName1() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setName(CHANGED_DATA);
 
@@ -64,10 +64,10 @@ public class DegreeDaoUpdateTest {
 	/**
 	 *
 	 * @throws SQLException
-	 * Compare modification with the update
+	 * Compare name modification with the update
 	 */
 	@Test
-	public void simpleUpdateCompare2() throws SQLException {
+	public void simpleUpdateCompareName2() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setName(CHANGED_DATA);
 
@@ -78,10 +78,10 @@ public class DegreeDaoUpdateTest {
 	}
 
 	/**
-	 * Compare the modification with the update
+	 * Compare the name modification with the update
 	 */
 	@Test
-	public void simpleUpdateCompare3() {
+	public void simpleUpdateCompareName3() {
 		Degree degree = degrees.get(0);
 		Degree dbDegree = (Degree) DbManager.getInstance().getDegreeDao().select(1);
 
@@ -91,10 +91,55 @@ public class DegreeDaoUpdateTest {
 	/**
 	 *
 	 * @throws SQLException
+	 * Compare level modification with the update
+	 */
+	@Test
+	public void simpleUpdateCompareLevel1() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setLevel(CHANGED_DATA);
+
+		Degree dbDegree = (Degree) DbManager.getInstance().getDegreeDao().select(1);
+		DbManager.getInstance().getDegreeDao().update(degree);
+		Degree dbDegreeUpdated = (Degree) DbManager.getInstance().getDegreeDao().select(1);
+
+		assertTrue(dbDegree.getId() == dbDegreeUpdated.getId() && !dbDegree.getLevel().equals(dbDegreeUpdated.getLevel())
+				&& dbDegreeUpdated.getLevel().equals(CHANGED_DATA));
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Compare level modification with the update
+	 */
+	@Test
+	public void simpleUpdateCompareLevel2() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setLevel(CHANGED_DATA);
+
+		DbManager.getInstance().getDegreeDao().update(degree);
+		Degree dbDegreeUpdated = (Degree) DbManager.getInstance().getDegreeDao().select(1);
+
+		assertTrue(degree.getId() == dbDegreeUpdated.getId() && degree.getLevel().equals(dbDegreeUpdated.getLevel()));
+	}
+
+	/**
+	 * Compare the level modification with the update
+	 */
+	@Test
+	public void simpleUpdateCompareLevel3() {
+		Degree degree = degrees.get(0);
+		Degree dbDegree = (Degree) DbManager.getInstance().getDegreeDao().select(1);
+
+		assertTrue(degree.getId() == dbDegree.getId() && degree.getLevel().equals(dbDegree.getLevel()));
+	}
+
+	/**
+	 *
+	 * @throws SQLException
 	 * Test if data is truncated when update is too long
 	 */
 	@Test(expected = MysqlDataTruncation.class)
-	public void updateMaxValExtended() throws SQLException {
+	public void updateMaxValNameExtended() throws SQLException {
 		Degree degree = degrees.get(0);
 
 		StringBuilder data = new StringBuilder();
@@ -112,7 +157,7 @@ public class DegreeDaoUpdateTest {
 	 * Test update with the max size for the data
 	 */
 	@Test
-	public void updateMaxValOK() throws SQLException {
+	public void updateMaxValNameOK() throws SQLException {
 		Degree degree = degrees.get(0);
 
 		StringBuilder data = new StringBuilder();
@@ -130,7 +175,7 @@ public class DegreeDaoUpdateTest {
 	 * Test the update with the min size of the value
 	 */
 	@Test
-	public void updateMinValOK() throws SQLException {
+	public void updateMinValNameOK() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setName("");
 
@@ -143,9 +188,71 @@ public class DegreeDaoUpdateTest {
 	 * Test the update with null value
 	 */
 	@Test(expected = MySQLIntegrityConstraintViolationException.class)
-	public void updateNullValKO() throws SQLException {
+	public void updateNullValNameKO() throws SQLException {
 		Degree degree = degrees.get(0);
 		degree.setName(null);
+
+		DbManager.getInstance().getDegreeDao().update(degree);
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Test if data is truncated when update is too long
+	 */
+	@Test(expected = MysqlDataTruncation.class)
+	public void updateMaxValLevelExtended() throws SQLException {
+		Degree degree = degrees.get(0);
+
+		StringBuilder data = new StringBuilder();
+		for (int i = 0; i < 256; i++) {
+			data.append("x");
+		}
+		degree.setLevel(data.toString());
+
+		DbManager.getInstance().getDegreeDao().update(degree);
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Test update with the max size for the data
+	 */
+	@Test
+	public void updateMaxValLevelOK() throws SQLException {
+		Degree degree = degrees.get(0);
+
+		StringBuilder data = new StringBuilder();
+		for (int i = 0; i < 50; i++) {
+			data.append("x");
+		}
+		degree.setLevel(data.toString());
+
+		DbManager.getInstance().getDegreeDao().update(degree);
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the update with the min size of the value
+	 */
+	@Test
+	public void updateMinValLevelOK() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setLevel("");
+
+		DbManager.getInstance().getDegreeDao().update(degree);
+	}
+
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the update with null value
+	 */
+	@Test(expected = MySQLIntegrityConstraintViolationException.class)
+	public void updateNullValLevelKO() throws SQLException {
+		Degree degree = degrees.get(0);
+		degree.setLevel(null);
 
 		DbManager.getInstance().getDegreeDao().update(degree);
 	}
