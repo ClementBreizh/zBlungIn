@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
@@ -17,6 +18,7 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
+import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoei.entities.Feedback;
@@ -38,6 +40,10 @@ public final class ProjetPoeiApplication {
 
         // Génération de données
 //        testGenerate();
+
+        // Test entité Assessment
+        // assessmentTests();
+
 
         // Tests entité Adress
 //        addressTests();
@@ -61,6 +67,8 @@ public final class ProjetPoeiApplication {
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 //        DegreeGenerator.getInstance().deleteDatas();
+
+
 
     }
 
@@ -118,7 +126,7 @@ public final class ProjetPoeiApplication {
         }
     }
 
-    // Test of database function for matiere class
+    /** Test of database function for matiere class */
     private static final void matiereTests () throws SQLException {
 
         DbManager.getInstance().getMatiereDao().drop();
@@ -203,6 +211,30 @@ public final class ProjetPoeiApplication {
 
 
         for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
+
+    private static final void assessmentTests () throws SQLException, ParseException {
+
+        DbManager.getInstance().getAssessmentDao().drop();
+        DbManager.getInstance().getAssessmentDao().create();
+
+        Assessment assessment1 = new Assessment("Riri", new SimpleDateFormat("yyyy/MM/dd").parse("1999/12/31"));
+        DbManager.getInstance().getAssessmentDao().insert(assessment1);
+
+        Assessment assessment2 = new Assessment("Fifi", new SimpleDateFormat("yyyy/MM/dd").parse("1982/02/12"));
+        DbManager.getInstance().getAssessmentDao().insert(assessment2);
+
+        for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
+            System.out.println(obj.toString());
+        }
+        DbManager.getInstance().getAssessmentDao().delete(assessment1);
+        assessment2.setCategory("Causette");
+        DbManager.getInstance().getAssessmentDao().update(assessment2);
+
+
+        for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
             System.out.println(obj.toString());
         }
     }
