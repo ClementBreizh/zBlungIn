@@ -32,7 +32,7 @@ public final class ProjetPoeiApplication {
 //        testGenerate();
 
         // Tests entité Adress
-         addressTests();
+//         addressTests();
 
          // Tests entité Matiere
 //         matiereTests();
