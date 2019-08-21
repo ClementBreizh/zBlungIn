@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoei.database;
 
 import com.apsidepoei.projetpoei.database.dao.AddressDao;
+import com.apsidepoei.projetpoei.database.dao.AppointmentDao;
 import com.apsidepoei.projetpoei.database.dao.AssessmentDao;
 import com.apsidepoei.projetpoei.database.dao.DegreeDao;
 import com.apsidepoei.projetpoei.database.dao.EntrepriseDao;
@@ -13,6 +14,7 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 public class DbManager {
 
     private AddressDao addressDao = new AddressDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
     private DegreeDao degreeDao = new DegreeDao();
     private EntrepriseDao entrepriseDao = new EntrepriseDao();
     private FeedbackDao feedbackDao = new FeedbackDao();
@@ -51,6 +53,13 @@ MattersDao();
      */
     public AddressDao getAddressDao() {
         return addressDao;
+    }
+
+    /**
+     * @return the appointmentDao
+     */
+    public AppointmentDao getAppointmentDao() {
+        return appointmentDao;
     }
 
     /**
