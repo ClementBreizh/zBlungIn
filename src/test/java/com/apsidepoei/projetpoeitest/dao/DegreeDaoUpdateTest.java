@@ -15,10 +15,19 @@ import com.apsidepoei.projetpoei.entities.Degree;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
+/**
+ * @author thomas
+ * This class test the update function of the dao
+ */
 public class DegreeDaoUpdateTest {
 	private static final String CHANGED_DATA = "toto";
 	private List<Degree> degrees = new ArrayList<Degree>();
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Before each test, drop & create the table and add / insert new degrees
+	 */
 	@Before
 	public void setupTests() throws SQLException {
 		DbManager.getInstance().getDegreeDao().drop();
@@ -34,6 +43,11 @@ public class DegreeDaoUpdateTest {
 		}
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Compare modification with the update
+	 */
 	@Test
 	public void simpleUpdateCompare1() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -47,6 +61,11 @@ public class DegreeDaoUpdateTest {
 				&& dbDegreeUpdated.getName().equals(CHANGED_DATA));
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Compare modification with the update
+	 */
 	@Test
 	public void simpleUpdateCompare2() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -58,6 +77,9 @@ public class DegreeDaoUpdateTest {
 		assertTrue(degree.getId() == dbDegreeUpdated.getId() && degree.getName().equals(dbDegreeUpdated.getName()));
 	}
 
+	/**
+	 * Compare the modification with the update
+	 */
 	@Test
 	public void simpleUpdateCompare3() {
 		Degree degree = degrees.get(0);
@@ -66,6 +88,11 @@ public class DegreeDaoUpdateTest {
 		assertTrue(degree.getId() == dbDegree.getId() && degree.getName().equals(dbDegree.getName()));
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Test if data is truncated when update is too long
+	 */
 	@Test(expected = MysqlDataTruncation.class)
 	public void updateMaxValExtended() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -79,6 +106,11 @@ public class DegreeDaoUpdateTest {
 		DbManager.getInstance().getDegreeDao().update(degree);
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Test update with the max size for the data
+	 */
 	@Test
 	public void updateMaxValOK() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -92,6 +124,11 @@ public class DegreeDaoUpdateTest {
 		DbManager.getInstance().getDegreeDao().update(degree);
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the update with the min size of the value
+	 */
 	@Test
 	public void updateMinValOK() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -100,6 +137,11 @@ public class DegreeDaoUpdateTest {
 		DbManager.getInstance().getDegreeDao().update(degree);
 	}
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the update with null value
+	 */
 	@Test(expected = MySQLIntegrityConstraintViolationException.class)
 	public void updateNullValKO() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -108,6 +150,10 @@ public class DegreeDaoUpdateTest {
 		DbManager.getInstance().getDegreeDao().update(degree);
 	}
 
+	/**
+	 * Test the update with the wrong id
+	 * @throws SQLException
+	 */
 	@Test
 	public void updateWrongId() throws SQLException {
 		Degree degree = degrees.get(0);
@@ -116,7 +162,11 @@ public class DegreeDaoUpdateTest {
 
 		assertEquals(new Integer(0), DbManager.getInstance().getDegreeDao().update(degree));
 	}
-
+	/**
+	 *
+	 * @throws SQLException
+	 * Test the update with the good id
+	 */
 	@Test
 	public void updateGoodId() throws SQLException {
 		Degree degree = degrees.get(0);

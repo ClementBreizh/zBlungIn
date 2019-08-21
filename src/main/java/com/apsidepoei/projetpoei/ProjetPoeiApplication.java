@@ -12,6 +12,9 @@ import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Degree;
+import com.apsidepoei.projetpoei.entities.Entreprise;
+
+
 import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
@@ -34,8 +37,12 @@ public final class ProjetPoeiApplication {
         // Tests entité Adress
 //         addressTests();
 
+    	 // Test entité Entreprise
+//    		entrepriseTests();
+
          // Tests entité Matiere
 //         matiereTests();
+
 
           // Tests entité Degree
 //        degreeTests();
@@ -97,6 +104,11 @@ public final class ProjetPoeiApplication {
         }
     }
 
+	/**
+	 *
+	 * @throws SQLException
+	 * Functions tests for degree
+	 */
     private static final void degreeTests () throws SQLException {
 
       DbManager.getInstance().getDegreeDao().drop();
@@ -125,7 +137,34 @@ public final class ProjetPoeiApplication {
       }
   }
 
+    private static final void entrepriseTests () throws SQLException {
 
+        DbManager.getInstance().getEntrepriseDao().drop();
+        DbManager.getInstance().getEntrepriseDao().create();
+        Entreprise entreprise1 = new Entreprise("Apside", "Apside Rennes", "30906508400068", "0000A");
+        DbManager.getInstance().getEntrepriseDao().insert(entreprise1);
+
+        Entreprise entreprise2 = new Entreprise("Capgemini", "Capgemini Nantes", "33070384400036", "0000A");
+        DbManager.getInstance().getEntrepriseDao().insert(entreprise2);
+
+        for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
+            System.out.println(obj.toString());
+        }
+
+        DbManager.getInstance().getEntrepriseDao().delete(entreprise1);
+
+        for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
+            System.out.println(obj.toString());
+        }
+
+        entreprise2.setNom("Capgemini France");
+        DbManager.getInstance().getEntrepriseDao().update(entreprise2);
+
+
+        for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
 
     private static void testGenerate() throws SQLException, ParseException {
 
@@ -137,6 +176,7 @@ public final class ProjetPoeiApplication {
 
                MatiereGenerator.getInstance().deleteDatas();
     }
+
 
 
     // librairie
