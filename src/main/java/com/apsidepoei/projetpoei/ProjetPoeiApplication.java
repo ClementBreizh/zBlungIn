@@ -75,6 +75,12 @@ public final class ProjetPoeiApplication {
         for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
             System.out.println(obj.toString());
         }
+        matiere2.setName("Mathematique");
+        DbManager.getInstance().getMatiereDao().update(matiere2);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(obj.toString());
+        }
     }
 
     private static final void degreeTests () throws SQLException {
