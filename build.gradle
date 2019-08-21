@@ -58,7 +58,7 @@ uploadArchives {
   }
 }*/
 
-/*apply plugin: 'jacoco'
+apply plugin: 'jacoco'
 
 jacoco {
             toolVersion "0.6.5.201403032054"
@@ -73,7 +73,7 @@ jacoco {
                 html.enabled = false
                 html.destination "${buildDir}/reports/jacoco"
             }
-}*/
+}
 
 /**
  * Checkstyle tasks
