@@ -17,12 +17,15 @@ import com.apsidepoei.projetpoei.entities.Degree;
 /**
  *
  * @author thomas
- *
+ * This class test the select functions of the dao
  */
-public class DegreeDaoTest {
+public class DegreeDaoSelectTest {
 
 	static List<Degree> Degrees = new ArrayList<Degree>();
 
+	/**
+	 * Before the tests, create new data
+	 */
 	@BeforeClass
 	public static void config() {
 		Degree Degree1 = new Degree("Diplome1", "Master");
@@ -36,6 +39,11 @@ public class DegreeDaoTest {
 		Degrees.add(Degree3);
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 * Before each test, drop, create and insert new data
+	 */
 	@Before
 	public void drop() throws Exception {
 		DbManager.getInstance().getDegreeDao().drop();
@@ -45,11 +53,21 @@ public class DegreeDaoTest {
 		DbManager.getInstance().getDegreeDao().insert(Degrees.get(2));
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 * Test to select all
+	 */
 	@Test
 	public void selectAll() throws Exception {
 		assertNotNull(DbManager.getInstance().getDegreeDao().select());
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 * Test select all with a count
+	 */
 	@Test
 	public void selectAllCount() throws Exception {
 		List<Degree> listObjects = DbManager.getInstance().getDegreeDao().select();
@@ -57,6 +75,11 @@ public class DegreeDaoTest {
 		assertEquals(3, listObjects.size());
 	}
 
+	/**
+	 *
+	 * @throws Exception
+	 * Test the data compare
+	 */
 	@Test
 	public void dataCompare() throws Exception {
 		List<Degree> listObjects = DbManager.getInstance().getDegreeDao().select();
