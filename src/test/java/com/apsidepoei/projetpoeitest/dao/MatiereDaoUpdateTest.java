@@ -15,12 +15,13 @@ import com.apsidepoei.projetpoei.entities.Matiere;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-//Test UPDATE function on database
+/** Test UPDATE function on database */
 public class MatiereDaoUpdateTest {
 
     private static final String CHANGED_DATA = "toto";
     private List<Matiere> matieres = new ArrayList<Matiere>();
 
+    // setup pour la mise en place des tests
     @Before
     public void setupTests() throws SQLException {
         DbManager.getInstance().getMatiereDao().drop();
@@ -36,6 +37,7 @@ public class MatiereDaoUpdateTest {
         }
     }
 
+    /** Comparaison entre données update et attendues */
     @Test
     public void simpleUpdateCompare1() throws SQLException {
         Matiere matiere = matieres.get(0);
@@ -67,12 +69,13 @@ public class MatiereDaoUpdateTest {
         assertTrue(matiere.getId() == dbMatiere.getId() && matiere.getName().equals(dbMatiere.getName()));
     }
 
+    /** Test sur le nombre de character saisie */
     @Test(expected = MysqlDataTruncation.class)
     public void updateMaxValExtended() throws SQLException {
         Matiere matiere = matieres.get(0);
 
         StringBuilder data = new StringBuilder();
-        for (int i = 0; i < 256; i++) {
+        for (int i = 0; i < 50; i++) {
             data.append("x");
         }
         matiere.setName(data.toString());
@@ -101,6 +104,7 @@ public class MatiereDaoUpdateTest {
         DbManager.getInstance().getMatiereDao().update(matiere);
     }
 
+    /** Test en cas de retour NULL */
     @Test(expected = MySQLIntegrityConstraintViolationException.class)
     public void updateNullValKO() throws SQLException {
         Matiere matiere = matieres.get(0);
@@ -109,6 +113,7 @@ public class MatiereDaoUpdateTest {
         DbManager.getInstance().getMatiereDao().update(matiere);
     }
 
+    /** Test si ID erronée */
     @Test
     public void updateWrongId() throws SQLException {
         Matiere matiere = matieres.get(0);
@@ -118,6 +123,7 @@ public class MatiereDaoUpdateTest {
         assertEquals(new Integer(0), DbManager.getInstance().getMatiereDao().update(matiere));
     }
 
+    /** Test si ID correcte */
     @Test
     public void updateGoodId() throws SQLException {
         Matiere matiere = matieres.get(0);

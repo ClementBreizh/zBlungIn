@@ -14,12 +14,13 @@ import org.junit.Test;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matiere;
 
-// Test SELECT function on database
+/** Test SELECT function on database */
 public class MatiereDaoTest {
 
     static List<Matiere> matieres = new ArrayList<Matiere>();
 
     @BeforeClass
+    /** Mise en place  des variables avant test */
     public static void config() {
         Matiere matiere1 = new Matiere("matiere1");
         Matiere matiere2 = new Matiere("matiere2");
@@ -33,6 +34,7 @@ public class MatiereDaoTest {
     }
 
     @Before
+    /** Mise en place d'une table propre pour les tests */
     public void drop() throws Exception{
         DbManager.getInstance().getMatiereDao().drop();
         DbManager.getInstance().getMatiereDao().create();
@@ -42,11 +44,13 @@ public class MatiereDaoTest {
     }
 
     @Test
+    /**  */
     public void selectAll() throws Exception {
         assertNotNull(DbManager.getInstance().getMatiereDao().select());
     }
 
     @Test
+    /**  */
     public void selectAllCount() throws Exception {
         List<Matiere> listObjects = DbManager.getInstance().getMatiereDao().select();
         DbManager.getInstance().getMatiereDao().select();
@@ -54,6 +58,7 @@ public class MatiereDaoTest {
     }
 
     @Test
+    /** comparaison entre les datas saisies et présente en DB */
     public void dataCompare() throws Exception {
         List<Matiere> listObjects = DbManager.getInstance().getMatiereDao().select();
 

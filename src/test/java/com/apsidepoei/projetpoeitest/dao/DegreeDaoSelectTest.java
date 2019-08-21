@@ -19,7 +19,7 @@ import com.apsidepoei.projetpoei.entities.Degree;
  * @author thomas
  * This class test the select functions of the dao
  */
-public class DegreeDaoTest {
+public class DegreeDaoSelectTest {
 
 	static List<Degree> Degrees = new ArrayList<Degree>();
 

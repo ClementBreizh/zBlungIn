@@ -58,22 +58,22 @@ uploadArchives {
   }
 }*/
 
-apply plugin: 'jacoco'
+/*apply plugin: 'jacoco'
 
 jacoco {
-            toolVersion "0.7.4.201502262128"
+            toolVersion "0.6.5.201403032054"
         }
 
         jacocoTestReport {
             description 'Run code coverage with JaCoCo.'
             group 'Verification'
             reports {
-                xml.enabled = false
+                xml.enabled = true
                 csv.enabled = false
-                html.enabled = true
+                html.enabled = false
                 html.destination "${buildDir}/reports/jacoco"
             }
-}
+}*/
 
 /**
  * Checkstyle tasks
@@ -184,8 +184,8 @@ task pmdMain(type: Pmd, overwrite: true) {
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
-        html.enabled = true
+        xml.enabled = true
+        html.enabled = false
     }
 }
 
@@ -199,8 +199,8 @@ task pmdTest(type: Pmd, overwrite: true) {
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
-        html.enabled = true
+        xml.enabled = true
+        html.enabled = false
     }
 }
 
