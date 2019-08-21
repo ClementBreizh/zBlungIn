@@ -21,7 +21,7 @@ import com.apsidepoei.projetpoei.entities.Address;
  * @author vianney
  *
  */
-public class AddressDaoSelect {
+public class AddressDaoSelectTest {
 
     static List<Address> addresses = new ArrayList<Address>();
 
