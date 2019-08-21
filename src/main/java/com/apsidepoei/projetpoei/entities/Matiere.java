@@ -42,4 +42,6 @@ public class Matiere extends EntityDb{
         return "Matiere [id =" + this.getId() + ", name=" + name + "]";
     }
 
+
+
 }

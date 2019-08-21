@@ -1,10 +1,12 @@
 package com.apsidepoei.projetpoei.database;
 
 import com.apsidepoei.projetpoei.database.dao.AddressDao;
+import com.apsidepoei.projetpoei.database.dao.AssessmentDao;
 import com.apsidepoei.projetpoei.database.dao.DegreeDao;
 import com.apsidepoei.projetpoei.database.dao.EntrepriseDao;
 import com.apsidepoei.projetpoei.database.dao.FeedbackDao;
 import com.apsidepoei.projetpoei.database.dao.MatiereDao;
+import com.apsidepoei.projetpoei.database.dao.SessionDao;
 
 public class DbManager {
 
@@ -13,6 +15,9 @@ public class DbManager {
     private EntrepriseDao entrepriseDao = new EntrepriseDao();
     private FeedbackDao feedbackDao = new FeedbackDao();
     private MatiereDao matiereDao = new MatiereDao();
+    private SessionDao sessionDao = new SessionDao();
+    private AssessmentDao assessmentDao = new AssessmentDao();
+
 
 
     /** Constructeur privé */
@@ -69,4 +74,17 @@ public class DbManager {
         return matiereDao;
     }
 
+    /**
+     * @return the sessionDao
+     */
+    public SessionDao getSessionDao() {
+        return sessionDao;
+    }
+
+    /**
+     * @return the assessmentDao
+     */
+    public AssessmentDao getAssessmentDao() {
+        return assessmentDao;
+    }
 }
