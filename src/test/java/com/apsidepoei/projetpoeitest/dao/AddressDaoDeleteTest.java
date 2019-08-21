@@ -26,7 +26,7 @@ import com.apsidepoei.projetpoei.entities.Address;
  * @author vianney
  *
  */
-public class AddressDaoDelete {
+public class AddressDaoDeleteTest {
 
 
     @Before

@@ -14,16 +14,19 @@
 //
 //public class AssessmentDaoTestBySelectId {
 //
+// @BeforeClass
+//		 DbManager.getInstance().getAssessmentDao().drop();
+//        DbManager.getInstance().getAssessmentDao().create();
+//
 //    @Test
+// 		/** test de selection par ID */
 //    public void testGetSelectId() {
 //        assertNotNull(DbManager.getInstance().getTestDao().select(1));
 //    }
 //
-//    @BeforeClass
+//   @Test
+//		/** test selection multiple */
 //    public static void testSelectIdMultiple() throws SQLException, ParseException {
-//
-//        DbManager.getInstance().getAssessmentDao().drop();
-//        DbManager.getInstance().getAssessmentDao().create();
 //
 //        for (int i = 1; i <= 10; i++) {
 //        	Assessment assessment = new Assessment("Rorchard" + i, new SimpleDateFormat("yyyy/mm/dd").parse("1999/12/31"));
@@ -33,6 +36,7 @@
 //    }
 //
 //    @Test
+//		/** Test de selection valide */
 //    public void testSelectIdTrue() {
 //        boolean isOk = false;
 //        Assessment assessment = (Assessment) DbManager.getInstance().getAssessmentDao().select(1);
@@ -43,6 +47,7 @@
 //
 //
 //    @Test
+//		/** Test de selection invalide */
 //    public void  testSelectIdFalse() {
 //        boolean isNotOk = true;
 //        Assessment assessment = (Assessment) DbManager.getInstance().getAssessmentDao().select(1);

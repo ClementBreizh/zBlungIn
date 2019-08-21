@@ -15,6 +15,7 @@
 //public class AssessmentDaoInsertTest {
 //
 //  @Test
+// 		/** Test d'insertion dans la table */
 //   public void testInsertAssessment() throws ParseException, SQLException {
 //	  Assessment monAssessment = new Assessment("Logique", new SimpleDateFormat("yyyy/mm/dd").parse("1980/04/24" ));
 //      DbManager.getInstance().getAssessmentDao().insert(monAssessment);
@@ -23,6 +24,7 @@
 //   }
 //
 //  @Test
+// 	/** Test avec lettre en autre que a-z */
 //  public void testInsertJapaneseLetter() throws ParseException, SQLException {
 //	  Assessment monAssessment2 = new Assessment("亜紀", new SimpleDateFormat("yyyy/mm/dd").parse("1980/04/24" ));
 //      DbManager.getInstance().getAssessmentDao().insert(monAssessment2);
@@ -31,8 +33,8 @@
 //   }
 //
 //  @Test
+//  /** Test sur longueur des saisies */
 //  public void testInsertCategoryVar50() throws ParseException {
-//
 //      String data = "";
 //      for (int i = 0; i < 50; i++) {
 //      data+= "x";
@@ -47,6 +49,7 @@
 //   }
 //
 //  @Test
+//  /**  Test sur la validité de la date */
 //  public void testInsertWrongDate() throws SQLException {
 //      try {
 //    	  Assessment monAssessment2 = new Assessment("MIROUF", new SimpleDateFormat("yyyy/mm/dd").parse("1980/24/32" ));
