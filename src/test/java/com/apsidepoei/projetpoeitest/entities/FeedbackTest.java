@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.apsidepoei.projetpoeitest.dao;
+package com.apsidepoei.projetpoeitest.entities;
 
 import org.junit.Assert;
 import org.junit.Test;

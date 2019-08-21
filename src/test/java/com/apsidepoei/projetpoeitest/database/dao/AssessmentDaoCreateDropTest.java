@@ -1,3 +1,4 @@
+package com.apsidepoei.projetpoeitest.database.dao;
 //package com.apsidepoei.projetpoeitest.dao;
 //
 //import static org.junit.Assert.assertTrue;

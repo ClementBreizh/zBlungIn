@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.apsidepoei.projetpoeitest.dao;
+package com.apsidepoei.projetpoeitest.database.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
