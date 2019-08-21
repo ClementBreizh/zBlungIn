@@ -15,6 +15,7 @@ import com.apsidepoei.projetpoei.entities.Matiere;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
+//Test UPDATE function on database
 public class MatiereDaoUpdateTest {
 
     private static final String CHANGED_DATA = "toto";
@@ -84,7 +85,7 @@ public class MatiereDaoUpdateTest {
         Matiere matiere = matieres.get(0);
 
         StringBuilder data = new StringBuilder();
-        for (int i = 0; i < 255; i++) {
+        for (int i = 0; i < 50; i++) {
             data.append("x");
         }
         matiere.setName(data.toString());

@@ -4,11 +4,12 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-import com.tactfactory.consolelogger.ConsoleLogger;
-import com.tactfactory.consolelogger.GlobalLogger;
-import com.tactfactory.consolelogger.Options;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
+import com.apsidepoei.projetpoei.entities.Address;
 
-import com.apsidepoei.projetpoei.entities.Adress;
+import com.apsidepoei.projetpoei.entities.Degree;
+
+import com.apsidepoei.projetpoei.entities.Matiere;
 
 public final class ProjetPoeiApplication {
 
@@ -24,41 +25,98 @@ public final class ProjetPoeiApplication {
     */
     public static void main(String[] args) throws ParseException, SQLException {
 
-//        GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
-//        GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
-//
-//        ConsoleLogger.LogForce("3eme data", Options.WARNING);
-//
-//        ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
-//
-//        logger.Log("3eme data", Options.WARNING);
 
-        adressTests();
+
+         matiereTests();
+         adressTests();
+
+//         degreeTests ();
+//         DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+//         DegreeGenerator.getInstance().deleteDatas();
 
     }
+
 
     private static final void adressTests () throws SQLException {
 
-        DbManager.getInstance().getAdressDao().drop();
-        DbManager.getInstance().getAdressDao().create();
+//        DbManager.getInstance().getAdressDao().drop();
+        DbManager.getInstance().getAddressDao().create();
+        Address adress1 = new Address("51 rue de l'alma", "35000", "rennes");
+        DbManager.getInstance().getAddressDao().insert(adress1);
 
-        Adress adress1 = new Adress("51 rue de l'alma", "35000", "rennes");
-        DbManager.getInstance().getAdressDao().insert(adress1);
+        Address adress2 = new Address("31 rue de la rabine", "35530", "noyal sur vilaine");
+        DbManager.getInstance().getAddressDao().insert(adress2);
 
-        Adress adress2 = new Adress("31 rue de la rabine", "35530", "noyal sur vilaine");
-        DbManager.getInstance().getAdressDao().insert(adress2);
-
-
-        for (Object obj : DbManager.getInstance().getAdressDao().select()) {
+        for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
-        DbManager.getInstance().getAdressDao().delete(adress1);
+        DbManager.getInstance().getAddressDao().delete(adress1);
 
-        for (Object obj : DbManager.getInstance().getAdressDao().select()) {
+        for (Object obj : DbManager.getInstance().getAddressDao().select()) {
             System.out.println(obj.toString());
         }
     }
 
+    // Test of database function for matiere class
+    private static final void matiereTests () throws SQLException {
+
+        DbManager.getInstance().getMatiereDao().drop();
+        DbManager.getInstance().getMatiereDao().create();
+        Matiere matiere1 = new Matiere("Physique Quantique");
+        DbManager.getInstance().getMatiereDao().insert(matiere1);
+
+        Matiere matiere2 = new Matiere("Algorythmie");
+        DbManager.getInstance().getMatiereDao().insert(matiere2);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(obj.toString());
+        }
+        DbManager.getInstance().getMatiereDao().delete(matiere1);
+
+        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
+
+    private static final void degreeTests () throws SQLException {
+
+      DbManager.getInstance().getDegreeDao().drop();
+      DbManager.getInstance().getDegreeDao().create();
+      Degree degree1 = new Degree("BTS Informatique", "BAC + 2");
+      DbManager.getInstance().getDegreeDao().insert(degree1);
+
+      Degree degree2 = new Degree("BTS Systèmes Numériques", "BAC + 2");
+      DbManager.getInstance().getDegreeDao().insert(degree2);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+
+      DbManager.getInstance().getDegreeDao().delete(degree1);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+
+      degree2.setName("BTS Systèmes Numériques Option A");
+      DbManager.getInstance().getDegreeDao().update(degree2);
+
+      for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
+          System.out.println(obj.toString());
+      }
+  }
 
 
+
+
+    // librairie
+
+//  GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
+//  GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
+//
+//  ConsoleLogger.LogForce("3eme data", Options.WARNING);
+//
+//  ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
+//
+//  logger.Log("3eme data", Options.WARNING);
 }
