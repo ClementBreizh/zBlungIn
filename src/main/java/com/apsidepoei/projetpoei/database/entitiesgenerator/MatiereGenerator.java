@@ -45,7 +45,7 @@ public class MatiereGenerator {
 
         int i = 0;
         while (i < nb) {
-            String matieres = faker.company().profession();
+            String matieres = faker.book().title();
             if (!matiere.contains(matieres)) {
                 matiere.add(matieres);
 

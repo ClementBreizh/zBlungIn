@@ -46,6 +46,15 @@ public class Entreprise extends EntityDb {
         this.siret = siret;
         this.codeApe = codeApe;
     }
+    
+    public Entreprise(int id, String nom, String nomAntenne, String siret, String codeApe) {
+        super();
+        this.setId(id);
+        this.nom = nom;
+        this.nomAntenne = nomAntenne;
+        this.siret = siret;
+        this.codeApe = codeApe;
+    }
 
     public Entreprise() {
 
