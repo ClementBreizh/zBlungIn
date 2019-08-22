@@ -19,7 +19,6 @@ import com.apsidepoei.projetpoei.entities.Assessment;
 
 /**
  * @author clement
- *
  */
 public class AssessmentDaoSelectTest {
 
@@ -49,8 +48,7 @@ public class AssessmentDaoSelectTest {
     }
 
     /**
-     *
-     * @throws SQLException Test SelectAll
+     *  Test SelectAll.
      */
     @Test
     public void selectAll() throws Exception {
@@ -59,8 +57,7 @@ public class AssessmentDaoSelectTest {
 
     @Test
     /**
-     *
-     * @throws SQLException Test SelectAll with counter
+     * Test SelectAll with counter.
      */
     public void selectAllCount() throws Exception {
         List<Assessment> listObjects = DbManager.getInstance().getAssessmentDao().select();
@@ -69,8 +66,7 @@ public class AssessmentDaoSelectTest {
     }
 
     /**
-     *
-     * @throws SQLException Test data compared with already registred data
+     *Test data compared with already registred data.
      */
     @Test
     public void dataCompare() throws Exception {
