@@ -64,13 +64,13 @@ public class SessionDao extends BaseDao<Session> {
         String dateStart = rs.getString(rs.findColumn(SessionContract.COL_DATESTART));
         dateStart = dateStart.substring(0, 10);
 
-        item.setDateStart(new SimpleDateFormat("YYYY-MM-DD")
+        item.setDateStart(new SimpleDateFormat("yyyy-MM-dd")
                 .parse(dateStart));
 
         String dateEnd = rs.getString(rs.findColumn(SessionContract.COL_DATEEND));
         dateEnd = dateEnd.substring(0, 10);
 
-        item.setDateStart(new SimpleDateFormat("YYYY-MM-DD")
+        item.setDateStart(new SimpleDateFormat("yyyy-MM-dd")
                 .parse(dateEnd));
 
         return item;
