@@ -97,7 +97,7 @@ jacoco {
 apply plugin: 'checkstyle'
 
 checkstyle {
-    toolVersion = "6.13"
+    toolVersion = "6.3"
 }
 
 task checkstyleMain (type: Checkstyle, overwrite: true) {
@@ -112,7 +112,7 @@ task checkstyleMain (type: Checkstyle, overwrite: true) {
         xml.destination "$project.buildDir/reports/checkstyle/main.xml"
     }
     classpath = fileTree(classesJava)
-    configFile = file("${rootProject.rootDir}/checkstyle_rules.xml")
+    configFile = file("${rootProject.rootDir}/checkstyle.xml")
 }
 
 task checkstyleTest (type: Checkstyle, overwrite: true){
@@ -127,13 +127,13 @@ task checkstyleTest (type: Checkstyle, overwrite: true){
         xml.destination "$project.buildDir/reports/checkstyle/test.xml"
     }
     classpath = fileTree("$project.buildDir/classes/test/")
-    configFile = file("${rootProject.rootDir}/checkstyle_rules.xml")
+    configFile = file("${rootProject.rootDir}/checkstyle.xml")
 }
 
 task checkstyleReport << {
     checkType = project.ext.get("checkType")
-    if (file("$buildDir/reports/checkstyle/${checkType}.xml").exists()) {
-        ant.xslt(in: "$project.buildDir/reports/checkstyle/${checkType}.xml",
+    if (file("$buildDir/reports/checkstyle/${checkType}1.xml").exists()) {
+        ant.xslt(in: "$project.buildDir/reports/checkstyle/${checkType}1.xml",
             style:"C:/ContinuousIntegration/checkstyle-6.13/checkstyle-noframes-sorted.xsl",
             out:"$project.buildDir/reports/checkstyle/checkstyle_${checkType}.html"
         )
