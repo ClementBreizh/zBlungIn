@@ -11,9 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * @author clement
+ */
 public class AssessmentDaoSelectTest {
 
   static List<Assessment> assessments = new ArrayList<Assessment>();
@@ -41,6 +45,7 @@ public class AssessmentDaoSelectTest {
   /**
    * Drop table.
    */
+  @Before
   public void drop() throws Exception {
     DbManager.getInstance().getAssessmentDao().drop();
     DbManager.getInstance().getAssessmentDao().create();
@@ -57,10 +62,10 @@ public class AssessmentDaoSelectTest {
     assertNotNull(DbManager.getInstance().getAssessmentDao().select());
   }
 
-  @Test
   /**
    * SQLException Test SelectAll with counter.
    */
+  @Test
   public void selectAllCount() throws Exception {
     List<Assessment> listObjects = DbManager.getInstance().getAssessmentDao().select();
     DbManager.getInstance().getAssessmentDao().select();
@@ -76,6 +81,6 @@ public class AssessmentDaoSelectTest {
 
     assertTrue((assessments.get(0).getId() == (listObjects.get(0).getId())
         && (assessments.get(0).getCategory().equals(listObjects.get(0).getCategory())
-            && (assessments.get(0).getDateTime().equals(listObjects.get(0).getDateTime())))));
+            && (assessments.get(0).getDateTime().compareTo(listObjects.get(0).getDateTime())== 0))));
   }
 }
