@@ -65,7 +65,8 @@ public class FeedbackDaoSelectTest {
 
     assertTrue((feedbacks.get(0).getId() == (listObjects.get(0).getId())
         && (feedbacks.get(0).getTypeOfContract().equals(listObjects.get(0).getTypeOfContract())
-            && (feedbacks.get(0).getDurationOfContract().equals(listObjects.get(0).getDurationOfContract())
+            && (feedbacks.get(0).getDurationOfContract()
+                .equals(listObjects.get(0).getDurationOfContract())
                 && (feedbacks.get(0).getComment().equals(listObjects.get(0).getComment()))))));
   }
 

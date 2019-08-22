@@ -25,8 +25,8 @@ public class Feedback extends EntityDb {
 
   @Override
   public String toString() {
-    return "Feedback [" + "Id = " + getId() + ", type de contrat = " + typeOfContract + ", durée de contrat = "
-        + durationOfContract + ", commentaire = " + comment + "]";
+    return "Feedback [" + "Id = " + getId() + ", type de contrat = " + typeOfContract
+        + ", durée de contrat = " + durationOfContract + ", commentaire = " + comment + "]";
   }
 
   // GETTER/SETTER

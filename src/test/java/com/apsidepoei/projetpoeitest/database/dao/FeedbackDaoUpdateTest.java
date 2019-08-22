@@ -91,8 +91,8 @@ public class FeedbackDaoUpdateTest {
     Feedback feedback = feedbackes.get(0);
     Feedback dbFeedback = (Feedback) DbManager.getInstance().getFeedbackDao().select(1);
 
-    assertTrue(
-        feedback.getId() == dbFeedback.getId() && feedback.getTypeOfContract().equals(dbFeedback.getTypeOfContract()));
+    assertTrue(feedback.getId() == dbFeedback.getId()
+        && feedback.getTypeOfContract().equals(dbFeedback.getTypeOfContract()));
   }
 
   // Simple compare postalCode
@@ -173,8 +173,8 @@ public class FeedbackDaoUpdateTest {
     DbManager.getInstance().getFeedbackDao().update(feedback);
     Feedback dbFeedbackUpdated = (Feedback) DbManager.getInstance().getFeedbackDao().select(1);
 
-    assertTrue(
-        feedback.getId() == dbFeedbackUpdated.getId() && feedback.getComment().equals(dbFeedbackUpdated.getComment()));
+    assertTrue(feedback.getId() == dbFeedbackUpdated.getId()
+        && feedback.getComment().equals(dbFeedbackUpdated.getComment()));
   }
 
   /**
@@ -185,7 +185,8 @@ public class FeedbackDaoUpdateTest {
     Feedback feedback = feedbackes.get(0);
     Feedback dbFeedback = (Feedback) DbManager.getInstance().getFeedbackDao().select(1);
 
-    assertTrue(feedback.getId() == dbFeedback.getId() && feedback.getComment().equals(dbFeedback.getComment()));
+    assertTrue(feedback.getId() == dbFeedback.getId()
+        && feedback.getComment().equals(dbFeedback.getComment()));
   }
 
 // verifying the Max size of the fields

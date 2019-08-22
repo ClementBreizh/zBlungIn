@@ -73,7 +73,8 @@ public class FeedbackDaoCreateDropTest {
   @Test
   public void testgetFeedbackDaoDropTableRemoved() throws SQLException {
     DbManager.getInstance().getFeedbackDao().drop();
-    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
+    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
+        .executeQuery("SHOW TABLES");
     while (rs.next()) {
       if (rs.getString(1).equals(FeedbackContract.TABLE)) {
         fail("Table already exists");
@@ -93,7 +94,8 @@ public class FeedbackDaoCreateDropTest {
     try {
       DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
     } catch (SQLException e) {
-      assertTrue(e.getMessage().equals("Table 'zbleugin." + FeedbackContract.TABLE + "' doesn't exist"));
+      assertTrue(
+          e.getMessage().equals("Table 'zbleugin." + FeedbackContract.TABLE + "' doesn't exist"));
     }
   }
 

@@ -60,9 +60,9 @@ public class AdressDaoUpdateTest {
     DbManager.getInstance().getAddressDao().update(address);
     Address dbAddressUpdated = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(
-        dbAddress.getId() == dbAddressUpdated.getId() && !dbAddress.getAddress().equals(dbAddressUpdated.getAddress())
-            && dbAddressUpdated.getAddress().equals(CHANGED_DATA));
+    assertTrue(dbAddress.getId() == dbAddressUpdated.getId()
+        && !dbAddress.getAddress().equals(dbAddressUpdated.getAddress())
+        && dbAddressUpdated.getAddress().equals(CHANGED_DATA));
   }
 
   /**
@@ -77,8 +77,8 @@ public class AdressDaoUpdateTest {
     DbManager.getInstance().getAddressDao().update(address);
     Address dbAddressUpdated = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(
-        address.getId() == dbAddressUpdated.getId() && address.getAddress().equals(dbAddressUpdated.getAddress()));
+    assertTrue(address.getId() == dbAddressUpdated.getId()
+        && address.getAddress().equals(dbAddressUpdated.getAddress()));
   }
 
   /**
@@ -89,7 +89,8 @@ public class AdressDaoUpdateTest {
     Address address = addresses.get(0);
     Address dbAddress = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(address.getId() == dbAddress.getId() && address.getAddress().equals(dbAddress.getAddress()));
+    assertTrue(address.getId() == dbAddress.getId()
+        && address.getAddress().equals(dbAddress.getAddress()));
   }
 
   // Simple compare postalCode
@@ -135,7 +136,8 @@ public class AdressDaoUpdateTest {
     Address address = addresses.get(0);
     Address dbAddress = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(address.getId() == dbAddress.getId() && address.getPostalCode().equals(dbAddress.getPostalCode()));
+    assertTrue(address.getId() == dbAddress.getId()
+        && address.getPostalCode().equals(dbAddress.getPostalCode()));
   }
 
   // Simple compare town
@@ -152,7 +154,8 @@ public class AdressDaoUpdateTest {
     DbManager.getInstance().getAddressDao().update(address);
     Address dbAddressUpdated = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(dbAddress.getId() == dbAddressUpdated.getId() && !dbAddress.getTown().equals(dbAddressUpdated.getTown())
+    assertTrue(dbAddress.getId() == dbAddressUpdated.getId()
+        && !dbAddress.getTown().equals(dbAddressUpdated.getTown())
         && dbAddressUpdated.getTown().equals(CHANGED_DATA));
   }
 
@@ -168,7 +171,8 @@ public class AdressDaoUpdateTest {
     DbManager.getInstance().getAddressDao().update(address);
     Address dbAddressUpdated = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(address.getId() == dbAddressUpdated.getId() && address.getTown().equals(dbAddressUpdated.getTown()));
+    assertTrue(address.getId() == dbAddressUpdated.getId()
+        && address.getTown().equals(dbAddressUpdated.getTown()));
   }
 
   /**
@@ -179,7 +183,8 @@ public class AdressDaoUpdateTest {
     Address address = addresses.get(0);
     Address dbAddress = (Address) DbManager.getInstance().getAddressDao().select(1);
 
-    assertTrue(address.getId() == dbAddress.getId() && address.getTown().equals(dbAddress.getTown()));
+    assertTrue(
+        address.getId() == dbAddress.getId() && address.getTown().equals(dbAddress.getTown()));
   }
 
 // verifying the Max size of the fields

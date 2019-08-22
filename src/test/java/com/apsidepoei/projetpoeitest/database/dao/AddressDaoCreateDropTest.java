@@ -73,7 +73,8 @@ public class AddressDaoCreateDropTest {
   @Test
   public void testgetAddressDaoDropTableRemoved() throws SQLException {
     DbManager.getInstance().getAddressDao().drop();
-    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
+    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
+        .executeQuery("SHOW TABLES");
     while (rs.next()) {
       if (rs.getString(1).equals(AddressContract.TABLE)) {
         fail("Table already exists");
@@ -93,7 +94,8 @@ public class AddressDaoCreateDropTest {
     try {
       DbManager.getInstance().getAddressDao().insert(new Address("Address1", "code1", "ville1"));
     } catch (SQLException e) {
-      assertTrue(e.getMessage().equals("Table 'zbleugin." + AddressContract.TABLE + "' doesn't exist"));
+      assertTrue(
+          e.getMessage().equals("Table 'zbleugin." + AddressContract.TABLE + "' doesn't exist"));
     }
   }
 
