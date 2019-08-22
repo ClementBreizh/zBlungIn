@@ -27,76 +27,74 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
  */
 public class FeedbackDaoCreateDropTest {
 
-    @Test
-    public void testGetFeedbackCreateTableMatchingFields() throws SQLException {
+  @Test
+  public void testGetFeedbackCreateTableMatchingFields() throws SQLException {
 
-        DbManager.getInstance().getFeedbackDao().drop();
-        DbManager.getInstance().getFeedbackDao().create();
+    DbManager.getInstance().getFeedbackDao().drop();
+    DbManager.getInstance().getFeedbackDao().create();
 
-        ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
-                .executeQuery("DESCRIBE " + FeedbackContract.TABLE);
-        List<DescribeQuery> describeQuery = new ArrayList<DescribeQuery>();
-        while (rs.next()) {
-            DescribeQuery desc = new DescribeQuery();
-            desc.setField(rs.getString(1));
-            desc.setType(rs.getString(2));
-            desc.setNullable(rs.getString(3));
-            desc.setKeyType(rs.getString(4));
-            desc.setDefaultValue(rs.getString(5));
-            desc.setExtra(rs.getString(6));
-            describeQuery.add(desc);
-        }
-
-        if (FeedbackContract.COLS.length != describeQuery.size()) {
-            fail("not same number of lines");
-        }
-
-        for (int i = 0; i < describeQuery.size(); i++) {
-            if (!describeQuery.get(i).getField().equals(FeedbackContract.COLS[i])) {
-                fail("Column name do not match");
-            }
-        }
-
+    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
+        .executeQuery("DESCRIBE " + FeedbackContract.TABLE);
+    List<DescribeQuery> describeQuery = new ArrayList<DescribeQuery>();
+    while (rs.next()) {
+      DescribeQuery desc = new DescribeQuery();
+      desc.setField(rs.getString(1));
+      desc.setType(rs.getString(2));
+      desc.setNullable(rs.getString(3));
+      desc.setKeyType(rs.getString(4));
+      desc.setDefaultValue(rs.getString(5));
+      desc.setExtra(rs.getString(6));
+      describeQuery.add(desc);
     }
 
-    @Test
-    public void testgetFeedbackDaoCreateTableInsertWorking() {
-        DbManager.getInstance().getFeedbackDao().drop();
-        DbManager.getInstance().getFeedbackDao().create();
-        try {
-            DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
-        } catch (Exception e) {
-            fail("Insertion failure");
-        }
+    if (FeedbackContract.COLS.length != describeQuery.size()) {
+      fail("not same number of lines");
     }
 
-    @Test
-    public void testgetFeedbackDaoDropTableRemoved() throws SQLException {
-        DbManager.getInstance().getFeedbackDao().drop();
-        ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
-        while (rs.next()) {
-            if (rs.getString(1).equals(FeedbackContract.TABLE)) {
-                fail("Table already exists");
-            }
-        }
+    for (int i = 0; i < describeQuery.size(); i++) {
+      if (!describeQuery.get(i).getField().equals(FeedbackContract.COLS[i])) {
+        fail("Column name do not match");
+      }
     }
 
-    @Test(expected = MySQLSyntaxErrorException.class)
-    public void testgetFeedbackDaoDropCannotInsert() throws SQLException, ParseException {
-        DbManager.getInstance().getFeedbackDao().drop();
-        DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
-    }
+  }
 
-    @Test
-    public void testgetFeedbackDaoDropCannotInsertGoodMessage() {
-        DbManager.getInstance().getFeedbackDao().drop();
-        try {
-            DbManager.getInstance().getFeedbackDao()
-            .insert(new Feedback("Feedback1", 1, "commentaire1"));
-        } catch (SQLException e) {
-            assertTrue(e.getMessage().equals("Table 'zbleugin." + FeedbackContract.TABLE + "' doesn't exist"));
-        }
+  @Test
+  public void testgetFeedbackDaoCreateTableInsertWorking() {
+    DbManager.getInstance().getFeedbackDao().drop();
+    DbManager.getInstance().getFeedbackDao().create();
+    try {
+      DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
+    } catch (Exception e) {
+      fail("Insertion failure");
     }
+  }
 
+  @Test
+  public void testgetFeedbackDaoDropTableRemoved() throws SQLException {
+    DbManager.getInstance().getFeedbackDao().drop();
+    ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement().executeQuery("SHOW TABLES");
+    while (rs.next()) {
+      if (rs.getString(1).equals(FeedbackContract.TABLE)) {
+        fail("Table already exists");
+      }
+    }
+  }
+
+  @Test(expected = MySQLSyntaxErrorException.class)
+  public void testgetFeedbackDaoDropCannotInsert() throws SQLException, ParseException {
+    DbManager.getInstance().getFeedbackDao().drop();
+    DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
+  }
+
+  @Test
+  public void testgetFeedbackDaoDropCannotInsertGoodMessage() {
+    DbManager.getInstance().getFeedbackDao().drop();
+    try {
+      DbManager.getInstance().getFeedbackDao().insert(new Feedback("Feedback1", 1, "commentaire1"));
+    } catch (SQLException e) {
+      assertTrue(e.getMessage().equals("Table 'zbleugin." + FeedbackContract.TABLE + "' doesn't exist"));
+    }
+  }
 
 }
