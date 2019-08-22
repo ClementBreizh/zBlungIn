@@ -1,83 +1,83 @@
 package com.apsidepoei.projetpoei.entities;
 
 /**
+ * This class is the Degree entity.
  * @author thomas
- * This class is the Degree entity
  *
  */
 public class Degree extends EntityDb {
 
-	private String name;
-	private String level;
+  private String name;
+  private String level;
 
-	/**
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * The name.
+   * @return
+   */
+  public String getName() {
+    return name;
+  }
 
-	/**
-	 *
-	 * @param set the name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * Set the name.
+   * @param name = the name
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 *
-	 * @return the level
-	 */
-	public String getLevel() {
-		return level;
-	}
+  /**
+   * The level.
+   * @return
+   */
+  public String getLevel() {
+    return level;
+  }
 
-	/**
-	 *
-	 * @param set the level
-	 */
-	public void setLevel(String level) {
-		this.level = level;
-	}
+  /**
+   * Set the level.
+   * @param level = the level
+   */
+  public void setLevel(String level) {
+    this.level = level;
+  }
 
-	/**
-	 *
-	 * @param name
-	 * @param level Constructor for a new degree
-	 */
-	public Degree(String name, String level) {
-		super();
-		this.name = name;
-		this.level = level;
-	}
+  /**
+   * Constructor for a new degree.
+   * @param name  = the name
+   * @param level = the level
+   */
+  public Degree(String name, String level) {
+    super();
+    this.name = name;
+    this.level = level;
+  }
 
-	/**
-	 *
-	 * @param id
-	 * @param name
-	 * @param level Constructor with id for new degree
-	 */
-	public Degree(int id, String name, String level) {
-		super();
-		this.setId(id);
-		this.name = name;
-		this.level = level;
-	}
+  /**
+   * Constructor with id for new degree.
+   * @param id    = the id
+   * @param name  = the name
+   * @param level = the level
+   */
+  public Degree(int id, String name, String level) {
+    super();
+    this.setId(id);
+    this.name = name;
+    this.level = level;
+  }
 
-	/**
-	 * empty constructor
-	 */
-	public Degree() {
+  /**
+   * Empty constructor.
+   */
+  public Degree() {
 
-	}
+  }
 
-	/**
-	 * override toString() function
-	 */
-	@Override
-	public String toString() {
-		return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
-	}
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+  }
 }

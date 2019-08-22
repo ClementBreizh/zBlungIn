@@ -13,116 +13,116 @@ import com.apsidepoei.projetpoei.entities.Appointment;
 import com.github.javafaker.Faker;
 
 /**
- *
+ * This class generate fake data.
  * @author thomas
- * This class generate fake data
  */
 public class AppointmentGenerator {
-	private AppointmentGenerator() {
-	}
+  private AppointmentGenerator() {
+  }
 
-	private static AppointmentGenerator INSTANCE = null;
+  private static AppointmentGenerator INSTANCE = null;
 
-	/**
-	 *
-	 * @return an instance of the constructor
-	 */
-	public static AppointmentGenerator getInstance() {
-		if (INSTANCE == null) {
-			synchronized (AppointmentGenerator.class) {
-				if (INSTANCE == null) {
-					INSTANCE = new AppointmentGenerator();
-				}
-			}
-		}
-		return INSTANCE;
-	}
+  /**
+   * An instance of the constructor.
+   * @return
+   */
 
-	Faker faker = new Faker(Locale.FRENCH);
-	private List<Appointment> datas = new ArrayList<Appointment>();
+  public static AppointmentGenerator getInstance() {
+    if (INSTANCE == null) {
+      synchronized (AppointmentGenerator.class) {
+        if (INSTANCE == null) {
+          INSTANCE = new AppointmentGenerator();
+        }
+      }
+    }
+    return INSTANCE;
+  }
 
-	/**
-	 *
-	 * @return
-	 * @throws SQLException Generate fake data
-	 * @throws ParseException
-	 */
-	public List<Appointment> generateDatas() throws SQLException, ParseException {
-		return generateDatas(faker.random().nextInt(100));
-	}
+  Faker faker = new Faker(Locale.FRENCH);
+  private List<Appointment> datas = new ArrayList<Appointment>();
 
-	/**
-	 *
-	 * @param nb
-	 * @return
-	 * @throws SQLException Generate n fake data
-	 * @throws ParseException
-	 */
-	public List<Appointment> generateDatas(int nb) throws SQLException, ParseException {
-		List<Appointment> result = new ArrayList<>();
+  /**
 
-	    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		final Date mySqlDate = sdf.parse("2019-08-22 02:05:00");
+   * @return
+   * @throws SQLException
+   * @throws ParseException
+   */
+  public List<Appointment> generateDatas() throws SQLException, ParseException {
+    return generateDatas(faker.random().nextInt(100));
+  }
 
-		for (int i = 0; i < nb; i++) {
-			Appointment appointment = new Appointment(faker.lorem().sentence(), mySqlDate, faker.lorem().sentence(4));
-			result.add(appointment);
-		}
+  /**
+   * Generate n fake data.
+   * @param nb = number
+   * @return
+   * @throws SQLException
+   * @throws ParseException
+   */
+  public List<Appointment> generateDatas(int nb) throws SQLException, ParseException {
+    List<Appointment> result = new ArrayList<>();
 
-		return result;
-	}
+    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    final Date mySqlDate = sdf.parse("2019-08-22 02:05:00");
 
-	/**
-	 *
-	 * @throws SQLException Generate and insert datas
-	 * @throws ParseException
-	 */
-	public void generateAndInsertDatas() throws SQLException, ParseException {
-		generateAndInsertDatas(faker.random().nextInt(100));
-	}
+    for (int i = 0; i < nb; i++) {
+      Appointment appointment = new Appointment(faker.lorem().sentence(), mySqlDate,
+          faker.lorem().sentence(4));
+      result.add(appointment);
+    }
 
-	/**
-	 *
-	 * @param nb
-	 * @throws SQLException Generate and insert n datas
-	 * @throws ParseException
-	 */
-	public void generateAndInsertDatas(int nb) throws SQLException, ParseException {
-		for (Appointment appointment : generateDatas(nb)) {
-			DbManager.getInstance().getAppointmentDao().insert(appointment);
-			System.out.println(appointment);
-			datas.add(appointment);
-		}
-	}
+    return result;
+  }
 
-	/**
-	 *
-	 * @throws SQLException Drop, create table, generate and insert datas
-	 * @throws ParseException
-	 */
-	public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
-		generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
-	}
+  /**
+   * Generate and insert datas.
+   * @throws SQLException = exception
+   */
+  public void generateAndInsertDatas() throws SQLException, ParseException {
+    generateAndInsertDatas(faker.random().nextInt(100));
+  }
 
-	/**
-	 *
-	 * @param nb
-	 * @throws SQLException Drop, create table, generate and insert n data
-	 * @throws ParseException
-	 */
-	public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
-		DbManager.getInstance().getAppointmentDao().drop();
-		DbManager.getInstance().getAppointmentDao().create();
+  /**
+   * Generate and insert n datas.
+   * @param nb = number
+   * @throws SQLException = exception
+   * @throws ParseException = exception
+   */
+  public void generateAndInsertDatas(int nb) throws SQLException, ParseException {
+    for (Appointment appointment : generateDatas(nb)) {
+      DbManager.getInstance().getAppointmentDao().insert(appointment);
+      System.out.println(appointment);
+      datas.add(appointment);
+    }
+  }
 
-		generateAndInsertDatas(nb);
-	}
+  /**
+   * Drop, create table, generate and insert datas.
+   * @throws SQLException = exception
+   * @throws ParseException = exception
+   */
+  public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
+    generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
+  }
 
-	/**
-	 * delete datas
-	 */
-	public void deleteDatas() {
-		for (Appointment appointment : datas) {
-			DbManager.getInstance().getAppointmentDao().delete(appointment);
-		}
-	}
+  /**
+   * Drop, create table, generate and insert n data.
+   * @param nb = number
+   * @throws SQLException = exception
+   * @throws ParseException = exception
+   */
+  public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
+    DbManager.getInstance().getAppointmentDao().drop();
+    DbManager.getInstance().getAppointmentDao().create();
+
+    generateAndInsertDatas(nb);
+  }
+
+  /**
+   * delete datas.
+   */
+  public void deleteDatas() {
+    for (Appointment appointment : datas) {
+      DbManager.getInstance().getAppointmentDao().delete(appointment);
+    }
+  }
 }

@@ -13,18 +13,18 @@ public class GetDbConfig {
   private static String psw;
 
   /**
-   * Constructeur privé
+   * Constructeur privé.
    */
   private GetDbConfig() {
   }
 
   /**
-   * Instance unique non préinitialisée
+   * Instance unique non préinitialisée.
    */
   private static GetDbConfig INSTANCE = null;
 
   /**
-   * Point d'accès pour l'instance unique du singleton
+   * Point d'accès pour l'instance unique du singleton.
    *
    */
   public static GetDbConfig getInstance() {
@@ -39,9 +39,9 @@ public class GetDbConfig {
   }
 
   /**
-   * Get db config from a file in /home
+   * Get db config from a file in /home.
    */
-  public void DbConfig() {
+  public void dbConfig() {
     try {
       InputStream flux = new FileInputStream("/home/DbConfigProjetPoei.txt");
       InputStreamReader lecture = new InputStreamReader(flux);
@@ -51,24 +51,24 @@ public class GetDbConfig {
       int i = 1;
       while ((ligne = buff.readLine()) != null) {
         switch (i) {
-        case 1:
-          ip = ligne;
-          i++;
-          break;
-        case 2:
-          login = ligne;
-          i++;
-          break;
-        case 3:
-          psw = ligne;
-          i++;
-          break;
-        case 4:
-          dbname = ligne;
-          i++;
-          break;
-        default:
-          break;
+          case 1:
+            ip = ligne;
+            i++;
+            break;
+          case 2:
+            login = ligne;
+            i++;
+            break;
+          case 3:
+            psw = ligne;
+            i++;
+            break;
+          case 4:
+            dbname = ligne;
+            i++;
+            break;
+          default:
+            break;
         }
       }
       buff.close();
@@ -78,7 +78,7 @@ public class GetDbConfig {
   }
 
   /**
-   * Get ip
+   * Get ip.
    *
    * @return
    */
@@ -87,7 +87,7 @@ public class GetDbConfig {
   }
 
   /**
-   * Get login
+   * Get login.
    *
    * @return
    */
@@ -96,7 +96,7 @@ public class GetDbConfig {
   }
 
   /**
-   * Get dbname
+   * Get dbname.
    *
    * @return
    */
@@ -105,7 +105,7 @@ public class GetDbConfig {
   }
 
   /**
-   * Get psw
+   * Get psw.
    *
    * @return
    */

@@ -10,7 +10,7 @@ public class DbOpenHelper {
 
   /** Constructeur privé. */
   private DbOpenHelper() {
-    GetDbConfig.getInstance().DbConfig();
+    GetDbConfig.getInstance().dbConfig();
 
     MysqlDataSource datasource = new MysqlDataSource();
     datasource.setUser(GetDbConfig.getInstance().getLogin());
