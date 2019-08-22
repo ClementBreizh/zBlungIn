@@ -4,13 +4,13 @@ import java.text.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.apsidepoei.projetpoei.entities.Matters;
+import com.apsidepoei.projetpoei.entities.Matter;
 
 /**
  *
  * @author clemb Test to string function
  */
-public class MattersTest {
+public class MatterTest {
     /**
      * Test the toString()
      *
@@ -19,9 +19,9 @@ public class MattersTest {
     @Test
     public void testToString() throws ParseException {
 
-        Matters matters = new Matters("Mon Super nom");
+        Matter matters = new Matter("Mon Super nom");
         matters.setId(1);
-        String expected = "Matters [Id = 1, name= Mon Super nom]";
+        String expected = "Matter [Id = 1, name= Mon Super nom]";
         Assert.assertEquals(expected, matters.toString());
     }
 }

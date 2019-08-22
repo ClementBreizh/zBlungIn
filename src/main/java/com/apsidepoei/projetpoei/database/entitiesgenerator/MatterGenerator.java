@@ -6,21 +6,21 @@ import java.util.List;
 import java.util.Locale;
 
 import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Matters;
+import com.apsidepoei.projetpoei.entities.Matter;
 import com.github.javafaker.Faker;
 
-public class MattersGenerator {
+public class MatterGenerator {
 
-    private MattersGenerator() {
+    private MatterGenerator() {
     }
 
-    private static MattersGenerator INSTANCE = null;
+    private static MatterGenerator INSTANCE = null;
 
-    public static MattersGenerator getInstance() {
+    public static MatterGenerator getInstance() {
         if (INSTANCE == null) {
-            synchronized (MattersGenerator.class) {
+            synchronized (MatterGenerator.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new MattersGenerator();
+                    INSTANCE = new MatterGenerator();
                 }
             }
         }
@@ -28,14 +28,14 @@ public class MattersGenerator {
     }
 
     private Faker faker = new Faker(Locale.FRENCH);
-    private List<Matters> datas = new ArrayList<Matters>();
+    private List<Matter> datas = new ArrayList<Matter>();
 
-    public List<Matters> generateDatas() throws SQLException {
+    public List<Matter> generateDatas() throws SQLException {
         return generateDatas(faker.random().nextInt(100));
     }
 
-    public List<Matters> generateDatas(int nb) throws SQLException {
-        List<Matters> result = new ArrayList<>();
+    public List<Matter> generateDatas(int nb) throws SQLException {
+        List<Matter> result = new ArrayList<>();
         List<String> matters = new ArrayList<String>();
 
         int i = 0;
@@ -45,7 +45,7 @@ public class MattersGenerator {
 
                 matters.add(matterss);
 
-                Matters mat = new Matters(matterss);
+                Matter mat = new Matter(matterss);
                 result.add(mat);
 
                 i++;
@@ -59,8 +59,8 @@ public class MattersGenerator {
     }
 
     public void generateAndInsertDatas(int nb) throws SQLException {
-        for (Matters matters : generateDatas(nb)) {
-            DbManager.getInstance().getMattersDao().insert(matters);
+        for (Matter matters : generateDatas(nb)) {
+            DbManager.getInstance().getMatterDao().insert(matters);
             datas.add(matters);
         }
     }
@@ -70,15 +70,15 @@ public class MattersGenerator {
     }
 
     public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
-        DbManager.getInstance().getMattersDao().drop();
-        DbManager.getInstance().getMattersDao().create();
+        DbManager.getInstance().getMatterDao().drop();
+        DbManager.getInstance().getMatterDao().create();
 
         generateAndInsertDatas(nb);
     }
 
     public void deleteDatas() {
-        for (Matters matters : datas) {
-            DbManager.getInstance().getMattersDao().delete(matters);
+        for (Matter matters : datas) {
+            DbManager.getInstance().getMatterDao().delete(matters);
         }
     }
 }
