@@ -88,13 +88,7 @@ public class SessionDaoSelectTest {
 	@Test
 	public void dataCompare() throws Exception {
 		List<Session> listObjects = DbManager.getInstance().getSessionDao().select();
-Date date1 = Sessions.get(0).getDateStart();
-Date date2 = ((Session) listObjects.get(0)).getDateStart();
 
-int toto = date1.compareTo(date2);
-System.out.println(toto);
-System.out.println(date1);
-System.out.println(date2);
 
 		assertTrue((Sessions.get(0).getId() == ((Session) listObjects.get(0)).getId())
 				&& (Sessions.get(0).getName().equals(((Session) listObjects.get(0)).getName())));
