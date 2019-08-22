@@ -55,6 +55,7 @@ public class BaseContract {
 
   private String insert() {
     StringBuilder result = new StringBuilder();
+
     result.append("insert INTO " + tables + "(");
 
     int j = 0;
@@ -66,6 +67,7 @@ public class BaseContract {
     result.append(") VALUES(");
 
     for (int i = 0; i < columns.length - 1; i++) {
+
       result.append("?,");
     }
     result.append("?");
@@ -76,6 +78,7 @@ public class BaseContract {
 
   private String update() {
     StringBuilder result = new StringBuilder();
+
     result.append("update " + tables + " SET ");
 
     int j = 1;
@@ -105,6 +108,7 @@ public class BaseContract {
 
   private String select() {
     StringBuilder result = selectBase();
+
     result.append(" WHERE " + columnId + " = ?");
 
     return result.toString();
@@ -112,6 +116,7 @@ public class BaseContract {
 
   private StringBuilder selectBase() {
     StringBuilder result = new StringBuilder();
+
     result.append("select ");
 
     int j = 0;
@@ -120,6 +125,7 @@ public class BaseContract {
     }
     result.append(columns[j]);
     result.append(" FROM " + tables);
+
     return result;
   }
 

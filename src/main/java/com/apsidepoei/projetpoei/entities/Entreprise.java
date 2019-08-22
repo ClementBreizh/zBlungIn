@@ -62,7 +62,7 @@ public class Entreprise extends EntityDb {
 
     @Override
     public String toString() {
-        return "Entreprise [nom=" + nom + ", nomAntenne=" + nomAntenne + ", siret=" + siret + ", codeApe=" + codeApe + ", getId()=" + getId() + "]";
+    	return "Entreprise [Id = " + getId() + ", nom = " + nom+ ", nomAntenne = " + nomAntenne + ", siret = " + siret + ", codeApe = " + codeApe +  "]";
     }
 
 }

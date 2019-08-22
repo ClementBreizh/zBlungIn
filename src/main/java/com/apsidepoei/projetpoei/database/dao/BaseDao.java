@@ -12,6 +12,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+import com.apsidepoei.projetpoei.database.DbOpenHelper;
+import com.apsidepoei.projetpoei.database.contracts.BaseContract;
+import com.apsidepoei.projetpoei.entities.EntityDb;
+
 public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
 
   private BaseContract contract;
@@ -24,7 +29,11 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
   public void create() {
     PreparedStatement ps = null;
     try {
+
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(contract.createTable);
+
+      ps = DbOpenHelper.getInstance().getConn().prepareStatement(contract.createTable);
+
       ps.execute();
     } catch (SQLException e) {
       e.printStackTrace();
@@ -42,7 +51,11 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     PreparedStatement ps = null;
     try {
       DbOpenHelper.getInstance().getConn().createStatement().execute("SET FOREIGN_KEY_CHECKS=0");
+
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(contract.dropTable);
+
+      ps = DbOpenHelper.getInstance().getConn().prepareStatement(contract.dropTable);
+
       ps.execute();
       DbOpenHelper.getInstance().getConn().createStatement().execute("SET FOREIGN_KEY_CHECKS=1");
     } catch (SQLException e) {
@@ -58,11 +71,16 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
 
   @Override
   public T insert(T item) throws SQLException {
+
     String request = contract.insert;
     PreparedStatement ps = null;
     try {
       ps = DbOpenHelper.getInstance().getConn()
           .prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+    } finally {
+    try {
+      ps = DbOpenHelper.getInstance().getConn().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+
       if (item.getId() == null) {
         ps.setNull(1, java.sql.Types.INTEGER);
       } else {
@@ -78,7 +96,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
 
     } catch (SQLException e) {
       throw e;
-    } finally {
+    }
       try {
         ps.close();
       } catch (SQLException e) {
@@ -93,6 +111,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     Integer nbTupleChanged = null;
 
     String request = contract.update;
+
     PreparedStatement ps = null;
     try {
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(request);
@@ -115,6 +134,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     Integer nbTupleChanged = null;
 
     String request = contract.delete;
+
     PreparedStatement ps = null;
     try {
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(request);
@@ -137,6 +157,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     List<T> result = new ArrayList<T>();
 
     String request = contract.selectAll;
+
     PreparedStatement ps = null;
     try {
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(request);
@@ -163,6 +184,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     T result = null;
 
     String request = contract.select;
+
     PreparedStatement ps = null;
     try {
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(request);

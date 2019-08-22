@@ -14,13 +14,12 @@ import com.apsidepoei.projetpoei.entities.Address;
  */
 public class AddressTest {
 
-    @Test
-    public void testToString()
-    {
-        Address address = new Address("adresse postale", "35000", "ville");
-        address.setId(1);
+  @Test
+  public void testToString() {
+    Address address = new Address("adresse postale", "35000", "ville");
+    address.setId(1);
 //        System.out.println(address.toString());
-        String expected = "Adresse [Id = 1, adresse postale = adresse postale, code postal = 35000, ville = ville]";
-        Assert.assertEquals(expected, address.toString());
-    }
+    String expected = "Adresse [Id = 1, adresse postale = adresse postale, code postal = 35000, ville = ville]";
+    Assert.assertEquals(expected, address.toString());
+  }
 }

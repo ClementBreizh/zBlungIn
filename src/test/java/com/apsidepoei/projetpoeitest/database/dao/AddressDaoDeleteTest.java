@@ -3,7 +3,6 @@
  */
 package com.apsidepoei.projetpoeitest.database.dao;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -24,91 +23,90 @@ import com.apsidepoei.projetpoei.entities.Address;
  */
 public class AddressDaoDeleteTest {
 
+  @Before
+  public void dropCreate() {
+    DbManager.getInstance().getAddressDao().drop();
+    DbManager.getInstance().getAddressDao().create();
+  }
 
-    @Before
-    public void dropCreate() {
-        DbManager.getInstance().getAddressDao().drop();
-        DbManager.getInstance().getAddressDao().create();
-    }
+  @Test
+  public void testAdressDaoDeleteSimple() throws SQLException, ParseException {
+    Address Adress = new Address("AdressTest", "Test", "villeTest");
+    DbManager.getInstance().getAddressDao().insert(Adress);
 
-    @Test
-    public void testAdressDaoDeleteSimple() throws SQLException, ParseException {
-        Address Adress = new Address("AdressTest", "Test", "villeTest");
-        DbManager.getInstance().getAddressDao().insert(Adress);
+    Adress.setId(1);
+    DbManager.getInstance().getAddressDao().delete(Adress);
 
-        Adress.setId(1);
+    assertNull(DbManager.getInstance().getAddressDao().select(1));
+  }
+
+  @Test
+  public void testAdressDaoDeleteMultiple() throws SQLException, ParseException {
+    boolean statut = false;
+
+    for (int i = 1; i <= 10; i++) {
+      Address Adress = new Address("Adress" + i, "cod" + i, "ville" + i);
+      Adress.setId(i);
+      DbManager.getInstance().getAddressDao().insert(Adress);
+
+      if (i == 5) {
         DbManager.getInstance().getAddressDao().delete(Adress);
-
-        assertNull(DbManager.getInstance().getAddressDao().select(1));
+      }
     }
 
-    @Test
-    public void testAdressDaoDeleteMultiple() throws SQLException, ParseException {
-        boolean statut = false;
-
-        for (int i = 1; i <= 10; i++) {
-            Address Adress = new Address("Adress" + i, "cod" + i, "ville" + i);
-            Adress.setId(i);
-            DbManager.getInstance().getAddressDao().insert(Adress);
-
-            if (i == 5) {
-                DbManager.getInstance().getAddressDao().delete(Adress);
-            }
-        }
-
-        for (int i = 1; i <= 10; i++) {
-            if (i == 5 && DbManager.getInstance().getAddressDao().select(i) == null) {
-                statut = true;
-            }
-        }
-
-        assertTrue(statut);
+    for (int i = 1; i <= 10; i++) {
+      if (i == 5 && DbManager.getInstance().getAddressDao().select(i) == null) {
+        statut = true;
+      }
     }
 
-    @Test
-    public void testAdressDaoDeleteMultiple2() throws SQLException, ParseException {
-        boolean statut = false;
+    assertTrue(statut);
+  }
 
-        for (int i = 17; i <= 102; i += 17) {
-            Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
-            Adress.setId(i);
-            DbManager.getInstance().getAddressDao().insert(Adress);
+  @Test
+  public void testAdressDaoDeleteMultiple2() throws SQLException, ParseException {
+    boolean statut = false;
 
-            if (i == 51) {
-                DbManager.getInstance().getAddressDao().delete(Adress);
-            }
-        }
+    for (int i = 17; i <= 102; i += 17) {
+      Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
+      Adress.setId(i);
+      DbManager.getInstance().getAddressDao().insert(Adress);
 
-        for (int i = 17; i <= 102; i += 17) {
-            if (i == 51 && DbManager.getInstance().getAddressDao().select(i) == null) {
-                statut = true;
-            }
-        }
-
-        assertTrue(statut);
+      if (i == 51) {
+        DbManager.getInstance().getAddressDao().delete(Adress);
+      }
     }
 
-    @Test
-    public void testAdressDaoDeleteNullMultiple() throws SQLException, ParseException {
-        int statut = 0;
-
-        for (int i = 17; i <= 102; i += 17) {
-            Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
-            Adress.setId(i);
-            DbManager.getInstance().getAddressDao().insert(Adress);
-
-            if (i == 102) {
-              DbManager.getInstance().getAddressDao().delete(Adress);
-              statut = DbManager.getInstance().getAddressDao().delete(Adress);
-            }
-        }
-
-        assertEquals(0, statut);
+    for (int i = 17; i <= 102; i += 17) {
+      if (i == 51 && DbManager.getInstance().getAddressDao().select(i) == null) {
+        statut = true;
+      }
     }
 
-    @AfterClass
-    public static void dropAfter() {
-        DbManager.getInstance().getAddressDao().drop();
-        DbManager.getInstance().getAddressDao().create();
+    assertTrue(statut);
+  }
+
+  @Test
+  public void testAdressDaoDeleteNullMultiple() throws SQLException, ParseException {
+    int statut = 0;
+
+    for (int i = 17; i <= 102; i += 17) {
+      Address Adress = new Address("Adress" + i, "" + i, "ville" + i);
+      Adress.setId(i);
+      DbManager.getInstance().getAddressDao().insert(Adress);
+
+      if (i == 102) {
+        DbManager.getInstance().getAddressDao().delete(Adress);
+        statut = DbManager.getInstance().getAddressDao().delete(Adress);
+      }
     }
+
+    assertEquals(0, statut);
+  }
+
+  @AfterClass
+  public static void dropAfter() {
+    DbManager.getInstance().getAddressDao().drop();
+    DbManager.getInstance().getAddressDao().create();
+  }
 }
