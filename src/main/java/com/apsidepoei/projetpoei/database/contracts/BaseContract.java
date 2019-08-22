@@ -2,122 +2,131 @@ package com.apsidepoei.projetpoei.database.contracts;
 
 public class BaseContract {
 
-    public final String TABLE;
+  public final String tables;
 
-    public final String COL_ID;
+  public final String columnId;
 
-    public final String ALIASED_COL_ID;
+  public final String aliasColumnId;
 
-    public final String[] COLS;
+  public final String[] columns;
 
-    public final String[] ALIASED_COLS;
+  public final String[] aliasCols;
 
-    public final String INSERT;
+  public final String insert;
 
-    public final String UPDATE;
+  public final String update;
 
-    public final String DELETE;
+  public final String delete;
 
-    public final String SELECTALL;
+  public final String selectAll;
 
-    public final String SELECT;
+  public final String select;
 
-    public final String CREATE_TABLE;
+  public final String createTable;
 
-    public final String DROP_TABLE;
+  public final String dropTable;
 
-    public BaseContract(String table, String col_id, String[] cols, String createTable) {
-        TABLE = table;
-        COL_ID = col_id;
-        COLS = cols;
-        CREATE_TABLE = createTable;
-        ALIASED_COL_ID = TABLE + "." + COL_ID;
-        DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE;
+  /**
+   * Setup for basecontract.
+   */
+  public BaseContract(String table, String colId, String[] cols, String createtable) {
+    tables = table;
+    columnId = colId;
+    columns = cols;
+    createTable = createtable;
+    aliasColumnId = table + "." + columnId;
+    dropTable = "DROP table IF EXISTS " + table;
 
-        ALIASED_COLS = aliasedCols();
-        INSERT = insert();
-        UPDATE = update();
-        DELETE = delete();
-        SELECTALL = selectAll();
-        SELECT = select();
+    aliasCols = aliasedcols();
+    insert = insert();
+    update = update();
+    delete = delete();
+    selectAll = selectAll();
+    select = select();
+  }
+
+  private String[] aliasedcols() {
+    String[] result = new String[columns.length];
+    for (int i = 0; i < columns.length; i++) {
+      result[i] = tables + "." + columns[i];
     }
+    return result;
+  }
 
-    private String[] aliasedCols() {
-        String[] result = new String[COLS.length];
-        for (int i = 0; i < COLS.length; i++) {
-            result[i] = TABLE + "." + COLS[i];
-        }
-        return result;
+  private String insert() {
+    StringBuilder result = new StringBuilder();
+
+    result.append("insert INTO " + tables + "(");
+
+    int j = 0;
+    for (; j < columns.length - 1; j++) {
+      result.append(columns[j] + ",");
     }
+    result.append(columns[j]);
 
-    private String insert() {
-        StringBuilder result = new StringBuilder();
-        result.append("INSERT INTO " + TABLE + "(");
+    result.append(") VALUES(");
 
-        int j = 0;
-        for (; j < COLS.length - 1; j++) {
-            result.append(COLS[j] + ",");
-        }
-        result.append(COLS[j]);
+    for (int i = 0; i < columns.length - 1; i++) {
 
-        result.append(") VALUES(");
-
-        for (int i = 0; i < COLS.length - 1; i++) {
-            result.append("?,");
-        }
-        result.append("?");
-
-        result.append(")");
-        return result.toString();
+      result.append("?,");
     }
+    result.append("?");
 
-    private String update() {
-        StringBuilder result = new StringBuilder();
-        result.append("UPDATE " + TABLE + " SET ");
+    result.append(")");
+    return result.toString();
+  }
 
-        int j = 1;
-        for (; j < COLS.length - 1; j++) {
-            result.append(COLS[j] + " = ?,");
-        }
-        result.append(COLS[j] + " = ? ");
+  private String update() {
+    StringBuilder result = new StringBuilder();
 
-        result.append(" WHERE " + COL_ID + " = ?");
+    result.append("update " + tables + " SET ");
 
-        return result.toString();
+    int j = 1;
+    for (; j < columns.length - 1; j++) {
+      result.append(columns[j] + " = ?,");
     }
+    result.append(columns[j] + " = ? ");
 
-    private String delete() {
-        StringBuilder result = new StringBuilder();
+    result.append(" WHERE " + columnId + " = ?");
 
-        result.append("DELETE FROM " + TABLE + " WHERE " + COL_ID + " = ?");
+    return result.toString();
+  }
 
-        return result.toString();
+  private String delete() {
+    StringBuilder result = new StringBuilder();
+
+    result.append("delete FROM " + tables + " WHERE " + columnId + " = ?");
+
+    return result.toString();
+  }
+
+  private String selectAll() {
+    StringBuilder result = selectBase();
+
+    return result.toString();
+  }
+
+  private String select() {
+    StringBuilder result = selectBase();
+
+    result.append(" WHERE " + columnId + " = ?");
+
+    return result.toString();
+  }
+
+  private StringBuilder selectBase() {
+    StringBuilder result = new StringBuilder();
+
+    result.append("select ");
+
+    int j = 0;
+    for (; j < columns.length - 1; j++) {
+      result.append(columns[j] + ",");
     }
+    result.append(columns[j]);
+    result.append(" FROM " + tables);
 
-    private String selectAll() {
-        StringBuilder result = selectBase();
-
-        return result.toString();
-    }
-
-    private String select() {
-        StringBuilder result = selectBase();
-        result.append(" WHERE " + COL_ID + " = ?");
-
-        return result.toString();
-    }
-
-    private StringBuilder selectBase() {
-        StringBuilder result = new StringBuilder();
-        result.append("SELECT ");
-
-        int j = 0;
-        for (; j < COLS.length - 1; j++) {
-            result.append(COLS[j] + ",");
-        }
-        result.append(COLS[j]);
-        result.append(" FROM " + TABLE);
-        return result;
-    }
+    return result;
+  }
 
 }
