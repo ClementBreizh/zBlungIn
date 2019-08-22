@@ -11,11 +11,13 @@ public class DbOpenHelper {
 
     /** Constructeur privé */
     private DbOpenHelper() {
+        GetDbConfig.getInstance().DbConfig();
+
         MysqlDataSource datasource = new MysqlDataSource();
-        datasource.setUser("vianney");
-        datasource.setPassword("root");
-        datasource.setServerName("192.168.15.45");
-        datasource.setDatabaseName("zbleugin");
+        datasource.setUser(GetDbConfig.getInstance().getLogin());
+        datasource.setPassword(GetDbConfig.getInstance().getPsw());
+        datasource.setServerName(GetDbConfig.getInstance().getIp());
+        datasource.setDatabaseName(GetDbConfig.getInstance().getDbname());
 
         try {
             datasource.setServerTimezone("UTC");
