@@ -103,6 +103,6 @@ public class Session extends EntityDb {
 	 */
 	@Override
 	public String toString() {
-		return "Session [name=" + name + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + ", getId()=" + getId() + "]";
+		return "session [Id = " + getId() + ", name=" + name + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + "]";
 	}
 }
