@@ -81,6 +81,7 @@ public class Assessment extends EntityDb {
      */
     @Override
     public String toString() {
-        return "Assessment [Id = " + getId() + "category =" + category + ", date=" + dateTime + "]";
+        return "Assessment [Id = " + getId() + ", category =" + category + ", date=" + dateTime + "]";
     }
+
 }

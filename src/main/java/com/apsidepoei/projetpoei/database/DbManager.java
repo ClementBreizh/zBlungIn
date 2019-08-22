@@ -1,23 +1,31 @@
 package com.apsidepoei.projetpoei.database;
 
 import com.apsidepoei.projetpoei.database.dao.AddressDao;
+import com.apsidepoei.projetpoei.database.dao.AppointmentDao;
 import com.apsidepoei.projetpoei.database.dao.AssessmentDao;
 import com.apsidepoei.projetpoei.database.dao.DegreeDao;
 import com.apsidepoei.projetpoei.database.dao.EntrepriseDao;
 import com.apsidepoei.projetpoei.database.dao.FeedbackDao;
-import com.apsidepoei.projetpoei.database.dao.MatiereDao;
+import com.apsidepoei.projetpoei.database.dao.
+MattersDao;
 import com.apsidepoei.projetpoei.database.dao.SessionDao;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 
 public class DbManager {
 
     private AddressDao addressDao = new AddressDao();
+    private AppointmentDao appointmentDao = new AppointmentDao();
     private DegreeDao degreeDao = new DegreeDao();
     private EntrepriseDao entrepriseDao = new EntrepriseDao();
     private FeedbackDao feedbackDao = new FeedbackDao();
-    private MatiereDao matiereDao = new MatiereDao();
+    private
+MattersDao
+mattersDao = new
+MattersDao();
     private SessionDao sessionDao = new SessionDao();
     private AssessmentDao assessmentDao = new AssessmentDao();
-
+    private AssessmentGenerator assessmentGenerator = new AssessmentGenerator();
+;
 
 
     /** Constructeur privé */
@@ -48,6 +56,13 @@ public class DbManager {
     }
 
     /**
+     * @return the appointmentDao
+     */
+    public AppointmentDao getAppointmentDao() {
+        return appointmentDao;
+    }
+
+    /**
      * @return the degreeDao
      */
     public DegreeDao getDegreeDao() {
@@ -68,10 +83,13 @@ public class DbManager {
         return feedbackDao;
     }
     /**
-     * @return the matiereDao
+     * @return the
+mattersDao
      */
-    public MatiereDao getMatiereDao() {
-        return matiereDao;
+    public
+    MattersDao getMattersDao() {
+        return
+mattersDao;
     }
 
     /**
@@ -87,4 +105,9 @@ public class DbManager {
     public AssessmentDao getAssessmentDao() {
         return assessmentDao;
     }
+
+	public AssessmentGenerator getAssessmentGenerator() {
+		return assessmentGenerator;
+	}
+	
 }

@@ -2,25 +2,33 @@ package com.apsidepoei.projetpoei;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
-import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.
+MattersGenerator;
 
 
 import com.apsidepoei.projetpoei.database.DbManager;
 
-import com.apsidepoei.projetpoei.database.entitiesgenerator.MatiereGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.MattersGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AppointmentGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
+import com.apsidepoei.projetpoei.entities.Appointment;
+import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoei.entities.Feedback;
-import com.apsidepoei.projetpoei.entities.Matiere;
+import com.apsidepoei.projetpoei.entities.
+Matters;
 
 public final class ProjetPoeiApplication {
 
@@ -37,7 +45,11 @@ public final class ProjetPoeiApplication {
     public static void main(String[] args) throws ParseException, SQLException {
 
         // Génération de données
-//        testGenerate();
+        // testGenerate();
+
+        // Test entité Assessment
+        // assessmentTests();
+        // AssessmentGenerator.getInstance().generateAndInsertDatas();
 
         // Tests entité Adress
 //        addressTests();
@@ -53,14 +65,18 @@ public final class ProjetPoeiApplication {
 //    		entrepriseTests();
 //			EntrepriseGenerator.getInstance().generateDatas(10);
 
-         // Tests entité Matiere
-//         matiereTests();
+         // Tests entité Matters
+//         mattersTests();
 
 
           // Tests entité Degree
 //        degreeTests();
 //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-//        DegreeGenerator.getInstance().deleteDatas();
+
+          // Tests entité Appointment
+//    	  appointmentTests();
+//    	  AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
 
     }
 
@@ -92,6 +108,42 @@ public final class ProjetPoeiApplication {
         }
     }
 
+	/**
+	 * Functions tests for degree
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	private static void appointmentTests() throws SQLException, ParseException {
+	    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		final Date mySqlDate = sdf.parse("2019-08-20 02:05:00");
+		final Date mySqlDateChg = sdf.parse("2019-09-12 06:05:00");
+
+		DbManager.getInstance().getAppointmentDao().drop();
+		DbManager.getInstance().getAppointmentDao().create();
+		Appointment appointment1 = new Appointment("Information de rendez-vous M. Bon", mySqlDate, "Compte rendu de rendez-vous de M. Jean");
+		DbManager.getInstance().getAppointmentDao().insert(appointment1);
+
+		Appointment appointment2 = new Appointment("Information de rendez-vous M. Jean", mySqlDate, "Compte rendu de rendez-vous de M. Bon");
+		DbManager.getInstance().getAppointmentDao().insert(appointment2);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+
+		DbManager.getInstance().getAppointmentDao().delete(appointment1);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+
+		appointment2.setDateTime(mySqlDateChg);
+		DbManager.getInstance().getAppointmentDao().update(appointment2);
+
+		for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
+			System.out.println(obj.toString());
+		}
+	}
+
     private static final void feedbackTests () throws SQLException {
 
         DbManager.getInstance().getFeedbackDao().drop();
@@ -118,29 +170,29 @@ public final class ProjetPoeiApplication {
         }
     }
 
-    // Test of database function for matiere class
-    private static final void matiereTests () throws SQLException {
+    /** Test of database function formatters class */
+    private static final void mattersTests () throws SQLException {
 
-        DbManager.getInstance().getMatiereDao().drop();
-        DbManager.getInstance().getMatiereDao().create();
-        Matiere matiere1 = new Matiere("Physique Quantique");
-        DbManager.getInstance().getMatiereDao().insert(matiere1);
+        DbManager.getInstance().getMattersDao().drop();
+        DbManager.getInstance().getMattersDao().create();
+        Matters matters1 = new Matters("Physique Quantique");
+        DbManager.getInstance().getMattersDao().insert(matters1);
 
-        Matiere matiere2 = new Matiere("Algorythmie");
-        DbManager.getInstance().getMatiereDao().insert(matiere2);
+        Matters matters2 = new Matters("Algorythmie");
+        DbManager.getInstance().getMattersDao().insert(matters2);
 
-        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+        for (Object obj : DbManager.getInstance().getMattersDao().select()) {
             System.out.println(obj.toString());
         }
-        DbManager.getInstance().getMatiereDao().delete(matiere1);
+        DbManager.getInstance().getMattersDao().delete(matters1);
 
-        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+        for (Object obj : DbManager.getInstance().getMattersDao().select()) {
             System.out.println(obj.toString());
         }
-        matiere2.setName("Mathematique");
-        DbManager.getInstance().getMatiereDao().update(matiere2);
+        matters2.setName("Mathematique");
+        DbManager.getInstance().getMattersDao().update(matters2);
 
-        for (Object obj : DbManager.getInstance().getMatiereDao().select()) {
+        for (Object obj : DbManager.getInstance().getMattersDao().select()) {
             System.out.println(obj.toString());
         }
     }
@@ -207,15 +259,47 @@ public final class ProjetPoeiApplication {
         }
     }
 
+    private static final void assessmentTests () throws SQLException, ParseException {
+
+        DbManager.getInstance().getAssessmentDao().drop();
+        DbManager.getInstance().getAssessmentDao().create();
+
+        Assessment assessment1 = new Assessment("Riri", new SimpleDateFormat("yyyy/MM/dd").parse("1999/12/31"));
+        DbManager.getInstance().getAssessmentDao().insert(assessment1);
+
+        Assessment assessment2 = new Assessment("Fifi", new SimpleDateFormat("yyyy/MM/dd").parse("1982/02/12"));
+        DbManager.getInstance().getAssessmentDao().insert(assessment2);
+
+        for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
+            System.out.println(obj.toString());
+        }
+        DbManager.getInstance().getAssessmentDao().delete(assessment1);
+        assessment2.setCategory("Causette");
+        DbManager.getInstance().getAssessmentDao().update(assessment2);
+
+
+        for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
+            System.out.println(obj.toString());
+        }
+    }
+
     private static void testGenerate() throws SQLException, ParseException {
 
-        MatiereGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
-               for (Matiere matiere : DbManager.getInstance().getMatiereDao().select()) {
-            System.out.println(matiere);
+        MattersGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
+               for (Matters matters : DbManager.getInstance().getMattersDao().select()) {
+            System.out.println(matters);
         }
 
-               MatiereGenerator.getInstance().deleteDatas();
+               MattersGenerator.getInstance().deleteDatas();
+               AssessmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
+               for (Assessment assessment : DbManager.getInstance().getAssessmentDao().select()) {
+            System.out.println(assessment);
+        }
+
+               AssessmentGenerator.getInstance().deleteDatas();
     }
 
 

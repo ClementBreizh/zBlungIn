@@ -1,6 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
-public class Matiere extends EntityDb{
+public class Matters extends EntityDb {
 
     private String name;
 
@@ -18,18 +18,18 @@ public class Matiere extends EntityDb{
         this.name = name;
     }
 
-    public Matiere(String name) {
+    public Matters(String name) {
         super();
         this.name = name;
     }
 
-    public Matiere(int id, String name) {
+    public Matters(int id, String name) {
         super();
         this.setId(id);
         this.name = name;
     }
 
-    public Matiere() {
+    public Matters() {
     }
 
     /*
@@ -39,9 +39,7 @@ public class Matiere extends EntityDb{
      */
     @Override
     public String toString() {
-        return "Matiere [id =" + this.getId() + ", name=" + name + "]";
+        return "Matters [Id = " + getId() + ", name= " + name + "]";
     }
-
-
 
 }

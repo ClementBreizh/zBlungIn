@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.entities.Assessment;
@@ -67,6 +68,10 @@ public class AssessmentDao extends BaseDao<Assessment> {
                 .parse(date));
 
         return item;
+    }
+
+    public Object update(List<Assessment> assessments) {
+                return null;
     }
 }
 
