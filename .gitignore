@@ -17,6 +17,7 @@ local.properties
 build/
 !libs/ConsoleLoggerLib.jar
 #src/main/java/com/apsidepoei/projetpoei/database/DbOpenHelper.java
+.checkstyle
 
 
 # External tool builders
