@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class MatterGenerator {
 
-  private MatterGenerator() {
+  public MatterGenerator() {
   }
 
   private static MatterGenerator INSTANCE = null;
@@ -100,5 +100,8 @@ public class MatterGenerator {
     for (Matter matters : datas) {
       DbManager.getInstance().getMatterDao().delete(matters);
     }
+  }
+
+  public void insert(Matter monMatter) {
   }
 }
