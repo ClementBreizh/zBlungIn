@@ -15,6 +15,10 @@ public class AssessmentContract extends BaseContract {
       + COL_CATEGORY + " VARCHAR(50) NOT NULL," + COL_DATE
       + " DATETIME NOT NULL)";
 
+  /**
+   * Constructor.
+   */
+
   public AssessmentContract() {
     super(TABLE, COL_ID, COLS, CREATE_TABLE);
   }

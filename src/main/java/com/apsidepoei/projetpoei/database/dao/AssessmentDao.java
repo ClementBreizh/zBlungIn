@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei.database.dao;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.entities.Assessment;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,8 +66,5 @@ public class AssessmentDao extends BaseDao<Assessment> {
 
     return item;
   }
-
-  public Object update(List<Assessment> assessments) {
-    return null;
-  }
 }
+
