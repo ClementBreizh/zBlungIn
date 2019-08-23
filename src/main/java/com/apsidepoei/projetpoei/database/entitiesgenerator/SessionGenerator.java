@@ -1,5 +1,9 @@
 package com.apsidepoei.projetpoei.database.entitiesgenerator;
 
+import com.apsidepoei.projetpoei.database.DbManager;
+import com.apsidepoei.projetpoei.entities.Session;
+import com.github.javafaker.Faker;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,12 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Session;
-import com.github.javafaker.Faker;
-
 /**
- * 
+ *   This class generate fake data.
  * @author benjamin-m
  *
  */
@@ -24,8 +24,9 @@ public class SessionGenerator {
   private static SessionGenerator INSTANCE = null;
 
   /**
+   *an instance of the constructor.
    *
-   * @return an instance of the constructor
+   * @return 
    */
   public static SessionGenerator getInstance() {
     if (INSTANCE == null) {
@@ -42,9 +43,10 @@ public class SessionGenerator {
   private List<Session> datas = new ArrayList<Session>();
 
   /**
+   * Generate fake data.
    *
    * @return
-   * @throws SQLException Generate fake data
+   * @throws SQLException
    * @throws ParseException
    */
   public List<Session> generateDatas() throws SQLException, ParseException {
@@ -52,18 +54,20 @@ public class SessionGenerator {
   }
 
   /**
+   * Generate n fake data.
    *
    * @param nb
    * @return
-   * @throws SQLException Generate n fake data
+   * @throws SQLException
    * @throws ParseException
    */
   public List<Session> generateDatas(int nb) throws SQLException, ParseException {
     List<Session> result = new ArrayList<>();
 
-
     for (int i = 0; i < nb; i++) {
-      Session session = new Session(faker.name().title(), new SimpleDateFormat("yyyy/mm/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/mm/dd").parse("2019/10/02"));
+      Session session = new Session(faker.name().title(),
+          new SimpleDateFormat("yyyy/mm/dd").parse("2019/06/15"),
+          new SimpleDateFormat("yyyy/mm/dd").parse("2019/10/02"));
       result.add(session);
     }
 
@@ -71,8 +75,9 @@ public class SessionGenerator {
   }
 
   /**
+   * Generate and insert datas.
    *
-   * @throws SQLException Generate and insert datas
+   * @throws SQLException
    * @throws ParseException
    */
   public void generateAndInsertDatas() throws SQLException, ParseException {
@@ -80,9 +85,10 @@ public class SessionGenerator {
   }
 
   /**
+   * Generate and insert n datas.
    *
-   * @param nb
-   * @throws SQLException Generate and insert n datas
+   * @param nb = the number
+   * @throws SQLException
    * @throws ParseException
    */
   public void generateAndInsertDatas(int nb) throws SQLException, ParseException {
@@ -94,8 +100,9 @@ public class SessionGenerator {
   }
 
   /**
+   * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException Drop, create table, generate and insert datas
+   * @throws SQLException
    * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
@@ -103,9 +110,10 @@ public class SessionGenerator {
   }
 
   /**
+   * Drop, create table, generate and insert n data.
    *
-   * @param nb
-   * @throws SQLException Drop, create table, generate and insert n data
+   * @param nb = the number
+   * @throws SQLException
    * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
@@ -116,7 +124,7 @@ public class SessionGenerator {
   }
 
   /**
-   * delete datas
+   * delete datas.
    */
   public void deleteDatas() {
     for (Session session : datas) {

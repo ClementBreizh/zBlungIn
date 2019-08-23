@@ -36,7 +36,8 @@ public final class ProjetPoeiApplication {
   }
 
   /**
-   *  Main entry.
+   * Main entry.
+   * 
    * @param args = the args
    * @throws ParseException = exception
    * @throws SQLException   = exception
@@ -51,34 +52,34 @@ public final class ProjetPoeiApplication {
     // AssessmentGenerator.getInstance().generateAndInsertDatas();
 
     // Tests entité Adress
-    //        addressTests();
-    //        AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-    //        AddressGenerator.getInstance().deleteDatas();
+    // addressTests();
+    // AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    // AddressGenerator.getInstance().deleteDatas();
 
     // Tests entité Feedback
-    //      feedbackTests();
-    //      FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
-    //      FeedbackGenerator.getInstance().deleteDatas();
+    // feedbackTests();
+    // FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
+    // FeedbackGenerator.getInstance().deleteDatas();
 
     // Test entité Entreprise
-    //       entrepriseTests();
-    //       EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    // entrepriseTests();
+    // EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
     // Tests entité Matter
-    //         mattersTests();
+    // mattersTests();
 
     // Tests entité Degree
-    //        degreeTests();
-    //        DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    // degreeTests();
+    // DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
     // Tests entité Appointment
-    //      appointmentTests();
-    //      AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    // appointmentTests();
+    // AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
     // Tests entité Session
     // sessionTests();
-    // SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10); 
-    
+    // SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+
   }
 
   private static final void addressTests() throws SQLException {
@@ -109,7 +110,7 @@ public final class ProjetPoeiApplication {
   /**
    * Functions tests for degree.
    *
-   * @throws SQLException = exception
+   * @throws SQLException   = exception
    * @throws ParseException = exception
    */
   private static void appointmentTests() throws SQLException, ParseException {
@@ -199,6 +200,7 @@ public final class ProjetPoeiApplication {
 
   /**
    * Functions tests for degre.
+   * 
    * @throws SQLException = exceptione
    */
   private static final void degreeTests() throws SQLException {
@@ -300,20 +302,24 @@ public final class ProjetPoeiApplication {
 
     AssessmentGenerator.getInstance().deleteDatas();
   }
-  
+
   /**
-   * Functions tests for Session
-   * @throws SQLException
-   * @throws ParseException
+   * Functions tests for Session.
+   * 
+   * @throws SQLException = exception
+   * @throws ParseException = exception
    */
   private static void sessionTests() throws SQLException, ParseException {
 
     DbManager.getInstance().getSessionDao().drop();
     DbManager.getInstance().getSessionDao().create();
-    Session session1 = new Session("Java Web", new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/mm/dd").parse("2019/10/02"));
+    Session session1 = new Session("Java Web",
+        new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"),
+        new SimpleDateFormat("yyyy/mm/dd").parse("2019/10/02"));
     DbManager.getInstance().getSessionDao().insert(session1);
 
-    Session session2 = new Session("PHP", new SimpleDateFormat("yyyy/MM/dd").parse("2019/11/15"), new SimpleDateFormat("yyyy/mm/dd").parse("2019/12/02"));
+    Session session2 = new Session("PHP", new SimpleDateFormat("yyyy/MM/dd").parse("2019/11/15"),
+        new SimpleDateFormat("yyyy/mm/dd").parse("2019/12/02"));
     DbManager.getInstance().getSessionDao().insert(session2);
 
     for (Object obj : DbManager.getInstance().getSessionDao().select()) {
@@ -333,16 +339,15 @@ public final class ProjetPoeiApplication {
       System.out.println(obj.toString());
     }
   }
-  
 
   // librairie
 
-  //  GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
-  //  GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
+  // GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
+  // GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
   //
-  //  ConsoleLogger.LogForce("3eme data", Options.WARNING);
+  // ConsoleLogger.LogForce("3eme data", Options.WARNING);
   //
-  //  ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
+  // ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
   //
-  //  logger.Log("3eme data", Options.WARNING);
+  // logger.Log("3eme data", Options.WARNING);
 }
