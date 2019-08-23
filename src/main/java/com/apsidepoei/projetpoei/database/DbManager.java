@@ -100,10 +100,16 @@ public class DbManager {
     return assessmentDao;
   }
 
+  /**
+   * the AssessmentGenerator.
+   */
   public AssessmentGenerator getAssessmentGenerator() {
     return assessmentGenerator;
   }
 
+  /**
+   * the Mattergenerator.
+   */
   public MatterGenerator getMatterGenerator() {
     return matterGenerator;
   }
