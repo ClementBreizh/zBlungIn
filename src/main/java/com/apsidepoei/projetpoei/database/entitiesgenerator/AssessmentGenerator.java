@@ -41,10 +41,7 @@ public class AssessmentGenerator {
   private List<Assessment> datas = new ArrayList<Assessment>();
 
   /**
-   * Generate data list for Assessment with faker
-   * @return
-   * @throws SQLException
-   * @throws ParseException
+   * Generate data list for Assessment with faker.
    */
   public List<Assessment> generateDatas() throws SQLException, ParseException {
     return generateDatas(faker.random().nextInt(100));
@@ -87,8 +84,6 @@ public class AssessmentGenerator {
   }
   /**
    * generate and insert data with faker.
-   * @throws SQLException
-   * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -115,7 +110,6 @@ public class AssessmentGenerator {
 
   /**
    * insert function.
-   * @param monAssessment
    */
   public void insert(Assessment monAssessment) {
 
