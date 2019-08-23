@@ -18,6 +18,9 @@ public class Matter extends EntityDb {
     this.name = name;
   }
 
+  /**
+   * Name in parameter.
+   */
   public Matter(String name) {
     super();
     this.name = name;
@@ -32,7 +35,11 @@ public class Matter extends EntityDb {
     this.name = name;
   }
 
+  /**
+   * construtor.
+   */
   public Matter() {
+    super();
   }
 
   @Override

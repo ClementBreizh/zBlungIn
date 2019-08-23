@@ -11,10 +11,13 @@ import java.util.Locale;
 
 public class MatterGenerator {
 
+  /**
+   * constructor.
+   */
   public MatterGenerator() {
   }
 
-  private static MatterGenerator INSTANCE = null;
+  private static volatile MatterGenerator INSTANCE = null;
 
   /**
    * Generator for Matter.
@@ -36,8 +39,6 @@ public class MatterGenerator {
 
   /**
    * Generate list.
-   * @return
-   * @throws SQLException
    */
   public List<Matter> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -109,6 +110,9 @@ public class MatterGenerator {
     }
   }
 
+  /**
+   *  monMatter.
+   */
   public void insert(Matter monMatter) {
   }
 }
