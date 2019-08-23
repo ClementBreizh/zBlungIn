@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei.database.dao;
 
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.entities.Matter;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,9 @@ import java.text.ParseException;
 
 public class MatterDao extends BaseDao<Matter> {
 
+  /**
+   * Constructor.
+   */
   public MatterDao() {
     super(new MatterContract());
   }
