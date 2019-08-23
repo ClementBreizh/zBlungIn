@@ -42,8 +42,10 @@ public class GetDbConfig {
    * Get db config from a file in /home.
    */
   public void dbConfig() {
+    final String CONFIGPATH = System.getenv("VARPROJECT");
+
     try {
-      InputStream flux = new FileInputStream("/home/DbConfigProjetPoei.txt");
+      InputStream flux = new FileInputStream("/" + CONFIGPATH);
       InputStreamReader lecture = new InputStreamReader(flux);
       BufferedReader buff = new BufferedReader(lecture);
       String ligne;
