@@ -4,6 +4,7 @@ import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Assessment;
 
 import com.github.javafaker.Faker;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +37,7 @@ public class AssessmentGenerator {
   }
 
   private Faker faker = new Faker(Locale.FRENCH);
+
   private List<Assessment> datas = new ArrayList<Assessment>();
 
   /**
