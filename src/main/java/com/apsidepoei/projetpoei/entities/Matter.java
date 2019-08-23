@@ -36,9 +36,10 @@ public class Matter extends EntityDb {
   }
 
   /**
-   * construtor
+   * construtor.
    */
   public Matter() {
+    super();
   }
 
   @Override

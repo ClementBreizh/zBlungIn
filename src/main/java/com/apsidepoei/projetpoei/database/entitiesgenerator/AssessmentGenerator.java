@@ -20,7 +20,7 @@ public class AssessmentGenerator {
   public AssessmentGenerator() {
   }
 
-  private static AssessmentGenerator INSTANCE = null;
+  private static volatile AssessmentGenerator INSTANCE = null;
 
   /**
    * Generator for Assessment.
