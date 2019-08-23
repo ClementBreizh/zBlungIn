@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 
 public class GetDbConfig {
 
-  private static String ip;
-  private static String login;
-  private static String dbname;
-  private static String psw;
+  private String ip;
+  private String login;
+  private String dbname;
+  private String psw;
 
   /**
    * Constructeur privé.
