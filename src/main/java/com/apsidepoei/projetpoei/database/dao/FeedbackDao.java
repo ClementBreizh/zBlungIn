@@ -12,15 +12,22 @@ import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.apsidepoei.projetpoei.entities.Feedback;
 
 /**
+ * This class define the tools for data access object Feedback.
  * @author vianney
  *
  */
 public class FeedbackDao extends BaseDao<Feedback> {
 
+  /**
+   * Constructor.
+   */
   public FeedbackDao() {
     super(new FeedbackContract());
   }
 
+  /**
+   * Override the function in order to insert a new Feedback.
+   */
   @Override
   protected void javaToSqlInsert(Feedback item, PreparedStatement ps) throws SQLException {
 
@@ -29,6 +36,9 @@ public class FeedbackDao extends BaseDao<Feedback> {
     ps.setString(4, item.getComment());
   }
 
+  /**
+   * Override the function in order to update a Feedback.
+   */
   @Override
   protected void javaToSqlUpdate(Feedback item, PreparedStatement ps) throws SQLException {
 
@@ -38,6 +48,9 @@ public class FeedbackDao extends BaseDao<Feedback> {
     ps.setInt(4, item.getId());
   }
 
+  /**
+   * Override the function to parse a Feedback from the database.
+   */
   @Override
   protected Feedback parseFromDbToJava(ResultSet rs) throws SQLException, ParseException {
     Feedback item = new Feedback();
