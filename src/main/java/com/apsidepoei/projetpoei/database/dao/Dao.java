@@ -36,7 +36,7 @@ public interface Dao<T extends EntityDb> {
   public Integer delete(T item);
 
   /**
-   * Select List
+   * Select List.
    */
   public List<T> select();
 
