@@ -26,6 +26,7 @@ import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoei.entities.Matter;
+import com.apsidepoei.projetpoei.entities.Session;
 
 public final class ProjetPoeiApplication {
 
@@ -59,8 +60,8 @@ public final class ProjetPoeiApplication {
     //      FeedbackGenerator.getInstance().deleteDatas();
 
     // Test entité Entreprise
-    //      entrepriseTests();
-    //      EntrepriseGenerator.getInstance().generateDatas(10);
+    //       entrepriseTests();
+    //       EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
     // Tests entité Matter
     //         mattersTests();
@@ -73,6 +74,10 @@ public final class ProjetPoeiApplication {
     //      appointmentTests();
     //      AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
 
+    // Tests entité Session
+    // sessionTests();
+    // SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10); 
+    
   }
 
   private static final void addressTests() throws SQLException {
@@ -294,6 +299,40 @@ public final class ProjetPoeiApplication {
 
     AssessmentGenerator.getInstance().deleteDatas();
   }
+  
+  /**
+   * Functions tests for Session
+   * @throws SQLException
+   * @throws ParseException
+   */
+  private static void sessionTests() throws SQLException, ParseException {
+
+    DbManager.getInstance().getSessionDao().drop();
+    DbManager.getInstance().getSessionDao().create();
+    Session session1 = new Session("Java Web", new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/mm/dd").parse("2019/10/02"));
+    DbManager.getInstance().getSessionDao().insert(session1);
+
+    Session session2 = new Session("PHP", new SimpleDateFormat("yyyy/MM/dd").parse("2019/11/15"), new SimpleDateFormat("yyyy/mm/dd").parse("2019/12/02"));
+    DbManager.getInstance().getSessionDao().insert(session2);
+
+    for (Object obj : DbManager.getInstance().getSessionDao().select()) {
+      System.out.println(obj.toString());
+    }
+
+    DbManager.getInstance().getSessionDao().delete(session1);
+
+    for (Object obj : DbManager.getInstance().getSessionDao().select()) {
+      System.out.println(obj.toString());
+    }
+
+    session2.setName("PHP mySql");
+    DbManager.getInstance().getSessionDao().update(session2);
+
+    for (Object obj : DbManager.getInstance().getSessionDao().select()) {
+      System.out.println(obj.toString());
+    }
+  }
+  
 
   // librairie
 
