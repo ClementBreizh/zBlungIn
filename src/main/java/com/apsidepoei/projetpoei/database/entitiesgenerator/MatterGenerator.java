@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matter;
+
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,6 +33,12 @@ public class MatterGenerator {
   private Faker faker = new Faker(Locale.FRENCH);
   private List<Matter> datas = new ArrayList<Matter>();
 
+
+  /**
+   * Generate list.
+   * @return
+   * @throws SQLException
+   */
   public List<Matter> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
   }
