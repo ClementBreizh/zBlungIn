@@ -2,7 +2,9 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Assessment;
+
 import com.github.javafaker.Faker;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,10 +14,13 @@ import java.util.Locale;
 
 public class AssessmentGenerator {
 
+  /**
+   * Constructor.
+   */
   public AssessmentGenerator() {
   }
 
-  private static AssessmentGenerator INSTANCE = null;
+  private static volatile AssessmentGenerator INSTANCE = null;
 
   /**
    * Generator for Assessment.
@@ -32,8 +37,12 @@ public class AssessmentGenerator {
   }
 
   private Faker faker = new Faker(Locale.FRENCH);
+
   private List<Assessment> datas = new ArrayList<Assessment>();
 
+  /**
+   * Generate data list for Assessment with faker.
+   */
   public List<Assessment> generateDatas() throws SQLException, ParseException {
     return generateDatas(faker.random().nextInt(100));
   }
@@ -73,7 +82,9 @@ public class AssessmentGenerator {
       datas.add(assessment);
     }
   }
-
+  /**
+   * generate and insert data with faker.
+   */
   public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
   }
@@ -97,6 +108,9 @@ public class AssessmentGenerator {
     }
   }
 
+  /**
+   * insert function.
+   */
   public void insert(Assessment monAssessment) {
 
   }

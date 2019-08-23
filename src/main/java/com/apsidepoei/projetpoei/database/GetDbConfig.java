@@ -24,8 +24,7 @@ public class GetDbConfig {
   private static GetDbConfig INSTANCE = null;
 
   /**
-   * Point d'accès pour l'instance unique du singleton.
-   *
+   * Acces point for singleton.
    */
   public static GetDbConfig getInstance() {
     if (INSTANCE == null) {
@@ -81,8 +80,6 @@ public class GetDbConfig {
 
   /**
    * Get ip.
-   *
-   * @return
    */
   public String getIp() {
     return ip;
@@ -90,8 +87,6 @@ public class GetDbConfig {
 
   /**
    * Get login.
-   *
-   * @return
    */
   public String getLogin() {
     return login;
@@ -99,8 +94,6 @@ public class GetDbConfig {
 
   /**
    * Get dbname.
-   *
-   * @return
    */
   public String getDbname() {
     return dbname;
@@ -108,8 +101,6 @@ public class GetDbConfig {
 
   /**
    * Get psw.
-   *
-   * @return
    */
   public String getPsw() {
     return psw;

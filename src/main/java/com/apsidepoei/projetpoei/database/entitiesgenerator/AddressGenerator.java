@@ -13,10 +13,15 @@ import com.apsidepoei.projetpoei.entities.Address;
 import com.github.javafaker.Faker;
 
 /**
- * @author vianney This class generate fake data
+ * This class generate fake data for Address class.
+ *
+ * @author vianney 
  */
 public class AddressGenerator {
 
+  /**
+   * Constructor.
+   */
   private AddressGenerator() {
   }
 
@@ -41,19 +46,21 @@ public class AddressGenerator {
   private List<Address> datas = new ArrayList<Address>();
 
   /**
+   *Generate fake data
    *
    * @return
-   * @throws SQLException Generate fake data
+   * @throws SQLException
    */
   public List<Address> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
   }
 
   /**
+   * Generate n fake data.
    *
    * @param nb
    * @return
-   * @throws SQLException Generate n fake data
+   * @throws SQLException
    */
   public List<Address> generateDatas(int nb) throws SQLException {
     List<Address> result = new ArrayList<>();
@@ -78,17 +85,19 @@ public class AddressGenerator {
   }
 
   /**
+   * Generate and insert datas.
    *
-   * @throws SQLException Generate and insert datas
+   * @throws SQLException
    */
   public void generateAndInsertDatas() throws SQLException {
     generateAndInsertDatas(faker.random().nextInt(100));
   }
 
   /**
+   * Generate and insert n datas.
    *
    * @param nb
-   * @throws SQLException Generate and insert n datas
+   * @throws SQLException
    */
   public void generateAndInsertDatas(int nb) throws SQLException {
     for (Address address : generateDatas(nb)) {
@@ -99,17 +108,19 @@ public class AddressGenerator {
   }
 
   /**
+   * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException Drop, create table, generate and insert datas
+   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
   }
 
   /**
+   * Drop, create table, generate and insert n data.
    *
-   * @param nb
-   * @throws SQLException Drop, create table, generate and insert n data
+   * @param nb = number
+   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
     DbManager.getInstance().getAddressDao().drop();
@@ -119,7 +130,7 @@ public class AddressGenerator {
   }
 
   /**
-   * delete datas
+   * Delete datas
    */
   public void deleteDatas() {
     for (Address address : datas) {

@@ -4,6 +4,7 @@
 package com.apsidepoei.projetpoei.entities;
 
 /**
+ * This class is the Feedback entity.
  * @author vianney
  *
  */
@@ -13,9 +14,18 @@ public class Feedback extends EntityDb {
   private Integer durationOfContract;
   private String comment;
 
+  /**
+   * Empty constructor.
+   */
   public Feedback() {
   }
 
+  /**
+   * Constructor with id for new Feedback.
+   * @param typeOfContract    = the typeOfContract
+   * @param durationOfContract  = the durationOfContract
+   * @param comment = the comment
+   */
   public Feedback(String typeOfContract, Integer durationOfContract, String comment) {
     super();
     this.typeOfContract = typeOfContract;
@@ -23,6 +33,9 @@ public class Feedback extends EntityDb {
     this.comment = comment;
   }
 
+  /**
+   * Override toString() function.
+   */
   @Override
   public String toString() {
     return "Feedback [" + "Id = " + getId() + ", type de contrat = " + typeOfContract
@@ -32,42 +45,48 @@ public class Feedback extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * @return the typeOfContract
+   * the typeOfContract
+   * @return
    */
   public String getTypeOfContract() {
     return typeOfContract;
   }
 
   /**
-   * @param typeOfContract the typeOfContract to set
+   * Set the typeOfContract.
+   * @param typeOfContract = the typeOfContract
    */
   public void setTypeOfContract(String typeOfContract) {
     this.typeOfContract = typeOfContract;
   }
 
   /**
-   * @return the durationOfContract
+   * the typeOfContract
+   * @return
    */
   public Integer getDurationOfContract() {
     return durationOfContract;
   }
 
   /**
-   * @param durationOfContract the durationOfContract to set
+   * Set the durationOfContract.
+   * @param durationOfContract = the durationOfContract
    */
   public void setDurationOfContract(Integer durationOfContract) {
     this.durationOfContract = durationOfContract;
   }
 
   /**
-   * @return the comment
+   * the comment
+   * @return
    */
   public String getComment() {
     return comment;
   }
 
   /**
-   * @param comment the comment to set
+   * Set the comment.
+   * @param comment = the comment
    */
   public void setComment(String comment) {
     this.comment = comment;

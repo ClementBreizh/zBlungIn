@@ -1,10 +1,5 @@
 package com.apsidepoei.projetpoei.database.dao;
 
-import com.apsidepoei.projetpoei.database.DbOpenHelper;
-
-import com.apsidepoei.projetpoei.database.contracts.BaseContract;
-import com.apsidepoei.projetpoei.entities.EntityDb;
-import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +7,19 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.jdbc.Statement;
+import com.apsidepoei.projetpoei.entities.EntityDb;
 import com.apsidepoei.projetpoei.database.DbOpenHelper;
 import com.apsidepoei.projetpoei.database.contracts.BaseContract;
-import com.apsidepoei.projetpoei.entities.EntityDb;
+
+import com.mysql.jdbc.Statement;
 
 public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
 
   private BaseContract contract;
 
+  /**
+   * Constructor wit param
+   */
   public BaseDao(BaseContract contract) {
     this.contract = contract;
   }
@@ -75,28 +74,27 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     String request = contract.insert;
     PreparedStatement ps = null;
     try {
-      ps = DbOpenHelper.getInstance().getConn()
-          .prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
-    } finally {
-    try {
       ps = DbOpenHelper.getInstance().getConn().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+    } finally {
+      try {
+        ps = DbOpenHelper.getInstance().getConn().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 
-      if (item.getId() == null) {
-        ps.setNull(1, java.sql.Types.INTEGER);
-      } else {
-        ps.setInt(1, item.getId());
+        if (item.getId() == null) {
+          ps.setNull(1, java.sql.Types.INTEGER);
+        } else {
+          ps.setInt(1, item.getId());
+        }
+
+        javaToSqlInsert(item, ps);
+        ps.execute();
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+          item.setId(rs.getInt(1));
+        }
+
+      } catch (SQLException e) {
+        throw e;
       }
-
-      javaToSqlInsert(item, ps);
-      ps.execute();
-      ResultSet rs = ps.getGeneratedKeys();
-      if (rs.next()) {
-        item.setId(rs.getInt(1));
-      }
-
-    } catch (SQLException e) {
-      throw e;
-    }
       try {
         ps.close();
       } catch (SQLException e) {

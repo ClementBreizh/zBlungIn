@@ -4,6 +4,7 @@
 package com.apsidepoei.projetpoei.entities;
 
 /**
+ * This class is the Degree entity.
  * @author vianney
  *
  */
@@ -13,9 +14,18 @@ public class Address extends EntityDb {
   private String postalCode;
   private String town;
 
+  /**
+   * Empty constructor.
+   */
   public Address() {
   }
 
+  /**
+   * Constructor with id for new Address.
+   * @param address    = the address
+   * @param postalCode  = the postalCode
+   * @param town = the town
+   */
   public Address(String address, String postalCode, String town) {
     super();
     this.address = address;
@@ -23,6 +33,9 @@ public class Address extends EntityDb {
     this.town = town;
   }
 
+  /**
+   * Override toString() function.
+   */
   @Override
   public String toString() {
     return "Adresse [Id = " + getId() + ", adresse postale = " + address + ", code postal = "
@@ -32,42 +45,48 @@ public class Address extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * @return the address
+   * The address.
+   * @return
    */
   public String getAddress() {
     return address;
   }
 
   /**
-   * @param address the address to set
+   * Set the address.
+   * @param address = the address
    */
   public void setAddress(String address) {
     this.address = address;
   }
 
   /**
-   * @return the postalCode
+   * The postalCode.
+   * @return
    */
   public String getPostalCode() {
     return postalCode;
   }
 
   /**
-   * @param postalCode the postalCode to set
+   * Set the postalCode.
+   * @param postalCode = the postalCode
    */
   public void setPostalCode(String postalCode) {
     this.postalCode = postalCode;
   }
 
   /**
-   * @return the town
+   * The town.
+   * @return
    */
   public String getTown() {
     return town;
   }
 
   /**
-   * @param town the town to set
+   * Set the town.
+   * @param town = the town
    */
   public void setTown(String town) {
     this.town = town;
