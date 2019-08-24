@@ -64,6 +64,7 @@ public final class ProjetPoeiApplication {
     // Test entité Entreprise
     //  entrepriseTests();
     //  EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  EntrepriseGenerator.getInstance().deleteDatas();
 
 
     // Tests entité Matter
@@ -74,14 +75,17 @@ public final class ProjetPoeiApplication {
     // Tests entité Degree
     //  degreeTests();
     //  DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  DegreeGenerator.getInstance().deleteDatas();
 
     // Tests entité Appointment
     //  appointmentTests();
     //  AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  AppointmentGenerator.getInstance().deleteDatas();
 
     // Tests entité Session
     //  sessionTests();
     //  SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  SessionGenerator.getInstance().deleteDatas();
 
   }
 
