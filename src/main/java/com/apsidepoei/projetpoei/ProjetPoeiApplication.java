@@ -32,7 +32,7 @@ public final class ProjetPoeiApplication {
   }
 
   /**
-   * Main entry. 
+   * Main entry.
    * @param args = the args
    * @throws ParseException = exception
    * @throws SQLException   = exception
@@ -114,11 +114,13 @@ public final class ProjetPoeiApplication {
 
     DbManager.getInstance().getAppointmentDao().drop();
     DbManager.getInstance().getAppointmentDao().create();
-    Appointment appointment1 = new Appointment("Information de rendez-vous M. Bon", mySqlDate,
+    Appointment appointment1 =
+        new Appointment("Information de rendez-vous M. Bon", mySqlDate,
         "Compte rendu de rendez-vous de M. Jean");
     DbManager.getInstance().getAppointmentDao().insert(appointment1);
 
-    Appointment appointment2 = new Appointment("Information de rendez-vous M. Jean", mySqlDate,
+    Appointment appointment2 =
+        new Appointment("Information de rendez-vous M. Jean", mySqlDate,
         "Compte rendu de rendez-vous de M. Bon");
     DbManager.getInstance().getAppointmentDao().insert(appointment2);
 
@@ -228,10 +230,12 @@ public final class ProjetPoeiApplication {
 
     DbManager.getInstance().getEntrepriseDao().drop();
     DbManager.getInstance().getEntrepriseDao().create();
-    Entreprise entreprise1 = new Entreprise("Apside", "Apside Rennes", "30906508400068", "0000A");
+    Entreprise entreprise1 =
+        new Entreprise("Apside", "Apside Rennes", "30906508400068", "0000A");
     DbManager.getInstance().getEntrepriseDao().insert(entreprise1);
 
-    Entreprise entreprise2 = new Entreprise("Capgemini", "Capgemini Nantes", "33070384400036", "0000A");
+    Entreprise entreprise2 =
+        new Entreprise("Capgemini", "Capgemini Nantes", "33070384400036", "0000A");
     DbManager.getInstance().getEntrepriseDao().insert(entreprise2);
 
     for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
@@ -257,10 +261,12 @@ public final class ProjetPoeiApplication {
     DbManager.getInstance().getAssessmentDao().drop();
     DbManager.getInstance().getAssessmentDao().create();
 
-    Assessment assessment1 = new Assessment("Riri", new SimpleDateFormat("yyyy/MM/dd").parse("1999/12/31"));
+    Assessment assessment1 = new Assessment("Riri",
+        new SimpleDateFormat("yyyy/MM/dd").parse("1999/12/31"));
     DbManager.getInstance().getAssessmentDao().insert(assessment1);
 
-    Assessment assessment2 = new Assessment("Fifi", new SimpleDateFormat("yyyy/MM/dd").parse("1982/02/12"));
+    Assessment assessment2 = new Assessment("Fifi",
+        new SimpleDateFormat("yyyy/MM/dd").parse("1982/02/12"));
     DbManager.getInstance().getAssessmentDao().insert(assessment2);
 
     for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
@@ -295,7 +301,7 @@ public final class ProjetPoeiApplication {
 
   /**
    * Functions tests for Session.
-   * 
+   *
    * @throws SQLException = exception
    * @throws ParseException = exception
    */

@@ -18,7 +18,7 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
   private BaseContract contract;
 
   /**
-   * Constructor wit param
+   * Constructor wit param.
    */
   public BaseDao(BaseContract contract) {
     this.contract = contract;
@@ -74,10 +74,12 @@ public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
     String request = contract.insert;
     PreparedStatement ps = null;
     try {
-      ps = DbOpenHelper.getInstance().getConn().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+      ps = DbOpenHelper.getInstance().getConn()
+          .prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
     } finally {
       try {
-        ps = DbOpenHelper.getInstance().getConn().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+        ps = DbOpenHelper.getInstance().getConn()
+            .prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 
         if (item.getId() == null) {
           ps.setNull(1, java.sql.Types.INTEGER);
