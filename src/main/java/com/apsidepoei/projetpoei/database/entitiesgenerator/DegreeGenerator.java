@@ -8,6 +8,8 @@ import java.util.Locale;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 /**
  * This class generate fake data.
@@ -114,10 +116,15 @@ public class DegreeGenerator {
    * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Degree generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getDegreeDao().drop();
     DbManager.getInstance().getDegreeDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

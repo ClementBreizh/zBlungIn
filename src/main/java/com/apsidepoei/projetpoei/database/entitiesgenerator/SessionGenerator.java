@@ -3,6 +3,8 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Session;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -26,7 +28,7 @@ public class SessionGenerator {
   /**
    *an instance of the constructor.
    *
-   * @return 
+   * @return
    */
   public static SessionGenerator getInstance() {
     if (INSTANCE == null) {
@@ -117,10 +119,15 @@ public class SessionGenerator {
    * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Session generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getSessionDao().drop();
     DbManager.getInstance().getSessionDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

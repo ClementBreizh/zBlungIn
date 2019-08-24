@@ -11,11 +11,13 @@ import java.util.Locale;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 /**
  * This class generate fake data for Address class.
  *
- * @author vianney 
+ * @author vianney
  */
 public class AddressGenerator {
 
@@ -123,10 +125,15 @@ public class AddressGenerator {
    * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Address generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getAddressDao().drop();
     DbManager.getInstance().getAddressDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

@@ -11,6 +11,8 @@ import java.util.Locale;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Appointment;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 /**
  * This class generate fake data.
@@ -111,10 +113,15 @@ public class AppointmentGenerator {
    * @throws ParseException = exception
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Appointment generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getAppointmentDao().drop();
     DbManager.getInstance().getAppointmentDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

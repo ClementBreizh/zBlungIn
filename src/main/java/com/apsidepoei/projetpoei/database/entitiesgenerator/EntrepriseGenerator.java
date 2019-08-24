@@ -3,6 +3,8 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class EntrepriseGenerator {
 
   /**
    * Generate fake data.
-   * 
+   *
    * @return
    * @throws SQLException
    */
@@ -51,7 +53,7 @@ public class EntrepriseGenerator {
 
   /**
    * Generate n fake data.
-   * 
+   *
    * @param nb
    * @return
    * @throws SQLException
@@ -115,10 +117,15 @@ public class EntrepriseGenerator {
    * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Company generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getEntrepriseDao().drop();
     DbManager.getInstance().getEntrepriseDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

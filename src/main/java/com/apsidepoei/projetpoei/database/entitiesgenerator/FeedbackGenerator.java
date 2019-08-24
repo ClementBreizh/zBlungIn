@@ -11,6 +11,8 @@ import java.util.Locale;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Feedback;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 /**
  * This class generate fake data for Feedback class.
@@ -130,10 +132,15 @@ public class FeedbackGenerator {
    * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Feedback generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getFeedbackDao().drop();
     DbManager.getInstance().getFeedbackDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**
