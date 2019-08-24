@@ -31,6 +31,7 @@ configurations {
 }
 
 dependencies {
+    compile files('./libs/ConsoleLoggerLib.jar')
     compile 'mysql:mysql-connector-java:5.1.37'
     compile group: 'com.github.javafaker', name: 'javafaker', version: '1.0.1'
     implementation 'com.google.guava:guava:22.0'

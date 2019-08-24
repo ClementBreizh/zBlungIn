@@ -15,7 +15,7 @@ import com.github.javafaker.Faker;
 /**
  * This class generate fake data for Address class.
  *
- * @author vianney 
+ * @author vianney
  */
 public class AddressGenerator {
 
