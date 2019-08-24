@@ -1,17 +1,16 @@
 package com.apsidepoei.projetpoei.database.dao;
 
+import com.apsidepoei.projetpoei.database.DbOpenHelper;
+import com.apsidepoei.projetpoei.database.contracts.BaseContract;
+import com.apsidepoei.projetpoei.entities.EntityDb;
+
+import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.apsidepoei.projetpoei.entities.EntityDb;
-import com.apsidepoei.projetpoei.database.DbOpenHelper;
-import com.apsidepoei.projetpoei.database.contracts.BaseContract;
-
-import com.mysql.jdbc.Statement;
 
 public abstract class BaseDao<T extends EntityDb> implements Dao<T> {
 
