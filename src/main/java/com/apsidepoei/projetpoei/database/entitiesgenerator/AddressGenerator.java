@@ -45,9 +45,9 @@ public class AddressGenerator {
   private List<Address> datas = new ArrayList<Address>();
 
   /**
-   *Generate fake data.
+   * Generate fake data.
    *
-   * @return
+   * @return fake data
    */
   public List<Address> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -57,7 +57,7 @@ public class AddressGenerator {
    * Generate n fake data.
    *
    * @param nb = the number.
-   * @return
+   * @return n fake data
    */
   public List<Address> generateDatas(int nb) throws SQLException {
     List<Address> result = new ArrayList<>();

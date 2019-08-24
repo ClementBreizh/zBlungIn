@@ -23,9 +23,9 @@ public class DegreeGenerator {
   private static DegreeGenerator INSTANCE = null;
 
   /**
-   * an instance of the constructor.
+   * An instance of the constructor.
    *
-   * @return
+   * @return an instance
    */
   public static DegreeGenerator getInstance() {
     if (INSTANCE == null) {
@@ -44,7 +44,7 @@ public class DegreeGenerator {
   /**
    * Generate fake data.
    *
-   * @return
+   * @return fake data
    */
   public List<Degree> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -54,7 +54,7 @@ public class DegreeGenerator {
    * Generate n fake data.
    *
    * @param nb = the number
-   * @return
+   * @return n fake data
    */
   public List<Degree> generateDatas(int nb) throws SQLException {
     List<Degree> result = new ArrayList<>();

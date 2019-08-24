@@ -26,9 +26,9 @@ public class SessionGenerator {
   private static SessionGenerator INSTANCE = null;
 
   /**
-   *an instance of the constructor.
+   * An instance of the constructor.
    *
-   * @return
+   * @return an instance
    */
   public static SessionGenerator getInstance() {
     if (INSTANCE == null) {

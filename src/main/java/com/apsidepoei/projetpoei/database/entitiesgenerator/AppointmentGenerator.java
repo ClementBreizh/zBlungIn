@@ -26,7 +26,7 @@ public class AppointmentGenerator {
 
   /**
    * An instance of the constructor.
-   * @return
+   * @return an instance
    */
 
   public static AppointmentGenerator getInstance() {
@@ -44,7 +44,8 @@ public class AppointmentGenerator {
   private List<Appointment> datas = new ArrayList<Appointment>();
 
   /**
-   * @return
+   * Generate fake data.
+   * @return fake data
    */
   public List<Appointment> generateDatas() throws SQLException, ParseException {
     return generateDatas(faker.random().nextInt(100));
@@ -53,7 +54,7 @@ public class AppointmentGenerator {
   /**
    * Generate n fake data.
    * @param nb = number
-   * @return
+   * @return n fake data
    */
   public List<Appointment> generateDatas(int nb) throws SQLException, ParseException {
     List<Appointment> result = new ArrayList<>();
@@ -121,7 +122,7 @@ public class AppointmentGenerator {
   }
 
   /**
-   * delete datas.
+   * Delete datas.
    */
   public void deleteDatas() {
     for (Appointment appointment : datas) {
