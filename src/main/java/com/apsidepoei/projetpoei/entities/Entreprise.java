@@ -14,7 +14,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * The name.
-   * @return
+   * @return the name
    */
   public String getNom() {
     return nom;
@@ -22,7 +22,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * Set the name.
-   * @return
+   * @param nom = the name
    */
   public void setNom(String nom) {
     this.nom = nom;
@@ -30,7 +30,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * The name of antenna.
-   * @return
+   * @return the name of an antenna
    */
   public String getNomAntenne() {
     return nomAntenne;
@@ -38,7 +38,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * Set the name of antenna.
-   * @return
+   * @param nomAntenne = name of an antenna
    */
   public void setNomAntenne(String nomAntenne) {
     this.nomAntenne = nomAntenne;
@@ -46,7 +46,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * The siret.
-   * @return
+   * @return the siret number
    */
   public String getSiret() {
     return siret;
@@ -54,7 +54,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * Set the siret.
-   * @return
+   * @param siret = the siret
    */
   public void setSiret(String siret) {
     this.siret = siret;
@@ -62,7 +62,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * The APE code.
-   * @return
+   * @return the code
    */
   public String getCodeApe() {
     return codeApe;
@@ -70,7 +70,7 @@ public class Entreprise extends EntityDb {
 
   /**
    * Set The APE code.
-   * @return
+   * @param codeApe = the code APE
    */
   public void setCodeApe(String codeApe) {
     this.codeApe = codeApe;

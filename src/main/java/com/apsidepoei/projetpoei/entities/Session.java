@@ -14,7 +14,7 @@ public class Session extends EntityDb {
 
   /**
    * The name.
-   * @return
+   * @return the name
    */
   public String getName() {
     return name;
@@ -22,7 +22,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the name.
-   * @return
+   * @param name = the name
    */
   public void setName(String name) {
     this.name = name;
@@ -30,7 +30,7 @@ public class Session extends EntityDb {
 
   /**
    * The dateStart.
-   * @return
+   * @return the start date
    */
   public Date getDateStart() {
     return dateStart;
@@ -38,7 +38,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the date start.
-   * @return
+   * @param dateStart = the start date
    */
   public void setDateStart(Date dateStart) {
     this.dateStart = dateStart;
@@ -46,7 +46,7 @@ public class Session extends EntityDb {
 
   /**
    * The dateEnd.
-   * @return
+   * @return the end date
    */
   public Date getDateEnd() {
     return dateEnd;
@@ -54,7 +54,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the dateEnd.
-   * @return
+   * @param dateEnd = the end date
    */
   public void setDateEnd(Date dateEnd) {
     this.dateEnd = dateEnd;
@@ -89,14 +89,14 @@ public class Session extends EntityDb {
   }
 
   /**
-   * empty constructor.
+   * Empty constructor.
    */
   public Session() {
 
   }
 
   /**
-   * override toString() function.
+   * Override toString() function.
    */
   @Override
   public String toString() {

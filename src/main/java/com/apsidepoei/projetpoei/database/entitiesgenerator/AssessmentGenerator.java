@@ -2,10 +2,10 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Assessment;
-
-import com.github.javafaker.Faker;
 import com.tactfactory.consolelogger.ConsoleLogger;
 import com.tactfactory.consolelogger.Options;
+
+import com.github.javafaker.Faker;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -95,7 +95,8 @@ public class AssessmentGenerator {
    * Generate and insert data after drop the table.
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
-    ConsoleLogger generatedLogger = new ConsoleLogger("Assessment generated data tests", Options.DEBUG);
+    ConsoleLogger generatedLogger = new ConsoleLogger("Assessment generated data tests",
+        Options.DEBUG);
     generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
 
     DbManager.getInstance().getAssessmentDao().drop();

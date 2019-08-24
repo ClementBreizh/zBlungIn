@@ -47,9 +47,7 @@ public class SessionGenerator {
   /**
    * Generate fake data.
    *
-   * @return
-   * @throws SQLException
-   * @throws ParseException
+   * @return the fake datas.
    */
   public List<Session> generateDatas() throws SQLException, ParseException {
     return generateDatas(faker.random().nextInt(100));
@@ -58,10 +56,8 @@ public class SessionGenerator {
   /**
    * Generate n fake data.
    *
-   * @param nb
-   * @return
-   * @throws SQLException
-   * @throws ParseException
+   * @param nb = the number
+   * @return n fake data.
    */
   public List<Session> generateDatas(int nb) throws SQLException, ParseException {
     List<Session> result = new ArrayList<>();
@@ -78,9 +74,6 @@ public class SessionGenerator {
 
   /**
    * Generate and insert datas.
-   *
-   * @throws SQLException
-   * @throws ParseException
    */
   public void generateAndInsertDatas() throws SQLException, ParseException {
     generateAndInsertDatas(faker.random().nextInt(100));
@@ -90,8 +83,6 @@ public class SessionGenerator {
    * Generate and insert n datas.
    *
    * @param nb = the number
-   * @throws SQLException
-   * @throws ParseException
    */
   public void generateAndInsertDatas(int nb) throws SQLException, ParseException {
     for (Session session : generateDatas(nb)) {
@@ -104,8 +95,6 @@ public class SessionGenerator {
   /**
    * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException
-   * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException, ParseException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -115,11 +104,10 @@ public class SessionGenerator {
    * Drop, create table, generate and insert n data.
    *
    * @param nb = the number
-   * @throws SQLException
-   * @throws ParseException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
-    ConsoleLogger generatedLogger = new ConsoleLogger("Session generated data tests", Options.DEBUG);
+    ConsoleLogger generatedLogger = new ConsoleLogger("Session generated data tests",
+        Options.DEBUG);
     generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
 
     DbManager.getInstance().getSessionDao().drop();

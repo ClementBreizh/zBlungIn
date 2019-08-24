@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
 /**
@@ -45,8 +42,8 @@ public class Feedback extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * the typeOfContract
-   * @return
+   * The typeOfContract.
+   * @return the type of contract
    */
   public String getTypeOfContract() {
     return typeOfContract;
@@ -61,8 +58,8 @@ public class Feedback extends EntityDb {
   }
 
   /**
-   * the typeOfContract
-   * @return
+   * The contract duration.
+   * @return the duration
    */
   public Integer getDurationOfContract() {
     return durationOfContract;
@@ -77,8 +74,8 @@ public class Feedback extends EntityDb {
   }
 
   /**
-   * the comment
-   * @return
+   * The comment.
+   * @return the comment.
    */
   public String getComment() {
     return comment;

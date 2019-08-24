@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
 /**
@@ -46,7 +43,7 @@ public class Address extends EntityDb {
 
   /**
    * The address.
-   * @return
+   * @return the adress
    */
   public String getAddress() {
     return address;
@@ -62,7 +59,7 @@ public class Address extends EntityDb {
 
   /**
    * The postalCode.
-   * @return
+   * @return the postal code
    */
   public String getPostalCode() {
     return postalCode;
@@ -78,7 +75,7 @@ public class Address extends EntityDb {
 
   /**
    * The town.
-   * @return
+   * @return the town
    */
   public String getTown() {
     return town;
