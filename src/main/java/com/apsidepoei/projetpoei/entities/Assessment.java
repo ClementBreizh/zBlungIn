@@ -37,7 +37,7 @@ public class Assessment extends EntityDb {
   }
 
   /**
-   * Constructor for a new Appointment.
+   * Constructor for a new Assessment.
    */
   public Assessment(String category, Date dateTime) {
     super();
@@ -46,7 +46,7 @@ public class Assessment extends EntityDb {
   }
 
   /**
-   * Constructor for a new Appointment.
+   * Constructor for a new Assessment.
    */
   public Assessment(int id, String category, Date dateTime) {
     super();
