@@ -284,23 +284,6 @@ public final class ProjetPoeiApplication {
     }
   }
 
-//  private static void testGenerate() throws SQLException, ParseException {
-//
-//    MatterGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-//
-//    for (Matter matters : DbManager.getInstance().getMatterDao().select()) {
-//      System.out.println(matters);
-//    }
-//
-//    MatterGenerator.getInstance().deleteDatas();
-//    AssessmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-//
-//    for (Assessment assessment : DbManager.getInstance().getAssessmentDao().select()) {
-//      System.out.println(assessment);
-//    }
-//
-//    AssessmentGenerator.getInstance().deleteDatas();
-//  }
 
   /**
    * Functions tests for Session.

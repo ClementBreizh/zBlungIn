@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /** Test SELECT function on database. */
-public class MatterDaoTest {
+public class MatterDaoSelectTest {
 
   static List<Matter> matterss = new ArrayList<Matter>();
 
