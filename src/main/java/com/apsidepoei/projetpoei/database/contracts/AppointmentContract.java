@@ -25,7 +25,7 @@ public class AppointmentContract extends BaseContract {
    */
   public static final String COL_DATETIME = "dateTime";
   /**
-   * Define the level column name.
+   * Define the report column name.
    */
   public static final String COL_REPORT = "report";
 

@@ -1,21 +1,20 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.entitiesgenerator;
+
+import com.apsidepoei.projetpoei.database.DbManager;
+import com.apsidepoei.projetpoei.entities.Address;
+import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Address;
-import com.github.javafaker.Faker;
-
 /**
  * This class generate fake data for Address class.
  *
- * @author vianney 
+ * @author vianney
  */
 public class AddressGenerator {
 
@@ -28,8 +27,8 @@ public class AddressGenerator {
   private static AddressGenerator INSTANCE = null;
 
   /**
-   *
-   * @return an instance of the constructor
+   * Instance of the constructor.
+   * @return an instance.
    */
   public static AddressGenerator getInstance() {
     if (INSTANCE == null) {
@@ -46,10 +45,9 @@ public class AddressGenerator {
   private List<Address> datas = new ArrayList<Address>();
 
   /**
-   *Generate fake data
+   * Generate fake data.
    *
-   * @return
-   * @throws SQLException
+   * @return fake data
    */
   public List<Address> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -58,9 +56,8 @@ public class AddressGenerator {
   /**
    * Generate n fake data.
    *
-   * @param nb
-   * @return
-   * @throws SQLException
+   * @param nb = the number.
+   * @return n fake data
    */
   public List<Address> generateDatas(int nb) throws SQLException {
     List<Address> result = new ArrayList<>();
@@ -86,8 +83,6 @@ public class AddressGenerator {
 
   /**
    * Generate and insert datas.
-   *
-   * @throws SQLException
    */
   public void generateAndInsertDatas() throws SQLException {
     generateAndInsertDatas(faker.random().nextInt(100));
@@ -96,8 +91,7 @@ public class AddressGenerator {
   /**
    * Generate and insert n datas.
    *
-   * @param nb
-   * @throws SQLException
+   * @param nb = the number.
    */
   public void generateAndInsertDatas(int nb) throws SQLException {
     for (Address address : generateDatas(nb)) {
@@ -110,7 +104,6 @@ public class AddressGenerator {
   /**
    * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -120,17 +113,22 @@ public class AddressGenerator {
    * Drop, create table, generate and insert n data.
    *
    * @param nb = number
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Address generated data tests",
+        Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getAddressDao().drop();
     DbManager.getInstance().getAddressDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**
-   * Delete datas
+   * Delete datas.
    */
   public void deleteDatas() {
     for (Address address : datas) {

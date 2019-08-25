@@ -15,7 +15,7 @@ public class Appointment extends EntityDb {
 
   /**
    * The informations.
-   * @return
+   * @return the informations.
    */
   public String getInformations() {
     return informations;
@@ -31,7 +31,7 @@ public class Appointment extends EntityDb {
 
   /**
    * Return the dateTime.
-   * @return
+   * @return the dateTime.
    */
   public Date getDateTime() {
     return dateTime;
@@ -47,7 +47,7 @@ public class Appointment extends EntityDb {
 
   /**
    * The report.
-   * @return
+   * @return the report.
    */
   public String getReport() {
     return report;
@@ -92,7 +92,7 @@ public class Appointment extends EntityDb {
    * Empty constructor.
    */
   public Appointment() {
-
+    super();
   }
 
   /**

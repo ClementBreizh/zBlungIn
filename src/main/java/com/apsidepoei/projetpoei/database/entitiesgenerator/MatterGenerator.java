@@ -4,6 +4,9 @@ import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Matter;
 
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +98,15 @@ public class MatterGenerator {
    * Generate and insert after a drop table with a parameter number.
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Matter generated data tests", Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getMatterDao().drop();
     DbManager.getInstance().getMatterDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

@@ -12,7 +12,7 @@ public class Degree extends EntityDb {
 
   /**
    * The name.
-   * @return
+   * @return the name.
    */
   public String getName() {
     return name;
@@ -28,7 +28,7 @@ public class Degree extends EntityDb {
 
   /**
    * The level.
-   * @return
+   * @return the name.
    */
   public String getLevel() {
     return level;
@@ -70,7 +70,7 @@ public class Degree extends EntityDb {
    * Empty constructor.
    */
   public Degree() {
-
+    super();
   }
 
   /**

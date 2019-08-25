@@ -1,15 +1,12 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.dao;
+
+import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
+import com.apsidepoei.projetpoei.entities.Feedback;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-
-import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
-import com.apsidepoei.projetpoei.entities.Feedback;
 
 /**
  * This class define the tools for data access object Feedback.

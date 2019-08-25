@@ -1,19 +1,14 @@
 package com.apsidepoei.projetpoei;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.apsidepoei.projetpoei.database.DbManager;
 
-import com.apsidepoei.projetpoei.database.entitiesgenerator.MatterGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AddressGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AppointmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.AssessmentGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.DegreeGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.EntrepriseGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.FeedbackGenerator;
+import com.apsidepoei.projetpoei.database.entitiesgenerator.MatterGenerator;
 import com.apsidepoei.projetpoei.database.entitiesgenerator.SessionGenerator;
 
 import com.apsidepoei.projetpoei.entities.Address;
@@ -24,6 +19,13 @@ import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Session;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public final class ProjetPoeiApplication {
 
@@ -38,26 +40,31 @@ public final class ProjetPoeiApplication {
    * @throws SQLException   = exception
    */
   public static void main(String[] args) throws ParseException, SQLException {
+    ConsoleLogger releaseLogger = new ConsoleLogger("zBleugin Application", Options.RELEASE);
+    releaseLogger.Log("Lancement de l'application.", Options.RELEASE, true);
 
+    ConsoleLogger warnLogger = new ConsoleLogger("ZBleugin Application", Options.WARNING);
+    warnLogger.Log("Désactivez les tests avant la release.", Options.WARNING, true);
 
     // Tests entité Assessment
     // assessmentTests();
     // AssessmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
     // AssessmentGenerator.getInstance().deleteDatas();
 
-    // Tests entité Adress
-    // addressTests();
-    // AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
-    // AddressGenerator.getInstance().deleteDatas();
+    // Tests entité Address
+    //  addressTests();
+    //  AddressGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  AddressGenerator.getInstance().deleteDatas();
 
     // Tests entité Feedback
-    // feedbackTests();
-    // FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
-    // FeedbackGenerator.getInstance().deleteDatas();
+    //  feedbackTests();
+    //  FeedbackGenerator.getInstance().generateAndInsertDatasDroppingTable(9);
+    //  FeedbackGenerator.getInstance().deleteDatas();
 
     // Test entité Entreprise
-    // entrepriseTests();
-    // EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  entrepriseTests();
+    //  EntrepriseGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  EntrepriseGenerator.getInstance().deleteDatas();
 
 
     // Tests entité Matter
@@ -65,22 +72,26 @@ public final class ProjetPoeiApplication {
     // MatterGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
     // MatterGenerator.getInstance().deleteDatas();
 
-
     // Tests entité Degree
-    // degreeTests();
-    // DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  degreeTests();
+    //  DegreeGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  DegreeGenerator.getInstance().deleteDatas();
 
     // Tests entité Appointment
-    // appointmentTests();
-    // AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  appointmentTests();
+    //  AppointmentGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  AppointmentGenerator.getInstance().deleteDatas();
 
     // Tests entité Session
-    // sessionTests();
-    // SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  sessionTests();
+    //  SessionGenerator.getInstance().generateAndInsertDatasDroppingTable(10);
+    //  SessionGenerator.getInstance().deleteDatas();
 
   }
 
   private static final void addressTests() throws SQLException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Address functionals tests", Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getAddressDao().drop();
     DbManager.getInstance().getAddressDao().create();
@@ -103,6 +114,8 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getAddressDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   /**
@@ -111,6 +124,10 @@ public final class ProjetPoeiApplication {
    * @throws ParseException = exception
    */
   private static void appointmentTests() throws SQLException, ParseException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Appointment functionals tests",
+        Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
+
     SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     final Date mySqlDate = sdf.parse("2019-08-20 02:05:00");
     final Date mySqlDateChg = sdf.parse("2019-09-12 06:05:00");
@@ -143,9 +160,13 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getAppointmentDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   private static final void feedbackTests() throws SQLException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Feedback functionals tests", Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getFeedbackDao().drop();
     DbManager.getInstance().getFeedbackDao().create();
@@ -168,10 +189,14 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getFeedbackDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   /** Test of database function formatters class. */
   private static final void mattersTests() throws SQLException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Matter functionals tests", Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getMatterDao().drop();
     DbManager.getInstance().getMatterDao().create();
@@ -195,13 +220,17 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getMatterDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   /**
    * Functions tests for degree.
-   * @throws SQLException = exceptione
+   * @throws SQLException = exception
    */
   private static final void degreeTests() throws SQLException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Degree functionals tests", Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getDegreeDao().drop();
     DbManager.getInstance().getDegreeDao().create();
@@ -227,9 +256,14 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getDegreeDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   private static final void entrepriseTests() throws SQLException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Entreprise functionals tests",
+        Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getEntrepriseDao().drop();
     DbManager.getInstance().getEntrepriseDao().create();
@@ -257,9 +291,14 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getEntrepriseDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
   private static final void assessmentTests() throws SQLException, ParseException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Assessment functionals tests",
+        Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getAssessmentDao().drop();
     DbManager.getInstance().getAssessmentDao().create();
@@ -282,6 +321,8 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getAssessmentDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
 
@@ -292,6 +333,8 @@ public final class ProjetPoeiApplication {
    * @throws ParseException = exception
    */
   private static void sessionTests() throws SQLException, ParseException {
+    ConsoleLogger functionalLogger = new ConsoleLogger("Session functionals tests", Options.DEBUG);
+    functionalLogger.Log("Lancement des tests fonctionnels.", Options.DEBUG);
 
     DbManager.getInstance().getSessionDao().drop();
     DbManager.getInstance().getSessionDao().create();
@@ -322,16 +365,8 @@ public final class ProjetPoeiApplication {
     for (Object obj : DbManager.getInstance().getSessionDao().select()) {
       System.out.println(obj.toString());
     }
+
+    functionalLogger.Log("Fin des tests fonctionnels.", Options.DEBUG);
   }
 
-  // librairie
-
-  // GlobalLogger.getConsoleLogger().Log("Ma data", Options.WARNING);
-  // GlobalLogger.getConsoleLogger().Log("ma deuxième data", Options.ERROR, true);
-  //
-  // ConsoleLogger.LogForce("3eme data", Options.WARNING);
-  //
-  // ConsoleLogger logger = new ConsoleLogger("my application", Options.RELEASE);
-  //
-  // logger.Log("3eme data", Options.WARNING);
 }

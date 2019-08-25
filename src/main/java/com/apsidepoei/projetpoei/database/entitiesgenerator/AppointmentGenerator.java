@@ -1,5 +1,11 @@
 package com.apsidepoei.projetpoei.database.entitiesgenerator;
 
+import com.apsidepoei.projetpoei.database.DbManager;
+import com.apsidepoei.projetpoei.entities.Appointment;
+import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,10 +13,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Appointment;
-import com.github.javafaker.Faker;
 
 /**
  * This class generate fake data.
@@ -24,7 +26,7 @@ public class AppointmentGenerator {
 
   /**
    * An instance of the constructor.
-   * @return
+   * @return an instance
    */
 
   public static AppointmentGenerator getInstance() {
@@ -42,10 +44,8 @@ public class AppointmentGenerator {
   private List<Appointment> datas = new ArrayList<Appointment>();
 
   /**
-
-   * @return
-   * @throws SQLException
-   * @throws ParseException
+   * Generate fake data.
+   * @return fake data
    */
   public List<Appointment> generateDatas() throws SQLException, ParseException {
     return generateDatas(faker.random().nextInt(100));
@@ -54,9 +54,7 @@ public class AppointmentGenerator {
   /**
    * Generate n fake data.
    * @param nb = number
-   * @return
-   * @throws SQLException
-   * @throws ParseException
+   * @return n fake data
    */
   public List<Appointment> generateDatas(int nb) throws SQLException, ParseException {
     List<Appointment> result = new ArrayList<>();
@@ -111,14 +109,20 @@ public class AppointmentGenerator {
    * @throws ParseException = exception
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException, ParseException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Appointment generated data tests",
+        Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getAppointmentDao().drop();
     DbManager.getInstance().getAppointmentDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**
-   * delete datas.
+   * Delete datas.
    */
   public void deleteDatas() {
     for (Appointment appointment : datas) {
