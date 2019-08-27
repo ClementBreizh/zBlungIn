@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.database.DbOpenHelper;
-import com.apsidepoei.projetpoei.database.contracts.EntrepriseContract;
-import com.apsidepoei.projetpoei.entities.Entreprise;
+import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
+import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoeitest.utils.DescribeQuery;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 
@@ -23,19 +23,19 @@ import org.junit.Test;
  * @author benjamin-m
  *
  */
-public class EntrepriseDaoCreateDropTest {
+public class CompanyDaoCreateDropTest {
 
   /**
    * Test the creation of the table.
    * @throws SQLException
    */
   @Test
-  public void testGetEntrepriseDaoCreateTableMatchingFields() throws SQLException {
-    DbManager.getInstance().getEntrepriseDao().drop();
-    DbManager.getInstance().getEntrepriseDao().create();
+  public void testGetCompanyDaoCreateTableMatchingFields() throws SQLException {
+    DbManager.getInstance().getCompanyDao().drop();
+    DbManager.getInstance().getCompanyDao().create();
 
     ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
-        .executeQuery("DESCRIBE " + EntrepriseContract.TABLE);
+        .executeQuery("DESCRIBE " + CompanyContract.TABLE);
     List<DescribeQuery> describeQuery = new ArrayList<DescribeQuery>();
     while (rs.next()) {
       DescribeQuery desc = new DescribeQuery();
@@ -48,12 +48,12 @@ public class EntrepriseDaoCreateDropTest {
       describeQuery.add(desc);
     }
 
-    if (EntrepriseContract.COLS.length != describeQuery.size()) {
+    if (CompanyContract.COLS.length != describeQuery.size()) {
       fail("not same number of lines");
     }
 
     for (int i = 0; i < describeQuery.size(); i++) {
-      if (!describeQuery.get(i).getField().equals(EntrepriseContract.COLS[i])) {
+      if (!describeQuery.get(i).getField().equals(CompanyContract.COLS[i])) {
         fail("Column name do not match");
       }
     }
@@ -63,12 +63,12 @@ public class EntrepriseDaoCreateDropTest {
    * Test the insert for a new business.
    */
   @Test
-  public void testGetEntrepriseDaoCreateTableInsertWorking() {
-    DbManager.getInstance().getEntrepriseDao().drop();
-    DbManager.getInstance().getEntrepriseDao().create();
+  public void testGetCompanyDaoCreateTableInsertWorking() {
+    DbManager.getInstance().getCompanyDao().drop();
+    DbManager.getInstance().getCompanyDao().create();
     try {
-      DbManager.getInstance().getEntrepriseDao()
-          .insert(new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A"));
+      DbManager.getInstance().getCompanyDao()
+          .insert(new Company("company1", "antenne1", "53267126000018", "0000A"));
     } catch (Exception e) {
       fail("Insertion failure");
     }
@@ -79,12 +79,12 @@ public class EntrepriseDaoCreateDropTest {
    * @throws SQLException
    */
   @Test
-  public void testGetEntrepriseDaoDropTableRemoved() throws SQLException {
-    DbManager.getInstance().getEntrepriseDao().drop();
+  public void testGetCompanyDaoDropTableRemoved() throws SQLException {
+    DbManager.getInstance().getCompanyDao().drop();
     ResultSet rs = DbOpenHelper.getInstance().getConn().createStatement()
         .executeQuery("SHOW TABLES");
     while (rs.next()) {
-      if (rs.getString(1).equals(EntrepriseContract.TABLE)) {
+      if (rs.getString(1).equals(CompanyContract.TABLE)) {
         fail("Table already exists");
       }
     }
@@ -96,24 +96,24 @@ public class EntrepriseDaoCreateDropTest {
    * @throws ParseException
    */
   @Test(expected = MySQLSyntaxErrorException.class)
-  public void testGetEntrepriseDaoDropCannotInsert() throws SQLException, ParseException {
-    DbManager.getInstance().getEntrepriseDao().drop();
-    DbManager.getInstance().getEntrepriseDao()
-        .insert(new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A"));
+  public void testGetCompanyDaoDropCannotInsert() throws SQLException, ParseException {
+    DbManager.getInstance().getCompanyDao().drop();
+    DbManager.getInstance().getCompanyDao()
+        .insert(new Company("company1", "antenne1", "53267126000018", "0000A"));
   }
 
   /**
    * Test insert isn't possible give the good alert.
    */
   @Test
-  public void testGetEntrepriseDaoDropCannotInsertGoodMessage() {
-    DbManager.getInstance().getEntrepriseDao().drop();
+  public void testGetCompanyDaoDropCannotInsertGoodMessage() {
+    DbManager.getInstance().getCompanyDao().drop();
     try {
-      DbManager.getInstance().getEntrepriseDao()
-          .insert(new Entreprise("entreprise1", "antenne1", "53267126000018", "0000A"));
+      DbManager.getInstance().getCompanyDao()
+          .insert(new Company("company1", "antenne1", "53267126000018", "0000A"));
     } catch (SQLException e) {
       assertTrue(
-          e.getMessage().equals("Table 'zbleugin." + EntrepriseContract.TABLE + "' doesn't exist"));
+          e.getMessage().equals("Table 'zbleugin." + CompanyContract.TABLE + "' doesn't exist"));
     }
   }
 }

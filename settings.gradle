@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'Projet_POEI_Java'
+rootProject.name = 'Projet_Zbleugin'

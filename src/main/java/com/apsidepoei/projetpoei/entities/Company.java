@@ -5,7 +5,7 @@ package com.apsidepoei.projetpoei.entities;
  * @author benjamin-m
  *
  */
-public class Entreprise extends EntityDb {
+public class Company extends EntityDb {
 
   private String nom;
   private String nomAntenne;
@@ -83,7 +83,7 @@ public class Entreprise extends EntityDb {
    * @param siret = the siret
    * @param codeApe = the APE code
    */
-  public Entreprise(String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(String nom, String nomAntenne, String siret, String codeApe) {
     super();
     this.nom = nom;
     this.nomAntenne = nomAntenne;
@@ -99,7 +99,7 @@ public class Entreprise extends EntityDb {
    * @param siret = the siret
    * @param codeApe = the APE code
    */
-  public Entreprise(int id, String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(int id, String nom, String nomAntenne, String siret, String codeApe) {
     super();
     this.setId(id);
     this.nom = nom;
@@ -111,7 +111,7 @@ public class Entreprise extends EntityDb {
   /**
    * Empty constructor.
    */
-  public Entreprise() {
+  public Company() {
 
   }
 

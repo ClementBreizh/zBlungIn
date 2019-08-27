@@ -1,17 +1,17 @@
 package com.apsidepoei.projetpoei.database.contracts;
 
 /**
- * This class is the Entreprise contract.
+ * This class is the Company contract.
  * @author benjamin-m 
  *
  */
 
-public class EntrepriseContract extends BaseContract {
+public class CompanyContract extends BaseContract {
 
   /**
    * Define the table name.
    */
-  public static final String TABLE = "entreprise";
+  public static final String TABLE = "company";
   /**
    * Define the id column name.
    */
@@ -49,7 +49,7 @@ public class EntrepriseContract extends BaseContract {
   /**
    * Constructor.
    */
-  public EntrepriseContract() {
+  public CompanyContract() {
     super(TABLE, COL_ID, COLS, CREATE_TABLE);
   }
 

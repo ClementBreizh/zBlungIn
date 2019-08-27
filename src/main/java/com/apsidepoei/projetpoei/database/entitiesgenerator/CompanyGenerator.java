@@ -1,7 +1,8 @@
+package com.apsidepoei.projetpoei.database.entitiesgenerator;
 //package com.apsidepoei.projetpoei.database.entitiesgenerator;
 //
 //import com.apsidepoei.projetpoei.database.DbManager;
-//import com.apsidepoei.projetpoei.entities.Degree;
+//import com.apsidepoei.projetpoei.entities.Company;
 //import com.github.javafaker.Faker;
 //import com.tactfactory.consolelogger.ConsoleLogger;
 //import com.tactfactory.consolelogger.Options;
@@ -12,26 +13,26 @@
 //import java.util.Locale;
 //
 ///**
-// * This class generate fake data.
+// *  This class generate fake data.
+// * @author benjamin-m
 // *
-// * @author thomas
 // */
-//public class DegreeGenerator {
-//  private DegreeGenerator() {
+//public class CompanyGenerator {
+//  private CompanyGenerator() {
 //  }
 //
-//  private static DegreeGenerator INSTANCE = null;
+//  private static CompanyGenerator INSTANCE = null;
 //
 //  /**
-//   * An instance of the constructor.
+//   * instance of the constructor.
 //   *
-//   * @return an instance
+//   * @return an
 //   */
-//  public static DegreeGenerator getInstance() {
+//  public static CompanyGenerator getInstance() {
 //    if (INSTANCE == null) {
-//      synchronized (DegreeGenerator.class) {
+//      synchronized (CompanyGenerator.class) {
 //        if (INSTANCE == null) {
-//          INSTANCE = new DegreeGenerator();
+//          INSTANCE = new CompanyGenerator();
 //        }
 //      }
 //    }
@@ -39,14 +40,14 @@
 //  }
 //
 //  Faker faker = new Faker(Locale.FRENCH);
-//  private List<Degree> datas = new ArrayList<Degree>();
+//  private List<Company> datas = new ArrayList<Company>();
 //
 //  /**
 //   * Generate fake data.
 //   *
-//   * @return fake data
+//   * @return fake data.
 //   */
-//  public List<Degree> generateDatas() throws SQLException {
+//  public List<Company> generateDatas() throws SQLException {
 //    return generateDatas(faker.random().nextInt(100));
 //  }
 //
@@ -54,20 +55,21 @@
 //   * Generate n fake data.
 //   *
 //   * @param nb = the number
-//   * @return n fake data
+//   * @return n fake data.
 //   */
-//  public List<Degree> generateDatas(int nb) throws SQLException {
-//    List<Degree> result = new ArrayList<>();
-//    List<String> degrees = new ArrayList<String>();
+//  public List<Company> generateDatas(int nb) throws SQLException {
+//    List<Company> result = new ArrayList<>();
+//    List<String> companys = new ArrayList<String>();
 //
 //    int i = 0;
 //    while (i < nb) {
-//      String deg = faker.educator().course();
-//      if (!degrees.contains(deg)) {
-//        degrees.add(deg);
+//      String ent = faker.company().name();
+//      if (!companys.contains(ent)) {
+//        companys.add(ent);
 //
-//        Degree degree = new Degree(deg, "BAC + " + faker.number().digit());
-//        result.add(degree);
+//        Company company = new Company(ent, ent + faker.address().city(),
+//            faker.number().digits(14), faker.letterify(faker.number().digits(4) + "?"));
+//        result.add(company);
 //
 //        i++;
 //      }
@@ -89,10 +91,10 @@
 //   * @param nb = the number
 //   */
 //  public void generateAndInsertDatas(int nb) throws SQLException {
-//    for (Degree degree : generateDatas(nb)) {
-//      DbManager.getInstance().getDegreeDao().insert(degree);
-//      System.out.println(degree);
-//      datas.add(degree);
+//    for (Company company : generateDatas(nb)) {
+//      DbManager.getInstance().getCompanyDao().insert(company);
+//      System.out.println(company);
+//      datas.add(company);
 //    }
 //  }
 //
@@ -107,14 +109,15 @@
 //  /**
 //   * Drop, create table, generate and insert n data.
 //   *
-//   * @param nb = number
+//   * @param nb = the number
 //   */
 //  public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
-//    ConsoleLogger generatedLogger = new ConsoleLogger("Degree generated data tests", Options.DEBUG);
+//    ConsoleLogger generatedLogger = new ConsoleLogger("Company generated data tests",
+//        Options.DEBUG);
 //    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
 //
-//    DbManager.getInstance().getDegreeDao().drop();
-//    DbManager.getInstance().getDegreeDao().create();
+//    DbManager.getInstance().getCompanyDao().drop();
+//    DbManager.getInstance().getCompanyDao().create();
 //
 //    generateAndInsertDatas(nb);
 //
@@ -122,11 +125,11 @@
 //  }
 //
 //  /**
-//   * Delete datas.
+//   * delete datas.
 //   */
 //  public void deleteDatas() {
-//    for (Degree degree : datas) {
-//      DbManager.getInstance().getDegreeDao().delete(degree);
+//    for (Company company : datas) {
+//      DbManager.getInstance().getCompanyDao().delete(company);
 //    }
 //  }
 //}
