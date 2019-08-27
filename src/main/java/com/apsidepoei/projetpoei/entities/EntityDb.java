@@ -1,7 +1,12 @@
 package com.apsidepoei.projetpoei.entities;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class EntityDb {
 
+  @Id
   private Integer id;
 
   /**

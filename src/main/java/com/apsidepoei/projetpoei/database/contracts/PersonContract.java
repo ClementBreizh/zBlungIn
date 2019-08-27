@@ -3,10 +3,10 @@ package com.apsidepoei.projetpoei.database.contracts;
 /**
  * This class is the Appointment contract.
  *
- * @author thomas
+ * @author vianney
  *
  */
-public class AppointmentContract extends BaseContract {
+public class PersonContract extends BaseContract {
 
   /**
    * Define the table name.
@@ -33,12 +33,6 @@ public class AppointmentContract extends BaseContract {
    */
   public static final String COL_STATUS = "status";
   /**
-   * Define the report column name.
-   */
-  public static final String COL_PERSONS = "persons";
-
-
-  /**
    * Define a table with all column.
    */
   public static final String[] COLS = new String[] { COL_ID, COL_INFORMATIONS, COL_DATETIME,
@@ -54,7 +48,7 @@ public class AppointmentContract extends BaseContract {
   /**
    * Constructor.
    */
-  public AppointmentContract() {
+  public PersonContract() {
     super(TABLE, COL_ID, COLS, CREATE_TABLE);
   }
 }

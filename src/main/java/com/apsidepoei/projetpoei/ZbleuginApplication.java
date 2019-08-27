@@ -5,6 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Appointment;
 import com.apsidepoei.projetpoei.entities.Assessment;
@@ -16,19 +21,14 @@ import com.apsidepoei.projetpoei.entities.Session;
 import com.tactfactory.consolelogger.ConsoleLogger;
 import com.tactfactory.consolelogger.Options;
 
-public final class ZbleuginApplication {
+@SpringBootApplication
+@Configuration
+@EnableJpaRepositories(basePackages="com.apsidepoei")
+public class ZbleuginApplication {
 
-  private ZbleuginApplication() {
-
-  }
-
-  /**
-   * Main entry.
-   * @param args = the args
-   * @throws ParseException = exception
-   * @throws SQLException   = exception
-   */
   public static void main(String[] args) throws ParseException, SQLException {
+    SpringApplication.run(ZbleuginApplication.class, args);
+
 //    ConsoleLogger releaseLogger = new ConsoleLogger("zBleugin Application", Options.RELEASE);
 //    releaseLogger.Log("Lancement de l'application.", Options.RELEASE, true);
 //

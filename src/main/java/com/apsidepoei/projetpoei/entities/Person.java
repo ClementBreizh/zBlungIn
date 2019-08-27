@@ -3,11 +3,24 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.List;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.apsidepoei.projetpoei.entities.Appointment;
 /**
  * @author vianney
  *
  */
-public class Personn {
+@Entity
+@Table(name = PersonContract.TABLE)
+@AttributeOverride(name = "id_person", column = @Column(name=PersonContract.COL_ID))
+public class Person extends EntityDb {
 
   private String firstname;
   private String lastname;
@@ -15,7 +28,8 @@ public class Personn {
   private String cellPhone;
   private String homePhone;
   private String commentary;
-
+  @ManyToMany
+  private List<Appointment> appointments;
 
   /**
    * @return the firstname
