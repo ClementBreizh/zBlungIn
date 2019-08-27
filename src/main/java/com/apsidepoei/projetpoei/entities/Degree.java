@@ -1,17 +1,35 @@
 package com.apsidepoei.projetpoei.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class is the Degree entity.
+ *
  * @author thomas
  *
  */
+@Entity
+@Table(name = DegreeContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = DegreeContract.COL_ID))
 public class Degree extends EntityDb {
 
+  @JsonProperty(value = DegreeContract.COL_NAME)
+  @Column(name = DegreeContract.COL_NAME, nullable = false)
   private String name;
+
+  @JsonProperty(value = DegreeContract.COL_LEVEL)
+  @Column(name = DegreeContract.COL_LEVEL, nullable = false)
   private String level;
 
   /**
    * The name.
+   *
    * @return the name.
    */
   public String getName() {
@@ -20,6 +38,7 @@ public class Degree extends EntityDb {
 
   /**
    * Set the name.
+   *
    * @param name = the name
    */
   public void setName(String name) {
@@ -28,6 +47,7 @@ public class Degree extends EntityDb {
 
   /**
    * The level.
+   *
    * @return the name.
    */
   public String getLevel() {
@@ -36,6 +56,7 @@ public class Degree extends EntityDb {
 
   /**
    * Set the level.
+   *
    * @param level = the level
    */
   public void setLevel(String level) {
@@ -44,6 +65,7 @@ public class Degree extends EntityDb {
 
   /**
    * Constructor for a new degree.
+   *
    * @param name  = the name
    * @param level = the level
    */
@@ -55,6 +77,7 @@ public class Degree extends EntityDb {
 
   /**
    * Constructor with id for new degree.
+   *
    * @param id    = the id
    * @param name  = the name
    * @param level = the level

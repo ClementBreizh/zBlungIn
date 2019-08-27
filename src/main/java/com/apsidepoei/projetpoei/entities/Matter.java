@@ -1,7 +1,20 @@
 package com.apsidepoei.projetpoei.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.MatterContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name = MatterContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = MatterContract.COL_ID))
 public class Matter extends EntityDb {
 
+  @JsonProperty(value = MatterContract.COL_NAME)
+  @Column(name = MatterContract.COL_NAME, nullable = false)
   private String name;
 
   /**
