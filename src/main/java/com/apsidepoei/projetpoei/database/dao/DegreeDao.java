@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei.database.dao;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.apsidepoei.projetpoei.entities.Degree;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

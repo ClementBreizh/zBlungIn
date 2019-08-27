@@ -3,6 +3,8 @@ package com.apsidepoei.projetpoei.database.entitiesgenerator;
 import com.apsidepoei.projetpoei.database.DbManager;
 import com.apsidepoei.projetpoei.entities.Entreprise;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,9 +43,8 @@ public class EntrepriseGenerator {
 
   /**
    * Generate fake data.
-   * 
-   * @return
-   * @throws SQLException
+   *
+   * @return fake data.
    */
   public List<Entreprise> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -51,10 +52,9 @@ public class EntrepriseGenerator {
 
   /**
    * Generate n fake data.
-   * 
-   * @param nb
-   * @return
-   * @throws SQLException
+   *
+   * @param nb = the number
+   * @return n fake data.
    */
   public List<Entreprise> generateDatas(int nb) throws SQLException {
     List<Entreprise> result = new ArrayList<>();
@@ -79,7 +79,6 @@ public class EntrepriseGenerator {
   /**
    * Generate and insert datas.
    *
-   * @throws SQLException
    */
   public void generateAndInsertDatas() throws SQLException {
     generateAndInsertDatas(faker.random().nextInt(100));
@@ -89,7 +88,6 @@ public class EntrepriseGenerator {
    * Generate and insert n datas.
    *
    * @param nb = the number
-   * @throws SQLException
    */
   public void generateAndInsertDatas(int nb) throws SQLException {
     for (Entreprise entreprise : generateDatas(nb)) {
@@ -102,7 +100,6 @@ public class EntrepriseGenerator {
   /**
    * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -112,13 +109,18 @@ public class EntrepriseGenerator {
    * Drop, create table, generate and insert n data.
    *
    * @param nb = the number
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Company generated data tests",
+        Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getEntrepriseDao().drop();
     DbManager.getInstance().getEntrepriseDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**

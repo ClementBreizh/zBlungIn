@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class GetDbConfig {
 
@@ -41,11 +42,11 @@ public class GetDbConfig {
    * Get db config from a file in /home.
    */
   public void dbConfig() {
-    final String CONFIGPATH = System.getenv("VARPROJECT");
+    final String configPath = System.getenv("VARPROJECT");
 
     try {
-      InputStream flux = new FileInputStream("/" + CONFIGPATH);
-      InputStreamReader lecture = new InputStreamReader(flux);
+      InputStream flux = new FileInputStream("/" + configPath);
+      InputStreamReader lecture = new InputStreamReader(flux, StandardCharsets.UTF_8);
       BufferedReader buff = new BufferedReader(lecture);
       String ligne;
 

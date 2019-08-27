@@ -1,16 +1,15 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.entitiesgenerator;
+
+import com.apsidepoei.projetpoei.database.DbManager;
+import com.apsidepoei.projetpoei.entities.Feedback;
+import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import com.apsidepoei.projetpoei.database.DbManager;
-import com.apsidepoei.projetpoei.entities.Feedback;
-import com.github.javafaker.Faker;
 
 /**
  * This class generate fake data for Feedback class.
@@ -29,7 +28,7 @@ public class FeedbackGenerator {
 
   /**
    *
-   * @return an instance of the constructor
+   * @return an instance of the constructor.
    */
   public static FeedbackGenerator getInstance() {
     if (INSTANCE == null) {
@@ -46,9 +45,8 @@ public class FeedbackGenerator {
   private List<Feedback> datas = new ArrayList<Feedback>();
 
   /**
-   *
-   * @return
-   * @throws SQLException Generate fake data
+   * Generate fake data.
+   * @return fake data
    */
   public List<Feedback> generateDatas() throws SQLException {
     return generateDatas(faker.random().nextInt(100));
@@ -57,9 +55,8 @@ public class FeedbackGenerator {
   /**
    * Generate n fake data.
    *
-   * @param nb
-   * @return
-   * @throws SQLException
+   * @param nb = the number
+   * @return n fake datas.
    */
   public List<Feedback> generateDatas(int nb) throws SQLException {
     List<Feedback> result = new ArrayList<>();
@@ -93,8 +90,6 @@ public class FeedbackGenerator {
 
   /**
    * Generate and insert datas.
-   *
-   * @throws SQLException
    */
   public void generateAndInsertDatas() throws SQLException {
     generateAndInsertDatas(faker.random().nextInt(100));
@@ -103,8 +98,7 @@ public class FeedbackGenerator {
   /**
    * Generate and insert n datas.
    *
-   * @param nb
-   * @throws SQLException
+   * @param nb = the number
    */
   public void generateAndInsertDatas(int nb) throws SQLException {
     for (Feedback feedback : generateDatas(nb)) {
@@ -117,7 +111,6 @@ public class FeedbackGenerator {
   /**
    * Drop, create table, generate and insert datas.
    *
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable() throws SQLException {
     generateAndInsertDatasDroppingTable(faker.random().nextInt(100));
@@ -127,17 +120,22 @@ public class FeedbackGenerator {
    * Drop, create table, generate and insert n data.
    *
    * @param nb = number
-   * @throws SQLException
    */
   public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
+    ConsoleLogger generatedLogger = new ConsoleLogger("Feedback generated data tests",
+        Options.DEBUG);
+    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
+
     DbManager.getInstance().getFeedbackDao().drop();
     DbManager.getInstance().getFeedbackDao().create();
 
     generateAndInsertDatas(nb);
+
+    generatedLogger.Log("Fin des tests de données générées.", Options.DEBUG);
   }
 
   /**
-   * Delete datas
+   * Delete datas.
    */
   public void deleteDatas() {
     for (Feedback feedback : datas) {

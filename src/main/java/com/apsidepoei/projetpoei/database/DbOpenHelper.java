@@ -1,6 +1,8 @@
 package com.apsidepoei.projetpoei.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,6 +26,9 @@ public class DbOpenHelper {
       conn = datasource.getConnection();
     } catch (SQLException e) {
       e.printStackTrace();
+
+      ConsoleLogger errorLogger = new ConsoleLogger("ZBleugin Application", Options.ERROR);
+      errorLogger.Log("Impossible de se connecter à la base de donnée.", Options.ERROR, true);
     }
   }
 

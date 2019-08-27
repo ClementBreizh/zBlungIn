@@ -1,7 +1,5 @@
 /**
- * 
- */
-/**
+ * zBleugin App.
  * @author clemb
  *
  */
