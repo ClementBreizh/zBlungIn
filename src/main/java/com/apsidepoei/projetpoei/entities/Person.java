@@ -18,14 +18,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author vianney
  *
  */
-<<<<<<< HEAD:src/main/java/com/apsidepoei/projetpoei/entities/Personn.java
-public class Personn extends EntityDb{
-=======
 @Entity
 @Table(name = PersonContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 public class Person extends EntityDb {
->>>>>>> 6dcb0066276a6957f6fda47c4e8361add9933e2e:src/main/java/com/apsidepoei/projetpoei/entities/Person.java
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false)
