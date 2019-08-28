@@ -2,7 +2,7 @@ package com.apsidepoei.projetpoei.database.contracts;
 
 /**
  * This class is the Company contract.
- * @author benjamin-m 
+ * @author benjamin-m
  *
  */
 
@@ -15,15 +15,15 @@ public class CompanyContract extends BaseContract {
   /**
    * Define the id column name.
    */
-  public static final String COL_ID = "id";
+  public static final String COL_ID = "id_company";
   /**
    * Define the name column name.
    */
-  public static final String COL_NOM = "nom";
+  public static final String COL_NOM = "name";
   /**
    * Define the name of antenna column name.
    */
-  public static final String COL_NOM_ANTENNE = "nomAntenne";
+  public static final String COL_NOM_ANTENNE = "antennaName";
   /**
    * Define the siret column name.
    */
@@ -31,7 +31,7 @@ public class CompanyContract extends BaseContract {
   /**
    * Define the APE code column name.
    */
-  public static  final String COL_CODE_APE = "codeApe";
+  public static  final String COL_CODE_APE = "apeCode";
   /**
    * Define a table with all column.
    */
