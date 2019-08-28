@@ -24,7 +24,7 @@ public abstract class BaseRestControllerTest<T, ID> {
     this.entityPath = entityPath;
   }
 
-  protected abstract Integer getItemIdToTest();
+  protected abstract ID getItemIdToTest();
 
   protected abstract JpaRepository<T, ID> getRepository();
 
