@@ -32,7 +32,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   private AssessmentRepository repository;
 
   public AssessmentRestControllerTest() {
-    super("/assessments");
+    super("/assesments");
   }
 
   @Override

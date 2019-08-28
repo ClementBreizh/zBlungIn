@@ -59,10 +59,11 @@ public abstract class BaseRestControllerTest<T, ID> {
   protected abstract boolean compareTo(T item1, T item2);
 
   @Test
-  public void getById() throws IOException {
+  public void getById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
+    T item = getRepository().save(getObjectTest());
     try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdToTest(), "GET");
+      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), "GET");
     } catch (IOException e) {
       e.printStackTrace();
       throw e;
