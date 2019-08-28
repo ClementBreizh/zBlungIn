@@ -29,18 +29,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Company extends EntityDb {
 
   @JsonProperty(value = CompanyContract.COL_NAME)
-  @Column(name = CompanyContract.COL_NAME, nullable = false)
+  @Column(name = CompanyContract.COL_NAME, nullable = false, length = 120)
   private String name;
 
   @JsonProperty(value = CompanyContract.COL_ANTENNANAME)
-  @Column(name = CompanyContract.COL_ANTENNANAME, nullable = false)
+  @Column(name = CompanyContract.COL_ANTENNANAME, nullable = false, length = 50)
   private String antennaName;
 
   @JsonProperty(value = CompanyContract.COL_SIRET)
-  @Column(name = CompanyContract.COL_SIRET, nullable = true)
+  @Column(name = CompanyContract.COL_SIRET, nullable = true, length = 14)
   private String siret;
+
   @JsonProperty(value = CompanyContract.COL_APECODE)
-  @Column(name = CompanyContract.COL_APECODE, nullable = true)
+  @Column(name = CompanyContract.COL_APECODE, nullable = true, length = 5)
   private String apeCode;
 
   @JsonProperty(value = CompanyContract.COL_FK_ID_CONTACTS)

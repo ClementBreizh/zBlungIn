@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Session;
+import com.apsidepoei.projetpoei.utils.DatasInsertors;
 import com.tactfactory.consolelogger.ConsoleLogger;
 import com.tactfactory.consolelogger.Options;
 
@@ -88,10 +90,12 @@ public class ZbleuginApplication {
 
   }
 
-  @Bean
-  public RestTemplate restTemplate() {
-      return new RestTemplate();
-  }
+//  @Bean
+//  @Qualifier(value="integerDatasInsertors")
+//  public DatasInsertors getInsertors() {
+//    return new DatasInsertors();
+//  }
+
 
 //  private static final void addressTests() throws SQLException {
 //    ConsoleLogger functionalLogger = new ConsoleLogger("Address functionals tests", Options.DEBUG);
