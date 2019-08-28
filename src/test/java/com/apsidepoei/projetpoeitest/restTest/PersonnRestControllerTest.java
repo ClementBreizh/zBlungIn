@@ -24,30 +24,30 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class PersonnRestControllerTest extends BaseRestControllerTest<Personn, Integer> {
+public class PersonRestControllerTest extends BaseRestControllerTest<Person, Integer> {
 
   @Autowired
-  private PersonnRepository repository;
+  private PersonRepository repository;
 
-  public PersonnRestControllerTest() {
-    super("/personns");
+  public PersonRestControllerTest() {
+    super("/persons");
   }
 
   @Override
-  protected JpaRepository<Personn, Integer> getRepository() {
+  protected JpaRepository<Person, Integer> getRepository() {
     return repository;
   }
 
   @Override
-  protected List<Personn> parseJsonToList(StringBuilder builder)
+  protected List<Person> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Personn>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<Person>>() {
     });
   }
 
   @Override
-  protected boolean compareTo(Personn item1, Personn item2) {
+  protected boolean compareTo(Person item1, Person item2) {
     return item1.getId().equals(item2.getId())
         && item1.getFirstname().equals(item2.getFirstname())
             && item1.getLastname().equals(item2.getLastname())

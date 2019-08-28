@@ -2,18 +2,40 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.SessionContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class is the session entity.
+ *
  * @author benjamin-m
  *
  */
+@Entity
+@Table(name = SessionContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = SessionContract.COL_ID))
 public class Session extends EntityDb {
+
+  @JsonProperty(value = SessionContract.COL_NAME)
+  @Column(name = SessionContract.COL_NAME, nullable = false)
   private String name;
+
+  @JsonProperty(value = SessionContract.COL_DATE_START)
+  @Column(name = SessionContract.COL_DATE_START, nullable = false)
   private Date dateStart;
+
+  @JsonProperty(value = SessionContract.COL_DATE_END)
+  @Column(name = SessionContract.COL_DATE_END, nullable = false)
   private Date dateEnd;
 
   /**
    * The name.
+   *
    * @return the name
    */
   public String getName() {
@@ -22,6 +44,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the name.
+   *
    * @param name = the name
    */
   public void setName(String name) {
@@ -30,6 +53,7 @@ public class Session extends EntityDb {
 
   /**
    * The dateStart.
+   *
    * @return the start date
    */
   public Date getDateStart() {
@@ -38,6 +62,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the date start.
+   *
    * @param dateStart = the start date
    */
   public void setDateStart(Date dateStart) {
@@ -46,6 +71,7 @@ public class Session extends EntityDb {
 
   /**
    * The dateEnd.
+   *
    * @return the end date
    */
   public Date getDateEnd() {
@@ -54,6 +80,7 @@ public class Session extends EntityDb {
 
   /**
    * Set the dateEnd.
+   *
    * @param dateEnd = the end date
    */
   public void setDateEnd(Date dateEnd) {
@@ -62,9 +89,10 @@ public class Session extends EntityDb {
 
   /**
    * Constructor for a new Session.
-   * @param name = the name
+   *
+   * @param name      = the name
    * @param dateStart = the dateStart
-   * @param dateEnd = the dateEnd
+   * @param dateEnd   = the dateEnd
    */
   public Session(String name, Date dateStart, Date dateEnd) {
     super();
@@ -75,10 +103,11 @@ public class Session extends EntityDb {
 
   /**
    * Constructor with id for a new Session.
-   * @param id = the id
-   * @param name = the name
+   *
+   * @param id        = the id
+   * @param name      = the name
    * @param dateStart = the dateStart
-   * @param dateEnd = the dateEnd
+   * @param dateEnd   = the dateEnd
    */
   public Session(int id, String name, Date dateStart, Date dateEnd) {
     super();

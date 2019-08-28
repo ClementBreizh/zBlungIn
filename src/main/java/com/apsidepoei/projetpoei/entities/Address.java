@@ -1,14 +1,34 @@
 package com.apsidepoei.projetpoei.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class is the Degree entity.
+ *
  * @author vianney
  *
  */
+@Entity
+@Table(name = AddressContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = AddressContract.COL_ID))
 public class Address extends EntityDb {
 
+  @JsonProperty(value = AddressContract.COL_ADDRESS)
+  @Column(name = AddressContract.COL_ADDRESS, nullable = false)
   private String address;
+
+  @JsonProperty(value = AddressContract.COL_POSTAL_CODE)
+  @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false)
   private String postalCode;
+
+  @JsonProperty(value = AddressContract.COL_TOWN)
+  @Column(name = AddressContract.COL_TOWN, nullable = false)
   private String town;
 
   /**
@@ -19,9 +39,10 @@ public class Address extends EntityDb {
 
   /**
    * Constructor with id for new Address.
+   *
    * @param address    = the address
-   * @param postalCode  = the postalCode
-   * @param town = the town
+   * @param postalCode = the postalCode
+   * @param town       = the town
    */
   public Address(String address, String postalCode, String town) {
     super();
@@ -43,6 +64,7 @@ public class Address extends EntityDb {
 
   /**
    * The address.
+   *
    * @return the adress
    */
   public String getAddress() {
@@ -51,6 +73,7 @@ public class Address extends EntityDb {
 
   /**
    * Set the address.
+   *
    * @param address = the address
    */
   public void setAddress(String address) {
@@ -59,6 +82,7 @@ public class Address extends EntityDb {
 
   /**
    * The postalCode.
+   *
    * @return the postal code
    */
   public String getPostalCode() {
@@ -67,6 +91,7 @@ public class Address extends EntityDb {
 
   /**
    * Set the postalCode.
+   *
    * @param postalCode = the postalCode
    */
   public void setPostalCode(String postalCode) {
@@ -75,6 +100,7 @@ public class Address extends EntityDb {
 
   /**
    * The town.
+   *
    * @return the town
    */
   public String getTown() {
@@ -83,6 +109,7 @@ public class Address extends EntityDb {
 
   /**
    * Set the town.
+   *
    * @param town = the town
    */
   public void setTown(String town) {
