@@ -5,12 +5,15 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.junit.Test;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.apsidepoei.projetpoeitest.utils.HttpUtils;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
-public abstract class BaseRestControllerTest {
+
+public abstract class BaseRestControllerTest <T,ID> {
 
   public static final String BASE_API = "/api";
   private String entityPath;
@@ -47,9 +50,7 @@ public abstract class BaseRestControllerTest {
     }
   }
 
-  protected abstract List<T> parseJsonToList(StringBuilder builder)
-      throws JsonParseException, JsonMappingException, IOException;
-
+  protected abstract List<T> parseJsonToList(StringBuilder builder) throws JsonParseException, JsonMappingException, IOException;
   protected abstract boolean compareTo(T item1, T item2);
 
   @Test
@@ -71,5 +72,6 @@ public abstract class BaseRestControllerTest {
   @Test
   public void count() {
   }
+
 
 }
