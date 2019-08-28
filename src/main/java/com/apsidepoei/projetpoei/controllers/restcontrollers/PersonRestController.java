@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
-import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
-import com.apsidepoei.projetpoei.entities.Session;
+import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
+import com.apsidepoei.projetpoei.entities.Person;
 
 /**
- * @author vianney
+ * @author clement
  *
  */
 @RestController
-@RequestMapping("/api/sessions")
-public class SessionRestController extends BaseRestController<Session, Integer> {
-  public SessionRestController(@Autowired SessionRepository repository) {
+@RequestMapping("/api/persons")
+public class PersonRestController extends BaseRestController<Person, Integer> {
+  public PersonRestController(@Autowired PersonRepository repository) {
     super(repository);
   }
 }

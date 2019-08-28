@@ -71,6 +71,4 @@ public abstract class BaseRestControllerTest<T,ID> {
   @Test
   public void count() {
   }
-
-
 }
