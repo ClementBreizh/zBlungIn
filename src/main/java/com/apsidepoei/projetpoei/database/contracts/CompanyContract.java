@@ -13,23 +13,23 @@ public class CompanyContract extends BaseContract {
    */
   public static final String TABLE = "company";
   /**
-   * Define the id column name.
+   * defines the name of the column="id_company".
    */
   public static final String COL_ID = "id_company";
   /**
-   * Define the name column name.
+   * defines the name of the column="name".
    */
   public static final String COL_NOM = "name";
   /**
-   * Define the name of antenna column name.
+   * defines the name of the column="antennaName".
    */
   public static final String COL_NOM_ANTENNE = "antennaName";
   /**
-   * Define the siret column name.
+   * defines the name of the column="siret".
    */
   public static final String COL_SIRET = "siret";
   /**
-   * Define the APE code column name.
+   * defines the name of the column="apeCode".
    */
   public static  final String COL_CODE_APE = "apeCode";
   /**

@@ -2,10 +2,22 @@ package com.apsidepoei.projetpoei.database.contracts;
 
 public class AssessmentContract extends BaseContract {
 
+  /**
+   * Define the table name.
+   */
   public static final String TABLE = "assessment";
 
+  /**
+   * defines the name of the column="id_assessment".
+   */
   public static final String COL_ID = "id_assessment";
+  /**
+   * defines the name of the column="category".
+   */
   public static final String COL_CATEGORY = "category";
+  /**
+   * defines the name of the column="updatingDate".
+   */
   public static final String COL_DATE = "updatingDate";
 
 

@@ -13,27 +13,27 @@ public class AppointmentContract extends BaseContract {
    */
   public static final String TABLE = "appointment";
   /**
-   * Define the id column name.
+   * defines the name of the column="id_appointment".
    */
   public static final String COL_ID = "id_appointment";
   /**
-   * Define the name column name.
+   * defines the name of the column="informations".
    */
   public static final String COL_INFORMATIONS = "informations";
   /**
-   * Define the level column name.
+   * defines the name of the column="dateTime".
    */
   public static final String COL_DATETIME = "dateTime";
   /**
-   * Define the report column name.
+   * defines the name of the column="report".
    */
   public static final String COL_REPORT = "report";
   /**
-   * Define the report column name.
+   * defines the name of the column="status".
    */
-  public static final String COL_STATUS = "status";  
+  public static final String COL_STATUS = "status";
   /**
-   * Define the report column name.
+   * defines the name of the column="persons".
    */
   public static final String COL_PERSONS = "persons";
 

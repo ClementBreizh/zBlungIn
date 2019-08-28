@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table; 
+import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
@@ -29,6 +29,21 @@ public class Matter extends EntityDb {
       @JoinColumn(name = MatterContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = CandidateContract.COL_ID) })
   private List<Candidate> candidates;
+
+  /**
+   * construtor.
+   */
+  public Matter() {
+    super();
+  }
+
+  @Override
+  public String toString() {
+    return "Matter [Id = " + getId() + ", name= " + name + "]";
+  }
+
+
+  // GETTER/SETTER
 
   /**
    * the name.
@@ -62,15 +77,16 @@ public class Matter extends EntityDb {
   }
 
   /**
-   * construtor.
+   * @return the candidates
    */
-  public Matter() {
-    super();
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
-  @Override
-  public String toString() {
-    return "Matter [Id = " + getId() + ", name= " + name + "]";
+  /**
+   * @param candidates the candidates to set
+   */
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
   }
-
 }

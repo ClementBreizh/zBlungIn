@@ -12,23 +12,23 @@ public class SessionContract extends BaseContract {
    */
   public static final String TABLE = "session";
   /**
-   * Define the id column name.
+   * defines the name of the column="id_session".
    */
   public static final String COL_ID = "id_session";
   /**
-   * Define the name column name.
+   * defines the name of the column="name".
    */
   public static final String COL_NAME = "name";
   /**
-   * Define the dateStart column name.
+   * defines the name of the column="startDate".
    */
   public static final String COL_DATE_START = "startDate";
   /**
-   * Define the report column name.
+   * defines the name of the column="endDate".
    */
   public static final String COL_DATE_END = "endDate";
   /**
-   * Define the report column name.
+   * defines the name of the column="candidates".
    */
   public static final String COL_CANDIDATES = "candidates";
 

@@ -23,25 +23,24 @@ public class CandidateContract extends BaseContract {
    * defines the name of the column="rankingCandidate".
    */
   public static final String COL_RANKING_CANDIDATE = "rankingCandidate";
-
   /**
-   * defines the name of the column="rankingCandidate".
+   * defines the name of the column="feedback_id".
    */
   public static final String COL_FK_ID_FEEDBACK = "feedback_id";
   /**
-   * Define the report column name.
+   * defines the name of the column="degrees".
    */
   public static final String COL_DEGREES = "degrees";
   /**
-   * Define the report column name.
+   * defines the name of the column="matters".
    */
   public static final String COL_MATTERS = "matters";
   /**
-   * Define the report column name.
+   * defines the name of the column="sessions".
    */
   public static final String COL_SESSIONS = "sessions";
   /**
-   * Define the report column name.
+   * defines the name of the column="assessments".
    */
   public static final String COL_ASSESSMENTS = "assessments";
 

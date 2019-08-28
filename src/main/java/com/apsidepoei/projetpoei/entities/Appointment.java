@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 @Table(name = AppointmentContract.TABLE)
-@AttributeOverride(name = "id_appointment", column = @Column(name = AppointmentContract.COL_ID))
+@AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
 
   @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)

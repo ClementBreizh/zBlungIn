@@ -21,11 +21,11 @@ public class Company extends EntityDb {
 
   @JsonProperty(value = CompanyContract.COL_NOM)
   @Column(name = CompanyContract.COL_NOM, nullable = false)
-  private String nom;
+  private String name;
 
   @JsonProperty(value = CompanyContract.COL_NOM_ANTENNE)
   @Column(name = CompanyContract.COL_NOM_ANTENNE, nullable = false)
-  private String nomAntenne;
+  private String antennaName;
 
   @JsonProperty(value = CompanyContract.COL_SIRET)
   @Column(name = CompanyContract.COL_SIRET, nullable = true)
@@ -33,112 +33,97 @@ public class Company extends EntityDb {
 
   @JsonProperty(value = CompanyContract.COL_CODE_APE)
   @Column(name = CompanyContract.COL_CODE_APE, nullable = true)
-  private String codeApe;
+  private String apeCode;
+
 
   /**
-   * The name.
-   *
    * @return the name
    */
-  public String getNom() {
-    return nom;
+  public String getName() {
+    return name;
   }
 
   /**
-   * Set the name.
-   *
-   * @param nom = the name
+   * @param name the name to set
    */
-  public void setNom(String nom) {
-    this.nom = nom;
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
-   * The name of antenna.
-   *
-   * @return the name of an antenna
+   * @return the antennaName
    */
-  public String getNomAntenne() {
-    return nomAntenne;
+  public String getAntennaName() {
+    return antennaName;
   }
 
   /**
-   * Set the name of antenna.
-   *
-   * @param nomAntenne = name of an antenna
+   * @param antennaName the antennaName to set
    */
-  public void setNomAntenne(String nomAntenne) {
-    this.nomAntenne = nomAntenne;
+  public void setAntennaName(String antennaName) {
+    this.antennaName = antennaName;
   }
 
   /**
-   * The siret.
-   *
-   * @return the siret number
+   * @return the siret
    */
   public String getSiret() {
     return siret;
   }
 
   /**
-   * Set the siret.
-   *
-   * @param siret = the siret
+   * @param siret the siret to set
    */
   public void setSiret(String siret) {
     this.siret = siret;
   }
 
   /**
-   * The APE code.
-   *
-   * @return the code
+   * @return the apeCode
    */
-  public String getCodeApe() {
-    return codeApe;
+  public String getApeCode() {
+    return apeCode;
   }
 
   /**
-   * Set The APE code.
-   *
-   * @param codeApe = the code APE
+   * @param apeCode the apeCode to set
    */
-  public void setCodeApe(String codeApe) {
-    this.codeApe = codeApe;
+  public void setApeCode(String apeCode) {
+    this.apeCode = apeCode;
   }
 
   /**
    * Constructor for a new business.
    *
-   * @param nom        = the name
-   * @param nomAntenne = the name of antenna
+   * @param name        = the name
+   * @param antennaName = the name of antenna
    * @param siret      = the siret
-   * @param codeApe    = the APE code
+   * @param apeCode    = the APE code
    */
-  public Company(String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(String name, String antennaName, String siret, String apeCode) {
     super();
-    this.nom = nom;
-    this.nomAntenne = nomAntenne;
+    this.name = name;
+    this.antennaName = antennaName;
     this.siret = siret;
-    this.codeApe = codeApe;
+    this.apeCode = apeCode;
   }
 
   /**
    * Constructor with id for a new business.
    *
    * @param id         = the id
-   * @param nom        = the name
-   * @param nomAntenne = the name of antenna
+   * @param name        = the name
+   * @param antennaName = the name of antenna
    * @param siret      = the siret
-   * @param codeApe    = the APE code
+   * @param apeCode    = the APE code
    */
-  public Company(int id, String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(int id, String name, String antennaName, String siret, String apeCode) {
     super();
     this.setId(id);
-    this.nom = nom;
-    this.nomAntenne = nomAntenne;
+    this.name = name;
+    this.antennaName = antennaName;
     this.siret = siret;
-    this.codeApe = codeApe;
+    this.apeCode = apeCode;
   }
 
   /**
@@ -153,8 +138,8 @@ public class Company extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Entreprise [Id = " + getId() + ", nom = " + nom + ", nomAntenne = " + nomAntenne + ", siret = " + siret
-        + ", codeApe = " + codeApe + "]";
+    return "Entreprise [Id = " + getId() + ", name = " + name + ", antennaName = " + antennaName + ", siret = " + siret
+        + ", apeCode = " + apeCode + "]";
   }
 
 }

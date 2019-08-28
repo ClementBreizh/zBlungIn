@@ -40,6 +40,25 @@ public class Degree extends EntityDb {
           @JoinColumn(name = CandidateContract.COL_ID) })
   private List<Candidate> candidates;
 
+
+  /**
+   * Empty constructor.
+   */
+  public Degree() {
+    super();
+  }
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+  }
+
+
+  // GETTER/SETTER
+
   /**
    * The name.
    *
@@ -103,17 +122,18 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * Empty constructor.
+   * @return the candidates
    */
-  public Degree() {
-    super();
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
   /**
-   * Override toString() function.
+   * @param candidates the candidates to set
    */
-  @Override
-  public String toString() {
-    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
   }
+
+
 }

@@ -12,6 +12,9 @@ public abstract class EntityDb {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+
+  // GETTER/SETTER
+
   /**
    * getter.
    */
