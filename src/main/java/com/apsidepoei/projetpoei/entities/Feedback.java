@@ -31,6 +31,7 @@ public class Feedback extends EntityDb {
   @Column(name = FeedbackContract.COL_COMMENT, nullable = true)
   private String comment;
 
+  
   /**
    * Empty constructor.
    */
