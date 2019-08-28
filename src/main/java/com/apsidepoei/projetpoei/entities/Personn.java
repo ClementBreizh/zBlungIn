@@ -7,7 +7,7 @@ package com.apsidepoei.projetpoei.entities;
  * @author vianney
  *
  */
-public class Personn {
+public class Personn extends EntityDb{
 
   private String firstname;
   private String lastname;
