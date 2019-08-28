@@ -28,6 +28,13 @@ public class AppointmentContract extends BaseContract {
    * Define the report column name.
    */
   public static final String COL_REPORT = "report";
+  /**
+   * Define the report column name.
+   */
+  public static final String COL_STATUS = "status";  /**
+   * Define the report column name.
+   */
+  public static final String COL_PERSONS = "persons";
 
   /**
    * Define a table with all column.

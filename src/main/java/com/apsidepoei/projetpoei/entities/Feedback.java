@@ -1,14 +1,34 @@
 package com.apsidepoei.projetpoei.entities;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class is the Feedback entity.
+ *
  * @author vianney
  *
  */
+@Entity
+@Table(name = FeedbackContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = FeedbackContract.COL_ID))
 public class Feedback extends EntityDb {
 
+  @JsonProperty(value = FeedbackContract.COL_TYPE_OF_CONTRACT)
+  @Column(name = FeedbackContract.COL_TYPE_OF_CONTRACT, nullable = false)
   private String typeOfContract;
+
+  @JsonProperty(value = FeedbackContract.COL_DURATION_OF_CONTRACT)
+  @Column(name = FeedbackContract.COL_DURATION_OF_CONTRACT, nullable = true)
   private Integer durationOfContract;
+
+  @JsonProperty(value = FeedbackContract.COL_COMMENT)
+  @Column(name = FeedbackContract.COL_COMMENT, nullable = true)
   private String comment;
 
   /**
@@ -19,9 +39,10 @@ public class Feedback extends EntityDb {
 
   /**
    * Constructor with id for new Feedback.
-   * @param typeOfContract    = the typeOfContract
-   * @param durationOfContract  = the durationOfContract
-   * @param comment = the comment
+   *
+   * @param typeOfContract     = the typeOfContract
+   * @param durationOfContract = the durationOfContract
+   * @param comment            = the comment
    */
   public Feedback(String typeOfContract, Integer durationOfContract, String comment) {
     super();
@@ -43,6 +64,7 @@ public class Feedback extends EntityDb {
 
   /**
    * The typeOfContract.
+   *
    * @return the type of contract
    */
   public String getTypeOfContract() {
@@ -51,6 +73,7 @@ public class Feedback extends EntityDb {
 
   /**
    * Set the typeOfContract.
+   *
    * @param typeOfContract = the typeOfContract
    */
   public void setTypeOfContract(String typeOfContract) {
@@ -59,6 +82,7 @@ public class Feedback extends EntityDb {
 
   /**
    * The contract duration.
+   *
    * @return the duration
    */
   public Integer getDurationOfContract() {
@@ -67,6 +91,7 @@ public class Feedback extends EntityDb {
 
   /**
    * Set the durationOfContract.
+   *
    * @param durationOfContract = the durationOfContract
    */
   public void setDurationOfContract(Integer durationOfContract) {
@@ -75,6 +100,7 @@ public class Feedback extends EntityDb {
 
   /**
    * The comment.
+   *
    * @return the comment.
    */
   public String getComment() {
@@ -83,6 +109,7 @@ public class Feedback extends EntityDb {
 
   /**
    * Set the comment.
+   *
    * @param comment = the comment
    */
   public void setComment(String comment) {
