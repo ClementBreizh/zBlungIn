@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import java.util.NoSuchElementException;
@@ -84,13 +85,14 @@ public abstract class BaseRestControllerTest<T, ID> {
   protected abstract T parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException;
 
-  
+
   /**
    * Test of data selected by Id is deleted.
+   * @throws ParseException
    * @throws IOException.
    */
   @Test(expected = NoSuchElementException.class)
-  public void deleteById() throws IOException {
+  public void deleteById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
     T item = getRepository().save(getObjectTest());
     getRepository().flush();
@@ -136,7 +138,7 @@ public abstract class BaseRestControllerTest<T, ID> {
   }
 
 
-  protected abstract T getObjectTest();
+  protected abstract T getObjectTest() throws ParseException;
 
 
   protected abstract ID getItemIdTest(T item);

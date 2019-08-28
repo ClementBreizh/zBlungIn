@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.experimental.theories.internal.ParameterizedAssertionError;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import freemarker.core.ParseException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -67,14 +70,13 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
 
   @Override
   protected Degree getObjectTest() {
-    // TODO Auto-generated method stub
-    return null;
+    Degree item = new Degree("BTS","Developpement Test");
+    return item;
   }
 
   @Override
   protected Integer getItemIdTest(Degree item) {
-    // TODO Auto-generated method stub
-    return null;
+    return item.getId();
   }
 }
 
