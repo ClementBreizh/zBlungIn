@@ -56,7 +56,24 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
                     && item1.getHomePhone().equals(item2.getHomePhone())
                       && item1.getCommentary().equals(item2.getCommentary());
   }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Person getObjectTest() {
+    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212342534", "no comment");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Person item) {
+    return item.getId();
+  }
 }
+
 
 
 

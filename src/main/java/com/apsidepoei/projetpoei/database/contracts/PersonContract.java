@@ -10,7 +10,7 @@ public class PersonContract extends BaseContract {
   /**
    * Define the table name.
    */
-  public static final String TABLE = "appointment";
+  public static final String TABLE = "person";
   /**
    * Define the id column name.
    */
