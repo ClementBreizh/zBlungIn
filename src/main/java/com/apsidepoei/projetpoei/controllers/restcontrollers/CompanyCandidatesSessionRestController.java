@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apsidepoei.projetpoei.database.repositories.CompanyCandidateSessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
 
 /**
  * @author vianney
@@ -15,8 +15,8 @@ import com.apsidepoei.projetpoei.database.repositories.CompanyCandidateSessionRe
  */
 @RestController
 @RequestMapping("/api/validatecandidates")
-public class CompanyCandidateSessionRestController {
-  public CompanyCandidateSessionRestController(@Autowired CompanyCandidateSessionRepository repository) {
+public class CompanyCandidatesSessionRestController {
+  public CompanyCandidatesSessionRestController(@Autowired CompanyCandidatesSessionRepository repository) {
     super();
   }
 }

@@ -10,8 +10,17 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
+import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
+import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
+import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
+import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
+import com.apsidepoei.projetpoei.database.repositories.FeedbackRepository;
+import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
+import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
 import com.github.javafaker.Faker;
 import com.apsidepoei.projetpoei.entities.Person;
@@ -28,6 +37,8 @@ import com.apsidepoei.projetpoei.entities.Candidate;
 @Service(value="baseDatasInsertors")
 public class DatasInsertors {
 
+  // Repositories
+
   @Autowired
   private PersonRepository personRepository;
 
@@ -36,6 +47,40 @@ public class DatasInsertors {
 
   @Autowired
   private CandidateRepository candidateRepository;
+
+  @Autowired
+  private AddressRepository addressRepository;
+
+  @Autowired
+  private AppointmentRepository appointmentRepository;
+
+  @Autowired
+  private AssessmentRepository assessmentRepository;
+
+  @Autowired
+  private CompanyRepository companyRepository;
+
+  @Autowired
+  private CompanyCandidatesSessionRepository validateRepository;
+
+  @Autowired
+  private DegreeRepository degreeRepository;
+
+  @Autowired
+  private FeedbackRepository feedbackRepository;
+
+  @Autowired
+  private MatterRepository matterRepository;
+
+  @Autowired
+  private SessionRepository sessionRepository;
+
+
+
+
+
+
+
 
   public DatasInsertors() {
     System.out.println("Lancement de DatasInsertors");
