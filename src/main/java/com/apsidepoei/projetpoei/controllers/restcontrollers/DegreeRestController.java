@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
+import com.apsidepoei.projetpoei.entities.Degree;
 
 /**
  * @author vianney
@@ -12,8 +14,8 @@ import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
  */
 @RestController
 @RequestMapping("/api/degrees")
-public class DegreeRestController {
+public class DegreeRestController extends BaseRestController<Degree, Integer> {
   public DegreeRestController(@Autowired DegreeRepository repository) {
-    super();
+    super(repository);
   }
 }

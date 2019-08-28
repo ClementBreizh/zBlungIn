@@ -135,4 +135,20 @@ public class Person extends EntityDb {
   public void setCommentary(String commentary) {
     this.commentary = commentary;
   }
+
+  public Person(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary) {
+    super();
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.cellPhone = cellPhone;
+    this.homePhone = homePhone;
+    this.commentary = commentary;
+  }
+
+  public Person() {
+    super();
+  }
+
+
 }

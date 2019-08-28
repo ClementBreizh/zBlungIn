@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
+import com.apsidepoei.projetpoei.entities.Appointment;
 
 /**
  * @author vianney
@@ -12,8 +14,8 @@ import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
  */
 @RestController
 @RequestMapping("/api/appointments")
-public class AppointmentRestController {
+public class AppointmentRestController extends BaseRestController<Appointment, Integer> {
   public AppointmentRestController(@Autowired AppointmentRepository repository) {
-    super();
+    super(repository);
   }
 }

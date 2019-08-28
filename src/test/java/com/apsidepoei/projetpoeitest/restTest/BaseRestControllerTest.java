@@ -4,6 +4,8 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.List;
+
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -23,26 +25,26 @@ public abstract class BaseRestControllerTest<T, ID> {
     this.entityPath = entityPath;
   }
 
+  protected abstract ID getItemIdToTest();
+
   protected abstract JpaRepository<T, ID> getRepository();
 
   @Test
   public void getAll() throws IOException {
     StringBuilder builder = new StringBuilder();
     try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath);
+      builder = httpUtils.callServer(builder, BASE_API + entityPath, "GET");
     } catch (IOException e) {
       e.printStackTrace();
       throw e;
     }
 
     List<T> dbItems = getRepository().findAll();
-
     List<T> httpItems = parseJsonToList(builder);
 
     if (dbItems.size() != httpItems.size()) {
       fail("List sized are not same");
     }
-
     for (int i = 0; i < httpItems.size(); i++) {
       if (!compareTo(dbItems.get(i), httpItems.get(i))) {
         fail();
@@ -59,7 +61,7 @@ public abstract class BaseRestControllerTest<T, ID> {
   public void getById() throws IOException {
     StringBuilder builder = new StringBuilder();
     try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdToTest());
+      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdToTest(), "GET");
     } catch (IOException e) {
       e.printStackTrace();
       throw e;
@@ -79,17 +81,50 @@ public abstract class BaseRestControllerTest<T, ID> {
 
   }
 
-  protected abstract ID getItemIdToTest();
-
   protected abstract T parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException;
 
-  @Test
-  public void deleteById() {
+  
+  /**
+   * Test of data selected by Id is deleted.
+   * @throws IOException.
+   */
+  @Test(expected = NoSuchElementException.class)
+  public void deleteById() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    T item = getRepository().save(getObjectTest());
+    getRepository().flush();
+    try {
+      httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), "DELETE");
+      //builder = httpUtils.callServer(builder, BASE_API + entityPath, "GET");
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+    //List<T> httpItems = parseJsonToList(builder);
+    Optional<T> deleteItem = getRepository().findById(getItemIdTest(item));
+    deleteItem.get();
+
   }
 
+  /**
+   * Test if all datas is DELETE.
+   * @throws IOException.
+   */
   @Test
-  public void deleteAll() {
+  public void deleteAll() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    try {
+      builder = httpUtils.callServer(builder, BASE_API + entityPath, "DELETE");
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+    List<T> httpItems = parseJsonToList(builder);
+
+    if (!httpItems.isEmpty()) {
+      fail();
+    }
   }
 
   @Test
@@ -99,5 +134,12 @@ public abstract class BaseRestControllerTest<T, ID> {
   @Test
   public void count() {
   }
+
+
+  protected abstract T getObjectTest();
+
+
+  protected abstract ID getItemIdTest(T item);
+
 
 }

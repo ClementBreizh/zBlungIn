@@ -64,5 +64,17 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
   protected Integer getItemIdToTest() {
     return 1;
   }
+
+  @Override
+  protected Degree getObjectTest() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Degree item) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }
 
