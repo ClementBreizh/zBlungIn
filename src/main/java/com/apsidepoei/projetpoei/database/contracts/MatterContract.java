@@ -6,6 +6,11 @@ public class MatterContract extends BaseContract {
 
   public static final String COL_ID = "id";
   public static final String COL_NAME = "name";
+  /**
+   * Define the report column name.
+   */
+  public static final String COL_CANDIDATES = "candidates";
+
 
   public static final String[] COLS = new String[] { COL_ID, COL_NAME };
 

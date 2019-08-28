@@ -11,7 +11,7 @@ public class AddressContract extends BaseContract {
   /**
    * Define the table name.
    */
-  public static final String TABLE = "adress";
+  public static final String TABLE = "address";
 
   /**
    * defines the name of the column="id".

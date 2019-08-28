@@ -1,12 +1,17 @@
 package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,6 +37,14 @@ public class Session extends EntityDb {
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
   private Date dateEnd;
+
+  @JsonProperty(value = SessionContract.COL_CANDIDATES)
+  @ManyToMany(targetEntity = Candidate.class)
+  @JoinTable(name = "session_candidate", joinColumns = {
+      @JoinColumn(name = SessionContract.COL_ID) }, inverseJoinColumns = {
+          @JoinColumn(name = CandidateContract.COL_ID) })
+  private List<Candidate> candidates;
+
 
   /**
    * The name.

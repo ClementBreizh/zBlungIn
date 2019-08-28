@@ -65,7 +65,7 @@ public class Address extends EntityDb {
   /**
    * The address.
    *
-   * @return the adress
+   * @return the address
    */
   public String getAddress() {
     return address;

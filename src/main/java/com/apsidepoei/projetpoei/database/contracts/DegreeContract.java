@@ -24,6 +24,10 @@ public class DegreeContract extends BaseContract {
    * Define the level column name.
    */
   public static final String COL_LEVEL = "level";
+  /**
+   * Define the report column name.
+   */
+  public static final String COL_CANDIDATES = "candidates";
 
   /**
    * Define a table with all column.
