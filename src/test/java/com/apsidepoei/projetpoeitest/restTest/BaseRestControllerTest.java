@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.junit.Test;
 
 import com.apsidepoei.projetpoeitest.utils.HttpUtils;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
-public abstract class BaseRestControllerTest {
+public abstract class BaseRestControllerTest <T,ID> {
 
   public static final String BASE_API = "/api";
   private String entityPath;
