@@ -112,7 +112,14 @@ public class User extends Person {
   }
 
   /**
-   * @param role the role to set
+   * @return the role label
+   */
+  public String getRoleLabel() {
+    return role.role;
+  }
+
+  /**
+   * @param role is the role to set
    */
   public void setRole(RoleUser role) {
     this.role = role;

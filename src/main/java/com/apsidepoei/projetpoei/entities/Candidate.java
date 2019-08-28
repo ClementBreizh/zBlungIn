@@ -112,6 +112,13 @@ public class Candidate extends Person {
   }
 
   /**
+   * @return the ranking label
+   */
+  public String getRankingLabel() {
+    return ranking.label;
+  }
+
+  /**
    * @param ranking the ranking to set
    */
   public void setRanking(RankingCandidate ranking) {
