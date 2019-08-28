@@ -7,16 +7,23 @@ package com.apsidepoei.projetpoei.database.contracts;
  * @author thomas
  *
  */
-public class CompanyCandidateSessionContract extends BaseContract {
+public class CompanyCandidatesSessionContract extends BaseContract {
 
   /**
    * Define the table name .
    */
   public static final String TABLE = "companyCandidateSession";
+
+  /**
+   * defines the name of the column="company".
+   */
+  public static final String COL_ID= "id_companyCandidateSession";
+
   /**
    * defines the name of the column="company".
    */
   public static final String COL_COMPANY = "company";
+
   /**
    * defines the name of the column="candidate".
    */
@@ -27,7 +34,7 @@ public class CompanyCandidateSessionContract extends BaseContract {
    */
   public static final String COL_SESSION = "session";
 
-  public CompanyCandidateSessionContract(String table, String colId, String[] cols, String createtable) {
+  public CompanyCandidatesSessionContract(String table, String colId, String[] cols, String createtable) {
     super(table, colId, cols, createtable);
   }
 
