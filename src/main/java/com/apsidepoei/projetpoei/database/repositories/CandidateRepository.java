@@ -1,12 +1,8 @@
-/**
- * 
- */
 package com.apsidepoei.projetpoei.database.repositories;
 
-/**
- * @author vianney
- *
- */
-public class CandidateRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.apsidepoei.projetpoei.entities.Candidate;
+
+public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 
 }

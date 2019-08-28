@@ -1,10 +1,16 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -26,6 +32,32 @@ public class Degree extends EntityDb {
   @JsonProperty(value = DegreeContract.COL_LEVEL)
   @Column(name = DegreeContract.COL_LEVEL, nullable = false)
   private String level;
+
+  @JsonProperty(value = DegreeContract.COL_CANDIDATES)
+  @ManyToMany(targetEntity = Candidate.class)
+  @JoinTable(name = "degree_candidates", joinColumns = {
+      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
+          @JoinColumn(name = CandidateContract.COL_ID) })
+  private List<Candidate> candidates;
+
+
+  /**
+   * Empty constructor.
+   */
+  public Degree() {
+    super();
+  }
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+  }
+
+
+  // GETTER/SETTER
 
   /**
    * The name.
@@ -90,17 +122,18 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * Empty constructor.
+   * @return the candidates
    */
-  public Degree() {
-    super();
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
   /**
-   * Override toString() function.
+   * @param candidates the candidates to set
    */
-  @Override
-  public String toString() {
-    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
   }
+
+
 }

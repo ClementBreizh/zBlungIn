@@ -12,35 +12,35 @@ public class PersonContract extends BaseContract {
    */
   public static final String TABLE = "person";
   /**
-   * Define the id column name.
+   * defines the name of the column="id_person".
    */
   public static final String COL_ID = "id_person";
   /**
-   * Define the name column name.
+   * defines the name of the column="firstname".
    */
   public static final String COL_FIRSTNAME = "firstname";
   /**
-   * Define the level column name.
+   * defines the name of the column="lastname".
    */
   public static final String COL_LASTNAME = "lastname";
   /**
-   * Define the report column name.
+   * defines the name of the column="email".
    */
   public static final String COL_EMAIL = "email";
   /**
-   * Define the report column name.
+   * defines the name of the column="cellPhone".
    */
   public static final String COL_CELL_PHONE = "cellPhone";
   /**
-   * Define the report column name.
+   * defines the name of the column="homePhone".
    */
   public static final String COL_HOME_PHONE = "homePhone";
   /**
-   * Define the report column name.
+   * defines the name of the column="commentary".
    */
   public static final String COL_COMMENTARY = "commentary";
   /**
-   * Define the report column name.
+   * defines the name of the column="address_id".
    */
   public final static String COL_FK_ID_ADDRESS = "address_id";
 

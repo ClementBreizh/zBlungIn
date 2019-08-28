@@ -13,17 +13,21 @@ public class DegreeContract extends BaseContract {
    */
   public static final String TABLE = "degree";
   /**
-   * Define the id column name.
+   * defines the name of the column="id_degree".
    */
   public static final String COL_ID = "id_degree";
   /**
-   * Define the name column name.
+   * defines the name of the column="name".
    */
   public static final String COL_NAME = "name";
   /**
-   * Define the level column name.
+   * defines the name of the column="level".
    */
   public static final String COL_LEVEL = "level";
+  /**
+   * defines the name of the column="candidates".
+   */
+  public static final String COL_CANDIDATES = "candidates";
 
   /**
    * Define a table with all column.

@@ -39,7 +39,6 @@ public class Company extends EntityDb {
   @JsonProperty(value = CompanyContract.COL_SIRET)
   @Column(name = CompanyContract.COL_SIRET, nullable = true)
   private String siret;
-
   @JsonProperty(value = CompanyContract.COL_APECODE)
   @Column(name = CompanyContract.COL_APECODE, nullable = true)
   private String apeCode;
@@ -65,8 +64,6 @@ public class Company extends EntityDb {
   private List<Session> sessions;
 
   /**
-   * The name.
-   *
    * @return the name
    */
   public String getName() {
@@ -76,52 +73,42 @@ public class Company extends EntityDb {
   /**
    * Set the name.
    *
-   * @param name = the name
+   * @param name the name to set
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * The name of antenna.
-   *
-   * @return the name of an antenna
+   * @return the antennaName
    */
   public String getAntennaName() {
     return antennaName;
   }
 
   /**
-   * Set the name of antenna.
-   *
-   * @param nomAntenne = name of an antenna
+   * @param antennaName the antennaName to set
    */
-  public void setNameAntenna(String antennaName) {
+  public void setAntennaName(String antennaName) {
     this.antennaName = antennaName;
   }
 
   /**
-   * The siret.
-   *
-   * @return the siret number
+   * @return the siret
    */
   public String getSiret() {
     return siret;
   }
 
   /**
-   * Set the siret.
-   *
-   * @param siret = the siret
+   * @param siret the siret to set
    */
   public void setSiret(String siret) {
     this.siret = siret;
   }
 
   /**
-   * The APE code.
-   *
-   * @return the code
+   * @return the apeCode
    */
   public String getApeCode() {
     return apeCode;
@@ -130,19 +117,19 @@ public class Company extends EntityDb {
   /**
    * Set The APE code.
    *
-   * @param apeCode = the code APE
+   * @param apeCode the apeCode to set
    */
-  public void setCodeApe(String apeCode) {
+  public void setApeCode(String apeCode) {
     this.apeCode = apeCode;
   }
 
   /**
    * Constructor for a new business.
    *
-   * @param nom        = the name
-   * @param nomAntenne = the name of antenna
+   * @param name        = the name
+   * @param antennaName = the name of antenna
    * @param siret      = the siret
-   * @param codeApe    = the APE code
+   * @param apeCode    = the APE code
    */
   public Company(String name, String antennaName, String siret, String apeCode) {
     super();
@@ -156,10 +143,10 @@ public class Company extends EntityDb {
    * Constructor with id for a new business.
    *
    * @param id         = the id
-   * @param nom        = the name
-   * @param nomAntenne = the name of antenna
+   * @param name        = the name
+   * @param antennaName = the name of antenna
    * @param siret      = the siret
-   * @param codeApe    = the APE code
+   * @param apeCode    = the APE code
    */
   public Company(int id, String name, String antennaName, String siret, String apeCode) {
     super();
@@ -182,8 +169,8 @@ public class Company extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Entreprise [Id = " + getId() + ", nom = " + name + ", nomAntenne = " + antennaName + ", siret = " + siret
-        + ", codeApe = " + apeCode + "]";
+    return "Entreprise [Id = " + getId() + ", name = " + name + ", antennaName = " + antennaName + ", siret = " + siret
+        + ", apeCode = " + apeCode + "]";
   }
 
 }

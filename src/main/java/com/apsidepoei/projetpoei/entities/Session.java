@@ -1,12 +1,17 @@
 package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,11 +32,69 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
-  private Date dateStart;
+  private Date startDate;
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
-  private Date dateEnd;
+  private Date endDate;
+
+  @JsonProperty(value = SessionContract.COL_CANDIDATES)
+  @ManyToMany(targetEntity = Candidate.class)
+  @JoinTable(name = "session_candidates", joinColumns = {
+      @JoinColumn(name = SessionContract.COL_ID) }, inverseJoinColumns = {
+          @JoinColumn(name = CandidateContract.COL_ID) })
+  private List<Candidate> candidates;
+
+
+  /**
+   * Empty constructor.
+   */
+  public Session() {
+
+  }
+
+  /**
+   * Constructor for a new Session.
+   *
+   * @param name      = the name
+   * @param startDate = the startDate
+   * @param endDate   = the endDate
+   */
+  public Session(String name, Date startDate, Date endDate) {
+    super();
+    this.name = name;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
+
+  /**
+   * Constructor with id for a new Session.
+   *
+   * @param id        = the id
+   * @param name      = the name
+   * @param startDate = the startDate
+   * @param endDate   = the endDate
+   */
+  public Session(int id, String name, Date startDate, Date endDate) {
+    super();
+    this.setId(id);
+    this.name = name;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
+
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "session [Id = " + getId() + ", name=" + name + ", startDate=" + startDate + ", endDate="
+        + endDate + "]";
+  }
+
+
+  // GETTER/SETTER
 
   /**
    * The name.
@@ -51,85 +114,49 @@ public class Session extends EntityDb {
     this.name = name;
   }
 
+
+
   /**
-   * The dateStart.
-   *
-   * @return the start date
+   * @return the startDate
    */
-  public Date getDateStart() {
-    return dateStart;
+  public Date getStartDate() {
+    return startDate;
   }
 
   /**
-   * Set the date start.
-   *
-   * @param dateStart = the start date
+   * @param startDate the startDate to set
    */
-  public void setDateStart(Date dateStart) {
-    this.dateStart = dateStart;
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
 
   /**
-   * The dateEnd.
-   *
-   * @return the end date
+   * @return the endDate
    */
-  public Date getDateEnd() {
-    return dateEnd;
+  public Date getEndDate() {
+    return endDate;
   }
 
   /**
-   * Set the dateEnd.
-   *
-   * @param dateEnd = the end date
+   * @param endDate the endDate to set
    */
-  public void setDateEnd(Date dateEnd) {
-    this.dateEnd = dateEnd;
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
   }
 
   /**
-   * Constructor for a new Session.
-   *
-   * @param name      = the name
-   * @param dateStart = the dateStart
-   * @param dateEnd   = the dateEnd
+   * @return the candidates
    */
-  public Session(String name, Date dateStart, Date dateEnd) {
-    super();
-    this.name = name;
-    this.dateStart = dateStart;
-    this.dateEnd = dateEnd;
+  public List<Candidate> getCandidates() {
+    return candidates;
   }
 
   /**
-   * Constructor with id for a new Session.
-   *
-   * @param id        = the id
-   * @param name      = the name
-   * @param dateStart = the dateStart
-   * @param dateEnd   = the dateEnd
+   * @param candidates the candidates to set
    */
-  public Session(int id, String name, Date dateStart, Date dateEnd) {
-    super();
-    this.setId(id);
-    this.name = name;
-    this.dateStart = dateStart;
-    this.dateEnd = dateEnd;
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
   }
 
-  /**
-   * Empty constructor.
-   */
-  public Session() {
 
-  }
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "session [Id = " + getId() + ", name=" + name + ", dateStart=" + dateStart + ", dateEnd="
-        + dateEnd + "]";
-  }
 }
