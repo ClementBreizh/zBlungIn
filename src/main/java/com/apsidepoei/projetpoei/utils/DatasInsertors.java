@@ -86,7 +86,7 @@ public class DatasInsertors {
     System.out.println("Lancement de DatasInsertors");
   }
 
-  @PostConstruct
+//  @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
 
