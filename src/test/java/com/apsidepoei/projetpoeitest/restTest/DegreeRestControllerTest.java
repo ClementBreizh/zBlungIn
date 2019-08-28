@@ -52,4 +52,17 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
         && item1.getLevel().equals(item2.getLevel());
   }
 
+  @Override
+  protected Degree parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Degree>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
 }
+

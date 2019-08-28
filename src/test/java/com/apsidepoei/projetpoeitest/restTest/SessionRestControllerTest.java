@@ -53,5 +53,18 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
           && item1.getDateStart().equals(item2.getDateStart())
             && item1.getDateEnd().equals(item2.getDateEnd());
   }
+  @Override
+  protected Session parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Session>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
 }
+
 

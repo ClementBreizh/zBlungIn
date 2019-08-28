@@ -51,5 +51,18 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     return item1.getId().equals(item2.getId())
         && item1.getName().equals(item2.getName());
   }
+
+  @Override
+  protected Matter parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Matter>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
 }
 

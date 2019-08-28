@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +13,7 @@ import com.apsidepoei.projetpoeitest.utils.HttpUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-
-public abstract class BaseRestControllerTest <T,ID> {
+public abstract class BaseRestControllerTest<T, ID> {
 
   public static final String BASE_API = "/api";
   private String entityPath;
@@ -50,12 +50,39 @@ public abstract class BaseRestControllerTest <T,ID> {
     }
   }
 
-  protected abstract List<T> parseJsonToList(StringBuilder builder) throws JsonParseException, JsonMappingException, IOException;
+  protected abstract List<T> parseJsonToList(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException;
+
   protected abstract boolean compareTo(T item1, T item2);
 
   @Test
-  public void getById() {
+  public void getById() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    try {
+      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdToTest());
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+
+    Optional<T> dbItem = getRepository().findById(getItemIdToTest());
+
+    T httpItem = parseJsonToObject(builder);
+
+    if (dbItem == null && httpItem == null) {
+      fail("One of object is nul");
+    }
+
+    if (!compareTo(dbItem.get(), httpItem)) {
+      fail();
+    }
+
   }
+
+  protected abstract ID getItemIdToTest();
+
+  protected abstract T parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException;
 
   @Test
   public void deleteById() {
@@ -72,6 +99,5 @@ public abstract class BaseRestControllerTest <T,ID> {
   @Test
   public void count() {
   }
-
 
 }

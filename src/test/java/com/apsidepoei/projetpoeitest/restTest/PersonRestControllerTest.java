@@ -56,8 +56,20 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
                     && item1.getHomePhone().equals(item2.getHomePhone())
                       && item1.getCommentary().equals(item2.getCommentary());
   }
-}
 
+  @Override
+  protected Person parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Person>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+}
 
 
 

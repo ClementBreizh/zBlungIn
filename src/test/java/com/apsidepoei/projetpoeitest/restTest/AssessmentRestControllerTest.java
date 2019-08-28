@@ -51,4 +51,17 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     return item1.getId().equals(item2.getId()) && item1.getCategory().equals(item2.getCategory())
         && item1.getDateTime().compareTo(item2.getDateTime()) == 0;
   }
+  
+  @Override
+  protected Assessment parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Assessment>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
 }

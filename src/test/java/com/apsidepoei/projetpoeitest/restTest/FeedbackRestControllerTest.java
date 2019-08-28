@@ -53,5 +53,19 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
             && item1.getDurationOfContract().equals(item2.getDurationOfContract())
                 && item1.getComment().equals(item2.getComment());
   }
+  
+  @Override
+  protected Feedback parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Feedback>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
 }
+
 
