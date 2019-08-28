@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 
 /**
+ * RestController for appointments.
  * @author vianney
  *
  */

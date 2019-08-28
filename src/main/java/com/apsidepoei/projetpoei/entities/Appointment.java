@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.test.annotation.Timed;
+
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +37,7 @@ public class Appointment extends EntityDb {
 
   @JsonProperty(value = AppointmentContract.COL_DATETIME)
   @Column(name = AppointmentContract.COL_DATETIME, nullable = false)
+  @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private Date dateTime;
 
   @JsonProperty(value = AppointmentContract.COL_REPORT)
@@ -39,8 +45,9 @@ public class Appointment extends EntityDb {
   private String report;
 
   @JsonProperty(value = AppointmentContract.COL_STATUS)
-  @Column(name = AppointmentContract.COL_STATUS, nullable = true)
-  private String status;
+  @Column(name = AppointmentContract.COL_STATUS)
+  @Type(type = "org.hibernate.type.NumericBooleanType")
+  private Boolean status;
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
@@ -48,11 +55,6 @@ public class Appointment extends EntityDb {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
-
-  /**
-   * Define the report column name.
-   */
-  public static final String COL_REPORT = "report";
 
   /**
    * The informations.
@@ -109,17 +111,33 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param dateTime     = date and time
-   * @param report       = the report
+   * Return the status for this appointment.
+   * @return a boolean for the status.
    */
-  public Appointment(String informations, Date dateTime, String report) {
-    super();
-    this.informations = informations;
-    this.dateTime = dateTime;
-    this.report = report;
+  public Boolean getStatus() {
+    return status;
+  }
+/**
+ * Set the status for this appointment
+ * @param status is the status for the appointment.
+ */
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+/**
+ * Getter fot the persons list in this appointment.
+ * @return a list of persons.
+ */
+  public List<Person> getPersons() {
+    return persons;
+  }
+
+  /**
+   * Setter for the persons list.
+   * @param persons is a list of persons, concerned in this appointment.
+   */
+  public void setPersons(List<Person> persons) {
+    this.persons = persons;
   }
 
   /**
@@ -128,13 +146,36 @@ public class Appointment extends EntityDb {
    * @param informations = informations
    * @param dateTime     = date and time
    * @param report       = the report
+   * @param status       = status for the appointment
+   * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(int id, String informations, Date dateTime, String report) {
+  public Appointment(String informations, Date dateTime, String report, Boolean status, List<Person> Person, List<Person> persons) {
+    super();
+    this.informations = informations;
+    this.dateTime = dateTime;
+    this.report = report;
+    this.status = status;
+    this.persons = persons;
+  }
+
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param informations = informations
+   * @param dateTime     = date and time
+   * @param report       = the report
+   * @param status       = status for the appointment
+   * @param persons      = list of persons, concerned in this appointment
+   */
+  public Appointment(int id, String informations, Date dateTime, String report, Boolean status, List<Person> Person, List<Person> persons) {
     super();
     this.setId(id);
     this.informations = informations;
     this.dateTime = dateTime;
     this.report = report;
+    this.status = status;
+    this.persons = persons;
+
   }
 
   /**
@@ -150,6 +191,6 @@ public class Appointment extends EntityDb {
   @Override
   public String toString() {
     return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + dateTime
-        + ", report=" + report + "]";
+        + ", report=" + report + ", status=" + status + "]";
   }
 }

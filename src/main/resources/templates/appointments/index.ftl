@@ -1,8 +1,8 @@
 <H1>Appointment Creation</H1>
 
-<form action="/appointment/insert" method="POST">
+<form action="/appointments/index" method="POST">
   Date:<br>
-  <input type="date" name="dateTime" value="">
+  <input type="datetime-local" name="dateTime" value="">
   <br>
   Informations:<br>
   <input type="text" name="informations" value="">
@@ -12,9 +12,9 @@
   <br>
   <h3>Realized</h3>
   <label>
-    <input type="radio" class="radio" value="1" name="status" />Yes</label>
+    <input type="radio" value="true" name="status" />Yes</label>
   <label>
-    <input type="radio" class="radio" value="-1" name="status" />No</label>
+    <input type="radio" value="false" name="status" />No</label>
 <br><br>
 
   <input type="submit" value="Submit">
