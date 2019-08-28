@@ -39,6 +39,24 @@ public class CompanyCandidatesSession extends EntityDb {
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
+
+  /**
+   * Empty constructor.
+   */
+  public CompanyCandidatesSession() {
+  }
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + company + ", candidates = " + candidates + ", session = " + session
+        + "]";
+  }
+
+  // GETTER/SETTER
+
   /**
    * Getter for the company.
    * @return the company
@@ -87,19 +105,6 @@ public class CompanyCandidatesSession extends EntityDb {
     this.session = session;
   }
 
-  /**
-   * Empty constructor.
-   */
-  public CompanyCandidatesSession() {
-  }
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + company + ", candidates = " + candidates + ", session = " + session
-        + "]";
-  }
 
 }

@@ -24,6 +24,34 @@ public class Assessment extends EntityDb {
   private Date dateTime;
 
   /**
+   * Constructor for a new Assessment.
+   */
+  public Assessment(int id, String category, Date dateTime) {
+    super();
+    this.setId(id);
+    this.category = category;
+    this.dateTime = dateTime;
+  }
+
+  /**
+   * empty constructor.
+   */
+  public Assessment() {
+
+  }
+
+  /**
+   * override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Assessment [Id = " + getId() + ", category =" + category + ", date=" + dateTime + "]";
+  }
+
+  // GETTER/SETTER
+
+
+  /**
    * the category.
    */
   public String getCategory() {
@@ -60,29 +88,6 @@ public class Assessment extends EntityDb {
     this.dateTime = dateTime;
   }
 
-  /**
-   * Constructor for a new Assessment.
-   */
-  public Assessment(int id, String category, Date dateTime) {
-    super();
-    this.setId(id);
-    this.category = category;
-    this.dateTime = dateTime;
-  }
 
-  /**
-   * empty constructor.
-   */
-  public Assessment() {
-
-  }
-
-  /**
-   * override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Assessment [Id = " + getId() + ", category =" + category + ", date=" + dateTime + "]";
-  }
 
 }
