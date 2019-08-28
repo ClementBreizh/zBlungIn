@@ -2,9 +2,9 @@ package com.apsidepoei.projetpoei.database.contracts;
 
 public class MatterContract extends BaseContract {
 
-  public static final String TABLE = "matters";
+  public static final String TABLE = "matter";
 
-  public static final String COL_ID = "id";
+  public static final String COL_ID = "id_matter";
   public static final String COL_NAME = "name";
   /**
    * Define the report column name.

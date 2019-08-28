@@ -22,16 +22,15 @@ public class SessionContract extends BaseContract {
   /**
    * Define the dateStart column name.
    */
-  public static final String COL_DATE_START = "dateStart";
+  public static final String COL_DATE_START = "startDate";
   /**
-   * Define the dateEnd column name.
+   * Define the report column name.
    */
-  public static final String COL_DATE_END = "dateEnd";
+  public static final String COL_DATE_END = "endDate";
   /**
    * Define the report column name.
    */
   public static final String COL_CANDIDATES = "candidates";
-
 
   /**
    * Define a table with all column.

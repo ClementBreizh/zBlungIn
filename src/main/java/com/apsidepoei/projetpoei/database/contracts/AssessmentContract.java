@@ -4,9 +4,9 @@ public class AssessmentContract extends BaseContract {
 
   public static final String TABLE = "assessment";
 
-  public static final String COL_ID = "id";
+  public static final String COL_ID = "id_assessment";
   public static final String COL_CATEGORY = "category";
-  public static final String COL_DATE = "majTest";
+  public static final String COL_DATE = "updatingDate";
 
 
 
