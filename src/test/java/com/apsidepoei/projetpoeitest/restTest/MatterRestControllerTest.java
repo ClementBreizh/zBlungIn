@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -63,6 +64,17 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
   @Override
   protected Integer getItemIdToTest() {
     return 1;
+  }
+
+  @Override
+  protected Matter getObjectTest() throws ParseException {
+    Matter item = new Matter("MatièreTest1");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Matter item) {
+    return item.getId();
   }
 }
 

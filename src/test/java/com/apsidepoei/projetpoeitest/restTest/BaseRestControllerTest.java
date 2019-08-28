@@ -85,7 +85,7 @@ public abstract class BaseRestControllerTest<T, ID> {
   protected abstract T parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException;
 
-  
+
   /**
    * Test of data selected by Id is deleted.
    * @throws ParseException 

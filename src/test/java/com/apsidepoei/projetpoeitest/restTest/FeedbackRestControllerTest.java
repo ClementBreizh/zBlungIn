@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -53,7 +54,7 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
             && item1.getDurationOfContract().equals(item2.getDurationOfContract())
                 && item1.getComment().equals(item2.getComment());
   }
-  
+
   @Override
   protected Feedback parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -65,6 +66,17 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
   @Override
   protected Integer getItemIdToTest() {
     return 1;
+  }
+
+  @Override
+  protected Feedback getObjectTest() throws ParseException {
+    Feedback item = new Feedback("CDI", 24, "no comment test");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Feedback item) {
+    return item.getId();
   }
 }
 
