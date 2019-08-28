@@ -40,7 +40,7 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)
   @ManyToMany(targetEntity = Candidate.class)
-  @JoinTable(name = "session_candidate", joinColumns = {
+  @JoinTable(name = "session_candidates", joinColumns = {
       @JoinColumn(name = SessionContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = CandidateContract.COL_ID) })
   private List<Candidate> candidates;

@@ -9,7 +9,7 @@ import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * This class is the Degree entity.
+ * This class is the Address entity.
  *
  * @author vianney
  *

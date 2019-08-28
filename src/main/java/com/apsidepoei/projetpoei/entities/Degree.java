@@ -35,7 +35,7 @@ public class Degree extends EntityDb {
 
   @JsonProperty(value = DegreeContract.COL_CANDIDATES)
   @ManyToMany(targetEntity = Candidate.class)
-  @JoinTable(name = "degree_candidate", joinColumns = {
+  @JoinTable(name = "degree_candidates", joinColumns = {
       @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = CandidateContract.COL_ID) })
   private List<Candidate> candidates;
