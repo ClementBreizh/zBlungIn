@@ -64,4 +64,15 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
   protected Integer getItemIdToTest() {
     return 1;
   }
+
+  @Override
+  protected Address getObjectTest() {
+    Address item = new Address("adresse postale", "35000", "ville");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Address item) {
+    return item.getId();
+  }
 }

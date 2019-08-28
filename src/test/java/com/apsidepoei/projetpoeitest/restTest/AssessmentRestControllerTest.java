@@ -1,6 +1,8 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -63,5 +65,16 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   @Override
   protected Integer getItemIdToTest() {
     return 1;
+  }
+
+  @Override
+  protected Assessment getObjectTest() throws ParseException {
+    Assessment item = new Assessment("categorie", new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Assessment item) {
+    return item.getId();
   }
 }

@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -64,5 +65,16 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
   @Override
   protected Integer getItemIdToTest() {
     return 1;
+  }
+
+  @Override
+  protected Company getObjectTest() throws ParseException {
+    Company item = new Company(1, "entreprise1", "antenne1", "53267126000018", "0000A");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Company item) {
+    return item.getId();
   }
 }
