@@ -1,6 +1,8 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -30,7 +32,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   private AssessmentRepository repository;
 
   public AssessmentRestControllerTest() {
-    super("/assessments");
+    super("/assesments");
   }
 
   @Override
@@ -50,5 +52,29 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   protected boolean compareTo(Assessment item1, Assessment item2) {
     return item1.getId().equals(item2.getId()) && item1.getCategory().equals(item2.getCategory())
         && item1.getDateTime().compareTo(item2.getDateTime()) == 0;
+  }
+  
+  @Override
+  protected Assessment parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Assessment>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Assessment getObjectTest() throws ParseException {
+    Assessment item = new Assessment("categorie", new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Assessment item) {
+    return item.getId();
   }
 }

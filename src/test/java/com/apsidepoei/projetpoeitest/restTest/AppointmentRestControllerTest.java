@@ -1,6 +1,8 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -31,7 +33,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   private AppointmentRepository repository;
 
   public AppointmentRestControllerTest() {
-    super("/appointment");
+    super("/appointments");
   }
 
   @Override
@@ -52,7 +54,29 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return item1.getId().equals(item2.getId()) && item1.getInformations().equals(item2.getInformations())
         && item1.getDateTime().compareTo(item2.getDateTime()) == 0 && item1.getReport().equals(item2.getReport());
   }
-
   
+  @Override
+  protected Appointment parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Appointment>() {
+    });
+  }
 
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Appointment getObjectTest() throws ParseException {
+    Appointment item = new Appointment("Commentaire 1",new SimpleDateFormat("yyyy/MM/dd").parse("2019/12/15"), "Report 1");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Appointment item) {
+    return item.getId();
+  }
 }
+

@@ -1,6 +1,8 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -53,5 +55,29 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
           && item1.getDateStart().equals(item2.getDateStart())
             && item1.getDateEnd().equals(item2.getDateEnd());
   }
+  @Override
+  protected Session parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Session>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Session getObjectTest() throws ParseException {
+    Session item = new Session("Session1", new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Session item) {
+    return item.getId();
+  }
 }
+
 

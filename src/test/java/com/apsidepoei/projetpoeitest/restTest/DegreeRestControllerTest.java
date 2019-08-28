@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.experimental.theories.internal.ParameterizedAssertionError;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import freemarker.core.ParseException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -52,4 +55,28 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
         && item1.getLevel().equals(item2.getLevel());
   }
 
+  @Override
+  protected Degree parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Degree>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Degree getObjectTest() {
+    Degree item = new Degree("BTS","Developpement Test");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Degree item) {
+    return item.getId();
+  }
 }
+

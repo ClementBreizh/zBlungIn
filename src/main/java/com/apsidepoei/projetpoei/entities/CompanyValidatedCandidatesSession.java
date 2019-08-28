@@ -39,6 +39,23 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   private Session session;
 
   /**
+   * Empty constructor.
+   */
+  public CompanyValidatedCandidatesSession() {
+  }
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + company
+        + ", validated candidates = " + validatedCandidates + ", session = " + session + "]";
+  }
+
+  // GETTER/SETTER
+
+  /**
    * Getter for the company.
    *
    * @return the company
@@ -92,18 +109,5 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
     this.session = session;
   }
 
-  /**
-   * Empty constructor.
-   */
-  public CompanyValidatedCandidatesSession() {
-  }
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + company
-        + ", validated candidates = " + validatedCandidates + ", session = " + session + "]";
-  }
 }

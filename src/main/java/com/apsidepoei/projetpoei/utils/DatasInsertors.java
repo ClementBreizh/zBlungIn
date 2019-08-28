@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.utils;
 
 import java.util.Locale;
@@ -26,15 +23,16 @@ import com.github.javafaker.Faker;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
 import com.apsidepoei.projetpoei.entities.User;
+import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Candidate;
-
-
+import com.apsidepoei.projetpoei.entities.Degree;
+import com.apsidepoei.projetpoei.entities.Matter;
 
 /**
  * @author vianney
  *
  */
-@Service(value="baseDatasInsertors")
+@Service(value = "baseDatasInsertors")
 public class DatasInsertors {
 
   // Repositories
@@ -75,48 +73,72 @@ public class DatasInsertors {
   @Autowired
   private SessionRepository sessionRepository;
 
+  Faker faker = new Faker(Locale.FRENCH);
 
-
-
-
-
-
+  Integer nbEntities = 10;
 
   public DatasInsertors() {
     System.out.println("Lancement de DatasInsertors");
   }
 
-//  @PostConstruct
+  @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
 
-    Person person = new Person(
-        faker.name().firstName(),
-        faker.name().lastName(),
-        faker.internet().emailAddress(),
-        faker.phoneNumber().phoneNumber().intern());
-    personRepository.save(person);
+    for (int i = 0; i < nbEntities; i++) {
+      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(), faker.address().city());
+      addressRepository.save(address);
+    }
 
-    Candidate candidate = new Candidate(
-        faker.name().firstName(),
-        faker.name().lastName(),
-        faker.internet().emailAddress(),
-        faker.phoneNumber().phoneNumber().intern());
-    candidate.setRanking(RankingCandidate.RANK_2);
-    candidateRepository.save(candidate);
+    for (int i = 0; i < nbEntities; i++) {
+      Degree degree = new Degree(faker.book().toString(), faker.random().nextInt(0, 5).toString());
+      degreeRepository.save(degree);
+    }
 
-    User user = new User(
-        faker.name().username(),
-        faker.internet().password(),
-        faker.name().firstName(),
-        faker.name().lastName(),
-        faker.internet().emailAddress(),
-        faker.phoneNumber().phoneNumber().intern());
-    userRepository.save(user);
+    for (int i = 0; i < nbEntities; i++) {
+      Matter matter = new Matter(faker.hacker().verb());
+      matterRepository.save(matter);
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+      Person person = new Person(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      personRepository.save(person);
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+      Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
+          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+
+//      candidate.setRanking(RankingCandidate.values()[(faker.random().nextInt(0, RankingCandidate.values().length))]);
+      candidate.setRanking(RankingCandidate.RANK_2);
+
+      candidate.getDegrees().add(degreeRepository.findById(1).get());
+      candidateRepository.save(candidate);
+      System.out.println(candidate);
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+      User user = new User(faker.name().username(), faker.internet().password(), faker.name().firstName(),
+          faker.name().lastName(), faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      userRepository.save(user);
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+
+    }
+
+    for (int i = 0; i < nbEntities; i++) {
+
+    }
 
     System.out.println(candidateRepository.findAll());
     System.out.println(personRepository.findAll());
     System.out.println(userRepository.findAll());
-
   }
 }

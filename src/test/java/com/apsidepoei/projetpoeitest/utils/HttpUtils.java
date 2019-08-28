@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class HttpUtils {
 
-    public StringBuilder callServer(StringBuilder builder, String subUrl) throws MalformedURLException, IOException {
+    public StringBuilder callServer(StringBuilder builder, String subUrl, String httpVerb) throws MalformedURLException, IOException {
       try {
         // Create base URL to go
         URL url = new URL("http://127.0.0.1:1234"+subUrl);
@@ -17,7 +17,7 @@ public class HttpUtils {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         // Set HTTP verbb to use
-        conn.setRequestMethod("GET");
+        conn.setRequestMethod(httpVerb);
 
         // Real request connection with all configs
         conn.connect();

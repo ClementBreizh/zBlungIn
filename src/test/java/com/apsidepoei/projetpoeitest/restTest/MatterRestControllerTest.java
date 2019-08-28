@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -50,6 +51,30 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
   protected boolean compareTo(Matter item1, Matter item2) {
     return item1.getId().equals(item2.getId())
         && item1.getName().equals(item2.getName());
+  }
+
+  @Override
+  protected Matter parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.readValue(builder.toString(), new TypeReference<Matter>() {
+    });
+  }
+
+  @Override
+  protected Integer getItemIdToTest() {
+    return 1;
+  }
+
+  @Override
+  protected Matter getObjectTest() throws ParseException {
+    Matter item = new Matter("MatièreTest1");
+    return item;
+  }
+
+  @Override
+  protected Integer getItemIdTest(Matter item) {
+    return item.getId();
   }
 }
 

@@ -3,6 +3,7 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -73,6 +74,7 @@ public class Candidate extends Person {
    * Empty constructor.
    */
   public Candidate() {
+    this.degrees = new ArrayList<Degree>();
   }
 
   /**
@@ -89,6 +91,7 @@ public class Candidate extends Person {
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
+    this.degrees = new ArrayList<Degree>();
   }
 
   /**
@@ -97,7 +100,7 @@ public class Candidate extends Person {
   @Override
   public String toString() {
     return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + "]";
+        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */"]";
   }
 
 
