@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Feedback extends EntityDb {
 
   @JsonProperty(value = FeedbackContract.COL_TYPE_OF_CONTRACT)
-  @Column(name = FeedbackContract.COL_TYPE_OF_CONTRACT, nullable = false)
+  @Column(name = FeedbackContract.COL_TYPE_OF_CONTRACT, nullable = false, length = 50)
   private String typeOfContract;
 
   @JsonProperty(value = FeedbackContract.COL_DURATION_OF_CONTRACT)
@@ -31,7 +31,7 @@ public class Feedback extends EntityDb {
   @Column(name = FeedbackContract.COL_COMMENT, nullable = true)
   private String comment;
 
-  
+
   /**
    * Empty constructor.
    */

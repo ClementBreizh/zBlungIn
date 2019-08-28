@@ -21,6 +21,7 @@ import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
+import com.apsidepoei.projetpoei.entities.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -31,10 +32,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = CandidateContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = CandidateContract.COL_ID))
-public class Candidate extends EntityDb {
+public class Candidate extends Person {
 
   @JsonProperty(value = CandidateContract.COL_RANKING_CANDIDATE)
-  @Column(name = CandidateContract.COL_RANKING_CANDIDATE, nullable = false)
+  @Column(name = CandidateContract.COL_RANKING_CANDIDATE, nullable = true)
   private RankingCandidate ranking;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
@@ -67,6 +68,42 @@ public class Candidate extends EntityDb {
   @OneToMany(targetEntity=Assessment.class)
   private List<Assessment> assessments;
 
+
+  /**
+   * Empty constructor.
+   */
+  public Candidate() {
+  }
+
+  /**
+   * Constructor with id for new Feedback.
+   *
+   * @param firstname = the firstname
+   * @param lastname  = the lastname
+   * @param email     = the email
+   * @param cellPhone = the cellPhone
+   */
+  public Candidate(String firstname, String lastname, String email, String cellPhone) {
+    super();
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.cellPhone = cellPhone;
+  }
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
+        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + "]";
+  }
+
+
+  // GETTER/SETTER
+
+
   /**
    * @return the ranking
    */
@@ -81,4 +118,73 @@ public class Candidate extends EntityDb {
     this.ranking = ranking;
   }
 
+  /**
+   * @return the feedback
+   */
+  public Feedback getFeedback() {
+    return feedback;
+  }
+
+  /**
+   * @param feedback the feedback to set
+   */
+  public void setFeedback(Feedback feedback) {
+    this.feedback = feedback;
+  }
+
+  /**
+   * @return the degrees
+   */
+  public List<Degree> getDegrees() {
+    return degrees;
+  }
+
+  /**
+   * @param degrees the degrees to set
+   */
+  public void setDegrees(List<Degree> degrees) {
+    this.degrees = degrees;
+  }
+
+  /**
+   * @return the matters
+   */
+  public List<Matter> getMatters() {
+    return matters;
+  }
+
+  /**
+   * @param matters the matters to set
+   */
+  public void setMatters(List<Matter> matters) {
+    this.matters = matters;
+  }
+
+  /**
+   * @return the sessions
+   */
+  public List<Session> getSessions() {
+    return sessions;
+  }
+
+  /**
+   * @param sessions the sessions to set
+   */
+  public void setSessions(List<Session> sessions) {
+    this.sessions = sessions;
+  }
+
+  /**
+   * @return the assessments
+   */
+  public List<Assessment> getAssessments() {
+    return assessments;
+  }
+
+  /**
+   * @param assessments the assessments to set
+   */
+  public void setAssessments(List<Assessment> assessments) {
+    this.assessments = assessments;
+  }
 }

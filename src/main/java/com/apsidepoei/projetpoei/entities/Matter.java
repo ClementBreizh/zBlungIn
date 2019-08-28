@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Matter extends EntityDb {
 
   @JsonProperty(value = MatterContract.COL_NAME)
-  @Column(name = MatterContract.COL_NAME, nullable = false)
+  @Column(name = MatterContract.COL_NAME, nullable = false, length = 50)
   private String name;
 
   @JsonProperty(value = MatterContract.COL_CANDIDATES)

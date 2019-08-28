@@ -30,7 +30,7 @@ public class Degree extends EntityDb {
   private String name;
 
   @JsonProperty(value = DegreeContract.COL_LEVEL)
-  @Column(name = DegreeContract.COL_LEVEL, nullable = false)
+  @Column(name = DegreeContract.COL_LEVEL, nullable = false, length = 50)
   private String level;
 
   @JsonProperty(value = DegreeContract.COL_CANDIDATES)

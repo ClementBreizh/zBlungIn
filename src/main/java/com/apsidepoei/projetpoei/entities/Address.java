@@ -24,7 +24,7 @@ public class Address extends EntityDb {
   private String address;
 
   @JsonProperty(value = AddressContract.COL_POSTAL_CODE)
-  @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false)
+  @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false, length = 5)
   private String postalCode;
 
   @JsonProperty(value = AddressContract.COL_TOWN)

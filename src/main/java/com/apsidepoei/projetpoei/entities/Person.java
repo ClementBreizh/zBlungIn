@@ -6,6 +6,8 @@ package com.apsidepoei.projetpoei.entities;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,40 +23,41 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = PersonContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
-  @Column(name = PersonContract.COL_FIRSTNAME, nullable = false)
-  private String firstname;
+  @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
+  protected String firstname;
 
   @JsonProperty(value = PersonContract.COL_LASTNAME)
-  @Column(name = PersonContract.COL_LASTNAME, nullable = false)
-  private String lastname;
+  @Column(name = PersonContract.COL_LASTNAME, nullable = false, length = 50)
+  protected String lastname;
 
   @JsonProperty(value = PersonContract.COL_EMAIL)
   @Column(name = PersonContract.COL_EMAIL, nullable = false)
-  private String email;
+  protected String email;
 
   @JsonProperty(value = PersonContract.COL_CELL_PHONE)
-  @Column(name = PersonContract.COL_CELL_PHONE, nullable = false)
-  private String cellPhone;
+  @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
+  protected String cellPhone;
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
-  @Column(name = PersonContract.COL_HOME_PHONE, nullable = true)
-  private String homePhone;
+  @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)
+  protected String homePhone;
 
   @JsonProperty(value = PersonContract.COL_COMMENTARY)
   @Column(name = PersonContract.COL_COMMENTARY, nullable = true)
-  private String commentary;
+  protected String commentary;
 
   @JsonProperty(value = PersonContract.COL_MAINCONTACT)
-  @Column(name = PersonContract.COL_MAINCONTACT, nullable = false)
-  private Boolean mainContact;
+  @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
+  protected Boolean mainContact;
 
   @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = PersonContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
-  private Address address;
+  protected Address address;
 
   /**
    * Empty constructor.

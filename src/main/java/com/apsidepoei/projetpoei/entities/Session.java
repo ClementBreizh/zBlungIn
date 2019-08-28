@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_NAME)
-  @Column(name = SessionContract.COL_NAME, nullable = false)
+  @Column(name = SessionContract.COL_NAME, nullable = false, length = 50)
   private String name;
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
