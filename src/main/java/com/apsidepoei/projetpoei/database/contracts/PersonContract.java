@@ -10,7 +10,7 @@ public class PersonContract extends BaseContract {
   /**
    * Define the table name.
    */
-  public static final String TABLE = "appointment";
+  public static final String TABLE = "person";
   /**
    * Define the id column name.
    */
@@ -40,10 +40,15 @@ public class PersonContract extends BaseContract {
    */
   public static final String COL_COMMENTARY = "commentary";
   /**
+   * Define the report column name.
+   */
+  public final static String COL_FK_ID_ADDRESS = "address_id";
+
+  /**
    * Define a table with all column.
    */
   public static final String[] COLS = new String[] { COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_EMAIL,
-      COL_CELL_PHONE, COL_HOME_PHONE, COL_COMMENTARY };
+      COL_CELL_PHONE, COL_HOME_PHONE, COL_COMMENTARY, COL_FK_ID_ADDRESS };
   /**
    * Define the string used for create the table.
    */

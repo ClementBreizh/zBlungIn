@@ -6,11 +6,11 @@ package com.apsidepoei.projetpoei.entities;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import java.util.List;
-
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -47,8 +47,10 @@ public class Person extends EntityDb {
   @Column(name = PersonContract.COL_COMMENTARY, nullable = false)
   private String commentary;
 
-  @ManyToMany
-  private List<Appointment> appointments;
+  @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
+  @ManyToOne(targetEntity=Address.class,optional=true)
+  @JoinColumn(name=PersonContract.COL_FK_ID_ADDRESS, referencedColumnName=AddressContract.COL_ID)
+  private Address address;
 
   /**
    * @return the firstname
