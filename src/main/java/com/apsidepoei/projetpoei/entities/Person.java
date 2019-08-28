@@ -47,6 +47,10 @@ public class Person extends EntityDb {
   @Column(name = PersonContract.COL_COMMENTARY, nullable = false)
   private String commentary;
 
+  @JsonProperty(value = PersonContract.COL_MAINCONTACT)
+  @Column(name = PersonContract.COL_MAINCONTACT, nullable = false)
+  private Boolean mainContact;
+
   @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity=Address.class,optional=true)
   @JoinColumn(name=PersonContract.COL_FK_ID_ADDRESS, referencedColumnName=AddressContract.COL_ID)

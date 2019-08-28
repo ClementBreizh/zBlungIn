@@ -1,11 +1,20 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
+import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -19,38 +28,58 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = CompanyContract.COL_ID))
 public class Company extends EntityDb {
 
-  @JsonProperty(value = CompanyContract.COL_NOM)
-  @Column(name = CompanyContract.COL_NOM, nullable = false)
-  private String nom;
+  @JsonProperty(value = CompanyContract.COL_NAME)
+  @Column(name = CompanyContract.COL_NAME, nullable = false)
+  private String name;
 
-  @JsonProperty(value = CompanyContract.COL_NOM_ANTENNE)
-  @Column(name = CompanyContract.COL_NOM_ANTENNE, nullable = false)
-  private String nomAntenne;
+  @JsonProperty(value = CompanyContract.COL_ANTENNANAME)
+  @Column(name = CompanyContract.COL_ANTENNANAME, nullable = false)
+  private String antennaName;
 
   @JsonProperty(value = CompanyContract.COL_SIRET)
   @Column(name = CompanyContract.COL_SIRET, nullable = true)
   private String siret;
 
-  @JsonProperty(value = CompanyContract.COL_CODE_APE)
-  @Column(name = CompanyContract.COL_CODE_APE, nullable = true)
-  private String codeApe;
+  @JsonProperty(value = CompanyContract.COL_APECODE)
+  @Column(name = CompanyContract.COL_APECODE, nullable = true)
+  private String apeCode;
+
+  @JsonProperty(value = CompanyContract.COL_FK_ID_CONTACTS)
+  @OneToMany(targetEntity=Person.class)
+  private List<Person> contacts;
+
+  @JsonProperty(value = CompanyContract.COL_FK_ID_MAINCONTACT)
+  @ManyToOne(targetEntity=Person.class,optional=true)
+  @JoinColumn(name=CompanyContract.COL_FK_ID_MAINCONTACT, referencedColumnName=PersonContract.COL_ID)
+  private Person mainContact;
+
+  @JsonProperty(value = CompanyContract.COL_FK_ID_ADRESSES)
+  @OneToMany(targetEntity=Address.class)
+  private List<Person> addresses;
+
+  @JsonProperty(value = CompanyContract.COL_SESSIONS)
+  @ManyToMany(targetEntity = Session.class)
+  @JoinTable(name = "company_session", joinColumns = {
+      @JoinColumn(name = CompanyContract.COL_ID) }, inverseJoinColumns = {
+          @JoinColumn(name = SessionContract.COL_ID) })
+  private List<Session> sessions;
 
   /**
    * The name.
    *
    * @return the name
    */
-  public String getNom() {
-    return nom;
+  public String getName() {
+    return name;
   }
 
   /**
    * Set the name.
    *
-   * @param nom = the name
+   * @param name = the name
    */
-  public void setNom(String nom) {
-    this.nom = nom;
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -58,8 +87,8 @@ public class Company extends EntityDb {
    *
    * @return the name of an antenna
    */
-  public String getNomAntenne() {
-    return nomAntenne;
+  public String getAntennaName() {
+    return antennaName;
   }
 
   /**
@@ -67,8 +96,8 @@ public class Company extends EntityDb {
    *
    * @param nomAntenne = name of an antenna
    */
-  public void setNomAntenne(String nomAntenne) {
-    this.nomAntenne = nomAntenne;
+  public void setNameAntenna(String antennaName) {
+    this.antennaName = antennaName;
   }
 
   /**
@@ -94,17 +123,17 @@ public class Company extends EntityDb {
    *
    * @return the code
    */
-  public String getCodeApe() {
-    return codeApe;
+  public String getApeCode() {
+    return apeCode;
   }
 
   /**
    * Set The APE code.
    *
-   * @param codeApe = the code APE
+   * @param apeCode = the code APE
    */
-  public void setCodeApe(String codeApe) {
-    this.codeApe = codeApe;
+  public void setCodeApe(String apeCode) {
+    this.apeCode = apeCode;
   }
 
   /**
@@ -115,12 +144,12 @@ public class Company extends EntityDb {
    * @param siret      = the siret
    * @param codeApe    = the APE code
    */
-  public Company(String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(String name, String antennaName, String siret, String apeCode) {
     super();
-    this.nom = nom;
-    this.nomAntenne = nomAntenne;
+    this.name = name;
+    this.antennaName = antennaName;
     this.siret = siret;
-    this.codeApe = codeApe;
+    this.apeCode = apeCode;
   }
 
   /**
@@ -132,13 +161,13 @@ public class Company extends EntityDb {
    * @param siret      = the siret
    * @param codeApe    = the APE code
    */
-  public Company(int id, String nom, String nomAntenne, String siret, String codeApe) {
+  public Company(int id, String name, String antennaName, String siret, String apeCode) {
     super();
     this.setId(id);
-    this.nom = nom;
-    this.nomAntenne = nomAntenne;
+    this.name = name;
+    this.antennaName = antennaName;
     this.siret = siret;
-    this.codeApe = codeApe;
+    this.apeCode = apeCode;
   }
 
   /**
@@ -153,8 +182,8 @@ public class Company extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Entreprise [Id = " + getId() + ", nom = " + nom + ", nomAntenne = " + nomAntenne + ", siret = " + siret
-        + ", codeApe = " + codeApe + "]";
+    return "Entreprise [Id = " + getId() + ", nom = " + name + ", nomAntenne = " + antennaName + ", siret = " + siret
+        + ", codeApe = " + apeCode + "]";
   }
 
 }
