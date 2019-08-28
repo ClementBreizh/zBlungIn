@@ -9,7 +9,7 @@ import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * This class is the Degree entity.
+ * This class is the Address entity.
  *
  * @author vianney
  *
@@ -24,7 +24,7 @@ public class Address extends EntityDb {
   private String address;
 
   @JsonProperty(value = AddressContract.COL_POSTAL_CODE)
-  @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false)
+  @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false, length = 5)
   private String postalCode;
 
   @JsonProperty(value = AddressContract.COL_TOWN)
@@ -65,7 +65,7 @@ public class Address extends EntityDb {
   /**
    * The address.
    *
-   * @return the adress
+   * @return the address
    */
   public String getAddress() {
     return address;

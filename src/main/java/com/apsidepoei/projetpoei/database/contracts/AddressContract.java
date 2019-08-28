@@ -11,12 +11,12 @@ public class AddressContract extends BaseContract {
   /**
    * Define the table name.
    */
-  public static final String TABLE = "adress";
+  public static final String TABLE = "address";
 
   /**
-   * defines the name of the column="id".
+   * defines the name of the column="id_address".
    */
-  public static final String COL_ID = "id";
+  public static final String COL_ID = "id_address";
 
   /**
    * defines the name of the column="address".

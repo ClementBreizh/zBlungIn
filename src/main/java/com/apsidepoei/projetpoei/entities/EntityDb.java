@@ -6,11 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class EntityDb {
+public abstract class EntityDb {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
+
+  // GETTER/SETTER
 
   /**
    * getter.

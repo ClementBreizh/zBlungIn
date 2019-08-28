@@ -2,7 +2,6 @@
 package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;

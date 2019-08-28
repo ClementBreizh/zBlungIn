@@ -15,7 +15,7 @@ public class FeedbackContract extends BaseContract {
   /**
    * defines the name of the column="id".
    */
-  public static final String COL_ID = "id";
+  public static final String COL_ID = "id_feedback";
 
   /**
    * defines the name of the column="typeOfContract".
