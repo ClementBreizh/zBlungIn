@@ -7,16 +7,16 @@ package com.apsidepoei.projetpoei.database.contracts;
  * @author vianney
  *
  */
-public class HasDoneAssessmentContract extends BaseContract {
+public class AcquiredMattersContract extends BaseContract {
 
   /**
    * Define the table name.
    */
-  public static final String TABLE = "HasDoneAssessment";
+  public static final String TABLE = "AcquiredMatters";
   /**
-   * defines the name of the column="id_has_done".
+   * defines the name of the column="id_acquired_matters".
    */
-  public static final String COL_ID = "id_has_done";
+  public static final String COL_ID = "id_acquired_matters";
   /**
    * defines the name of the column="score".
    */
@@ -26,18 +26,18 @@ public class HasDoneAssessmentContract extends BaseContract {
    */
   public final static String COL_VALIDATION_DATE = "validation_date";
   /**
-   * defines the name of the column="assessment_id".
+   * defines the name of the column="id_matter".
    */
-  public final static String COL_FK_ID_ASSESSMENT = "id_assessment";
+  public final static String COL_FK_ID_MATTER = "id_matter";
   /**
    * defines the name of the column="candidate_id".
    */
   public final static String COL_FK_ID_CANDIDATE = "id_candidate";
-
   /**
    * defines the name of the column="candidate_id".
    */
   public final static String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
+
   /**
    * Define a table with all column.
    */
@@ -51,7 +51,7 @@ public class HasDoneAssessmentContract extends BaseContract {
   /**
    * Constructor.
    */
-  public HasDoneAssessmentContract() {
+  public AcquiredMattersContract() {
     super(TABLE, COL_ID, COLS, CREATE_TABLE);
   }
 }
