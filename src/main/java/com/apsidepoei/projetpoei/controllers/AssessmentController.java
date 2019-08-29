@@ -15,7 +15,7 @@ public class AssessmentController extends BaseController {
   /**
    * Constructor.
    */
-  public AssessmentController(String entityPath) {
+  public AssessmentController() {
     super("/assessments");
   }
 }

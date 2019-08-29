@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-@RequestMapping("/adresses")
+@RequestMapping("/addresses")
 public class AddressController extends BaseController {
 
   /**
    * Constructor.
    */
-  public AddressController(String entityPath) {
-    super("/adresses");
+  public AddressController() {
+    super("/addresses");
   }
 }
