@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.database.contracts.HasDoneAssessmentContract;
-import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -32,8 +31,8 @@ public class HasDoneAssessment extends EntityDb {
   protected Float score;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_VALIDATION_DATE)
-  @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = false)
-  protected Date calidationDate;
+  @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = true)
+  protected Date validationDate;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_FK_ID_ASSESSMENT)
   @ManyToOne(targetEntity = Assessment.class, optional = true)
@@ -95,4 +94,33 @@ public class HasDoneAssessment extends EntityDb {
   public void setCandidate(Candidate candidate) {
     this.candidate = candidate;
   }
+
+  /**
+   * @return the score
+   */
+  public Float getScore() {
+    return score;
+  }
+
+  /**
+   * @param score the score to set
+   */
+  public void setScore(Float score) {
+    this.score = score;
+  }
+
+  /**
+   * @return the validationDate
+   */
+  public Date getValidationDate() {
+    return validationDate;
+  }
+
+  /**
+   * @param validationDate the validationDate to set
+   */
+  public void setValidationDate(Date validationDate) {
+    this.validationDate = validationDate;
+  }
+
 }
