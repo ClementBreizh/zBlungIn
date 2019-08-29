@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.database.contracts.HasDoneAssessmentContract;
-import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

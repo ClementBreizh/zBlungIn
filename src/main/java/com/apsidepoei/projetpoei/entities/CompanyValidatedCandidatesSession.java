@@ -1,7 +1,7 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,6 +42,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
    * Empty constructor.
    */
   public CompanyValidatedCandidatesSession() {
+    this.validatedCandidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -67,7 +68,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   /**
    * Setter for the company.
    *
-   * @param company = object company
+   * @param optional = object company
    */
   public void setCompany(Company company) {
     this.company = company;
@@ -108,6 +109,4 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   public void setSession(Session session) {
     this.session = session;
   }
-
-
 }
