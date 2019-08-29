@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
@@ -45,17 +47,18 @@ public class Company extends EntityDb {
   private String apeCode;
 
   @JsonProperty(value = CompanyContract.COL_FK_ID_CONTACTS)
-  @OneToMany(targetEntity=Person.class)
+  @OneToMany(targetEntity = Person.class)
   private List<Person> contacts;
 
   @JsonProperty(value = CompanyContract.COL_FK_ID_MAINCONTACT)
-  @ManyToOne(targetEntity=Person.class,optional=true)
-  @JoinColumn(name=CompanyContract.COL_FK_ID_MAINCONTACT, referencedColumnName=PersonContract.COL_ID)
+  @ManyToOne(targetEntity = Person.class, optional = true)
+  @JoinColumn(name = CompanyContract.COL_FK_ID_MAINCONTACT, referencedColumnName = PersonContract.COL_ID)
   private Person mainContact;
 
-  @JsonProperty(value = CompanyContract.COL_FK_ID_ADRESSES)
-  @OneToMany(targetEntity=Address.class)
-  private List<Address> addresses;
+  @JsonProperty(value = CompanyContract.COL_FK_ID_ADRESS)
+  @ManyToOne(targetEntity = Address.class, optional = true)
+  @JoinColumn(name = CompanyContract.COL_FK_ID_ADRESS, referencedColumnName = AddressContract.COL_ID)
+  private Address address;
 
   @JsonProperty(value = CompanyContract.COL_SESSIONS)
   @ManyToMany(targetEntity = Session.class)
@@ -64,6 +67,65 @@ public class Company extends EntityDb {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions;
 
+  /**
+   * Constructor for a new business.
+   *
+   * @param name        = the name
+   * @param antennaName = the name of antenna
+   * @param siret       = the siret
+   * @param apeCode     = the APE code
+   */
+  public Company(String name, String antennaName, String siret, String apeCode) {
+    super();
+    this.name = name;
+    this.antennaName = antennaName;
+    this.siret = siret;
+    this.apeCode = apeCode;
+    this.contacts = new ArrayList<Person>();
+    this.sessions = new ArrayList<Session>();
+  }
+
+  /**
+   * Constructor with id for a new business.
+   *
+   * @param id          = the id
+   * @param name        = the name
+   * @param antennaName = the name of antenna
+   * @param siret       = the siret
+   * @param apeCode     = the APE code
+   */
+  public Company(int id, String name, String antennaName, String siret, String apeCode,
+      List<Person> contacts, Person mainContact, List<Session> sessions) {
+    super();
+    this.setId(id);
+    this.name = name;
+    this.antennaName = antennaName;
+    this.siret = siret;
+    this.apeCode = apeCode;
+    this.contacts = contacts;
+    this.mainContact = mainContact;
+    this.sessions = sessions;
+  }
+
+  /**
+   * Empty constructor.
+   */
+  public Company() {
+
+  }
+
+  /**
+   * override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Entreprise [Id = " + getId() + ", name = " + name + ", antennaName = " + antennaName
+        + ", siret = " + siret + ", apeCode = " + apeCode + ", contacts = " + contacts
+        + ", mainContact = " + mainContact + ", address = " + address + ", sessions = " + sessions
+        + "]";
+  }
+
+  // GETTER/SETTER
   /**
    * @return the name
    */
@@ -126,6 +188,7 @@ public class Company extends EntityDb {
 
   /**
    * Getter for the contact list.
+   *
    * @return the list of person.
    */
   public List<Person> getContacts() {
@@ -134,6 +197,7 @@ public class Company extends EntityDb {
 
   /**
    * Setter for the contact list.
+   *
    * @param contacts = a list of person object.
    */
   public void setContacts(List<Person> contacts) {
@@ -142,6 +206,7 @@ public class Company extends EntityDb {
 
   /**
    * Getter for the main contact.
+   *
    * @return the main contact.
    */
   public Person getMainContact() {
@@ -150,6 +215,7 @@ public class Company extends EntityDb {
 
   /**
    * Setter for the main contact.
+   *
    * @param mainContact = the object person who is the main contact.
    */
   public void setMainContact(Person mainContact) {
@@ -157,23 +223,26 @@ public class Company extends EntityDb {
   }
 
   /**
-   * Getter for the adresses list.
-   * @return the adresses list.
+   * Getter for the address.
+   *
+   * @return the address.
    */
-  public List<Address> getAddresses() {
-    return addresses;
+  public Address getAddress() {
+    return address;
   }
 
   /**
-   * Setter for the adresses list.
-   * @param addresses = a list of adresses.
+   * Setter for the address .
+   *
+   * @param addresses = an address.
    */
-  public void setAddresses(List<Address> addresses) {
-    this.addresses = addresses;
+  public void setAddress(Address address) {
+    this.address = address;
   }
 
   /**
    * Getter for the sessions list.
+   *
    * @return a session object list.
    */
   public List<Session> getSessions() {
@@ -182,71 +251,10 @@ public class Company extends EntityDb {
 
   /**
    * Setter for the sessions list.
+   *
    * @param sessions is the list of session object.
    */
   public void setSessions(List<Session> sessions) {
     this.sessions = sessions;
   }
-
-  /**
-   * Constructor for a new business.
-   *
-   * @param name        = the name
-   * @param antennaName = the name of antenna
-   * @param siret      = the siret
-   * @param apeCode    = the APE code
-   */
-  public Company(String name, String antennaName, String siret, String apeCode, List<Person> contacts, Person mainContact,
-      List<Address> addresses, List<Session> sessions) {
-    super();
-    this.name = name;
-    this.antennaName = antennaName;
-    this.siret = siret;
-    this.apeCode = apeCode;
-    this.contacts =  contacts;
-    this.mainContact = mainContact;
-    this.addresses = addresses;
-    this.sessions = sessions;
-  }
-
-  /**
-   * Constructor with id for a new business.
-   *
-   * @param id         = the id
-   * @param name        = the name
-   * @param antennaName = the name of antenna
-   * @param siret      = the siret
-   * @param apeCode    = the APE code
-   */
-  public Company(int id, String name, String antennaName, String siret, String apeCode, List<Person> contacts, Person mainContact,
-      List<Address> addresses, List<Session> sessions) {
-    super();
-    this.setId(id);
-    this.name = name;
-    this.antennaName = antennaName;
-    this.siret = siret;
-    this.apeCode = apeCode;
-    this.contacts =  contacts;
-    this.mainContact = mainContact;
-    this.addresses = addresses;
-    this.sessions = sessions;
-  }
-
-  /**
-   * Empty constructor.
-   */
-  public Company() {
-
-  }
-
-  /**
-   * override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Entreprise [Id = " + getId() + ", name = " + name + ", antennaName = " + antennaName + ", siret = " + siret
-        + ", apeCode = " + apeCode + ", contacts = " + contacts + ", mainContact = " + mainContact + ", addresses = " + addresses +
-        ", sessions = " + sessions +"]";
-  }
-
 }

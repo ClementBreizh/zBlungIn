@@ -30,11 +30,20 @@ public class Matter extends EntityDb {
           @JoinColumn(name = CandidateContract.COL_ID) })
   private List<Candidate> candidates;
 
+
   /**
-   * construtor.
+   * constructor.
    */
   public Matter() {
     super();
+  }
+
+  /**
+   * Name in parameter.
+   */
+  public Matter(String name) {
+    super();
+    this.name = name;
   }
 
   @Override
@@ -56,14 +65,6 @@ public class Matter extends EntityDb {
    * name the name to set.
    */
   public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Name in parameter.
-   */
-  public Matter(String name) {
-    super();
     this.name = name;
   }
 

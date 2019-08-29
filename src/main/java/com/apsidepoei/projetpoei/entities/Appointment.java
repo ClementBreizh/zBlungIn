@@ -1,20 +1,19 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.test.annotation.Timed;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
@@ -55,6 +54,38 @@ public class Appointment extends EntityDb {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
+
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param informations = informations
+   * @param dateTime     = date and time
+   * @param report       = the report
+   */
+  public Appointment(String informations, Date dateTime, String report) {
+    super();
+    this.informations = informations;
+    this.dateTime = dateTime;
+    this.report = report;
+    this.persons = new ArrayList<Person>();
+  }
+
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param informations = informations
+   * @param dateTime     = date and time
+   * @param report       = the report
+   */
+  public Appointment(int id, String informations, Date dateTime, String report) {
+    super();
+    this.setId(id);
+    this.informations = informations;
+    this.dateTime = dateTime;
+    this.report = report;
+  }
+
+  // GETTER/SETTER
 
   /**
    * The informations.
@@ -149,7 +180,7 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(String informations, Date dateTime, String report, Boolean status, List<Person> Person, List<Person> persons) {
+  public Appointment(String informations, Date dateTime, String report, Boolean status, List<Person> persons) {
     super();
     this.informations = informations;
     this.dateTime = dateTime;
@@ -167,7 +198,7 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(int id, String informations, Date dateTime, String report, Boolean status, List<Person> Person, List<Person> persons) {
+  public Appointment(int id, String informations, Date dateTime, String report, Boolean status, List<Person> persons) {
     super();
     this.setId(id);
     this.informations = informations;

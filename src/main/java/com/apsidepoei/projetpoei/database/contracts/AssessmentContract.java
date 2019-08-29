@@ -21,7 +21,6 @@ public class AssessmentContract extends BaseContract {
   public static final String COL_DATE = "updatingDate";
 
 
-
   public static final String[] COLS = new String[] { COL_ID, COL_CATEGORY, COL_DATE };
 
   public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + "(" + COL_ID
