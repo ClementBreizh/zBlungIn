@@ -65,10 +65,6 @@ public class Candidate extends Person {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions;
 
-//  @JsonProperty(value = CandidateContract.COL_ASSESSMENTS)
-//  @OneToMany(targetEntity = HasDoneAssessment.class)
-//  private List<HasDoneAssessment> assessments;
-
   /**
    * Empty constructor.
    */

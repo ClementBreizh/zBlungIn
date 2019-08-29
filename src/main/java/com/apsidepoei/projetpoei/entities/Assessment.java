@@ -27,9 +27,6 @@ public class Assessment extends EntityDb {
   @Column(name = AssessmentContract.COL_DATE, nullable = false)
   private Date dateTime;
 
-//  @JsonProperty(value = AssessmentContract.COL_CANDIDATES)
-//  @OneToMany(targetEntity = HasDoneAssessment.class)
-//  private List<HasDoneAssessment> assessments;
 
   /**
    * Constructor for a new Assessment.
