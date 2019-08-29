@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.utils;
 
 import java.util.Locale;
