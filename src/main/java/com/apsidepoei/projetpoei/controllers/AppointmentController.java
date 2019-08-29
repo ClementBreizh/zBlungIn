@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.controllers;
 
 import java.text.ParseException;
@@ -9,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.apsidepoei.projetpoei.controllers.restcontrollers.AppointmentRestController;
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
+import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.entities.Appointment;
 
 /**
@@ -18,15 +17,7 @@ import com.apsidepoei.projetpoei.entities.Appointment;
  *
  */
 @Controller
-public class AppointmentFormController extends BaseRestController<Appointment, Integer> {
-
-  /**
-   * Constructor.
-   * @param repository is the repository from BaseRestController.
-   */
-  public AppointmentFormController(JpaRepository<Appointment, Integer> repository) {
-    super(repository);
-  }
+public class AppointmentController {
 
   /**
    * Routing for the form.
@@ -35,18 +26,6 @@ public class AppointmentFormController extends BaseRestController<Appointment, I
    */
   @GetMapping("/appointments/index")
   public String getIndex() {
-    return "/appointments/index";
-  }
-
-  /**
-   * Routing for posting a new appointment.
-   *
-   * @return the page form.
-   */
-  @PostMapping("/appointments/index")
-  public String appointmentCreate(Appointment appointment) throws ParseException {
-    repository.save(appointment);
-    System.out.println(appointment);
     return "/appointments/index";
   }
 
