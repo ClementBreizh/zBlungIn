@@ -1,7 +1,7 @@
 package com.apsidepoei.projetpoei.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Controller for appointment form.
@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  */
 @Controller
-public class AppointmentController {
+@RequestMapping("/appointments")
+public class AppointmentController extends BaseController {
 
   /**
-   * Routing for the form.
-   *
-   * @return the form page.
+   * Constructor.
    */
-  @GetMapping("/appointments/index")
-  public String getIndex() {
-    return "/appointments/index";
+  public AppointmentController() {
+    super("/appointments");
   }
-
 }
