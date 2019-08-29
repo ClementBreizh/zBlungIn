@@ -9,6 +9,7 @@ import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.entities.Appointment;
 
 /**
+ * RestController for appointments.
  * @author vianney
  *
  */
