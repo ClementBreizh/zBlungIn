@@ -39,10 +39,7 @@ public class CandidateContract extends BaseContract {
    * defines the name of the column="sessions".
    */
   public static final String COL_SESSIONS = "sessions";
-  /**
-   * defines the name of the column="assessments".
-   */
-  public static final String COL_ASSESSMENTS = "assessments";
+
 
   /**
    * Define a table with all column.
