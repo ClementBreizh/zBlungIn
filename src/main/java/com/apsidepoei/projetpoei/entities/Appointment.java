@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,56 @@ public class Appointment extends EntityDb {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
+
+
+  /**
+   * Empty constructor.
+   */
+  public Appointment() {
+    super();
+  }
+
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param informations = informations
+   * @param dateTime     = date and time
+   * @param report       = the report
+   */
+  public Appointment(String informations, Date dateTime, String report) {
+    super();
+    this.informations = informations;
+    this.dateTime = dateTime;
+    this.report = report;
+    this.persons = new ArrayList<Person>();
+  }
+
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param informations = informations
+   * @param dateTime     = date and time
+   * @param report       = the report
+   */
+  public Appointment(int id, String informations, Date dateTime, String report) {
+    super();
+    this.setId(id);
+    this.informations = informations;
+    this.dateTime = dateTime;
+    this.report = report;
+  }
+
+  // GETTER/SETTER
+
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + dateTime
+        + ", report=" + report + "]";
+  }
 
   /**
    * Define the report column name.
@@ -106,50 +157,5 @@ public class Appointment extends EntityDb {
    */
   public void setReport(String report) {
     this.report = report;
-  }
-
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param dateTime     = date and time
-   * @param report       = the report
-   */
-  public Appointment(String informations, Date dateTime, String report) {
-    super();
-    this.informations = informations;
-    this.dateTime = dateTime;
-    this.report = report;
-  }
-
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param dateTime     = date and time
-   * @param report       = the report
-   */
-  public Appointment(int id, String informations, Date dateTime, String report) {
-    super();
-    this.setId(id);
-    this.informations = informations;
-    this.dateTime = dateTime;
-    this.report = report;
-  }
-
-  /**
-   * Empty constructor.
-   */
-  public Appointment() {
-    super();
-  }
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + dateTime
-        + ", report=" + report + "]";
   }
 }

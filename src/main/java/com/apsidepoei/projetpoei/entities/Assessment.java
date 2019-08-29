@@ -2,12 +2,16 @@
 package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -22,6 +26,10 @@ public class Assessment extends EntityDb {
   @JsonProperty(value = AssessmentContract.COL_DATE)
   @Column(name = AssessmentContract.COL_DATE, nullable = false)
   private Date dateTime;
+
+//  @JsonProperty(value = AssessmentContract.COL_CANDIDATES)
+//  @OneToMany(targetEntity = HasDoneAssessment.class)
+//  private List<HasDoneAssessment> assessments;
 
   /**
    * Constructor for a new Assessment.

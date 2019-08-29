@@ -65,10 +65,9 @@ public class Candidate extends Person {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions;
 
-  @JsonProperty(value = CandidateContract.COL_ASSESSMENTS)
-  @OneToMany(targetEntity=Assessment.class)
-  private List<Assessment> assessments;
-
+//  @JsonProperty(value = CandidateContract.COL_ASSESSMENTS)
+//  @OneToMany(targetEntity = HasDoneAssessment.class)
+//  private List<HasDoneAssessment> assessments;
 
   /**
    * Empty constructor.
@@ -182,19 +181,5 @@ public class Candidate extends Person {
    */
   public void setSessions(List<Session> sessions) {
     this.sessions = sessions;
-  }
-
-  /**
-   * @return the assessments
-   */
-  public List<Assessment> getAssessments() {
-    return assessments;
-  }
-
-  /**
-   * @param assessments the assessments to set
-   */
-  public void setAssessments(List<Assessment> assessments) {
-    this.assessments = assessments;
   }
 }
