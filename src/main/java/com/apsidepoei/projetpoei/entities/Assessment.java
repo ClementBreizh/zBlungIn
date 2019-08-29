@@ -1,17 +1,12 @@
-
 package com.apsidepoei.projetpoei.entities;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -31,13 +26,11 @@ public class Assessment extends EntityDb {
   /**
    * Constructor for a new Assessment.
    */
-  public Assessment(int id, String category, Date dateTime) {
+  public Assessment(String category, Date dateTime) {
     super();
-    this.setId(id);
     this.category = category;
     this.dateTime = dateTime;
   }
-
   /**
    * empty constructor.
    */
@@ -83,16 +76,5 @@ public class Assessment extends EntityDb {
   public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
-
-  /**
-   * Constructor for a new Assessment.
-   */
-  public Assessment(String category, Date dateTime) {
-    super();
-    this.category = category;
-    this.dateTime = dateTime;
-  }
-
-
-
+  
 }

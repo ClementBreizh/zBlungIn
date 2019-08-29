@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
 public class CompanyValidatedCandidatesSession extends EntityDb {
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_COMPANY)
-  @OneToOne(targetEntity = Session.class, optional = true)
+  @OneToOne(targetEntity = Session.class)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
@@ -34,9 +34,26 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   private List<Candidate> validatedCandidates;
 
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_SESSION)
-  @OneToOne(targetEntity = Session.class, optional = true)
+  @OneToOne(targetEntity = Session.class)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
+
+
+  public CompanyValidatedCandidatesSession(Company company, Session session) {
+    super();
+    this.company = company;
+    this.session = session;
+    this.validatedCandidates = new ArrayList<Candidate>();
+
+  }
+
+  public CompanyValidatedCandidatesSession(Company company, List<Candidate> validatedCandidates,
+      Session session) {
+    super();
+    this.company = company;
+    this.validatedCandidates = validatedCandidates;
+    this.session = session;
+  }
 
   /**
    * Empty constructor.
@@ -48,10 +65,15 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   /**
    * Override toString() function.
    */
+//  @Override
+//  public String toString() {
+//    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + getCompany().getName()
+//        + ", session = " + getSession().getName() + "]";
+//  }
+
   @Override
   public String toString() {
-    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + company
-        + ", validated candidates = " + validatedCandidates + ", session = " + session + "]";
+    return "Association Company/Candidates/Session [Id = ]";
   }
 
   // GETTER/SETTER

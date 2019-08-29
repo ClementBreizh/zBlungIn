@@ -61,6 +61,28 @@ public class User extends Person {
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
+    this.role = RoleUser.ROLE_3;
+  }
+
+  /**
+   * Constructor with id for new Feedback.
+   *
+   * @param login      = the login
+   * @param password  = the password
+   * @param firstname = the firstname
+   * @param lastname  = the lastname
+   * @param email     = the email
+   * @param cellPhone = the cellPhone
+   */
+  public User(String login, String password, String firstname, String lastname, String email, String cellPhone, RoleUser role) {
+    super();
+    this.login = login;
+    this.password = password;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.cellPhone = cellPhone;
+    this.role = role;
   }
 
   /**

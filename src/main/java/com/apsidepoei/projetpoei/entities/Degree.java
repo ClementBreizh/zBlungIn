@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -42,10 +43,24 @@ public class Degree extends EntityDb {
 
 
   /**
+   * Constructor for a new degree.
+   *
+   * @param name  = the name
+   * @param level = the level
+   */
+  public Degree(String name, String level) {
+    super();
+    this.name = name;
+    this.level = level;
+    this.candidates = new ArrayList<Candidate>();
+  }
+
+  /**
    * Empty constructor.
    */
   public Degree() {
     super();
+    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -92,18 +107,6 @@ public class Degree extends EntityDb {
    * @param level = the level
    */
   public void setLevel(String level) {
-    this.level = level;
-  }
-
-  /**
-   * Constructor for a new degree.
-   *
-   * @param name  = the name
-   * @param level = the level
-   */
-  public Degree(String name, String level) {
-    super();
-    this.name = name;
     this.level = level;
   }
 

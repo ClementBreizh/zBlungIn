@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class Session extends EntityDb {
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.candidates = new ArrayList<Candidate>();
   }
 
   /**

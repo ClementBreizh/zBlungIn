@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -44,6 +45,7 @@ public class Matter extends EntityDb {
   public Matter(String name) {
     super();
     this.name = name;
+    this.candidates = new ArrayList<Candidate>();
   }
 
   @Override

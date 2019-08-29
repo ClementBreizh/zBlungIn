@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -40,10 +41,27 @@ public class CompanyCandidatesSession extends EntityDb {
   private Session session;
 
 
+
+  public CompanyCandidatesSession(Company company, List<Candidate> candidates, Session session) {
+    super();
+    this.company = company;
+    this.candidates = candidates;
+    this.session = session;
+  }
+
+  public CompanyCandidatesSession(Company company, Session session) {
+    super();
+    this.company = company;
+    this.session = session;
+    this.candidates = new ArrayList<Candidate>();
+
+  }
+
   /**
    * Empty constructor.
    */
   public CompanyCandidatesSession() {
+    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -104,7 +122,4 @@ public class CompanyCandidatesSession extends EntityDb {
   public void setSession(Session session) {
     this.session = session;
   }
-
-
-
 }
