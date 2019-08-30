@@ -198,6 +198,17 @@ public abstract class BaseRestControllerTest<T, ID> {
 
   @Test
   public void count() throws IOException {
+    long counter = getRepository().count();
+    StringBuilder builder = new StringBuilder();
+    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+
+  List<T> dbItems = getRepository().findAll();
+  List<T> httpItems = parseJsonToList(builder);
+
+  System.out.println(dbItems.size());
+  System.out.println(httpItems.size());
+  System.out.println(counter);
+
   }
 
   protected abstract T getObjectTest() throws ParseException;
