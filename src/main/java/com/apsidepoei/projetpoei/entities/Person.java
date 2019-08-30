@@ -106,8 +106,7 @@ public class Person extends EntityDb {
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
 
-        + ", email = " + email + ", cellphone = " + cellPhone + ", adresse = ]";
-
+        + ", email = " + email + ", téléphone = " + cellPhone + ", adresse = ]";
 
   }
 
