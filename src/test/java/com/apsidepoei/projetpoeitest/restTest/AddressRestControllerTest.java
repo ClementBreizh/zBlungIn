@@ -51,7 +51,7 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     return item1.getId().equals(item2.getId()) && item1.getPostalCode().equals(item2.getPostalCode())
         && item1.getAddress().equals(item2.getAddress()) && item1.getTown().equals(item2.getTown());
   }
-  
+
   @Override
   protected Address parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -74,5 +74,17 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
   @Override
   protected Integer getItemIdTest(Address item) {
     return item.getId();
+  }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Address> items, List<Address> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }

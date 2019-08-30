@@ -78,6 +78,18 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
   protected Integer getItemIdTest(Feedback item) {
     return item.getId();
   }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Feedback> items, List<Feedback> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
 
 

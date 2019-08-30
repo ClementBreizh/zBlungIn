@@ -160,11 +160,11 @@ public class DatasInsertors {
             faker.name().firstName(),
             faker.name().lastName(),
             faker.internet().emailAddress(),
-            faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+            faker.phoneNumber().cellPhone().replaceAll(" ", ""), null);
         person.setHomePhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
         person.setCommentary(faker.lorem().sentence());
-//      person.setAddresses(addresses);
-//      person.setMainContact(person);
+   //   person.setAddresses(addresses);
+   //   person.setMainContact(person);
         personRepository.save(person);
       }
 

@@ -78,5 +78,17 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
   protected Integer getItemIdTest(Degree item) {
     return item.getId();
   }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Degree> items, List<Degree> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
 
