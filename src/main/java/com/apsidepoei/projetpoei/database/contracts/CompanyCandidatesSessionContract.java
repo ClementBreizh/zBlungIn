@@ -12,12 +12,12 @@ public class CompanyCandidatesSessionContract extends BaseContract {
   /**
    * Define the table name .
    */
-  public static final String TABLE = "companyCandidateSession";
+  public static final String TABLE = "companyCandidatesSession";
 
   /**
    * defines the name of the column="company".
    */
-  public static final String COL_ID= "id_companyCandidateSession";
+  public static final String COL_ID= "id_companyCandidatesSession";
 
   /**
    * defines the name of the column="company".

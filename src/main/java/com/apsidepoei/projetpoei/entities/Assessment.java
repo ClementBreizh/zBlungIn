@@ -35,7 +35,7 @@ public class Assessment extends EntityDb {
    * empty constructor.
    */
   public Assessment() {
-
+    super();
   }
 
   /**
@@ -76,5 +76,5 @@ public class Assessment extends EntityDb {
   public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
-  
+
 }

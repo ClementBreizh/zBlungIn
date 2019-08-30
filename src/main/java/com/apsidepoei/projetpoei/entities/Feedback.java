@@ -62,6 +62,7 @@ public class Feedback extends EntityDb {
    * Empty constructor.
    */
   public Feedback() {
+    super();
   }
 
 
