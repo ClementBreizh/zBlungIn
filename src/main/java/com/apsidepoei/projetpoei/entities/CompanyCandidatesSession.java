@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CompanyCandidatesSession extends EntityDb {
 
   @JsonProperty(value = CompanyCandidatesSessionContract.COL_COMPANY)
-  @OneToOne(targetEntity=Session.class,optional=true)
+  @OneToOne(targetEntity=Session.class,optional=false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
@@ -36,7 +36,7 @@ public class CompanyCandidatesSession extends EntityDb {
   private List<Candidate> candidates;
 
   @JsonProperty(value = CompanyCandidatesSessionContract.COL_SESSION)
-  @OneToOne(targetEntity=Session.class,optional=true)
+  @OneToOne(targetEntity=Session.class,optional=false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 

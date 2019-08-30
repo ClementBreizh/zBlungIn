@@ -67,6 +67,7 @@ public class Company extends EntityDb {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions;
 
+
   /**
    * Constructor for a new business.
    *
@@ -75,12 +76,26 @@ public class Company extends EntityDb {
    * @param siret       = the siret
    * @param apeCode     = the APE code
    */
-  public Company(String name, String antennaName, String siret, String apeCode) {
+  public Company(String name, Address address, Person mainContact) {
     super();
     this.name = name;
-    this.antennaName = antennaName;
-    this.siret = siret;
-    this.apeCode = apeCode;
+    this.address = address;
+    this.mainContact = mainContact;
+    this.contacts = new ArrayList<Person>();
+    this.sessions = new ArrayList<Session>();
+  }
+
+  /**
+   * Constructor for a new business.
+   *
+   * @param name        = the name
+   * @param antennaName = the name of antenna
+   * @param siret       = the siret
+   * @param apeCode     = the APE code
+   */
+  public Company(String name) {
+    super();
+    this.name = name;
     this.contacts = new ArrayList<Person>();
     this.sessions = new ArrayList<Session>();
   }
@@ -94,10 +109,9 @@ public class Company extends EntityDb {
    * @param siret       = the siret
    * @param apeCode     = the APE code
    */
-  public Company(int id, String name, String antennaName, String siret, String apeCode,
+  public Company(String name, String antennaName, String siret, String apeCode,
       List<Person> contacts, Person mainContact, List<Session> sessions) {
     super();
-    this.setId(id);
     this.name = name;
     this.antennaName = antennaName;
     this.siret = siret;

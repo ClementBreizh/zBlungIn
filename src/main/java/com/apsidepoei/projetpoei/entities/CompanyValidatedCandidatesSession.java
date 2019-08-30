@@ -3,13 +3,11 @@ package com.apsidepoei.projetpoei.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
 public class CompanyValidatedCandidatesSession extends EntityDb {
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_COMPANY)
-  @OneToOne(targetEntity = Session.class)
+  @OneToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
@@ -37,18 +35,11 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   private List<Candidate> validatedCandidates;
 
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_SESSION)
-  @OneToOne(targetEntity = Session.class)
+  @OneToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
 
-  public CompanyValidatedCandidatesSession(Company company, Session session) {
-    super();
-    this.company = company;
-    this.session = session;
-    this.validatedCandidates = new ArrayList<Candidate>();
-
-  }
 
   public CompanyValidatedCandidatesSession(Company company, List<Candidate> validatedCandidates,
       Session session) {
@@ -62,6 +53,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
    * Empty constructor.
    */
   public CompanyValidatedCandidatesSession() {
+    super();
     this.validatedCandidates = new ArrayList<Candidate>();
   }
 
