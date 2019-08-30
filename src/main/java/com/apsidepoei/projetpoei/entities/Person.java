@@ -88,13 +88,15 @@ public class Person extends EntityDb {
    * @param lastname  = the lastname
    * @param email     = the email
    * @param cellPhone = the cellPhone
+   * @param homePhone = the homePhone
    */
-  public Person(String firstname, String lastname, String email, String cellPhone) {
+  public Person(String firstname, String lastname, String email, String cellPhone, String homePhone) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
+    this.homePhone = homePhone;
   }
 
   /**
@@ -103,7 +105,9 @@ public class Person extends EntityDb {
   @Override
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
+
         + ", email = " + email + ", téléphone = " + cellPhone + ", adresse = ]";
+
   }
 
 
