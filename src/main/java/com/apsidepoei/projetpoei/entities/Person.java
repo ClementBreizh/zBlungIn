@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,11 +37,11 @@ public class Person extends EntityDb {
   protected String lastname;
 
   @JsonProperty(value = PersonContract.COL_EMAIL)
-  @Column(name = PersonContract.COL_EMAIL, nullable = false)
+  @Column(name = PersonContract.COL_EMAIL, nullable = true)
   protected String email;
 
   @JsonProperty(value = PersonContract.COL_CELL_PHONE)
-  @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
+  @Column(name = PersonContract.COL_CELL_PHONE, nullable = true, length = 12)
   protected String cellPhone;
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
@@ -52,7 +54,8 @@ public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
-  protected Boolean mainContact;
+  @Type(type = "org.hibernate.type.NumericBooleanType")
+  protected Boolean mainContact = false;
 
   @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
@@ -63,6 +66,19 @@ public class Person extends EntityDb {
    * Empty constructor.
    */
   public Person() {
+    super();
+  }
+
+  /**
+   * Constructor with id for new Feedback.
+   *
+   * @param firstname = the firstname
+   * @param lastname  = the lastname
+   */
+  public Person(String firstname, String lastname) {
+    super();
+    this.firstname = firstname;
+    this.lastname = lastname;
   }
 
   /**
@@ -89,7 +105,10 @@ public class Person extends EntityDb {
   @Override
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", cellphone = " + cellPhone + "]";
+
+        + ", email = " + email + ", cellphone = " + cellPhone + ", adresse = ]";
+
+
   }
 
 

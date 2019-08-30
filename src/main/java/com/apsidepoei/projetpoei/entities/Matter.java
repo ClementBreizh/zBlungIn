@@ -37,6 +37,7 @@ public class Matter extends EntityDb {
    */
   public Matter() {
     super();
+    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -46,6 +47,15 @@ public class Matter extends EntityDb {
     super();
     this.name = name;
     this.candidates = new ArrayList<Candidate>();
+  }
+
+  /**
+   * Name in parameter.
+   */
+  public Matter(String name, List<Candidate> candidates) {
+    super();
+    this.name = name;
+    this.candidates = candidates;
   }
 
   @Override

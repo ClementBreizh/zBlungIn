@@ -31,7 +31,7 @@ public class HasDoneAssessment extends EntityDb {
   protected Float score;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_VALIDATION_DATE)
-  @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = true)
+  @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = false)
   protected Date validationDate;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_FK_ID_ASSESSMENT)
@@ -65,6 +65,21 @@ public class HasDoneAssessment extends EntityDb {
     this.candidate = candidate;
   }
 
+  /**
+   * Constructor for a new HasDoneAssessment.
+   *
+   * @param assessment = assessment
+   * @param candidate  = candidate
+   * @param validationDate = validationDate
+   * @param score  = score
+   */
+  public HasDoneAssessment(Float score, Date validationDate, Assessment assessment, Candidate candidate) {
+    super();
+    this.score = score;
+    this.validationDate = validationDate;
+    this.assessment = assessment;
+    this.candidate = candidate;
+  }
 
   // GETTER/SETTER
   /**

@@ -24,7 +24,6 @@ import com.apsidepoei.projetpoei.entities.RankingCandidate;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 /**
  * @author vianney
  *
@@ -39,8 +38,8 @@ public class Candidate extends Person {
   private RankingCandidate ranking;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
-  @ManyToOne(targetEntity=Feedback.class,optional=true)
-  @JoinColumn(name=CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName=FeedbackContract.COL_ID)
+  @ManyToOne(targetEntity = Feedback.class, optional = true)
+  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
   private Feedback feedback;
 
   @JsonProperty(value = CandidateContract.COL_DEGREES)
@@ -99,12 +98,10 @@ public class Candidate extends Person {
   @Override
   public String toString() {
     return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */"]";
+        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
-
   // GETTER/SETTER
-
 
   /**
    * @return the ranking

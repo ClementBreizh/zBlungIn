@@ -34,13 +34,14 @@ public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_ROLE)
   @Column(name = UserContract.COL_ROLE, nullable = true)
-  private RoleUser role;
+  private RoleUser role = RoleUser.ROLE_3;
 
 
   /**
    * Empty constructor.
    */
   public User() {
+    super();
   }
 
   /**
@@ -50,8 +51,6 @@ public class User extends Person {
    * @param password  = the password
    * @param firstname = the firstname
    * @param lastname  = the lastname
-   * @param email     = the email
-   * @param cellPhone = the cellPhone
    */
   public User(String login, String password, String firstname, String lastname, String email, String cellPhone) {
     super();
@@ -59,8 +58,6 @@ public class User extends Person {
     this.password = password;
     this.firstname = firstname;
     this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
     this.role = RoleUser.ROLE_3;
   }
 
