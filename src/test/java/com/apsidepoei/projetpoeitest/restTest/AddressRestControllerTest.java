@@ -78,13 +78,12 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
 
   @Override
   protected String getObjectToStringToPost() {
-    // TODO Auto-generated method stub
-    return null;
+    String urlParameters  = "address=adresse postale&postalCode=35000&town=ville";
+    return urlParameters;
   }
 
   @Override
   protected boolean compareToList(List<Address> items, List<Address> dbItems) {
-    // TODO Auto-generated method stub
     return false;
   }
 }
