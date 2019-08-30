@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,6 +54,7 @@ public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
+  @Type(type = "org.hibernate.type.NumericBooleanType")
   protected Boolean mainContact;
 
   @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
@@ -87,7 +90,7 @@ public class Person extends EntityDb {
   @Override
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", téléphone = " + cellPhone + "]";
+        + ", email = " + email + ", téléphoneyvukftyfyj = " + cellPhone + ", adresse = ]";
   }
 
 

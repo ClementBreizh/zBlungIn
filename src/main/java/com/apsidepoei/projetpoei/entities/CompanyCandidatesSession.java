@@ -54,7 +54,6 @@ public class CompanyCandidatesSession extends EntityDb {
     this.company = company;
     this.session = session;
     this.candidates = new ArrayList<Candidate>();
-
   }
 
   /**

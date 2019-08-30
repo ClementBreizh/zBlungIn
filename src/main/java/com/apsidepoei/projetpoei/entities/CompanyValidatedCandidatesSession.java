@@ -2,10 +2,13 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,7 +33,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   private Company company;
 
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_VALIDATED_CANDIDATES)
-  @OneToMany(targetEntity = Candidate.class)
+  @ManyToMany(targetEntity = Candidate.class)
   private List<Candidate> validatedCandidates;
 
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_SESSION)
