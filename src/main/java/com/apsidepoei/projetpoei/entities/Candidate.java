@@ -35,7 +35,7 @@ public class Candidate extends Person {
 
   @JsonProperty(value = CandidateContract.COL_RANKING_CANDIDATE)
   @Column(name = CandidateContract.COL_RANKING_CANDIDATE, nullable = true)
-  private RankingCandidate ranking;
+  private RankingCandidate ranking = RankingCandidate.RANK_0;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
   @ManyToOne(targetEntity = Feedback.class, optional = true)

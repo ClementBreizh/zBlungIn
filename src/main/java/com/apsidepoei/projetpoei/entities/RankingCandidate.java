@@ -9,6 +9,7 @@ package com.apsidepoei.projetpoei.entities;
  */
 public enum RankingCandidate {
 
+    RANK_0("0 - statut non déterminé"),
     RANK_1("1 - tout est ok "),
     RANK_2("2 - ok sauf documents à revoir"),
     RANK_3("3 - pas mal de choses à revoir"),
