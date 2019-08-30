@@ -4,18 +4,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controller for appointment form.
+ * Controller for adress form.
  * @author thomas
  *
  */
 @Controller
-@RequestMapping("/appointments")
-public class AppointmentController extends BaseController {
+@RequestMapping("/addresses")
+public class AddressController extends BaseController {
 
   /**
    * Constructor.
    */
-  public AppointmentController() {
-    super("/appointments");
+  public AddressController() {
+    super("/addresses");
   }
 }

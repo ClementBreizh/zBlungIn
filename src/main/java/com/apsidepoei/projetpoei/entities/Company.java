@@ -35,7 +35,7 @@ public class Company extends EntityDb {
   private String name;
 
   @JsonProperty(value = CompanyContract.COL_ANTENNANAME)
-  @Column(name = CompanyContract.COL_ANTENNANAME, nullable = false, length = 50)
+  @Column(name = CompanyContract.COL_ANTENNANAME, nullable = true, length = 50)
   private String antennaName;
 
   @JsonProperty(value = CompanyContract.COL_SIRET)
@@ -111,19 +111,27 @@ public class Company extends EntityDb {
    * Empty constructor.
    */
   public Company() {
-
+    super();
+    this.contacts = new ArrayList<Person>();
+    this.sessions = new ArrayList<Session>();
   }
 
   /**
    * override toString() function.
    */
+//  @Override
+//  public String toString() {
+//    return "Entreprise [Id = " + getId() + ", name = " + getName() + ", antennaName = " + getAntennaName()
+//        + ", siret = " + getSiret() + ", apeCode = " + getApeCode() + ", contacts = " + getContacts()
+//        + ", mainContact = " + getMainContact() + ", address = " + getAddress() + ", sessions = " + getSessions()
+//        + "]";
+//  }
   @Override
   public String toString() {
-    return "Entreprise [Id = " + getId() + ", name = " + name + ", antennaName = " + antennaName
-        + ", siret = " + siret + ", apeCode = " + apeCode + ", contacts = " + contacts
-        + ", mainContact = " + mainContact + ", address = " + address + ", sessions = " + sessions
-        + "]";
+    return "Entreprise [Id = " + getId() + ", name = " + getName() + ", antennaName = " + getAntennaName()
+        + ", siret = " + getSiret() + ", apeCode = " + getApeCode() + "]";
   }
+
 
   // GETTER/SETTER
   /**

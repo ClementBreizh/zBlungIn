@@ -14,7 +14,7 @@ import com.apsidepoei.projetpoei.database.repositories.CompanyValidatedCandidate
 *
 */
 @RestController
-@RequestMapping("/api/validatecandidates")
+@RequestMapping("/api/valCandidBySessionAndCompany")
 public class CompanyValidatedCandidatesSessionRestController {
  public CompanyValidatedCandidatesSessionRestController(@Autowired CompanyValidatedCandidatesSessionRepository repository) {
    super();

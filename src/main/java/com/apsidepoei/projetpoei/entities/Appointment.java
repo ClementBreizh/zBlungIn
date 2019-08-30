@@ -46,7 +46,7 @@ public class Appointment extends EntityDb {
   @JsonProperty(value = AppointmentContract.COL_STATUS)
   @Column(name = AppointmentContract.COL_STATUS)
   @Type(type = "org.hibernate.type.NumericBooleanType")
-  private Boolean status;
+  private Boolean status = false;
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
@@ -77,12 +77,20 @@ public class Appointment extends EntityDb {
    * @param dateTime     = date and time
    * @param report       = the report
    */
-  public Appointment(int id, String informations, Date dateTime, String report) {
+  public Appointment(String informations, Date dateTime, String report, List<Person> persons) {
     super();
-    this.setId(id);
     this.informations = informations;
     this.dateTime = dateTime;
     this.report = report;
+    this.persons = persons;
+  }
+
+  /**
+   * Empty constructor.
+   */
+  public Appointment() {
+    super();
+    this.persons = new ArrayList<Person>();
   }
 
   // GETTER/SETTER
@@ -207,13 +215,6 @@ public class Appointment extends EntityDb {
     this.status = status;
     this.persons = persons;
 
-  }
-
-  /**
-   * Empty constructor.
-   */
-  public Appointment() {
-    super();
   }
 
   /**

@@ -192,4 +192,19 @@ public class Person extends EntityDb {
   public void setAddress(Address address) {
     this.address = address;
   }
+
+  /**
+   * @return the mainContact
+   */
+  public Boolean getMainContact() {
+    return mainContact;
+  }
+
+  /**
+   * @param mainContact the mainContact to set
+   */
+  public void setMainContact(Boolean mainContact) {
+    this.mainContact = mainContact;
+  }
+
 }

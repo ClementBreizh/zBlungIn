@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
@@ -70,6 +69,8 @@ public class Candidate extends Person {
    */
   public Candidate() {
     this.degrees = new ArrayList<Degree>();
+    this.sessions = new ArrayList<Session>();
+    this.matters = new ArrayList<Matter>();
   }
 
   /**
@@ -87,6 +88,9 @@ public class Candidate extends Person {
     this.email = email;
     this.cellPhone = cellPhone;
     this.degrees = new ArrayList<Degree>();
+    this.degrees = new ArrayList<Degree>();
+    this.sessions = new ArrayList<Session>();
+    this.matters = new ArrayList<Matter>();
   }
 
   /**
