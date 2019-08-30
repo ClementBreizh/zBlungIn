@@ -6,9 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
+import org.springframework.http.HttpMethod;
+
 public class HttpUtils {
 
-    public StringBuilder callServer(StringBuilder builder, String subUrl, String httpVerb) throws MalformedURLException, IOException {
+    public StringBuilder callServer(StringBuilder builder, String subUrl, HttpMethod httpVerb) throws MalformedURLException, IOException {
       try {
         // Create base URL to go
         URL url = new URL("http://127.0.0.1:1234"+subUrl);
@@ -17,7 +19,7 @@ public class HttpUtils {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         // Set HTTP verbb to use
-        conn.setRequestMethod(httpVerb);
+        conn.setRequestMethod(httpVerb.name());
 
         // Real request connection with all configs
         conn.connect();

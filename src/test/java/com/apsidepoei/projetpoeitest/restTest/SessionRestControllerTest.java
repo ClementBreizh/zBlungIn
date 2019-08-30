@@ -52,8 +52,8 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
   protected boolean compareTo(Session item1, Session item2) {
     return item1.getId().equals(item2.getId())
         && item1.getName().equals(item2.getName())
-          && item1.getDateStart().equals(item2.getDateStart())
-            && item1.getDateEnd().equals(item2.getDateEnd());
+          && item1.getStartDate().equals(item2.getStartDate())
+            && item1.getEndDate().equals(item2.getEndDate());
   }
   @Override
   protected Session parseJsonToObject(StringBuilder builder)
@@ -77,6 +77,18 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
   @Override
   protected Integer getItemIdTest(Session item) {
     return item.getId();
+  }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Session> items, List<Session> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
 

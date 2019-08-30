@@ -103,7 +103,9 @@ public class Person extends EntityDb {
   @Override
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", téléphoneyvukftyfyj = " + cellPhone + ", adresse = ]";
+
+        + ", email = " + email + ", téléphone = " + cellPhone + ", adresse = ]";
+
   }
 
 

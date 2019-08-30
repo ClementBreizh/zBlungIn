@@ -76,5 +76,17 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
   protected Integer getItemIdTest(Matter item) {
     return item.getId();
   }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Matter> items, List<Matter> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
 

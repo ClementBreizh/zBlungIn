@@ -13,8 +13,6 @@
   <h3>Realized</h3>
   <label>
     <input type="radio" value="true" name="status" />Yes</label>
-  <label>
-    <input type="radio" value="false" name="status" />No</label>
 <br><br>
 
   <input type="submit" value="Submit">
