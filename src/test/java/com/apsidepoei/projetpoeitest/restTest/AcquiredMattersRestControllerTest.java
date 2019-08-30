@@ -2,7 +2,6 @@ package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -15,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
-import com.apsidepoei.projetpoei.entities.Assessment;
+import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
+import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -24,56 +23,57 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
 *
 * @author clemb
-* Tests for Assessment Entity.
+* Tests for AcquiredMatters Entity.
 */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessment, Integer> {
+public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<AcquiredMatters, Integer> {
 
   @Autowired
-  private AssessmentRepository repository;
+  private AcquiredMattersRepository repository;
   /**
    * Empty Constructor.
    */
-  public AssessmentRestControllerTest() {
-    super("/assesments");
+  public AcquiredMattersRestControllerTest() {
+    super("/acquiredmatterss");
   }
-
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<Assessment, Integer> getRepository() {
+  protected JpaRepository<AcquiredMatters, Integer> getRepository() {
     return repository;
   }
   /**
    * Parse Json to List for test.
    */
   @Override
-  protected List<Assessment> parseJsonToList(StringBuilder builder)
+  protected List<AcquiredMatters> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Assessment>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<AcquiredMatters>>() {
     });
   }
   /**
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(Assessment item1, Assessment item2) {
-    return item1.getId().equals(item2.getId()) && item1.getCategory().equals(item2.getCategory())
-        && item1.getDateTime().compareTo(item2.getDateTime()) == 0;
+  protected boolean compareTo(AcquiredMatters item1, AcquiredMatters item2) {
+    return item1.getId().equals(item2.getId())
+        && item1.getScore().equals(item2.getScore())
+            && item1.getValidationDate().equals(item2.getValidationDate());
   }
+
   /**
    * Parse Json to a Object for run test.
    */
   @Override
-  protected Assessment parseJsonToObject(StringBuilder builder)
+  protected AcquiredMatters parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<Assessment>() {
+    return mapper.readValue(builder.toString(), new TypeReference<AcquiredMatters>() {
     });
   }
   /**
@@ -87,15 +87,15 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    * Create a object for run test.
    */
   @Override
-  protected Assessment getObjectTest() throws ParseException {
-    Assessment item = new Assessment("categorie", new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+  protected AcquiredMatters getObjectTest() throws ParseException {
+    AcquiredMatters item = new AcquiredMatters();
     return item;
   }
   /**
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(Assessment item) {
+  protected Integer getItemIdTest(AcquiredMatters item) {
     return item.getId();
   }
   /**
@@ -103,14 +103,16 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "category=categorie&dateTime=2019/10/02";
+    String urlParameters  = "score=12&validationDate=2019/02/24&";
     return urlParameters;
   }
   /**
    * Method to compare list.
    */
   @Override
-  protected boolean compareToList(List<Assessment> items, List<Assessment> dbItems) { // TODO Auto-generated method stub
+  protected boolean compareToList(List<AcquiredMatters> items, List<AcquiredMatters> dbItems) {
     return false;
   }
 }
+
+

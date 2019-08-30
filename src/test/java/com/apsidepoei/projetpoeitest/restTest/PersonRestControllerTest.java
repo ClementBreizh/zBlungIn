@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  *
  * @author clemb
- *
+ * Tests for Person Entity.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -34,15 +34,24 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
   @Autowired
   private PersonRepository repository;
 
+  /**
+   * Empty Constructor.
+   */
   public PersonRestControllerTest() {
     super("/persons");
   }
 
+  /**
+   * Create repository.
+   */
   @Override
   protected JpaRepository<Person, Integer> getRepository() {
     return repository;
   }
 
+  /**
+   * Parse Person in Json to List for test.
+   */
   @Override
   protected List<Person> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -51,6 +60,9 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
     });
   }
 
+  /**
+   * Compare if data is the same.
+   */
   @Override
   protected boolean compareTo(Person item1, Person item2) {
     return item1.getId().equals(item2.getId())
@@ -61,28 +73,43 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
                     && item1.getHomePhone().equals(item2.getHomePhone());
   }
 
+  /**
+   * Generate a Id for run test.
+   */
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
 
+  /**
+   * Create a Person object for run test.
+   */
   @Override
   protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0213234323");
+    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443");
     return item;
   }
 
+  /**
+   * Create a string for POST method API.
+   */
   @Override
   protected String getObjectToStringToPost() {
     String urlParameters  = "firstname=José&lastname=Phine&email=josephine@gmail.com&cellPhone=0712233443&homePhone=0213234323";
     return urlParameters;
   }
 
+  /**
+   * Return Id of Object for run test.
+   */
   @Override
   protected Integer getItemIdTest(Person item) {
     return item.getId();
   }
 
+  /**
+   * Parse Json to a Object Person for run test.
+   */
   @Override
   protected Person parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -91,6 +118,9 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
     });
   }
 
+  /**
+   * Method to compare list of Person.
+   */
   @Override
   protected boolean compareToList(List<Person> items, List<Person> dbItems) {
     return false;
