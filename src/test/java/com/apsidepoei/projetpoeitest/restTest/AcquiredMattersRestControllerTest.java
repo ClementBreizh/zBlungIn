@@ -37,7 +37,7 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
    * Empty Constructor.
    */
   public AcquiredMattersRestControllerTest() {
-    super("/acquiredmatterss");
+    super("/acquiredmatters");
   }
   /**
    * Create repository.
@@ -103,7 +103,7 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "score=12&validationDate=2019/02/24&";
+    String urlParameters  = "score=12&validationDate=2019/02/24";
     return urlParameters;
   }
   /**

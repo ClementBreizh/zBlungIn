@@ -13,50 +13,49 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
-import com.apsidepoei.projetpoei.entities.CompanyCandidatesSession;
+import com.apsidepoei.projetpoei.database.repositories.HasDoneAssessmentRepository;
+import com.apsidepoei.projetpoei.entities.HasDoneAssessment;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
- * @author clemb
- * Tests for CompanyCandidatesSession Entity.
- */
+*
+* @author clemb
+* Tests for HasDoneAssessment Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class CompanyCandidatesSessionRestControllerTest extends BaseRestControllerTest<CompanyCandidatesSession, Integer> {
-
+public class HasDoneAssessmentRestControllerTest extends BaseRestControllerTest<HasDoneAssessment, Integer>{
   @Autowired
-  private CompanyCandidatesSessionRepository repository;
+  private HasDoneAssessmentRepository repository;
 
   /**
    * Empty Constructor.
    */
-  public CompanyCandidatesSessionRestControllerTest() {
-    super("/candidBySessionAndCompany");
+  public HasDoneAssessmentRestControllerTest() {
+    super("/persons");
   }
 
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<CompanyCandidatesSession, Integer> getRepository() {
+  protected JpaRepository<HasDoneAssessment, Integer> getRepository() {
     return repository;
   }
 
   /**
-   * Parse CompanyCandidatesSession in Json to List for test.
+   * Parse HasDoneAssessment in Json to List for test.
    */
   @Override
-  protected List<CompanyCandidatesSession> parseJsonToList(StringBuilder builder)
+  protected List<HasDoneAssessment> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<CompanyCandidatesSession>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<HasDoneAssessment>>() {
     });
   }
 
@@ -64,12 +63,12 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(CompanyCandidatesSession item1, CompanyCandidatesSession item2) {
+  protected boolean compareTo(HasDoneAssessment item1, HasDoneAssessment item2) {
     return item1.getId().equals(item2.getId())
-        && item1.getCompany().equals(item2.getCompany())
-            && item1.getCandidates().equals(item2.getCandidates())
-                && item1.getSession().equals(item2.getSession())
-                ;
+        && item1.getScore().equals(item2.getScore())
+            && item1.getValidationDate().equals(item2.getValidationDate())
+                && item1.getAssessment().equals(item2.getAssessment())
+                  && item1.getCandidate().equals(item2.getCandidate());
   }
 
   /**
@@ -81,11 +80,11 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
   }
 
   /**
-   * Create a CompanyCandidatesSession object for run test.
+   * Create a HasDoneAssessment object for run test.
    */
   @Override
-  protected CompanyCandidatesSession getObjectTest() {
-    CompanyCandidatesSession item = new CompanyCandidatesSession();
+  protected HasDoneAssessment getObjectTest() {
+    HasDoneAssessment item = new HasDoneAssessment();
     return item;
   }
 
@@ -102,31 +101,26 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(CompanyCandidatesSession item) {
+  protected Integer getItemIdTest(HasDoneAssessment item) {
     return item.getId();
   }
 
   /**
-   * Parse Json to a Object CompanyCandidatesSession for run test.
+   * Parse Json to a Object HasDoneAssessment for run test.
    */
   @Override
-  protected CompanyCandidatesSession parseJsonToObject(StringBuilder builder)
+  protected HasDoneAssessment parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<CompanyCandidatesSession>() {
+    return mapper.readValue(builder.toString(), new TypeReference<HasDoneAssessment>() {
     });
   }
 
   /**
-   * Method to compare list of CompanyValidateCandidatesSession.
+   * Method to compare list of HasDoneAssessment.
    */
   @Override
-  protected boolean compareToList(List<CompanyCandidatesSession> items, List<CompanyCandidatesSession> dbItems) {
+  protected boolean compareToList(List<HasDoneAssessment> items, List<HasDoneAssessment> dbItems) {
     return false;
   }
 }
-
-
-
-
-

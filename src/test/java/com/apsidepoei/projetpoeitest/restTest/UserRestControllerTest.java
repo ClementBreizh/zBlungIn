@@ -13,50 +13,50 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
-import com.apsidepoei.projetpoei.entities.CompanyCandidatesSession;
+import com.apsidepoei.projetpoei.database.repositories.UserRepository;
+import com.apsidepoei.projetpoei.entities.User;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
- * @author clemb
- * Tests for CompanyCandidatesSession Entity.
- */
+*
+* @author clemb
+* Tests for User Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class CompanyCandidatesSessionRestControllerTest extends BaseRestControllerTest<CompanyCandidatesSession, Integer> {
+public class UserRestControllerTest extends BaseRestControllerTest <User, Integer> {
 
   @Autowired
-  private CompanyCandidatesSessionRepository repository;
+  private UserRepository repository;
 
   /**
    * Empty Constructor.
    */
-  public CompanyCandidatesSessionRestControllerTest() {
-    super("/candidBySessionAndCompany");
+  public UserRestControllerTest() {
+    super("/users");
   }
 
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<CompanyCandidatesSession, Integer> getRepository() {
+  protected JpaRepository<User, Integer> getRepository() {
     return repository;
   }
 
   /**
-   * Parse CompanyCandidatesSession in Json to List for test.
+   * Parse User in Json to List for test.
    */
   @Override
-  protected List<CompanyCandidatesSession> parseJsonToList(StringBuilder builder)
+  protected List<User> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<CompanyCandidatesSession>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<User>>() {
     });
   }
 
@@ -64,12 +64,13 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(CompanyCandidatesSession item1, CompanyCandidatesSession item2) {
+  protected boolean compareTo(User item1, User item2) {
     return item1.getId().equals(item2.getId())
-        && item1.getCompany().equals(item2.getCompany())
-            && item1.getCandidates().equals(item2.getCandidates())
-                && item1.getSession().equals(item2.getSession())
-                ;
+        && item1.getFirstname().equals(item2.getFirstname())
+            && item1.getLastname().equals(item2.getLastname())
+                && item1.getEmail().equals(item2.getEmail())
+                  && item1.getCellPhone().equals(item2.getCellPhone())
+                    && item1.getHomePhone().equals(item2.getHomePhone());
   }
 
   /**
@@ -81,11 +82,11 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
   }
 
   /**
-   * Create a CompanyCandidatesSession object for run test.
+   * Create a User object for run test.
    */
   @Override
-  protected CompanyCandidatesSession getObjectTest() {
-    CompanyCandidatesSession item = new CompanyCandidatesSession();
+  protected User getObjectTest() {
+    User item = new User("logadmin", "PassAdmin", "PrenomAdmin", "NomAdmin" ,"josephine@gmail.com", "0712233443");
     return item;
   }
 
@@ -94,7 +95,7 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "";
+    String urlParameters  = "login=logadmin&password=PassAdmin&firstname=José&lastname=Phine&email=josephine@gmail.com&cellPhone=0712233443&homePhone=0213234323";
     return urlParameters;
   }
 
@@ -102,31 +103,26 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(CompanyCandidatesSession item) {
+  protected Integer getItemIdTest(User item) {
     return item.getId();
   }
 
   /**
-   * Parse Json to a Object CompanyCandidatesSession for run test.
+   * Parse Json to a Object User for run test.
    */
   @Override
-  protected CompanyCandidatesSession parseJsonToObject(StringBuilder builder)
+  protected User parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<CompanyCandidatesSession>() {
+    return mapper.readValue(builder.toString(), new TypeReference<User>() {
     });
   }
 
   /**
-   * Method to compare list of CompanyValidateCandidatesSession.
+   * Method to compare list of Person.
    */
   @Override
-  protected boolean compareToList(List<CompanyCandidatesSession> items, List<CompanyCandidatesSession> dbItems) {
+  protected boolean compareToList(List<User> items, List<User> dbItems) {
     return false;
   }
 }
-
-
-
-
-
