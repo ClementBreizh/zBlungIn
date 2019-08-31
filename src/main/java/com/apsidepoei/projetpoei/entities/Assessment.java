@@ -38,7 +38,7 @@ public class Assessment extends EntityDb {
    * empty constructor.
    */
   public Assessment() {
-
+    super();
   }
 
   /**

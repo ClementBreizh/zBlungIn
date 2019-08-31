@@ -77,11 +77,9 @@ public class Appointment extends EntityDb {
    * @param dateTime     = date and time
    * @param report       = the report
    */
-  public Appointment(String informations, Date dateTime, String report, List<Person> persons) {
+  public Appointment(Date dateTime, List<Person> persons) {
     super();
-    this.informations = informations;
     this.dateTime = dateTime;
-    this.report = report;
     this.persons = persons;
   }
 

@@ -20,6 +20,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ *
+ * @author clemb
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -53,8 +58,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
             && item1.getLastname().equals(item2.getLastname())
                 && item1.getEmail().equals(item2.getEmail())
                   && item1.getCellPhone().equals(item2.getCellPhone())
-                    && item1.getHomePhone().equals(item2.getHomePhone())
-                      && item1.getCommentary().equals(item2.getCommentary());
+                    && item1.getHomePhone().equals(item2.getHomePhone());
   }
 
   @Override
@@ -64,16 +68,20 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
 
   @Override
   protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212342534", "no comment");
+    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0213234323");
     return item;
+  }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    String urlParameters  = "firstname=José&lastname=Phine&email=josephine@gmail.com&cellPhone=0712233443&homePhone=0213234323";
+    return urlParameters;
   }
 
   @Override
   protected Integer getItemIdTest(Person item) {
     return item.getId();
   }
-
-
 
   @Override
   protected Person parseJsonToObject(StringBuilder builder)
@@ -83,6 +91,10 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
     });
   }
 
+  @Override
+  protected boolean compareToList(List<Person> items, List<Person> dbItems) {
+    return false;
+  }
 }
 
 

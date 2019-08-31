@@ -54,7 +54,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return item1.getId().equals(item2.getId()) && item1.getInformations().equals(item2.getInformations())
         && item1.getDateTime().compareTo(item2.getDateTime()) == 0 && item1.getReport().equals(item2.getReport());
   }
-  
+
   @Override
   protected Appointment parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -77,6 +77,18 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   @Override
   protected Integer getItemIdTest(Appointment item) {
     return item.getId();
+  }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Appointment> items, List<Appointment> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
 

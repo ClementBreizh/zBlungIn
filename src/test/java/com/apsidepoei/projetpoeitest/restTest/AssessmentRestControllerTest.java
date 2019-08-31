@@ -53,7 +53,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     return item1.getId().equals(item2.getId()) && item1.getCategory().equals(item2.getCategory())
         && item1.getDateTime().compareTo(item2.getDateTime()) == 0;
   }
-  
+
   @Override
   protected Assessment parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -76,5 +76,17 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   @Override
   protected Integer getItemIdTest(Assessment item) {
     return item.getId();
+  }
+
+  @Override
+  protected String getObjectToStringToPost() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  protected boolean compareToList(List<Assessment> items, List<Assessment> dbItems) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }

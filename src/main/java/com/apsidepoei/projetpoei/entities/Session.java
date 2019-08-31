@@ -55,7 +55,7 @@ public class Session extends EntityDb {
    * Empty constructor.
    */
   public Session() {
-
+    super();
   }
 
   /**
@@ -81,12 +81,12 @@ public class Session extends EntityDb {
    * @param startDate = the startDate
    * @param endDate   = the endDate
    */
-  public Session(int id, String name, Date startDate, Date endDate) {
+  public Session(int id, String name, Date startDate, Date endDate, List<Candidate> candidates) {
     super();
-    this.setId(id);
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.candidates = candidates;
   }
 
 
