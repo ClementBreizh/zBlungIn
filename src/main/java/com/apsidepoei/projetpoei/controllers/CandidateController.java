@@ -16,6 +16,6 @@ public class CandidateController extends BaseController {
    * Constructor.
    */
   public CandidateController() {
-    super("/acquiredmatters");
+    super("/candidates");
   }
 }

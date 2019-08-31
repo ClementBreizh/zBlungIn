@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +31,8 @@ public class AcquiredMatters extends EntityDb {
 
  @JsonProperty(value = AcquiredMattersContract.COL_VALIDATION_DATE)
  @Column(name = AcquiredMattersContract.COL_VALIDATION_DATE, nullable = true)
+ @DateTimeFormat(pattern = "yyyy-MM-dd")
+
  protected Date validationDate;
 
  @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_MATTER)

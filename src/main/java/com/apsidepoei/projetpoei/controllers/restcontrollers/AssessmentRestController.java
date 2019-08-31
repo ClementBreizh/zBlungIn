@@ -13,7 +13,7 @@ import com.apsidepoei.projetpoei.entities.Assessment;
  *
  */
 @RestController
-@RequestMapping("/api/assesments")
+@RequestMapping("/api/assessments")
 public class AssessmentRestController extends BaseRestController<Assessment, Integer> {
   public AssessmentRestController(@Autowired AssessmentRepository repository) {
     super(repository);

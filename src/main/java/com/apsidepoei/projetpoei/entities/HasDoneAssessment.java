@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.database.contracts.HasDoneAssessmentContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +34,7 @@ public class HasDoneAssessment extends EntityDb {
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_VALIDATION_DATE)
   @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = false)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   protected Date validationDate;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_FK_ID_ASSESSMENT)
