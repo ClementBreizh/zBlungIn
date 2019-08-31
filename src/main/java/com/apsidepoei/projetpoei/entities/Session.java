@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,10 +35,12 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date startDate;
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)

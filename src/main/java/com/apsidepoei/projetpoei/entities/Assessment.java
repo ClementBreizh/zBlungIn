@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,6 +22,7 @@ public class Assessment extends EntityDb {
 
   @JsonProperty(value = AssessmentContract.COL_DATE)
   @Column(name = AssessmentContract.COL_DATE, nullable = false)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date dateTime;
 
 
@@ -76,5 +79,5 @@ public class Assessment extends EntityDb {
   public void setDateTime(Date dateTime) {
     this.dateTime = dateTime;
   }
-  
+
 }
