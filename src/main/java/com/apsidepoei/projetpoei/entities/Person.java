@@ -88,15 +88,13 @@ public class Person extends EntityDb {
    * @param lastname  = the lastname
    * @param email     = the email
    * @param cellPhone = the cellPhone
-   * @param homePhone = the homePhone
    */
-  public Person(String firstname, String lastname, String email, String cellPhone, String homePhone) {
+  public Person(String firstname, String lastname, String email, String cellPhone) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
-    this.homePhone = homePhone;
   }
 
   /**
