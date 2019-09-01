@@ -3,7 +3,6 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -21,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 @Table(name = UserContract.TABLE)
-@AttributeOverride(name = "id", column = @Column(name = UserContract.COL_ID))
 public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_NAME)
