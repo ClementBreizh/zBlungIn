@@ -38,7 +38,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    * Empty Constructor.
    */
   public AssessmentRestControllerTest() {
-    super("/assesments");
+    super("/assessments");
   }
 
   /**

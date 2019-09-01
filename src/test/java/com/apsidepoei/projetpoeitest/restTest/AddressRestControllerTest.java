@@ -90,7 +90,7 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
    */
   @Override
   protected Address getObjectTest() {
-    Address item = new Address("adresse postale", "35000", "ville");
+    Address item = new Address("adressepostale", "35000", "ville");
     return item;
   }
   /**
@@ -105,7 +105,7 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "address=adresse postale&postalCode=35000&town=ville";
+    String urlParameters  = "address=adressepostale&postalCode=35000&town=ville";
     return urlParameters;
   }
   /**

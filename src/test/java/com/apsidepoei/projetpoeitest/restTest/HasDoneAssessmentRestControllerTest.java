@@ -1,6 +1,9 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -81,19 +84,22 @@ public class HasDoneAssessmentRestControllerTest extends BaseRestControllerTest<
 
   /**
    * Create a HasDoneAssessment object for run test.
+   * @throws ParseException
    */
   @Override
-  protected HasDoneAssessment getObjectTest() {
-    HasDoneAssessment item = new HasDoneAssessment();
+  protected HasDoneAssessment getObjectTest() throws ParseException {
+    Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2019/12/21");
+    HasDoneAssessment item = new HasDoneAssessment(12F, date);
     return item;
   }
 
   /**
    * Create a string for POST method API.
+   * @throws ParseException
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "";
+    String urlParameters  = "score=12F&validationDate=2019/12/21";
     return urlParameters;
   }
 

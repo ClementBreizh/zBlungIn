@@ -62,9 +62,7 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
    */
   @Override
   protected boolean compareTo(Company item1, Company item2) {
-    return item1.getId().equals(item2.getId()) && item1.getName().equals(item2.getName())
-        && item1.getAntennaName().equals(item2.getAntennaName()) && item1.getSiret().equals(item2.getSiret())
-        && item1.getApeCode().equals(item2.getApeCode());
+    return item1.getId().equals(item2.getId()) && item1.getName().equals(item2.getName());
   }
   /**
    * Parse Json to a Object for run test.
@@ -88,7 +86,7 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
    */
   @Override
   protected Company getObjectTest() throws ParseException {
-    Company item = new Company();
+    Company item = new Company("ZorgINC");
     return item;
   }
   /**
@@ -103,7 +101,8 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    return null;
+    String urlParameters  = "name=ZorgINC";
+    return urlParameters;
   }
   /**
    * Method to compare list.
