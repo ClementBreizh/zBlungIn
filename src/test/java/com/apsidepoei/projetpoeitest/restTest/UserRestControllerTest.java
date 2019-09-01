@@ -13,50 +13,50 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
-import com.apsidepoei.projetpoei.entities.Person;
+import com.apsidepoei.projetpoei.database.repositories.UserRepository;
+import com.apsidepoei.projetpoei.entities.User;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
- * @author clemb
- * Tests for Person Entity.
- */
+*
+* @author clemb
+* Tests for User Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class PersonRestControllerTest extends BaseRestControllerTest<Person, Integer> {
+public class UserRestControllerTest extends BaseRestControllerTest <User, Integer> {
 
   @Autowired
-  private PersonRepository repository;
+  private UserRepository repository;
 
   /**
    * Empty Constructor.
    */
-  public PersonRestControllerTest() {
-    super("/persons");
+  public UserRestControllerTest() {
+    super("/users");
   }
 
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<Person, Integer> getRepository() {
+  protected JpaRepository<User, Integer> getRepository() {
     return repository;
   }
 
   /**
-   * Parse Person in Json to List for test.
+   * Parse User in Json to List for test.
    */
   @Override
-  protected List<Person> parseJsonToList(StringBuilder builder)
+  protected List<User> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Person>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<User>>() {
     });
   }
 
@@ -64,7 +64,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(Person item1, Person item2) {
+  protected boolean compareTo(User item1, User item2) {
     return item1.getId().equals(item2.getId())
         && item1.getFirstname().equals(item2.getFirstname())
             && item1.getLastname().equals(item2.getLastname())
@@ -82,11 +82,11 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
   }
 
   /**
-   * Create a Person object for run test.
+   * Create a User object for run test.
    */
   @Override
-  protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443");
+  protected User getObjectTest() {
+    User item = new User("logadmin", "PassAdmin", "PrenomAdmin", "NomAdmin" ,"josephine@gmail.com", "0712233443");
     return item;
   }
 
@@ -95,7 +95,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "firstname=José&lastname=Phine&email=josephine@gmail.com&cellPhone=0712233443&homePhone=0213234323";
+    String urlParameters  = "login=logadmin&password=PassAdmin&firstname=José&lastname=Phine&email=josephine@gmail.com&cellPhone=0712233443&homePhone=0213234323";
     return urlParameters;
   }
 
@@ -103,18 +103,18 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(Person item) {
+  protected Integer getItemIdTest(User item) {
     return item.getId();
   }
 
   /**
-   * Parse Json to a Object Person for run test.
+   * Parse Json to a Object User for run test.
    */
   @Override
-  protected Person parseJsonToObject(StringBuilder builder)
+  protected User parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<Person>() {
+    return mapper.readValue(builder.toString(), new TypeReference<User>() {
     });
   }
 
@@ -122,12 +122,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    * Method to compare list of Person.
    */
   @Override
-  protected boolean compareToList(List<Person> items, List<Person> dbItems) {
+  protected boolean compareToList(List<User> items, List<User> dbItems) {
     return false;
   }
 }
-
-
-
-
-
