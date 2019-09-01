@@ -181,7 +181,7 @@ public class DatasInsertors {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
       company.setApeCode(faker.number().digits(5));
-      company.setAddress(addressRepository.findById(i).get());
+//      company.setAddress(addressRepository.findById(i).get());
       companyRepository.save(company);
     }
     companyList.addAll(companyRepository.findAll());
@@ -313,23 +313,35 @@ public class DatasInsertors {
 
     Integer personSize = faker.random().nextInt(0, personList.size());
 
-    addressList.get(1).toString();
 
-    for (int i = 0; i < nbEntities; i++) {
+//    for (int i = 1; i < nbEntities+1; i++) {
+//      Integer rand1 = faker.random().nextInt(0, addressList.size()-1);
+//      System.out.println(companyRepository.findById(rand1).get().toString());
+//      System.out.println(addressRepository.findById(rand1).get().toString());
+//      System.out.println(i);
+//    }
+
+//    int i = 0;
+//    while (i < nbEntities) {
 //      Integer rand1 = faker.random().nextInt(0, addressList.size());
+//
+//      System.out.println(companyRepository.findById(rand1).get().toString());
+//      System.out.println(addressRepository.findById(rand1).get().toString());
+//      i++;
+//    }
+//  companyRepository.findById(rand1).get().setAddress(addressRepository.findById(rand1).get());
 
+//  company.setAddress(addressRepository.findById(rand1).get());
 
-//      Candidate cand = new Candidate();
-//      cand = candidateRepository.findById(i + 1).get();
-//      cand.setAddress(addressList.get(rand1));
-//      candidateRepository.save(cand);
+//  Candidate cand = new Candidate();
+//  cand = candidateRepository.findById(i + 1).get();
+//  cand.setAddress(addressList.get(rand1));
+//  candidateRepository.save(cand);
 
-//      Person pers = new Person();
-//      pers = candidateRepository.findById(i + 1).get();
-//      pers.setAddress(addressList.get(1));
-//      personRepository.save(pers);
-    }
-
+//  Person pers = new Person();
+//  pers = candidateRepository.findById(i + 1).get();
+//  pers.setAddress(addressList.get(1));
+//  personRepository.save(pers);
 
 
     System.out.println("DatasInsertors totalement chargé");
