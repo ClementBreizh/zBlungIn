@@ -49,7 +49,6 @@ public class HasDoneAssessment extends EntityDb {
   private Candidate candidate;
 
 
-
   /**
    * Empty constructor.
    */
@@ -58,32 +57,30 @@ public class HasDoneAssessment extends EntityDb {
   }
 
   /**
-   * Constructor for a new HasDoneAssessment.
-   *
-   * @param assessment = assessment
-   * @param candidate  = candidate
+   * @param score
+   * @param validationDate
    */
-  public HasDoneAssessment(Assessment assessment, Candidate candidate) {
+  public HasDoneAssessment(Float score, LocalDate validationDate) {
     super();
-    this.assessment = assessment;
-    this.candidate = candidate;
+    this.score = score;
+    this.validationDate = validationDate;
   }
 
   /**
-   * Constructor for a new HasDoneAssessment.
-   *
-   * @param assessment = assessment
-   * @param candidate  = candidate
-   * @param validationDate = validationDate
-   * @param score  = score
+   * @param score
+   * @param validationDate
+   * @param assessment
+   * @param candidate
    */
-  public HasDoneAssessment(Float score, LocalDate validationDate, Assessment assessment, Candidate candidate) {
+  public HasDoneAssessment(Float score, LocalDate validationDate, Assessment assessment,
+      Candidate candidate) {
     super();
     this.score = score;
     this.validationDate = validationDate;
     this.assessment = assessment;
     this.candidate = candidate;
   }
+
 
   // GETTER/SETTER
   /**

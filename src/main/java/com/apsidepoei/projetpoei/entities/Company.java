@@ -69,18 +69,10 @@ public class Company extends EntityDb {
 
 
   /**
-   * Constructor for a new business.
-   *
-   * @param name        = the name
-   * @param antennaName = the name of antenna
-   * @param siret       = the siret
-   * @param apeCode     = the APE code
+   * Empty constructor.
    */
-  public Company(String name, Address address, Person mainContact) {
+  public Company() {
     super();
-    this.name = name;
-    this.address = address;
-    this.mainContact = mainContact;
     this.contacts = new ArrayList<Person>();
     this.sessions = new ArrayList<Session>();
   }
@@ -89,9 +81,6 @@ public class Company extends EntityDb {
    * Constructor for a new business.
    *
    * @param name        = the name
-   * @param antennaName = the name of antenna
-   * @param siret       = the siret
-   * @param apeCode     = the APE code
    */
   public Company(String name) {
     super();
@@ -101,16 +90,39 @@ public class Company extends EntityDb {
   }
 
   /**
-   * Constructor with id for a new business.
-   *
-   * @param id          = the id
-   * @param name        = the name
-   * @param antennaName = the name of antenna
-   * @param siret       = the siret
-   * @param apeCode     = the APE code
+   * @param name
+   * @param antennaName
+   * @param siret
+   * @param apeCode
+   * @param mainContact
+   * @param address
+   */
+  public Company(String name, String antennaName, String siret, String apeCode, Person mainContact,
+      Address address) {
+    super();
+    this.name = name;
+    this.antennaName = antennaName;
+    this.siret = siret;
+    this.apeCode = apeCode;
+    this.mainContact = mainContact;
+    this.address = address;
+    this.contacts = new ArrayList<Person>();
+    this.sessions = new ArrayList<Session>();
+  }
+
+
+  /**
+   * @param name
+   * @param antennaName
+   * @param siret
+   * @param apeCode
+   * @param contacts
+   * @param mainContact
+   * @param address
+   * @param sessions
    */
   public Company(String name, String antennaName, String siret, String apeCode,
-      List<Person> contacts, Person mainContact, List<Session> sessions) {
+      List<Person> contacts, Person mainContact, Address address, List<Session> sessions) {
     super();
     this.name = name;
     this.antennaName = antennaName;
@@ -118,17 +130,10 @@ public class Company extends EntityDb {
     this.apeCode = apeCode;
     this.contacts = contacts;
     this.mainContact = mainContact;
+    this.address = address;
     this.sessions = sessions;
   }
 
-  /**
-   * Empty constructor.
-   */
-  public Company() {
-    super();
-    this.contacts = new ArrayList<Person>();
-    this.sessions = new ArrayList<Session>();
-  }
 
   /**
    * override toString() function.

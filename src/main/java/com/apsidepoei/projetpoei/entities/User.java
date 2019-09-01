@@ -43,6 +43,16 @@ public class User extends Person {
   }
 
   /**
+   * @param login
+   * @param password
+   */
+  public User(String login, String password) {
+    super();
+    this.login = login;
+    this.password = password;
+  }
+
+  /**
    * Constructor with id for new Feedback.
    *
    * @param login      = the login
@@ -79,6 +89,7 @@ public class User extends Person {
     this.cellPhone = cellPhone;
     this.role = role;
   }
+
 
   /**
    * Override toString() function.

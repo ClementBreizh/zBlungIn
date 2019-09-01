@@ -139,7 +139,8 @@ public class DatasInsertors {
       Appointment appointment = new Appointment(
           faker.lorem().sentence(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
-          faker.lorem().sentence());
+          faker.lorem().sentence(), false);
+
       appointment.setInformations(faker.lorem().sentence());
       appointmentRepository.save(appointment);
     }
@@ -230,9 +231,10 @@ public class DatasInsertors {
       Integer addressSize = faker.random().nextInt(0, addressList.size());
       Person person = new Person(
           faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+          faker.name().lastName());
+      person.setEmail(faker.internet().emailAddress());
+      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+
       personRepository.save(person);
     }
     personList.addAll(personRepository.findAll());

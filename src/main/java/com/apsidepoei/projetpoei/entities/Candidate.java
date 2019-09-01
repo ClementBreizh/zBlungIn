@@ -66,6 +66,7 @@ public class Candidate extends Person {
    * Empty constructor.
    */
   public Candidate() {
+    super();
     this.degrees = new ArrayList<Degree>();
     this.sessions = new ArrayList<Session>();
     this.matters = new ArrayList<Matter>();
@@ -86,10 +87,33 @@ public class Candidate extends Person {
     this.email = email;
     this.cellPhone = cellPhone;
     this.degrees = new ArrayList<Degree>();
-    this.degrees = new ArrayList<Degree>();
     this.sessions = new ArrayList<Session>();
     this.matters = new ArrayList<Matter>();
   }
+
+
+
+  /**
+   * @param ranking
+   * @param feedback
+   * @param degrees
+   * @param matters
+   * @param sessions
+   */
+  public Candidate(String firstname, String lastname, String email, String cellPhone, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
+      List<Matter> matters, List<Session> sessions) {
+    super();
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.email = email;
+    this.cellPhone = cellPhone;
+    this.ranking = ranking;
+    this.feedback = feedback;
+    this.degrees = degrees;
+    this.matters = matters;
+    this.sessions = sessions;
+  }
+
 
   /**
    * Override toString() function.
