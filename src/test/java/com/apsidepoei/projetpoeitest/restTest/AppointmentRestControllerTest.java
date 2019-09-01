@@ -3,6 +3,8 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -63,7 +65,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   @Override
   protected boolean compareTo(Appointment item1, Appointment item2) {
     return item1.getId().equals(item2.getId()) && item1.getInformations().equals(item2.getInformations())
-        && item1.getDateTime().compareTo(item2.getDateTime()) == 0 && item1.getReport().equals(item2.getReport());
+        && item1.getAppointmentDate().compareTo(item2.getAppointmentDate()) == 0 && item1.getReport().equals(item2.getReport());
   }
   /**
    * Parse Json to a Object Appointment for run test.
@@ -87,8 +89,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
    */
   @Override
   protected Appointment getObjectTest() throws ParseException {
-    Appointment item = new Appointment("Commentaire", new SimpleDateFormat("yyyy/MM/dd").parse("2019/12/15"),
-        "Report");
+    Appointment item = new Appointment();
     return item;
   }
   /**

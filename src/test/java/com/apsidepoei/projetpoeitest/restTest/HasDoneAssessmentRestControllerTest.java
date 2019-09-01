@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -88,8 +89,8 @@ public class HasDoneAssessmentRestControllerTest extends BaseRestControllerTest<
    */
   @Override
   protected HasDoneAssessment getObjectTest() throws ParseException {
-    Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2019/12/21");
-    HasDoneAssessment item = new HasDoneAssessment(12F, date);
+    LocalDate localDate = LocalDate.of(2016, 8, 19);
+    HasDoneAssessment item = new HasDoneAssessment(12F, localDate);
     return item;
   }
 

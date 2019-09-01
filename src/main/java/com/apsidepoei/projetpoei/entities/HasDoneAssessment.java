@@ -57,7 +57,7 @@ public class HasDoneAssessment extends EntityDb {
     super();
   }
 
-  public HasDoneAssessment(Float score, Date validationDate) {
+  public HasDoneAssessment(Float score, LocalDate validationDate) {
     super();
     this.score = score;
     this.validationDate = validationDate;

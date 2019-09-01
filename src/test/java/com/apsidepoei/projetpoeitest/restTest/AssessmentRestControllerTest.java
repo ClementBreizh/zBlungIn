@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -64,7 +65,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   @Override
   protected boolean compareTo(Assessment item1, Assessment item2) {
     return item1.getId().equals(item2.getId()) && item1.getCategory().equals(item2.getCategory())
-        && item1.getDateTime().compareTo(item2.getDateTime()) == 0;
+        && item1.getUpdatingDate().compareTo(item2.getUpdatingDate()) == 0;
   }
   /**
    * Parse Json to a Object for run test.
@@ -88,7 +89,8 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    */
   @Override
   protected Assessment getObjectTest() throws ParseException {
-    Assessment item = new Assessment("categorie", new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    LocalDate localDate = LocalDate.of(2016, 8, 19);
+    Assessment item = new Assessment("categorie", localDate);
     return item;
   }
   /**

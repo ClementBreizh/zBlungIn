@@ -63,7 +63,7 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   protected boolean compareTo(AcquiredMatters item1, AcquiredMatters item2) {
     return item1.getId().equals(item2.getId())
         && item1.getScore().equals(item2.getScore())
-            && item1.getValidationDate().equals(item2.getValidationDate());
+            && item1.getValidationLocalDate().equals(item2.getValidationLocalDate());
   }
 
   /**
