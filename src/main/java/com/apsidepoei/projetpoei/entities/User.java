@@ -3,7 +3,6 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
