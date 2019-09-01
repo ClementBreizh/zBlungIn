@@ -33,6 +33,23 @@ public class Feedback extends EntityDb {
 
 
   /**
+   * Empty constructor.
+   */
+  public Feedback() {
+    super();
+  }
+
+  /**
+   * Constructor with id for new Feedback.
+   *
+   * @param typeOfContract     = the typeOfContract
+   */
+  public Feedback(String typeOfContract) {
+    super();
+    this.typeOfContract = typeOfContract;
+  }
+
+  /**
    * Constructor with id for new Feedback.
    *
    * @param typeOfContract     = the typeOfContract
@@ -45,26 +62,6 @@ public class Feedback extends EntityDb {
     this.durationOfContract = durationOfContract;
     this.comment = comment;
   }
-
-  /**
-   * Constructor with id for new Feedback.
-   *
-   * @param typeOfContract     = the typeOfContract
-   * @param durationOfContract = the durationOfContract
-   * @param comment            = the comment
-   */
-  public Feedback(String typeOfContract) {
-    super();
-    this.typeOfContract = typeOfContract;
-  }
-
-  /**
-   * Empty constructor.
-   */
-  public Feedback() {
-    super();
-  }
-
 
 
   /**

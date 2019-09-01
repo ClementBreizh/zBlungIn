@@ -65,7 +65,23 @@ public class AcquiredMatters extends EntityDb {
    this.candidate = candidate;
  }
 
+ /**
+  * Constructor for a new HasDoneAssessment.
+  *
+  * @param score                = score
+  * @param validationLocalDate  = validationLocalDate
+  * @param assessment           = assessment
+  * @param candidate            = candidate
+  */
+ public AcquiredMatters(Float score, LocalDate validationLocalDate, Matter matter, Candidate candidate) {
+   super();
+   this.score = score;
+   this.validationLocalDate = validationLocalDate;
+   this.matter = matter;
+   this.candidate = candidate;
+ }
 
+ 
  // GETTER/SETTER
 
  /**

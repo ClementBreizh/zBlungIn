@@ -43,6 +43,14 @@ public class Degree extends EntityDb {
 
 
   /**
+   * Empty constructor.
+   */
+  public Degree() {
+    super();
+    this.candidates = new ArrayList<Candidate>();
+  }
+
+  /**
    * Constructor for a new degree.
    *
    * @param name  = the name
@@ -56,12 +64,17 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * Empty constructor.
+   * @param name
+   * @param level
+   * @param candidates
    */
-  public Degree() {
+  public Degree(String name, String level, List<Candidate> candidates) {
     super();
-    this.candidates = new ArrayList<Candidate>();
+    this.name = name;
+    this.level = level;
+    this.candidates = candidates;
   }
+
 
   /**
    * Override toString() function.

@@ -57,6 +57,7 @@ public class Session extends EntityDb {
    */
   public Session() {
     super();
+    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
