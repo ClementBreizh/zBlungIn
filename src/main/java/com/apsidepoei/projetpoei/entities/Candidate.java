@@ -30,7 +30,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 @Table(name = CandidateContract.TABLE)
-@AttributeOverride(name = "id", column = @Column(name = CandidateContract.COL_ID))
 public class Candidate extends Person {
 
   @JsonProperty(value = CandidateContract.COL_RANKING_CANDIDATE)
