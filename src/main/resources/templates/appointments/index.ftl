@@ -1,9 +1,9 @@
 <H1>Appointment Creation</H1>
 
 <form action="/api/appointments" method="POST">
-  <label for="dateTime">Date<label>
+  <label for="appointmentDate">Date<label>
   <br>
-  <input type="datetime-local" name="dateTime" value="">
+  <input type="datetime-local" name="appointmentDate" value="">
   <br>
   <label for="informations">Informations</label>
   <br>
