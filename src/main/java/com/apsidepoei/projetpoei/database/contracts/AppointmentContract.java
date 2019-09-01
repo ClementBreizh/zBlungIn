@@ -23,7 +23,7 @@ public class AppointmentContract extends BaseContract {
   /**
    * defines the name of the column="dateTime".
    */
-  public static final String COL_DATETIME = "dateTime";
+  public static final String COL_DATETIME = "appointmentDate";
   /**
    * defines the name of the column="report".
    */

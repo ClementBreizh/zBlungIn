@@ -3,6 +3,7 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.AttributeOverride;
@@ -35,7 +36,7 @@ public class HasDoneAssessment extends EntityDb {
   @JsonProperty(value = HasDoneAssessmentContract.COL_VALIDATION_DATE)
   @Column(name = HasDoneAssessmentContract.COL_VALIDATION_DATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  protected Date validationDate;
+  protected LocalDate validationDate;
 
   @JsonProperty(value = HasDoneAssessmentContract.COL_FK_ID_ASSESSMENT)
   @ManyToOne(targetEntity = Assessment.class, optional = true)
@@ -76,7 +77,7 @@ public class HasDoneAssessment extends EntityDb {
    * @param validationDate = validationDate
    * @param score  = score
    */
-  public HasDoneAssessment(Float score, Date validationDate, Assessment assessment, Candidate candidate) {
+  public HasDoneAssessment(Float score, LocalDate validationDate, Assessment assessment, Candidate candidate) {
     super();
     this.score = score;
     this.validationDate = validationDate;
@@ -130,14 +131,14 @@ public class HasDoneAssessment extends EntityDb {
   /**
    * @return the validationDate
    */
-  public Date getValidationDate() {
+  public LocalDate getValidationDate() {
     return validationDate;
   }
 
   /**
    * @param validationDate the validationDate to set
    */
-  public void setValidationDate(Date validationDate) {
+  public void setValidationDate(LocalDate validationDate) {
     this.validationDate = validationDate;
   }
 
