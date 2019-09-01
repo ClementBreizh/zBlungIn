@@ -105,7 +105,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "category=categorie&dateTime=2019/10/02";
+    String urlParameters  = "category=categorie&updatingDate=2016-8-19";
     return urlParameters;
   }
   /**
