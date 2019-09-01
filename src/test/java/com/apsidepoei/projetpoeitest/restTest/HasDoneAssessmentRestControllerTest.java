@@ -100,7 +100,7 @@ public class HasDoneAssessmentRestControllerTest extends BaseRestControllerTest<
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "score=12F&validationDate=2019/12/21";
+    String urlParameters  = "score=12F&validationDate=2016/08/19";
     return urlParameters;
   }
 
