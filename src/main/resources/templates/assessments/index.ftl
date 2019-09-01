@@ -4,8 +4,8 @@
     <label for="category">Category</label>
     <input type="text" name="category">
     <br>
-    <label for="dateTime">Date Time</label>
-    <input type="date" name="dateTime">
+    <label for="updatingDate">Date Time</label>
+    <input type="date" name="updatingDate">
     <br><br>
     <input type="submit" value="Submit">
 </form>

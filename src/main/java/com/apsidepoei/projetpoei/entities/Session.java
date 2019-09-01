@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,12 +37,12 @@ public class Session extends EntityDb {
   @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date startDate;
+  private LocalDate startDate;
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date endDate;
+  private LocalDate endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)
   @ManyToMany(targetEntity = Candidate.class)
@@ -65,7 +66,7 @@ public class Session extends EntityDb {
    * @param startDate = the startDate
    * @param endDate   = the endDate
    */
-  public Session(String name, Date startDate, Date endDate) {
+  public Session(String name, LocalDate startDate, LocalDate endDate) {
     super();
     this.name = name;
     this.startDate = startDate;
@@ -81,7 +82,7 @@ public class Session extends EntityDb {
    * @param startDate = the startDate
    * @param endDate   = the endDate
    */
-  public Session(int id, String name, Date startDate, Date endDate, List<Candidate> candidates) {
+  public Session(int id, String name, LocalDate startDate, LocalDate endDate, List<Candidate> candidates) {
     super();
     this.name = name;
     this.startDate = startDate;
@@ -125,28 +126,28 @@ public class Session extends EntityDb {
   /**
    * @return the startDate
    */
-  public Date getStartDate() {
+  public LocalDate getStartDate() {
     return startDate;
   }
 
   /**
    * @param startDate the startDate to set
    */
-  public void setStartDate(Date startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
   /**
    * @return the endDate
    */
-  public Date getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
   /**
    * @param endDate the endDate to set
    */
-  public void setEndDate(Date endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 

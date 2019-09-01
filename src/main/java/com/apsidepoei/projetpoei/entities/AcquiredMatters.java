@@ -1,6 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -32,8 +32,7 @@ public class AcquiredMatters extends EntityDb {
  @JsonProperty(value = AcquiredMattersContract.COL_VALIDATION_DATE)
  @Column(name = AcquiredMattersContract.COL_VALIDATION_DATE, nullable = true)
  @DateTimeFormat(pattern = "yyyy-MM-dd")
-
- protected Date validationDate;
+ protected LocalDate validationLocalDate;
 
  @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_MATTER)
  @ManyToOne(targetEntity = Matter.class, optional = false)
@@ -112,17 +111,17 @@ public void setMatter(Matter matter) {
  }
 
  /**
-  * @return the validationDate
+  * @return the validationLocalDate
   */
- public Date getValidationDate() {
-   return validationDate;
+ public LocalDate getValidationLocalDate() {
+   return validationLocalDate;
  }
 
  /**
-  * @param validationDate the validationDate to set
+  * @param validationLocalDate the validationLocalDate to set
   */
- public void setValidationDate(Date validationDate) {
-   this.validationDate = validationDate;
+ public void setValidationLocalDate(LocalDate validationLocalDate) {
+   this.validationLocalDate = validationLocalDate;
  }
 
 }
