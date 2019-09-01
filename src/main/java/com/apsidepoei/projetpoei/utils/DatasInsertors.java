@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
+import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
 import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
@@ -23,11 +24,13 @@ import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
 import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
 import com.github.javafaker.Faker;
+import com.mysql.cj.x.protobuf.MysqlxCrud.FindOrBuilder;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
 import com.apsidepoei.projetpoei.entities.RoleUser;
 import com.apsidepoei.projetpoei.entities.Session;
 import com.apsidepoei.projetpoei.entities.User;
+import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Appointment;
 import com.apsidepoei.projetpoei.entities.Assessment;
@@ -87,6 +90,9 @@ public class DatasInsertors {
   @Autowired
   private CompanyValidatedCandidatesSessionRepository companyValidatedCandidatesSessionRepository;
 
+  @Autowired
+  private AcquiredMattersRepository acquiredMattersRepository;
+
 
   // Lists
 
@@ -106,40 +112,32 @@ public class DatasInsertors {
 
   Integer nbEntities = 10;
 
-
   public DatasInsertors() {
     System.out.println("Lancement de DatasInsertors");
   }
 
-//  @PostConstruct
+  @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
 
-
     // Address
-    for (int i = 0; i < nbEntities; i++) {
-      Address address = new Address(
-          faker.address().streetAddress(),
-          faker.address().zipCode(),
+    for (int i = 1; i < nbEntities+1; i++) {
+      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(),
           faker.address().city());
       addressRepository.save(address);
     }
     addressList.addAll(addressRepository.findAll());
     System.out.println("Address ok");
 
-
     // Appointment
-    for (int i = 0; i < nbEntities; i++) {
-      Appointment appointment = new Appointment(
-          faker.lorem().sentence(),
-          faker.date().birthday(),
+    for (int i = 1; i < nbEntities+1; i++) {
+      Appointment appointment = new Appointment(faker.lorem().sentence(), faker.date().birthday(),
           faker.lorem().sentence());
       appointment.setInformations(faker.lorem().sentence());
       appointmentRepository.save(appointment);
     }
     appointmentList.addAll(appointmentRepository.findAll());
     System.out.println("Appointment ok");
-
 
     // Assessment
     Assessment assessment1 = new Assessment("Culture générale", faker.date().birthday());
@@ -153,25 +151,28 @@ public class DatasInsertors {
     assessmentList.addAll(assessmentRepository.findAll());
     System.out.println("Assessment ok");
 
-
     // Candidate
-    for (int i = 0; i < nbEntities; i++) {
-      Candidate candidate = new Candidate(
-          faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-      candidate.setRanking(RankingCandidate.RANK_2);
+    for (int i = 1; i < nbEntities + 1; i++) {
+      Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
+          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      candidate.setAddress(addressRepository.findById(i).get());
+      candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
+      candidate.setCommentary(faker.lorem().sentence().toString());
+//      candidate.setFeedback(feedbackRepository.findById(i).get());
+      System.out.println(i);
       candidateRepository.save(candidate);
     }
+
     candidateList.addAll(candidateRepository.findAll());
     System.out.println("Candidate ok");
 
 
     // Company
-    for (int i = 0; i < nbEntities; i++) {
-      Company company = new Company(
-          faker.company().name());
+    for (int i = 1; i < nbEntities+1; i++) {
+      Company company = new Company(faker.company().name());
+      company.setSiret(faker.number().digits(14));
+      company.setApeCode(faker.number().digits(5));
+      company.setAddress(addressRepository.findById(i).get());
       companyRepository.save(company);
     }
     companyList.addAll(companyRepository.findAll());
@@ -179,27 +180,20 @@ public class DatasInsertors {
 
 
     // Degrees
-    for (int i = 0; i < nbEntities; i++) {
-      Degree degree = new Degree(
-          faker.book().title(),
-          faker.random().nextInt(0, 5).toString());
+    for (int i = 1; i < nbEntities+1; i++) {
+      Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
       degreeRepository.save(degree);
     }
     degreeList.addAll(degreeRepository.findAll());
     System.out.println("Degrees ok");
 
-
     // Feedback
-    for (int i = 0; i < nbEntities; i++) {
-      Feedback feedback = new Feedback(
-          "CDD",
-          faker.random().nextInt(6, 24),
-          faker.lorem().word());
+    for (int i = 1; i < nbEntities+1; i++) {
+      Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word());
       feedbackRepository.save(feedback);
     }
     feedbackList.addAll(feedbackRepository.findAll());
     System.out.println("Feedback ok");
-
 
     // Matter
     Matter matter1 = new Matter("Angular");
@@ -218,62 +212,68 @@ public class DatasInsertors {
     matterList.addAll(matterRepository.findAll());
     System.out.println("Matter ok");
 
-
     // Person
-    for (int i = 0; i < nbEntities; i++) {
+    for (int i = 1; i < nbEntities+1; i++) {
       Integer addressSize = faker.random().nextInt(0, addressList.size());
-      Person person = new Person(
-          faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      Person person = new Person(faker.name().firstName(), faker.name().lastName(),
+          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      person.setAddress(addressRepository.findById(i).get());
+      person.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
+      person.setCommentary(faker.lorem().sentence().toString());
+
       personRepository.save(person);
     }
     personList.addAll(personRepository.findAll());
     System.out.println("Person ok");
 
-
     // Session
-    for (int i = 0; i < nbEntities; i++) {
-      Session session = new Session(
-          faker.gameOfThrones().house(),
-          faker.date().birthday(),
+    for (int i = 1; i < nbEntities+1; i++) {
+      Session session = new Session(faker.gameOfThrones().house(), faker.date().birthday(),
           faker.date().birthday());
       sessionRepository.save(session);
     }
     sessionList.addAll(sessionRepository.findAll());
     System.out.println("Session ok");
 
-
     // User
-    for (int i = 0; i < nbEntities; i++) {
-      User user = new User(
-          faker.name().username(),
-          faker.internet().password(),
-          faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
+    for (int i = 1; i < nbEntities+1; i++) {
+      User user = new User(faker.name().username(), faker.internet().password(),
+          faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
           faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      user.setAddress(addressRepository.findById(i).get());
+      user.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
+      user.setCommentary(faker.lorem().sentence().toString());
+
       userRepository.save(user);
     }
     userList.addAll(userRepository.findAll());
     System.out.println("User ok");
 
-
 //  ------------------------Relations---------------------------
 //  ------------------------------------------------------------
 
+    // AcquiredMatters
 
+//        for (int i = 1; i < nbEntities+1; i++) {
+//          float score = faker.random().nextInt(0,20);
+//          AcquiredMatters acqui = new AcquiredMatters(
+//              matterRepository.findById(i).get(),
+//              candidateRepository.findById(2).get());
+//          acqui.setScore(score);
+//          acqui.setValidationDate(faker.date().birthday());
+//          AcquiredMattersRepository.save(acqui);
+//        }
 
     // CompanyCandidateSession
 
-  //    for (int i = 0; i < nbEntities; i++) {
-  //      Integer companySize = faker.random().nextInt(0, (companyList.size() - 1));
-  //      Integer sessionSize = faker.random().nextInt(0, (sessionList.size() - 1));
-  //      CompanyCandidatesSession ccs = new CompanyCandidatesSession(companyList.get(companySize),
-  //          sessionList.get(sessionSize));
-  //      companyCandidatesSessionRepository.save(ccs);
-  //    }
+    // for (int i = 0; i < nbEntities; i++) {
+    // Integer companySize = faker.random().nextInt(0, (companyList.size() - 1));
+    // Integer sessionSize = faker.random().nextInt(0, (sessionList.size() - 1));
+    // CompanyCandidatesSession ccs = new
+    // CompanyCandidatesSession(companyList.get(companySize),
+    // sessionList.get(sessionSize));
+    // companyCandidatesSessionRepository.save(ccs);
+    // }
 //    System.out.println("CompanyCandidateSession ok");
 
     // CompanyValidatedCandidatesSession
@@ -292,41 +292,50 @@ public class DatasInsertors {
 //    }
 //  System.out.println("CompanyValidatedCandidatesSession ok");
 
-
     // HasDoneAssessment
-
-
-
 
 //  -----------------------------Derniers champs------------------------------------
 //  --------------------------------------------------------------------------------
 
 //    variables
 
-//    Integer addressSize = faker.random().nextInt(0, addressList.size());
-//    Integer personSize = faker.random().nextInt(0, personList.size());
+    Integer personSize = faker.random().nextInt(0, personList.size());
+
+    addressList.get(1).toString();
+
+    for (int i = 0; i < nbEntities; i++) {
+//      Integer rand1 = faker.random().nextInt(0, addressList.size());
 
 
+//      Candidate cand = new Candidate();
+//      cand = candidateRepository.findById(i + 1).get();
+//      cand.setAddress(addressList.get(rand1));
+//      candidateRepository.save(cand);
 
-
-//  -----------------------------------Tests-----------------------------------------------
-//  ---------------------------------------------------------------------------------------
-
-    System.out.println(personRepository.count());
-
-    for (int i = 0; i < nbEntities *3; i++) {
-      Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
-    Person entity = new Person();
-    entity = (personRepository.findById(i + 1).get());
-      entity.setAddress(addressList.get(addressSize));
-      personRepository.save(entity);
+//      Person pers = new Person();
+//      pers = candidateRepository.findById(i + 1).get();
+//      pers.setAddress(addressList.get(1));
+//      personRepository.save(pers);
     }
-
-//     System.out.println("Tests terminés et chargés");
 
 
 
     System.out.println("DatasInsertors totalement chargé");
+
+//  -----------------------------------Tests-----------------------------------------------
+//  ---------------------------------------------------------------------------------------
+
+//    System.out.println(personRepository.count());
+//
+//    for (int i = 0; i < nbEntities * 3; i++) {
+//      Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
+//      Person entity = new Person();
+//      entity = (personRepository.findById(i + 1).get());
+//      entity.setAddress(addressList.get(addressSize));
+//      personRepository.save(entity);
+//    }
+
+//     System.out.println("Tests terminés et chargés");
 
   }
 }
