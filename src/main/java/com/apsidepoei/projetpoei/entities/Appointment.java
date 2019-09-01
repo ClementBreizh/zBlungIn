@@ -37,7 +37,7 @@ public class Appointment extends EntityDb {
   @JsonProperty(value = AppointmentContract.COL_DATETIME)
   @Column(name = AppointmentContract.COL_DATETIME, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-  private Date dateTime;
+  private Date appointmentDate;
 
   @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
@@ -65,7 +65,7 @@ public class Appointment extends EntityDb {
   public Appointment(String informations, Date dateTime, String report) {
     super();
     this.informations = informations;
-    this.dateTime = dateTime;
+    this.appointmentDate = appointmentDate;
     this.report = report;
     this.persons = new ArrayList<Person>();
   }
@@ -79,7 +79,7 @@ public class Appointment extends EntityDb {
    */
   public Appointment(Date dateTime, List<Person> persons) {
     super();
-    this.dateTime = dateTime;
+    this.appointmentDate = appointmentDate;
     this.persons = persons;
   }
 
@@ -116,8 +116,8 @@ public class Appointment extends EntityDb {
    *
    * @return the dateTime.
    */
-  public Date getDateTime() {
-    return dateTime;
+  public Date getAppointmentDate() {
+    return appointmentDate;
   }
 
   /**
@@ -125,8 +125,8 @@ public class Appointment extends EntityDb {
    *
    * @param dateTime = the date and time
    */
-  public void setDateTime(Date dateTime) {
-    this.dateTime = dateTime;
+  public void setAppointmentDate(Date appointmentDate) {
+    this.appointmentDate = appointmentDate;
   }
 
   /**
@@ -186,10 +186,10 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(String informations, Date dateTime, String report, Boolean status, List<Person> persons) {
+  public Appointment(String informations, Date appointmentDate, String report, Boolean status, List<Person> persons) {
     super();
     this.informations = informations;
-    this.dateTime = dateTime;
+    this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
     this.persons = persons;
@@ -204,11 +204,11 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(int id, String informations, Date dateTime, String report, Boolean status, List<Person> persons) {
+  public Appointment(int id, String informations, Date appointmentDate, String report, Boolean status, List<Person> persons) {
     super();
     this.setId(id);
     this.informations = informations;
-    this.dateTime = dateTime;
+    this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
     this.persons = persons;
@@ -220,7 +220,7 @@ public class Appointment extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + dateTime
+    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + appointmentDate
         + ", report=" + report + ", status=" + status + "]";
   }
 }
