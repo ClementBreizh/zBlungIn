@@ -1,6 +1,7 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -9,16 +10,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.format.datetime.joda.LocalDateParser;
+import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
+import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoei.entities.CompanyCandidatesSession;
+import com.apsidepoei.projetpoei.entities.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.result.LocalDateValueFactory;
 
 /**
  *
@@ -85,7 +91,10 @@ public class CompanyCandidatesSessionRestControllerTest extends BaseRestControll
    */
   @Override
   protected CompanyCandidatesSession getObjectTest() {
-    CompanyCandidatesSession item = new CompanyCandidatesSession();
+    Company comp1 = new Company("MaSuperCompany");
+    LocalDate dateTest = LocalDate.of(2016, 8, 19);
+    Session session1 = new Session("maSuperComp", dateTest, dateTest);
+    CompanyCandidatesSession item = new CompanyCandidatesSession(comp1, session1);
     return item;
   }
 

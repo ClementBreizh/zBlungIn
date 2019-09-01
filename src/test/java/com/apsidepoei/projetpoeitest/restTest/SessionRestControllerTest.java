@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -89,8 +90,12 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected Session getObjectTest() throws ParseException {
-    Session item = new Session("Session1", new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    LocalDate localDate = LocalDate.of(2016, 8, 19);
+    Session item = new Session("Session1", localDate, localDate);
+    System.out.println("TTTEEESSTTTT" + item);
     return item;
+
+
   }
   /**
    * Return Id of Object for run test.
@@ -104,7 +109,7 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "name=Session1&startDate=2019/06/15&endDate=2019/10/02";
+    String urlParameters  = "name=Session1&startDate=2016-8-19&endDate=2016-8-19";
     return urlParameters;
   }
   /**
