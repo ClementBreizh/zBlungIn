@@ -1,7 +1,7 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -37,7 +37,7 @@ public class Appointment extends EntityDb {
   @JsonProperty(value = AppointmentContract.COL_DATETIME)
   @Column(name = AppointmentContract.COL_DATETIME, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-  private Date appointmentDate;
+  private LocalDateTime appointmentDate;
 
   @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
@@ -62,7 +62,7 @@ public class Appointment extends EntityDb {
    * @param dateTime     = date and time
    * @param report       = the report
    */
-  public Appointment(String informations, Date dateTime, String report) {
+  public Appointment(String informations, LocalDateTime appointmentDate, String report) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
@@ -77,7 +77,7 @@ public class Appointment extends EntityDb {
    * @param dateTime     = date and time
    * @param report       = the report
    */
-  public Appointment(Date dateTime, List<Person> persons) {
+  public Appointment(LocalDateTime appointmentDate, List<Person> persons) {
     super();
     this.appointmentDate = appointmentDate;
     this.persons = persons;
@@ -116,7 +116,7 @@ public class Appointment extends EntityDb {
    *
    * @return the dateTime.
    */
-  public Date getAppointmentDate() {
+  public LocalDateTime getAppointmentDate() {
     return appointmentDate;
   }
 
@@ -125,7 +125,7 @@ public class Appointment extends EntityDb {
    *
    * @param dateTime = the date and time
    */
-  public void setAppointmentDate(Date appointmentDate) {
+  public void setAppointmentDate(LocalDateTime appointmentDate) {
     this.appointmentDate = appointmentDate;
   }
 
@@ -186,7 +186,7 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(String informations, Date appointmentDate, String report, Boolean status, List<Person> persons) {
+  public Appointment(String informations, LocalDateTime appointmentDate, String report, Boolean status, List<Person> persons) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
@@ -204,7 +204,7 @@ public class Appointment extends EntityDb {
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
    */
-  public Appointment(int id, String informations, Date appointmentDate, String report, Boolean status, List<Person> persons) {
+  public Appointment(int id, String informations, LocalDateTime appointmentDate, String report, Boolean status, List<Person> persons) {
     super();
     this.setId(id);
     this.informations = informations;

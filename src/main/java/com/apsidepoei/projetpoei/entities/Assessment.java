@@ -1,6 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +23,13 @@ public class Assessment extends EntityDb {
   @JsonProperty(value = AssessmentContract.COL_DATE)
   @Column(name = AssessmentContract.COL_DATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date updatingDate;
+  private LocalDate updatingDate;
 
 
   /**
    * Constructor for a new Assessment.
    */
-  public Assessment(String category, Date updatingDate) {
+  public Assessment(String category, LocalDate updatingDate) {
     super();
     this.category = category;
     this.updatingDate = updatingDate;
@@ -69,14 +69,14 @@ public class Assessment extends EntityDb {
   /**
    * the dateTime.
    */
-  public Date getUpdatingDate() {
+  public LocalDate getUpdatingDate() {
     return updatingDate;
   }
 
   /**
    * set the dateTime.
    */
-  public void setUpdatingDate(Date updatingDate) {
+  public void setUpdatingDate(LocalDate updatingDate) {
     this.updatingDate = updatingDate;
   }
 
