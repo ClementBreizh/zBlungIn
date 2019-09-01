@@ -2,12 +2,15 @@
 
 <form action="/api/appointments" method="POST">
   <label for="dateTime">Date<label>
+  <br>
   <input type="datetime-local" name="dateTime" value="">
   <br>
   <label for="informations">Informations</label>
+  <br>
   <input type="text" name="informations" value="">
-  <br><br>
+  <br>
   <label for="report">Report</label>
+  <br>
   <input type="text" name="report" value="">
   <br>
   <h3>Realized</h3>
