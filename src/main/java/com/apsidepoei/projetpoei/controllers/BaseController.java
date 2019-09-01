@@ -12,7 +12,7 @@ public abstract class BaseController {
 
   /**
    * Constructeur.
-   * @param entityPath
+   * @param entityPath = the path variable from child controller.
    */
   public BaseController(String entityPath) {
     path = entityPath;

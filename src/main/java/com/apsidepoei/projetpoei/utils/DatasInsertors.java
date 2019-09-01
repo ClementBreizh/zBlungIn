@@ -1,6 +1,13 @@
 package com.apsidepoei.projetpoei.utils;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -113,7 +120,6 @@ public class DatasInsertors {
   Integer nbEntities = 10;
 
   public DatasInsertors() {
-    System.out.println("Lancement de DatasInsertors");
   }
 
   @PostConstruct
@@ -130,8 +136,11 @@ public class DatasInsertors {
     System.out.println("Address ok");
 
     // Appointment
-    for (int i = 1; i < nbEntities+1; i++) {
-      Appointment appointment = new Appointment(faker.lorem().sentence(), faker.date().birthday(),
+
+    for (int i = 0; i < nbEntities; i++) {
+      Appointment appointment = new Appointment(
+          faker.lorem().sentence(),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
           faker.lorem().sentence());
       appointment.setInformations(faker.lorem().sentence());
       appointmentRepository.save(appointment);
@@ -140,13 +149,13 @@ public class DatasInsertors {
     System.out.println("Appointment ok");
 
     // Assessment
-    Assessment assessment1 = new Assessment("Culture générale", faker.date().birthday());
+    Assessment assessment1 = new Assessment("Culture générale", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment1);
-    Assessment assessment2 = new Assessment("Mathématiques", faker.date().birthday());
+    Assessment assessment2 = new Assessment("Mathématiques", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment2);
-    Assessment assessment3 = new Assessment("Culture informatique", faker.date().birthday());
+    Assessment assessment3 = new Assessment("Culture informatique", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment3);
-    Assessment assessment4 = new Assessment("Logique", faker.date().birthday());
+    Assessment assessment4 = new Assessment("Logique", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment4);
     assessmentList.addAll(assessmentRepository.findAll());
     System.out.println("Assessment ok");
@@ -227,9 +236,12 @@ public class DatasInsertors {
     System.out.println("Person ok");
 
     // Session
-    for (int i = 1; i < nbEntities+1; i++) {
-      Session session = new Session(faker.gameOfThrones().house(), faker.date().birthday(),
-          faker.date().birthday());
+
+    for (int i = 0; i < nbEntities; i++) {
+      Session session = new Session(
+          faker.gameOfThrones().house(),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       sessionRepository.save(session);
     }
     sessionList.addAll(sessionRepository.findAll());
