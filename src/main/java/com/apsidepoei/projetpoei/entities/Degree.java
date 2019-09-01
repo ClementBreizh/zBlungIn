@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoei.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 @Table(name = DegreeContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = DegreeContract.COL_ID))
 public class Degree extends EntityDb {
 
   @JsonProperty(value = DegreeContract.COL_NAME)
