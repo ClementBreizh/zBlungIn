@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Entity
 @Table(name = UserContract.TABLE)
-@AttributeOverride(name = "id", column = @Column(name = UserContract.COL_ID))
 public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_NAME)
