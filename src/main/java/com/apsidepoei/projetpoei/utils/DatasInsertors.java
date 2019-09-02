@@ -168,8 +168,6 @@ public class DatasInsertors {
       candidate.setAddress(addressRepository.findById(i).get());
       candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
       candidate.setCommentary(faker.lorem().sentence().toString());
-//      candidate.setFeedback(feedbackRepository.findById(i).get());
-      System.out.println(i);
       candidateRepository.save(candidate);
     }
 
@@ -182,7 +180,6 @@ public class DatasInsertors {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
       company.setApeCode(faker.number().digits(5));
-//      company.setAddress(addressRepository.findById(i).get());
       companyRepository.save(company);
     }
     companyList.addAll(companyRepository.findAll());
@@ -231,7 +228,7 @@ public class DatasInsertors {
           faker.name().lastName());
       person.setEmail(faker.internet().emailAddress());
       person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-
+//      person.setAddress(addressRepository.findById(addressSize).get());
       personRepository.save(person);
     }
     personList.addAll(personRepository.findAll());
@@ -266,47 +263,6 @@ public class DatasInsertors {
 //  ------------------------Relations---------------------------
 //  ------------------------------------------------------------
 
-    // AcquiredMatters
-
-//        for (int i = 1; i < nbEntities+1; i++) {
-//          float score = faker.random().nextInt(0,20);
-//          AcquiredMatters acqui = new AcquiredMatters(
-//              matterRepository.findById(i).get(),
-//              candidateRepository.findById(2).get());
-//          acqui.setScore(score);
-//          acqui.setValidationDate(faker.date().birthday());
-//          AcquiredMattersRepository.save(acqui);
-//        }
-
-    // CompanyCandidateSession
-
-    // for (int i = 0; i < nbEntities; i++) {
-    // Integer companySize = faker.random().nextInt(0, (companyList.size() - 1));
-    // Integer sessionSize = faker.random().nextInt(0, (sessionList.size() - 1));
-    // CompanyCandidatesSession ccs = new
-    // CompanyCandidatesSession(companyList.get(companySize),
-    // sessionList.get(sessionSize));
-    // companyCandidatesSessionRepository.save(ccs);
-    // }
-//    System.out.println("CompanyCandidateSession ok");
-
-    // CompanyValidatedCandidatesSession
-
-//    for (int i = 0; i < nbEntities; i++) {
-//      Integer companySize = faker.random().nextInt(0, (companyList.size()-1));
-//      Integer sessionSize = faker.random().nextInt(0, (sessionList.size()-1));
-//      Integer candidateSize = faker.random().nextInt(0, (candidateList.size()-1));
-//      Integer candidateSize2 = faker.random().nextInt(0, (candidateList.size()-1));
-//      CompanyValidatedCandidatesSession relation = new CompanyValidatedCandidatesSession();
-//      relation.setCompany(companyRepository.findById(companySize).get());
-//      relation.setSession(sessionRepository.findById(sessionSize).get());
-//      relation.getValidatedCandidates().add(candidateList.get(candidateSize));
-//      companyValidatedCandidatesSessionRepository.save(relation);
-//      System.out.println("entrée " + relation.getId() + " ok");
-//    }
-//  System.out.println("CompanyValidatedCandidatesSession ok");
-
-    // HasDoneAssessment
 
 //  -----------------------------Derniers champs------------------------------------
 //  --------------------------------------------------------------------------------
@@ -315,53 +271,29 @@ public class DatasInsertors {
 
     Integer personSize = faker.random().nextInt(0, personList.size());
 
+    for (int i = 1; i <= nbEntities; i++) {
+      candidateRepository.findById(i).get().setFeedback(feedbackRepository.findById(i).get());
 
-//    for (int i = 1; i < nbEntities+1; i++) {
-//      Integer rand1 = faker.random().nextInt(0, addressList.size()-1);
-//      System.out.println(companyRepository.findById(rand1).get().toString());
-//      System.out.println(addressRepository.findById(rand1).get().toString());
-//      System.out.println(i);
-//    }
+//     companyRepository.findById(i).get().setAddress(addressRepository.findById(i).get());
+//     companyRepository.findById(i).get().setAddress(addressList.get(i));
 
-//    int i = 0;
-//    while (i < nbEntities) {
-//      Integer rand1 = faker.random().nextInt(0, addressList.size());
+    }
+
+
+//for (int i = 1; i < nbEntities; i++) {
+////  personRepository.findById(i).get().setAddress(addressRepository.findById(1).get());
+////  companyRepository.findById(i).get().getContacts().add(personRepository.findById(i).get());
+//  Person person =   personRepository.findById(i).get();
+//  List<Person> personList = companyRepository.findById(i).get().getContacts();
+////  personList.add(new Person());
+//  personList.add(person);
 //
-//      System.out.println(companyRepository.findById(rand1).get().toString());
-//      System.out.println(addressRepository.findById(rand1).get().toString());
-//      i++;
-//    }
-//  companyRepository.findById(rand1).get().setAddress(addressRepository.findById(rand1).get());
-
-//  company.setAddress(addressRepository.findById(rand1).get());
-
-//  Candidate cand = new Candidate();
-//  cand = candidateRepository.findById(i + 1).get();
-//  cand.setAddress(addressList.get(rand1));
-//  candidateRepository.save(cand);
-
-//  Person pers = new Person();
-//  pers = candidateRepository.findById(i + 1).get();
-//  pers.setAddress(addressList.get(1));
-//  personRepository.save(pers);
+//}
 
 
     System.out.println("DatasInsertors totalement chargé");
 
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
-
-//    System.out.println(personRepository.count());
-//
-//    for (int i = 0; i < nbEntities * 3; i++) {
-//      Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
-//      Person entity = new Person();
-//      entity = (personRepository.findById(i + 1).get());
-//      entity.setAddress(addressList.get(addressSize));
-//      personRepository.save(entity);
-//    }
-
-//     System.out.println("Tests terminés et chargés");
-
   }
 }
