@@ -23,6 +23,8 @@ import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
 import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
 import com.github.javafaker.Faker;
+import com.tactfactory.consolelogger.ConsoleLogger;
+import com.tactfactory.consolelogger.Options;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
 import com.apsidepoei.projetpoei.entities.RoleUser;
@@ -113,8 +115,7 @@ public class DatasInsertors {
 
     // Address
     for (int i = 0; i < nbEntities; i++) {
-      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(),
-          faker.address().city());
+      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(), faker.address().city());
       addressRepository.save(address);
     }
     addressList.addAll(addressRepository.findAll());
@@ -154,8 +155,8 @@ public class DatasInsertors {
 
     // Company
     for (int i = 0; i < nbEntities; i++) {
-      Company company = new Company(faker.company().name(), faker.address().city(),
-          faker.number().digits(14), faker.number().digits(5));
+      Company company = new Company(faker.company().name(), faker.address().city(), faker.number().digits(14),
+          faker.number().digits(5));
       companyRepository.save(company);
     }
     companyList.addAll(companyRepository.findAll());
@@ -198,8 +199,8 @@ public class DatasInsertors {
     for (int i = 0; i < nbEntities; i++) {
       Integer addressSize = faker.random().nextInt(0, addressList.size());
 
-      Person person = new Person(faker.name().firstName(), faker.name().lastName(),
-          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      Person person = new Person(faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
       personRepository.save(person);
     }
     personList.addAll(personRepository.findAll());
@@ -207,8 +208,7 @@ public class DatasInsertors {
 
     // Session
     for (int i = 0; i < nbEntities; i++) {
-      Session session = new Session(faker.gameOfThrones().house(), faker.date().birthday(),
-          faker.date().birthday());
+      Session session = new Session(faker.gameOfThrones().house(), faker.date().birthday(), faker.date().birthday());
       sessionRepository.save(session);
     }
     sessionList.addAll(sessionRepository.findAll());
@@ -216,8 +216,8 @@ public class DatasInsertors {
 
     // User
     for (int i = 0; i < nbEntities; i++) {
-      User user = new User(faker.name().username(), faker.internet().password(),
-          faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
+      User user = new User(faker.name().username(), faker.internet().password(), faker.name().firstName(),
+          faker.name().lastName(), faker.internet().emailAddress(),
           faker.phoneNumber().cellPhone().replaceAll(" ", ""));
 //      user.setRole(RoleUser.ROLE_3);
       userRepository.save(user);
@@ -260,10 +260,10 @@ public class DatasInsertors {
 
     System.out.println(personRepository.count());
 
-    for (int i = 0; i < nbEntities *3; i++) {
+    for (int i = 0; i < nbEntities * 3; i++) {
       Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
-    Person entity = new Person();
-    entity = (personRepository.findById(i + 1).get());
+      Person entity = new Person();
+      entity = (personRepository.findById(i + 1).get());
       entity.setAddress(addressList.get(addressSize));
       personRepository.save(entity);
     }
@@ -279,30 +279,52 @@ public class DatasInsertors {
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
-//     System.out.println("Tests terminés chargé");
+    System.out.println("Tests terminés chargé");
 
-//      Person personTest = new Person("personTest", "personTest", "email@defe.fr", "06000000000");
-//      personRepository.save(personTest);
-//      System.out.println("1");
-//      System.out.println(personTest.toString());
-//
-//      System.out.println("2");
-//      System.out.println(personRepository.findById(1).toString());
-//
-//      Candidate candid = new Candidate("candid", "candid", "email@defe.fr", "06000000000");
-//      candid.setRanking(RankingCandidate.RANK_2);
-//      candidateRepository.save(candid);
-//      System.out.println("3");
-//      System.out.println(candid.toString());
-//
-//      System.out.println("4");
-//      System.out.println(candidateRepository.findById(1).toString());
-//
-//      Person personTest1 = new Person();
-//      personTest1 = (personRepository.findById(2).get());
-//      System.out.println("5");
-//      System.out.println(personTest1.toString());
-//
+    Person personTest = new Person("personTest", "personTest", "email@defe.fr", "06000000000");
+    personRepository.save(personTest);
+    System.out.println("1");
+    System.out.println(personTest.toString());
+
+    System.out.println("2");
+    Candidate person = (Candidate) personRepository.findById(1).get();
+    person.getDegrees().add(degreeRepository.findById(1).get());
+    candidateRepository.save(person);
+    //System.out.println(person.toString());
+    Candidate person1 = (Candidate) personRepository.findById(1).get();
+    
+    System.out.println(person1.toString());
+    String s1 = person.toString();
+    System.out.println(s1);
+
+    Candidate candid = new Candidate("candid", "candid", "email@defe.fr", "06000000000");
+    candid.setRanking(RankingCandidate.RANK_2);
+    candidateRepository.save(candid);
+    System.out.println("3");
+    System.out.println(candid.toString());
+
+    System.out.println("4");
+    System.out.println(candidateRepository.findById(1).get().toString());
+
+    Person personTest1 = new Person();
+    personTest1 = (personRepository.findById(2).get());
+    System.out.println("5");
+    System.out.println(personTest1.toString());
+
+
+    ConsoleLogger logger = new ConsoleLogger(Options.DEBUG);
+
+    for (Person p : personRepository.findAll()) {
+      if (p instanceof Candidate) {
+        logger.Log(p.toString(), Options.DEBUG, true);
+        logger.Log(candidateRepository.findById(p.getId()).toString(), Options.DEBUG, false);
+      }else if(p instanceof User) {
+        logger.Log(p.toString(), Options.WARNING, true);
+        logger.Log(userRepository.findById(p.getId()).toString(), Options.WARNING, false);
+      }else {
+        logger.Log(p.toString(), Options.ERROR, true);
+      }
+    }
 
     System.out.println("DatasInsertors totalement chargé");
 

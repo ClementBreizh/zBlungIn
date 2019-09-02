@@ -84,17 +84,17 @@ public class Person extends EntityDb {
     this.cellPhone = cellPhone;
   }
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", téléphoneyvukftyfyj = " + cellPhone + ", adresse = ]";
-  }
+
 
 
   // GETTER/SETTER
+
+  @Override
+  public String toString() {
+    return "Person [firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", cellPhone=" + cellPhone
+        + ", homePhone=" + homePhone + ", commentary=" + commentary + ", mainContact=" + mainContact + ", address="
+        + address + ", getId()=" + getId() + "]";
+  }
 
   /**
    * @return the firstname

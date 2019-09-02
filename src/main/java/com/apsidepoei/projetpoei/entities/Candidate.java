@@ -9,11 +9,13 @@ import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
@@ -43,24 +45,27 @@ public class Candidate extends Person {
   private Feedback feedback;
 
   @JsonProperty(value = CandidateContract.COL_DEGREES)
-  @ManyToMany(targetEntity = Degree.class)
+  @ManyToMany(targetEntity = Degree.class, fetch=FetchType.LAZY)
   @JoinTable(name = "candidate_degree", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = DegreeContract.COL_ID) })
+//  @Transient
   private List<Degree> degrees;
 
   @JsonProperty(value = CandidateContract.COL_MATTERS)
-  @ManyToMany(targetEntity = Matter.class)
+  @ManyToMany(targetEntity = Matter.class, fetch=FetchType.LAZY)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = MatterContract.COL_ID) })
+//  @Transient
   private List<Matter> matters;
 
   @JsonProperty(value = CandidateContract.COL_SESSIONS)
-  @ManyToMany(targetEntity = Session.class)
+  @ManyToMany(targetEntity = Session.class, fetch=FetchType.LAZY)
   @JoinTable(name = "candidate_session", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = SessionContract.COL_ID) })
+//  @Transient
   private List<Session> sessions;
 
   /**
@@ -81,24 +86,11 @@ public class Candidate extends Person {
    * @param cellPhone = the cellPhone
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone) {
-    super();
+    this();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
-    this.degrees = new ArrayList<Degree>();
-    this.degrees = new ArrayList<Degree>();
-    this.sessions = new ArrayList<Session>();
-    this.matters = new ArrayList<Matter>();
-  }
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
   // GETTER/SETTER
@@ -108,6 +100,14 @@ public class Candidate extends Person {
    */
   public RankingCandidate getRanking() {
     return ranking;
+  }
+
+  @Override
+  public String toString() {
+    return "Candidate [ranking=" + ranking + ", feedback=" + feedback + ", degrees=" + degrees + ", matters=" + matters
+        + ", sessions=" + sessions + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
+        + ", cellPhone=" + cellPhone + ", homePhone=" + homePhone + ", commentary=" + commentary + ", mainContact="
+        + mainContact + ", address=" + address + ", getId()=" + getId() + "]";
   }
 
   /**

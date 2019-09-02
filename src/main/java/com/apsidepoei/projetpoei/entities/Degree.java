@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -49,10 +51,9 @@ public class Degree extends EntityDb {
    * @param level = the level
    */
   public Degree(String name, String level) {
-    super();
+    this();
     this.name = name;
     this.level = level;
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -63,16 +64,15 @@ public class Degree extends EntityDb {
     this.candidates = new ArrayList<Candidate>();
   }
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
-  }
+
 
 
   // GETTER/SETTER
+
+  @Override
+  public String toString() {
+    return "Degree [name=" + name + ", level=" + level + ", candidates=" + candidates + ", getId()=" + getId() + "]";
+  }
 
   /**
    * The name.

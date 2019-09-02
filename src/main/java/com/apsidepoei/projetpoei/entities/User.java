@@ -88,11 +88,7 @@ public class User extends Person {
   /**
    * Override toString() function.
    */
-  @Override
-  public String toString() {
-    return "Person [" + "Id = " + getId() + "identifiant = " + login + ", mot de passe = " + password + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", téléphone = " + cellPhone + "]";
-  }
+
 
 
   // GETTER/SETTER
@@ -103,6 +99,16 @@ public class User extends Person {
    */
   public String getLogin() {
     return login;
+  }
+
+
+
+  @Override
+  public String toString() {
+    return "User [login=" + login + ", password=" + password + ", role=" + role + ", firstname=" + firstname
+        + ", lastname=" + lastname + ", email=" + email + ", cellPhone=" + cellPhone + ", homePhone=" + homePhone
+        + ", commentary=" + commentary + ", mainContact=" + mainContact + ", address=" + address + ", getId()="
+        + getId() + "]";
   }
 
   /**
@@ -146,4 +152,6 @@ public class User extends Person {
   public void setRole(RoleUser role) {
     this.role = role;
   }
+
+
 }
