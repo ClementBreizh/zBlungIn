@@ -20,7 +20,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+*
+* @author clemb
+* Tests for Feedback Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -29,16 +33,22 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
 
   @Autowired
   private FeedbackRepository repository;
-
+  /**
+   * Empty Constructor.
+   */
   public FeedbackRestControllerTest() {
     super("/feedbacks");
   }
-
+  /**
+   * Create repository.
+   */
   @Override
   protected JpaRepository<Feedback, Integer> getRepository() {
     return repository;
   }
-
+  /**
+   * Parse Json to List for test.
+   */
   @Override
   protected List<Feedback> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -46,7 +56,9 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
     return mapper.readValue(builder.toString(), new TypeReference<List<Feedback>>() {
     });
   }
-
+  /**
+   * Compare if data is the same.
+   */
   @Override
   protected boolean compareTo(Feedback item1, Feedback item2) {
     return item1.getId().equals(item2.getId())
@@ -54,7 +66,9 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
             && item1.getDurationOfContract().equals(item2.getDurationOfContract())
                 && item1.getComment().equals(item2.getComment());
   }
-
+  /**
+   * Parse Json to a Object for run test.
+   */
   @Override
   protected Feedback parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -62,32 +76,41 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
     return mapper.readValue(builder.toString(), new TypeReference<Feedback>() {
     });
   }
-
+  /**
+   * Generate a Id for run test.
+   */
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
-
+  /**
+   * Create a object for run test.
+   */
   @Override
   protected Feedback getObjectTest() throws ParseException {
     Feedback item = new Feedback("CDI", 24, "no comment test");
     return item;
   }
-
+  /**
+   * Return Id of Object for run test.
+   */
   @Override
   protected Integer getItemIdTest(Feedback item) {
     return item.getId();
   }
-
+  /**
+   * Create a string for POST method API.
+   */
   @Override
   protected String getObjectToStringToPost() {
-    // TODO Auto-generated method stub
-    return null;
+    String urlParameters  = "typeOfContract=CDI&durationOfContract=24&comment=nocomment";
+    return urlParameters;
   }
-
+  /**
+   * Method to compare list.
+   */
   @Override
   protected boolean compareToList(List<Feedback> items, List<Feedback> dbItems) {
-    // TODO Auto-generated method stub
     return false;
   }
 }

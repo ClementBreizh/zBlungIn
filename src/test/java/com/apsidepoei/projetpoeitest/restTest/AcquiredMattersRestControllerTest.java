@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
-import com.apsidepoei.projetpoei.entities.Company;
+import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
+import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -23,55 +23,57 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
 *
 * @author clemb
-* Tests for Company Entity.
+* Tests for AcquiredMatters Entity.
 */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class CompanyRestControllerTest extends BaseRestControllerTest<Company, Integer> {
+public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<AcquiredMatters, Integer> {
 
   @Autowired
-  private CompanyRepository repository;
+  private AcquiredMattersRepository repository;
   /**
    * Empty Constructor.
    */
-  public CompanyRestControllerTest() {
-    super("/companies");
+  public AcquiredMattersRestControllerTest() {
+    super("/acquiredmatters");
   }
-
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<Company, Integer> getRepository() {
+  protected JpaRepository<AcquiredMatters, Integer> getRepository() {
     return repository;
   }
   /**
    * Parse Json to List for test.
    */
   @Override
-  protected List<Company> parseJsonToList(StringBuilder builder)
+  protected List<AcquiredMatters> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Company>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<AcquiredMatters>>() {
     });
   }
   /**
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(Company item1, Company item2) {
-    return item1.getId().equals(item2.getId()) && item1.getName().equals(item2.getName());
+  protected boolean compareTo(AcquiredMatters item1, AcquiredMatters item2) {
+    return item1.getId().equals(item2.getId())
+        && item1.getScore().equals(item2.getScore())
+            && item1.getValidationLocalDate().equals(item2.getValidationLocalDate());
   }
+
   /**
    * Parse Json to a Object for run test.
    */
   @Override
-  protected Company parseJsonToObject(StringBuilder builder)
+  protected AcquiredMatters parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<Company>() {
+    return mapper.readValue(builder.toString(), new TypeReference<AcquiredMatters>() {
     });
   }
   /**
@@ -85,15 +87,15 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
    * Create a object for run test.
    */
   @Override
-  protected Company getObjectTest() throws ParseException {
-    Company item = new Company("ZorgINC");
+  protected AcquiredMatters getObjectTest() throws ParseException {
+    AcquiredMatters item = new AcquiredMatters();
     return item;
   }
   /**
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(Company item) {
+  protected Integer getItemIdTest(AcquiredMatters item) {
     return item.getId();
   }
   /**
@@ -101,14 +103,16 @@ public class CompanyRestControllerTest extends BaseRestControllerTest<Company, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "name=ZorgINC";
+    String urlParameters  = "score=12&validationDate=2019/02/24";
     return urlParameters;
   }
   /**
    * Method to compare list.
    */
   @Override
-  protected boolean compareToList(List<Company> items, List<Company> dbItems) {
+  protected boolean compareToList(List<AcquiredMatters> items, List<AcquiredMatters> dbItems) {
     return false;
   }
 }
+
+
