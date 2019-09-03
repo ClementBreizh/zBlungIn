@@ -34,8 +34,8 @@ public class Appointment extends EntityDb {
   @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
   private String informations;
 
-  @JsonProperty(value = AppointmentContract.COL_DATETIME)
-  @Column(name = AppointmentContract.COL_DATETIME, nullable = false)
+  @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
+  @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
 
@@ -50,7 +50,7 @@ public class Appointment extends EntityDb {
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
-  @JoinTable(name = "appointment_persons", joinColumns = {
+  @JoinTable(name = "appointmentPersons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
@@ -59,7 +59,7 @@ public class Appointment extends EntityDb {
    * Constructor for a new Appointment.
    *
    * @param informations = informations
-   * @param dateTime     = date and time
+   * @param appointmentDate     = date and time
    * @param report       = the report
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report) {
@@ -74,7 +74,7 @@ public class Appointment extends EntityDb {
    * Constructor for a new Appointment.
    *
    * @param informations = informations
-   * @param dateTime     = date and time
+   * @param appointmentDate     = date and time
    * @param report       = the report
    */
   public Appointment(LocalDateTime appointmentDate, List<Person> persons) {
@@ -112,18 +112,18 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * Return the dateTime.
+   * Return the appointmentDate.
    *
-   * @return the dateTime.
+   * @return the appointmentDate.
    */
   public LocalDateTime getAppointmentDate() {
     return appointmentDate;
   }
 
   /**
-   * Set the dateTime.
+   * Set the appointmentDate.
    *
-   * @param dateTime = the date and time
+   * @param appointmentDate = the date and time
    */
   public void setAppointmentDate(LocalDateTime appointmentDate) {
     this.appointmentDate = appointmentDate;
@@ -181,7 +181,7 @@ public class Appointment extends EntityDb {
    * Constructor for a new Appointment.
    *
    * @param informations = informations
-   * @param dateTime     = date and time
+   * @param appointmentDate     = date and time
    * @param report       = the report
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment
@@ -199,7 +199,7 @@ public class Appointment extends EntityDb {
    * Constructor for a new Appointment.
    *
    * @param informations = informations
-   * @param dateTime     = date and time
+   * @param appointmentDate     = date and time
    * @param report       = the report
    * @param status       = status for the appointment
    * @param persons      = list of persons, concerned in this appointment

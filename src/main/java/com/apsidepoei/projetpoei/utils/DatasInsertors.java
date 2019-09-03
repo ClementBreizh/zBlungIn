@@ -318,15 +318,15 @@ public class DatasInsertors {
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
-    System.out.println(personRepository.count());
-
-    for (int i = 0; i < nbEntities *3; i++) {
-      Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
-    Person entity = new Person();
-    entity = (personRepository.findById(i + 1).get());
-      entity.setAddress(addressList.get(addressSize));
-      personRepository.save(entity);
-    }
+//    System.out.println(personRepository.count());
+//
+//    for (int i = 0; i < nbEntities *3; i++) {
+//      Integer addressSize = faker.random().nextInt(0, (addressList.size() - 1));
+//    Person entity = new Person();
+//    entity = (personRepository.findById(i + 1).get());
+//      entity.setAddress(addressList.get(addressSize));
+//      personRepository.save(entity);
+//    }
 
 //     System.out.println("Tests terminés et chargés");
 

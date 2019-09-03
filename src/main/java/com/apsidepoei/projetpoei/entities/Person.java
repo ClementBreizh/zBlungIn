@@ -57,11 +57,6 @@ public class Person extends EntityDb {
   @Type(type = "org.hibernate.type.NumericBooleanType")
   protected Boolean mainContact = false;
 
-  @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
-  @ManyToOne(targetEntity = Address.class, optional = true)
-  @JoinColumn(name = PersonContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
-  protected Address address;
-
   /**
    * Empty constructor.
    */
@@ -193,20 +188,6 @@ public class Person extends EntityDb {
    */
   public void setCommentary(String commentary) {
     this.commentary = commentary;
-  }
-
-  /**
-   * @return the address
-   */
-  public Address getAddress() {
-    return address;
-  }
-
-  /**
-   * @param address the address to set
-   */
-  public void setAddress(Address address) {
-    this.address = address;
   }
 
   /**

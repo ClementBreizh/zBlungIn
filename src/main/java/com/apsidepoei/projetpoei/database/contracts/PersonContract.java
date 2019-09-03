@@ -39,10 +39,6 @@ public class PersonContract extends BaseContract {
    * defines the name of the column="commentary".
    */
   public static final String COL_COMMENTARY = "commentary";
-  /**
-   * defines the name of the column="address_id".
-   */
-  public final static String COL_FK_ID_ADDRESS = "address_id";
 
   /**
    * Define name of column mainContact
@@ -53,7 +49,7 @@ public class PersonContract extends BaseContract {
    * Define a table with all column.
    */
   public static final String[] COLS = new String[] { COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_EMAIL,
-      COL_CELL_PHONE, COL_HOME_PHONE, COL_COMMENTARY, COL_FK_ID_ADDRESS };
+      COL_CELL_PHONE, COL_HOME_PHONE, COL_COMMENTARY };
   /**
    * Define the string used for create the table.
    */
