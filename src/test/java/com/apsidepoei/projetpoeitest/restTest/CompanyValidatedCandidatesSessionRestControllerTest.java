@@ -3,7 +3,6 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.tomcat.jni.Address;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,8 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
-import com.apsidepoei.projetpoei.entities.Person;
+import com.apsidepoei.projetpoei.database.repositories.CompanyValidatedCandidatesSessionRepository;
+import com.apsidepoei.projetpoei.entities.CompanyValidatedCandidatesSession;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -24,40 +23,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  *
  * @author clemb
- * Tests for Person Entity.
+ * Tests for CompanyValidateCandidatesSession Entity.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
-public class PersonRestControllerTest extends BaseRestControllerTest<Person, Integer> {
+public class CompanyValidatedCandidatesSessionRestControllerTest extends BaseRestControllerTest<CompanyValidatedCandidatesSession, Integer> {
 
   @Autowired
-  private PersonRepository repository;
+  private CompanyValidatedCandidatesSessionRepository repository;
 
   /**
    * Empty Constructor.
    */
-  public PersonRestControllerTest() {
-    super("/persons");
+  public CompanyValidatedCandidatesSessionRestControllerTest() {
+    super("/valCandidBySessionAndCompany");
   }
 
   /**
    * Create repository.
    */
   @Override
-  protected JpaRepository<Person, Integer> getRepository() {
+  protected JpaRepository<CompanyValidatedCandidatesSession, Integer> getRepository() {
     return repository;
   }
 
   /**
-   * Parse Person in Json to List for test.
+   * Parse CompanyValidateCandidatesSession in Json to List for test.
    */
   @Override
-  protected List<Person> parseJsonToList(StringBuilder builder)
+  protected List<CompanyValidatedCandidatesSession> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Person>>() {
+    return mapper.readValue(builder.toString(), new TypeReference<List<CompanyValidatedCandidatesSession>>() {
     });
   }
 
@@ -65,13 +64,12 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    * Compare if data is the same.
    */
   @Override
-  protected boolean compareTo(Person item1, Person item2) {
+  protected boolean compareTo(CompanyValidatedCandidatesSession item1, CompanyValidatedCandidatesSession item2) {
     return item1.getId().equals(item2.getId())
-        && item1.getFirstname().equals(item2.getFirstname())
-            && item1.getLastname().equals(item2.getLastname())
-                && item1.getEmail().equals(item2.getEmail())
-                  && item1.getCellPhone().equals(item2.getCellPhone())
-                    && item1.getHomePhone().equals(item2.getHomePhone());
+        && item1.getCompany().equals(item2.getCompany())
+            && item1.getValidatedCandidates().equals(item2.getValidatedCandidates())
+                && item1.getSession().equals(item2.getSession())
+                ;
   }
 
   /**
@@ -83,11 +81,11 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
   }
 
   /**
-   * Create a Person object for run test.
+   * Create a CompanyValidateCandidatesSession object for run test.
    */
   @Override
-  protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212233443", "this is a comment", false, null);
+  protected CompanyValidatedCandidatesSession getObjectTest() {
+    CompanyValidatedCandidatesSession item = new CompanyValidatedCandidatesSession();
     return item;
   }
 
@@ -96,9 +94,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "firstname=José&lastname=Phine&email=josephine@gmail.com"
-        + "&cellPhone=0712233443&homePhone=0213234323&commentary=thsiisacomment"
-        + "&mainContact=false&adress=null";
+    String urlParameters  = "";
     return urlParameters;
   }
 
@@ -106,26 +102,26 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    * Return Id of Object for run test.
    */
   @Override
-  protected Integer getItemIdTest(Person item) {
+  protected Integer getItemIdTest(CompanyValidatedCandidatesSession item) {
     return item.getId();
   }
 
   /**
-   * Parse Json to a Object Person for run test.
+   * Parse Json to a Object CompanyValidateCandidatesSession for run test.
    */
   @Override
-  protected Person parseJsonToObject(StringBuilder builder)
+  protected CompanyValidatedCandidatesSession parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<Person>() {
+    return mapper.readValue(builder.toString(), new TypeReference<CompanyValidatedCandidatesSession>() {
     });
   }
 
   /**
-   * Method to compare list of Person.
+   * Method to compare list of CompanyValidateCandidatesSession.
    */
   @Override
-  protected boolean compareToList(List<Person> items, List<Person> dbItems) {
+  protected boolean compareToList(List<CompanyValidatedCandidatesSession> items, List<CompanyValidatedCandidatesSession> dbItems) {
     return false;
   }
 }

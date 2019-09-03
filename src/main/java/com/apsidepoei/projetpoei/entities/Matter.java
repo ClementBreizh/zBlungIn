@@ -33,7 +33,7 @@ public class Matter extends EntityDb {
 
 
   /**
-   * constructor.
+   * Empty constructor.
    */
   public Matter() {
     super();
@@ -50,13 +50,15 @@ public class Matter extends EntityDb {
   }
 
   /**
-   * Name in parameter.
+   * @param name
+   * @param candidates
    */
   public Matter(String name, List<Candidate> candidates) {
     super();
     this.name = name;
     this.candidates = candidates;
   }
+
 
   @Override
   public String toString() {

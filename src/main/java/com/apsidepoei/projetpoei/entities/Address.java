@@ -35,6 +35,7 @@ public class Address extends EntityDb {
    * Empty constructor.
    */
   public Address() {
+    super();
   }
 
   /**
@@ -51,6 +52,8 @@ public class Address extends EntityDb {
     this.town = town;
   }
 
+
+
   /**
    * Override toString() function.
    */
@@ -59,6 +62,7 @@ public class Address extends EntityDb {
     return "Adresse [Id = " + getId() + ", adresse postale = " + address + ", code postal = "
         + postalCode + ", ville = " + town + "]";
   }
+
 
   // GETTER/SETTER
 

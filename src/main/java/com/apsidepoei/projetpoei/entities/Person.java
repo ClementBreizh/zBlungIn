@@ -77,20 +77,27 @@ public class Person extends EntityDb {
   }
 
   /**
-   * Constructor with id for new Feedback.
-   *
-   * @param firstname = the firstname
-   * @param lastname  = the lastname
-   * @param email     = the email
-   * @param cellPhone = the cellPhone
+   * @param firstname
+   * @param lastname
+   * @param email
+   * @param cellPhone
+   * @param homePhone
+   * @param commentary
+   * @param mainContact
+   * @param address
    */
-  public Person(String firstname, String lastname, String email, String cellPhone) {
+  public Person(String firstname, String lastname, String email, String cellPhone, String homePhone,
+      String commentary, Boolean mainContact, Address address) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
+    this.homePhone = homePhone;
+    this.commentary = commentary;
+    this.mainContact = mainContact;
   }
+
 
   /**
    * Override toString() function.

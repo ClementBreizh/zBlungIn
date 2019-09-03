@@ -41,14 +41,18 @@ public class CompanyCandidatesSession extends EntityDb {
   private Session session;
 
 
-
-  public CompanyCandidatesSession(Company company, List<Candidate> candidates, Session session) {
+  /**
+   * Empty constructor.
+   */
+  public CompanyCandidatesSession() {
     super();
-    this.company = company;
-    this.candidates = candidates;
-    this.session = session;
+    this.candidates = new ArrayList<Candidate>();
   }
 
+  /**
+   * @param company
+   * @param session
+   */
   public CompanyCandidatesSession(Company company, Session session) {
     super();
     this.company = company;
@@ -57,11 +61,17 @@ public class CompanyCandidatesSession extends EntityDb {
   }
 
   /**
-   * Empty constructor.
+   * @param company
+   * @param candidates
+   * @param session
    */
-  public CompanyCandidatesSession() {
-    this.candidates = new ArrayList<Candidate>();
+  public CompanyCandidatesSession(Company company, List<Candidate> candidates, Session session) {
+    super();
+    this.company = company;
+    this.candidates = candidates;
+    this.session = session;
   }
+
 
   /**
    * Override toString() function.

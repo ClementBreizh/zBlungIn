@@ -40,7 +40,30 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   private Session session;
 
 
+  /**
+   * Empty constructor.
+   */
+  public CompanyValidatedCandidatesSession() {
+    super();
+    this.validatedCandidates = new ArrayList<Candidate>();
+  }
 
+  /**
+   * @param company
+   * @param session
+   */
+  public CompanyValidatedCandidatesSession(Company company, Session session) {
+    super();
+    this.company = company;
+    this.session = session;
+    this.validatedCandidates = new ArrayList<Candidate>();
+  }
+
+  /**
+   * @param company
+   * @param validatedCandidates
+   * @param session
+   */
   public CompanyValidatedCandidatesSession(Company company, List<Candidate> validatedCandidates,
       Session session) {
     super();
@@ -49,13 +72,6 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
     this.session = session;
   }
 
-  /**
-   * Empty constructor.
-   */
-  public CompanyValidatedCandidatesSession() {
-    super();
-    this.validatedCandidates = new ArrayList<Candidate>();
-  }
 
   /**
    * Override toString() function.

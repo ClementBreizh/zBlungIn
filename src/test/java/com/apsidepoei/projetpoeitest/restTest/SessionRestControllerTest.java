@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -21,7 +22,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+*
+* @author clemb
+* Tests for Session Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -30,16 +35,22 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
 
   @Autowired
   private SessionRepository repository;
-
+  /**
+   * Empty Constructor.
+   */
   public SessionRestControllerTest() {
     super("/sessions");
   }
-
+  /**
+   * Create repository.
+   */
   @Override
   protected JpaRepository<Session, Integer> getRepository() {
     return repository;
   }
-
+  /**
+   * Parse Json to List for test.
+   */
   @Override
   protected List<Session> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -47,7 +58,9 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
     return mapper.readValue(builder.toString(), new TypeReference<List<Session>>() {
     });
   }
-
+  /**
+   * Compare if data is the same.
+   */
   @Override
   protected boolean compareTo(Session item1, Session item2) {
     return item1.getId().equals(item2.getId())
@@ -55,6 +68,9 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
           && item1.getStartDate().equals(item2.getStartDate())
             && item1.getEndDate().equals(item2.getEndDate());
   }
+  /**
+   * Parse Json to a Object for run test.
+   */
   @Override
   protected Session parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -62,32 +78,45 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
     return mapper.readValue(builder.toString(), new TypeReference<Session>() {
     });
   }
-
+  /**
+   * Generate a Id for run test.
+   */
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
-
+  /**
+   * Create a object for run test.
+   */
   @Override
   protected Session getObjectTest() throws ParseException {
-    Session item = new Session("Session1", new SimpleDateFormat("yyyy/MM/dd").parse("2019/06/15"), new SimpleDateFormat("yyyy/MM/dd").parse("2019/10/02"));
+    LocalDate localDate = LocalDate.of(2016, 8, 19);
+    Session item = new Session("Session1", localDate, localDate);
+    System.out.println("TTTEEESSTTTT" + item);
     return item;
-  }
 
+
+  }
+  /**
+   * Return Id of Object for run test.
+   */
   @Override
   protected Integer getItemIdTest(Session item) {
     return item.getId();
   }
-
+  /**
+   * Create a string for POST method API.
+   */
   @Override
   protected String getObjectToStringToPost() {
-    // TODO Auto-generated method stub
-    return null;
+    String urlParameters  = "name=Session1&startDate=2016-8-19&endDate=2016-8-19";
+    return urlParameters;
   }
-
+  /**
+   * Method to compare list.
+   */
   @Override
   protected boolean compareToList(List<Session> items, List<Session> dbItems) {
-    // TODO Auto-generated method stub
     return false;
   }
 }

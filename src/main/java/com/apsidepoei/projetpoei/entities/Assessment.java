@@ -25,6 +25,12 @@ public class Assessment extends EntityDb {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate updatingDate;
 
+  /**
+   * empty constructor.
+   */
+  public Assessment() {
+    super();
+  }
 
   /**
    * Constructor for a new Assessment.
@@ -34,12 +40,7 @@ public class Assessment extends EntityDb {
     this.category = category;
     this.updatingDate = updatingDate;
   }
-  /**
-   * empty constructor.
-   */
-  public Assessment() {
-    super();
-  }
+
 
   /**
    * override toString() function.

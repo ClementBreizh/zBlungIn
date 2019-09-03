@@ -50,38 +50,11 @@ public class Appointment extends EntityDb {
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
-  @JoinTable(name = "appointmentPersons", joinColumns = {
+  @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
 
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param appointmentDate     = date and time
-   * @param report       = the report
-   */
-  public Appointment(String informations, LocalDateTime appointmentDate, String report) {
-    super();
-    this.informations = informations;
-    this.appointmentDate = appointmentDate;
-    this.report = report;
-    this.persons = new ArrayList<Person>();
-  }
-
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param appointmentDate     = date and time
-   * @param report       = the report
-   */
-  public Appointment(LocalDateTime appointmentDate, List<Person> persons) {
-    super();
-    this.appointmentDate = appointmentDate;
-    this.persons = persons;
-  }
 
   /**
    * Empty constructor.
@@ -91,7 +64,64 @@ public class Appointment extends EntityDb {
     this.persons = new ArrayList<Person>();
   }
 
+  /**
+   * Constructor for a new Appointment.
+   *
+   * @param appointmentDate     = appointmentDate
+   */
+  public Appointment(LocalDateTime appointmentDate) {
+    super();
+    this.appointmentDate = appointmentDate;
+    this.persons = new ArrayList<Person>();
+  }
+
+  /**
+   * @param informations
+   * @param appointmentDate
+   * @param report
+   * @param status
+   */
+  public Appointment(String informations, LocalDateTime appointmentDate, String report,
+      Boolean status) {
+    super();
+    this.informations = informations;
+    this.appointmentDate = appointmentDate;
+    this.report = report;
+    this.status = status;
+    this.persons = new ArrayList<Person>();
+  }
+
+  /**
+   * @param informations
+   * @param appointmentDate
+   * @param report
+   * @param status
+   * @param persons
+   */
+  public Appointment(String informations, LocalDateTime appointmentDate, String report,
+      Boolean status, List<Person> persons) {
+    super();
+    this.informations = informations;
+    this.appointmentDate = appointmentDate;
+    this.report = report;
+    this.status = status;
+    this.persons = persons;
+  }
+
+
+  /**
+   * Override toString() function.
+   */
+  @Override
+  public String toString() {
+    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + appointmentDate
+        + ", report=" + report + ", status=" + status + "]";
+  }
+
+
+
   // GETTER/SETTER
+
 
   /**
    * The informations.
@@ -112,18 +142,18 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * Return the appointmentDate.
+   * Return the dateTime.
    *
-   * @return the appointmentDate.
+   * @return the dateTime.
    */
   public LocalDateTime getAppointmentDate() {
     return appointmentDate;
   }
 
   /**
-   * Set the appointmentDate.
+   * Set the dateTime.
    *
-   * @param appointmentDate = the date and time
+   * @param dateTime = the date and time
    */
   public void setAppointmentDate(LocalDateTime appointmentDate) {
     this.appointmentDate = appointmentDate;
@@ -177,50 +207,5 @@ public class Appointment extends EntityDb {
     this.persons = persons;
   }
 
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param appointmentDate     = date and time
-   * @param report       = the report
-   * @param status       = status for the appointment
-   * @param persons      = list of persons, concerned in this appointment
-   */
-  public Appointment(String informations, LocalDateTime appointmentDate, String report, Boolean status, List<Person> persons) {
-    super();
-    this.informations = informations;
-    this.appointmentDate = appointmentDate;
-    this.report = report;
-    this.status = status;
-    this.persons = persons;
-  }
 
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param informations = informations
-   * @param appointmentDate     = date and time
-   * @param report       = the report
-   * @param status       = status for the appointment
-   * @param persons      = list of persons, concerned in this appointment
-   */
-  public Appointment(int id, String informations, LocalDateTime appointmentDate, String report, Boolean status, List<Person> persons) {
-    super();
-    this.setId(id);
-    this.informations = informations;
-    this.appointmentDate = appointmentDate;
-    this.report = report;
-    this.status = status;
-    this.persons = persons;
-
-  }
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + appointmentDate
-        + ", report=" + report + ", status=" + status + "]";
-  }
 }

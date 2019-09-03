@@ -3,6 +3,8 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -21,8 +23,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
+/**
+*
+* @author clemb
+* Tests for Appointment Entity.
+*/
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -31,16 +36,22 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
 
   @Autowired
   private AppointmentRepository repository;
-
+  /**
+   * Empty Constructor.
+   */
   public AppointmentRestControllerTest() {
     super("/appointments");
   }
-
+  /**
+   * Create repository.
+   */
   @Override
   protected JpaRepository<Appointment, Integer> getRepository() {
     return repository;
   }
-
+  /**
+   * Parse Adress in Json to List for test.
+   */
   @Override
   protected List<Appointment> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -48,13 +59,17 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return mapper.readValue(builder.toString(), new TypeReference<List<Appointment>>() {
     });
   }
-
+  /**
+   * Compare if data is the same.
+   */
   @Override
   protected boolean compareTo(Appointment item1, Appointment item2) {
     return item1.getId().equals(item2.getId()) && item1.getInformations().equals(item2.getInformations())
-        && item1.getDateTime().compareTo(item2.getDateTime()) == 0 && item1.getReport().equals(item2.getReport());
+        && item1.getAppointmentDate().compareTo(item2.getAppointmentDate()) == 0 && item1.getReport().equals(item2.getReport());
   }
-
+  /**
+   * Parse Json to a Object Appointment for run test.
+   */
   @Override
   protected Appointment parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -62,33 +77,41 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return mapper.readValue(builder.toString(), new TypeReference<Appointment>() {
     });
   }
-
+  /**
+   * Generate a Id for run test.
+   */
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
-
+  /**
+   * Create a object for run test.
+   */
   @Override
   protected Appointment getObjectTest() throws ParseException {
-    Appointment item = new Appointment("Commentaire 1",new SimpleDateFormat("yyyy/MM/dd").parse("2019/12/15"), "Report 1");
+    Appointment item = new Appointment();
     return item;
   }
-
+  /**
+   * Return Id of Object for run test.
+   */
   @Override
   protected Integer getItemIdTest(Appointment item) {
     return item.getId();
   }
-
+  /**
+   * Create a string for POST method API.
+   */
   @Override
   protected String getObjectToStringToPost() {
-    // TODO Auto-generated method stub
-    return null;
+    String urlParameters  = "informations=Commentaire&dateTime=2019/12/15&report=Report";
+    return urlParameters;
   }
-
+  /**
+   * Method to compare list.
+   */
   @Override
   protected boolean compareToList(List<Appointment> items, List<Appointment> dbItems) {
-    // TODO Auto-generated method stub
     return false;
   }
 }
-
