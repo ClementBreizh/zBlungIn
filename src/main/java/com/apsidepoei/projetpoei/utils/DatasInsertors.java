@@ -227,16 +227,16 @@ public class DatasInsertors {
 
 
     // Person
-    for (int i = 0; i < nbEntities; i++) {
-      Integer addressSize = faker.random().nextInt(0, addressList.size());
-      Person person = new Person(
-          faker.name().firstName(),
-          faker.name().lastName());
-      person.setEmail(faker.internet().emailAddress());
-      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-
-      personRepository.save(person);
-    }
+//    for (int i = 0; i < nbEntities; i++) {
+//      Integer addressSize = faker.random().nextInt(0, addressList.size());
+//      Person person = new Person(
+//          faker.name().firstName(),
+//          faker.name().lastName());
+//      person.setEmail(faker.internet().emailAddress());
+//      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+//
+//      personRepository.save(person);
+//    }
     personList.addAll(personRepository.findAll());
     System.out.println("Person ok");
 
@@ -254,16 +254,16 @@ public class DatasInsertors {
 
 
     // User
-    for (int i = 0; i < nbEntities; i++) {
-      User user = new User(
-          faker.name().username(),
-          faker.internet().password(),
-          faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-      userRepository.save(user);
-    }
+//    for (int i = 0; i < nbEntities; i++) {
+//      User user = new User(
+//          faker.name().username(),
+//          faker.internet().password(),
+//          faker.name().firstName(),
+//          faker.name().lastName(),
+//          faker.internet().emailAddress(),
+//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+//      userRepository.save(user);
+//    }
     userList.addAll(userRepository.findAll());
     System.out.println("User ok");
 

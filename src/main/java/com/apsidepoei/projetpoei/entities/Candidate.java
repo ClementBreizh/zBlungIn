@@ -80,19 +80,50 @@ public class Candidate extends Person {
   /**
    * Constructor with id for new Feedback.
    *
-   * @param firstname = the firstname
-   * @param lastname  = the lastname
-   * @param email     = the email
-   * @param cellPhone = the cellPhone
+   * @param firstname   = the firstname
+   * @param lastname    = the lastname
+   * @param email       = the email
+   * @param cellPhone   = the cellPhone
    * @param address
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, Address address) {
-    super();
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
+    super(firstname, lastname, email, cellPhone);
     this.address = address;
+    this.degrees = new ArrayList<Degree>();
+    this.sessions = new ArrayList<Session>();
+    this.matters = new ArrayList<Matter>();
+  }
+
+  /**
+   * @param ranking
+   * @param feedback
+   * @param degrees
+   * @param matters
+   * @param sessions
+   */
+  public Candidate(String firstname, String lastname, String email, String cellPhone, List<Degree> degrees, List<Matter> matters, List<Session> sessions) {
+    super(firstname, lastname, email, cellPhone);
+    this.degrees = degrees;
+    this.matters = matters;
+    this.sessions = sessions;
+  }
+  /**
+   * Constructor with id for new Feedback.
+   *
+   * @param firstname   = the firstname
+   * @param lastname    = the lastname
+   * @param email       = the email
+   * @param cellPhone   = the cellPhone
+   * @param homePhone   = the homePhone
+   * @param commentary  = the commentary
+   * @param mainContact = the mainContact
+   * @param address
+   */
+  public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback) {
+    super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
+    this.address = address;
+    this.ranking = ranking;
+    this.feedback = feedback;
     this.degrees = new ArrayList<Degree>();
     this.sessions = new ArrayList<Session>();
     this.matters = new ArrayList<Matter>();
@@ -107,13 +138,9 @@ public class Candidate extends Person {
    * @param matters
    * @param sessions
    */
-  public Candidate(String firstname, String lastname, String email, String cellPhone, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
+  public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
       List<Matter> matters, List<Session> sessions) {
-    super();
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
+    super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.feedback = feedback;
     this.degrees = degrees;

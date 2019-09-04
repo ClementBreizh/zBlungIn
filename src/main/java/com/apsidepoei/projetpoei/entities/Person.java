@@ -34,11 +34,11 @@ public class Person extends EntityDb {
   protected String lastname;
 
   @JsonProperty(value = PersonContract.COL_EMAIL)
-  @Column(name = PersonContract.COL_EMAIL, nullable = true)
+  @Column(name = PersonContract.COL_EMAIL, nullable = false)
   protected String email;
 
   @JsonProperty(value = PersonContract.COL_CELL_PHONE)
-  @Column(name = PersonContract.COL_CELL_PHONE, nullable = true, length = 12)
+  @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
   protected String cellPhone;
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
@@ -67,18 +67,21 @@ public class Person extends EntityDb {
    *
    * @param firstname = the firstname
    * @param lastname  = the lastname
+   * @param email     = the email
+   * @param cellPhone = the cellPhone
    */
-  public Person(String firstname, String lastname) {
+  public Person(String firstname, String lastname, String email, String cellPhone) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
+    this.email = email;
+    this.cellPhone = cellPhone;
   }
 
   /**
    * @param firstname
    * @param lastname
-   * @param email
-   * @param cellPhone
+
    * @param homePhone
    * @param commentary
    * @param mainContact
@@ -193,8 +196,6 @@ public class Person extends EntityDb {
   public void setCommentary(String commentary) {
     this.commentary = commentary;
   }
-
-
 
   /**
    * @return the mainContact
