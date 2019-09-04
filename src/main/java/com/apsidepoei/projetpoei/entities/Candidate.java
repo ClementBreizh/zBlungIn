@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
@@ -61,6 +62,11 @@ public class Candidate extends Person {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions;
 
+  @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
+  @ManyToOne(targetEntity = Address.class, optional = true)
+  @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
+  protected Address address;
+
   /**
    * Empty constructor.
    */
@@ -78,13 +84,15 @@ public class Candidate extends Person {
    * @param lastname  = the lastname
    * @param email     = the email
    * @param cellPhone = the cellPhone
+   * @param address
    */
-  public Candidate(String firstname, String lastname, String email, String cellPhone) {
+  public Candidate(String firstname, String lastname, String email, String cellPhone, Address address) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.cellPhone = cellPhone;
+    this.address = address;
     this.degrees = new ArrayList<Degree>();
     this.sessions = new ArrayList<Session>();
     this.matters = new ArrayList<Matter>();
@@ -200,5 +208,18 @@ public class Candidate extends Person {
    */
   public void setSessions(List<Session> sessions) {
     this.sessions = sessions;
+  }
+  /**
+   * @return the address
+   */
+  public Address getAddress() {
+    return address;
+  }
+
+  /**
+   * @param address the address to set
+   */
+  public void setAddress(Address address) {
+    this.address = address;
   }
 }

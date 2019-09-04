@@ -17,7 +17,7 @@ public class CandidateContract extends BaseContract {
   /**
    * defines the name of the column="id".
    */
-  public static final String COL_ID = "id_candidate";
+  public static final String COL_ID = "id_person";
 
   /**
    * defines the name of the column="rankingCandidate".
@@ -39,12 +39,15 @@ public class CandidateContract extends BaseContract {
    * defines the name of the column="sessions".
    */
   public static final String COL_SESSIONS = "sessions";
-
+  /**
+   * defines the name of the column="address_id".
+   */
+  public final static String COL_FK_ID_ADDRESS = "address_id";
 
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE };
+  public static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE , COL_FK_ID_ADDRESS };
 
   /**
    * Define the sql request used for create the table in database.

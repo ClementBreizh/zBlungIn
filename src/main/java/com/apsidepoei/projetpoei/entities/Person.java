@@ -8,13 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -57,11 +54,6 @@ public class Person extends EntityDb {
   @Type(type = "org.hibernate.type.NumericBooleanType")
   protected Boolean mainContact = false;
 
-  @JsonProperty(value = PersonContract.COL_FK_ID_ADDRESS)
-  @ManyToOne(targetEntity = Address.class, optional = true)
-  @JoinColumn(name = PersonContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
-  protected Address address;
-
 
   /**
    * Empty constructor.
@@ -90,10 +82,9 @@ public class Person extends EntityDb {
    * @param homePhone
    * @param commentary
    * @param mainContact
-   * @param address
    */
   public Person(String firstname, String lastname, String email, String cellPhone, String homePhone,
-      String commentary, Boolean mainContact, Address address) {
+      String commentary, Boolean mainContact) {
     super();
     this.firstname = firstname;
     this.lastname = lastname;
@@ -102,7 +93,6 @@ public class Person extends EntityDb {
     this.homePhone = homePhone;
     this.commentary = commentary;
     this.mainContact = mainContact;
-    this.address = address;
   }
 
 
@@ -113,7 +103,7 @@ public class Person extends EntityDb {
   public String toString() {
     return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
 
-        + ", email = " + email + ", téléphone = " + cellPhone + ", adresse = ]";
+        + ", email = " + email + ", téléphone = " + cellPhone + "]";
 
   }
 
@@ -204,19 +194,7 @@ public class Person extends EntityDb {
     this.commentary = commentary;
   }
 
-  /**
-   * @return the address
-   */
-  public Address getAddress() {
-    return address;
-  }
 
-  /**
-   * @param address the address to set
-   */
-  public void setAddress(Address address) {
-    this.address = address;
-  }
 
   /**
    * @return the mainContact
