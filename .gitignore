@@ -20,6 +20,9 @@ build/
 .checkstyle
 src/main/resources/application.properties
 .vscode/
+.idea/
+Projet_Zbleugin.eml
+
 
 # External tool builders
 .externalToolBuilders/
