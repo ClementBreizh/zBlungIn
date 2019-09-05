@@ -22,6 +22,7 @@ src/main/resources/application.properties
 .vscode/
 .idea/
 Projet_Zbleugin.eml
+Projet_Zbleugin.iml
 
 
 # External tool builders
