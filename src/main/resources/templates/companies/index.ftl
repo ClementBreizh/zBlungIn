@@ -3,11 +3,11 @@
 <form action="/api/companies" method="POST">
   <label for="name">Name</label>
   <br>
-  <input type="text" name="name">
+  <input type="text" name="name" id="name" required>
   <br>
   <label for="antennaName">Antenna Name</label>
   <br>
-  <input type="text" name="antennaName">
+  <input type="text" name="antennaName" id="antennaName">
   <br>
   <label for="siret">Siret<label>
   <br>
