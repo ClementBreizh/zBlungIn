@@ -43,16 +43,16 @@ public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
   @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)
-  protected String homePhone;
+  private String homePhone;
 
   @JsonProperty(value = PersonContract.COL_COMMENTARY)
   @Column(name = PersonContract.COL_COMMENTARY, nullable = true)
-  protected String commentary;
+  private String commentary;
 
   @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
   @Type(type = "org.hibernate.type.NumericBooleanType")
-  protected Boolean mainContact = false;
+  private Boolean mainContact = false;
 
 
   /**
