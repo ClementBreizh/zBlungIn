@@ -25,10 +25,6 @@
   <br>
   <textarea name="commentary" id="commentary"></textarea>
   <br>
-  <label for="mainContact" >Main contact</label>
-  <br>
-  <input type="checkbox" name="mainContact" id="mainContact" value="true">
-  <br>
   <label for="address">Address</label>
   <br>
   <input type="number" name="address" id="address">
@@ -44,9 +40,9 @@
   <label for="role">Role</label>
   <br>
   <select name="role" required>
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
+    <option value="ROLE_1">1</option>
+    <option value="ROLE_2">2</option>
+    <option value="ROLE_3">3</option>
   </select>
   <br><br>
   <input type="submit" value="Submit">

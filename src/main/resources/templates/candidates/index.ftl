@@ -25,10 +25,6 @@
   <br>
   <textarea name="commentary" id="commentary"></textarea>
   <br>
-  <label for="mainContact">Main contact</label>
-  <br>
-  <input type="checkbox" name="mainContact" id="mainContact" value="true">
-  <br>
   <label for="address">Address</label>
   <br>
   <input type="number" name="address" id="address">
@@ -36,11 +32,11 @@
   <label for="ranking">Ranking</label>
   <br>
   <select name="ranking" id="ranking">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
+    <option value="RANK_0">0</option>
+    <option value="RANK_1">1</option>
+    <option value="RANK_2">2</option>
+    <option value="RANK_3">3</option>
+    <option value="RANK_4">4</option>
   </select>
   <br>
   <label for="feedback">Feedback</label>

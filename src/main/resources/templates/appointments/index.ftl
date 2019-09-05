@@ -9,6 +9,10 @@
   <br>
   <input type="text" name="informations" id="informations">
   <br>
+  <label for="guestAppointment">Invités</label>
+  <br>
+  <input type="number" name="guestAppointment" id="guestAppointment">
+  <br>
   <label for="report">Report</label>
   <br>
   <input type="text" name="report" id="report">

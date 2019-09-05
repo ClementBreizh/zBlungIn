@@ -5,9 +5,9 @@
     <br>
     <input type="text" name="category" id="category" required>
     <br>
-    <label for="dateTime">Date Time</label>
+    <label for="updatingDate">Updating date</label>
     <br>
-    <input type="date" name="dateTime" id="dateTime" required>
+    <input type="date" name="updatingDate" id="updatingDate" required>
     <br><br>
     <input type="submit" value="Submit">
 </form>
