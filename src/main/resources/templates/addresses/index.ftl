@@ -9,9 +9,9 @@
 	<br>
 	<input type="text" name="postalCode" id="postalCode" required>
 	<br>
-	<label for="town">Town</label>
+	<label for="city">City</label>
 	<br>
-	<input type="text" name="town" id="town" required>
+	<input type="text" name="city" id="city" required>
 	<br><br>
 	<input type="submit" value="Submit">
 </form>
