@@ -25,8 +25,9 @@ public class PersonController extends BaseController {
   private PersonRepository repository;
 
   @GetMapping("/userByFLName")
-  public List<Person> getAllUserByFirstnameLastname(@PathParam(value = "firstname") String firstname,
-      @PathParam(value = "lastname") String lastname) {
+  public List<Person> getAllUserByFirstnameLastname(
+        @PathParam(value = "firstname") String firstname,
+        @PathParam(value = "lastname") String lastname) {
     return (List<Person>) repository.findAllByFirstnameAndLastname(firstname, lastname);
   }
 
