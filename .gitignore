@@ -19,6 +19,10 @@ build/
 #src/main/java/com/apsidepoei/projetpoei/database/DbOpenHelper.java
 .checkstyle
 src/main/resources/application.properties
+.vscode/
+.idea/
+Projet_Zbleugin.eml
+
 
 # External tool builders
 .externalToolBuilders/

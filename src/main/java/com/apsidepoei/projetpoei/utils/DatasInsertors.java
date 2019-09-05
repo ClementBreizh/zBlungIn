@@ -162,15 +162,15 @@ public class DatasInsertors {
     System.out.println("Assessment ok");
 
     // Candidate
-    for (int i = 1; i < nbEntities + 1; i++) {
-      Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
-          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-      candidate.setAddress(addressRepository.findById(i).get());
-      candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
-      candidate.setCommentary(faker.lorem().sentence().toString());
-      candidateRepository.save(candidate);
-    }
-
+//    for (int i = 0; i < nbEntities; i++) {
+//      Candidate candidate = new Candidate(
+//          faker.name().firstName(),
+//          faker.name().lastName(),
+//          faker.internet().emailAddress(),
+//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+//      candidate.setRanking(RankingCandidate.RANK_2);
+//      candidateRepository.save(candidate);
+//    }
     candidateList.addAll(candidateRepository.findAll());
     System.out.println("Candidate ok");
 
@@ -220,17 +220,16 @@ public class DatasInsertors {
     System.out.println("Matter ok");
 
     // Person
-    for (int i = 1; i < nbEntities+1; i++) {
-      Integer addressSize = faker.random().nextInt(0, addressList.size());
-
-      Person person = new Person(
-          faker.name().firstName(),
-          faker.name().lastName());
-      person.setEmail(faker.internet().emailAddress());
-      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      person.setAddress(addressRepository.findById(addressSize).get());
-      personRepository.save(person);
-    }
+//    for (int i = 0; i < nbEntities; i++) {
+//      Integer addressSize = faker.random().nextInt(0, addressList.size());
+//      Person person = new Person(
+//          faker.name().firstName(),
+//          faker.name().lastName());
+//      person.setEmail(faker.internet().emailAddress());
+//      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+//
+//      personRepository.save(person);
+//    }
     personList.addAll(personRepository.findAll());
     System.out.println("Person ok");
 
@@ -247,16 +246,16 @@ public class DatasInsertors {
     System.out.println("Session ok");
 
     // User
-    for (int i = 1; i < nbEntities+1; i++) {
-      User user = new User(faker.name().username(), faker.internet().password(),
-          faker.name().firstName(), faker.name().lastName(), faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-      user.setAddress(addressRepository.findById(i).get());
-      user.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
-      user.setCommentary(faker.lorem().sentence().toString());
-
-      userRepository.save(user);
-    }
+//    for (int i = 0; i < nbEntities; i++) {
+//      User user = new User(
+//          faker.name().username(),
+//          faker.internet().password(),
+//          faker.name().firstName(),
+//          faker.name().lastName(),
+//          faker.internet().emailAddress(),
+//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+//      userRepository.save(user);
+//    }
     userList.addAll(userRepository.findAll());
     System.out.println("User ok");
 
@@ -267,17 +266,12 @@ public class DatasInsertors {
 //  -----------------------------Derniers champs------------------------------------
 //  --------------------------------------------------------------------------------
 
-//    variables
 
-    Integer personSize = faker.random().nextInt(0, personList.size());
+//  -----------------------------------Tests-----------------------------------------------
+//  ---------------------------------------------------------------------------------------
 
-    for (int i = 1; i <= nbEntities; i++) {
-      candidateRepository.findById(i).get().setFeedback(feedbackRepository.findById(i).get());
+    System.out.println(personRepository.count());
 
-//     companyRepository.findById(i).get().setAddress(addressRepository.findById(i).get());
-//     companyRepository.findById(i).get().setAddress(addressList.get(i));
-
-    }
 
 
 //for (int i = 1; i < nbEntities; i++) {

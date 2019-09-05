@@ -43,11 +43,15 @@ public class User extends Person {
   }
 
   /**
+   * @param firstname
+   * @param lastname
+   * @param email
+   * @param cellPhone
    * @param login
    * @param password
    */
-  public User(String login, String password) {
-    super();
+  public User(String firstname, String lastname, String email, String cellPhone, String login, String password) {
+    super(firstname, lastname, email, cellPhone);
     this.login = login;
     this.password = password;
   }
@@ -55,38 +59,19 @@ public class User extends Person {
   /**
    * Constructor with id for new Feedback.
    *
-   * @param login      = the login
-   * @param password  = the password
-   * @param firstname = the firstname
-   * @param lastname  = the lastname
-   */
-  public User(String login, String password, String firstname, String lastname, String email, String cellPhone) {
-    super();
-    this.login = login;
-    this.password = password;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.role = RoleUser.ROLE_3;
-  }
-
-  /**
-   * Constructor with id for new Feedback.
-   *
-   * @param login      = the login
+   * @param login     = the login
    * @param password  = the password
    * @param firstname = the firstname
    * @param lastname  = the lastname
    * @param email     = the email
    * @param cellPhone = the cellPhone
+   * @param role      = the role
+
    */
-  public User(String login, String password, String firstname, String lastname, String email, String cellPhone, RoleUser role) {
-    super();
+  public User(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, String login, String password, RoleUser role) {
+    super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.login = login;
     this.password = password;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
     this.role = role;
   }
 
