@@ -55,9 +55,9 @@ public class Company extends EntityDb {
   @JoinColumn(name = CompanyContract.COL_FK_ID_MAINCONTACT, referencedColumnName = PersonContract.COL_ID)
   private Person mainContact;
 
-  @JsonProperty(value = CompanyContract.COL_FK_ID_ADRESS)
+  @JsonProperty(value = CompanyContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
-  @JoinColumn(name = CompanyContract.COL_FK_ID_ADRESS, referencedColumnName = AddressContract.COL_ID)
+  @JoinColumn(name = CompanyContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
   private Address address;
 
   @JsonProperty(value = CompanyContract.COL_SESSIONS)

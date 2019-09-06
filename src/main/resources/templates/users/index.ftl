@@ -3,53 +3,47 @@
 <form method="POST" action="/api/users">
   <label for="firstname">Firstname</label>
   <br>
-  <input type="text" name="firstname">
+  <input type="text" name="firstname" id="firstname" required>
   <br>
   <label for="lastname">Lastname</label>
   <br>
-  <input type="text" name="lastname">
+  <input type="text" name="lastname" id="lastname" required>
   <br>
   <label for="email">Email</label>
   <br>
-  <input type="email" name="email">
+  <input type="email" name="email" id="email" required>
   <br>
   <label for="cellPhone">Cell phone</label>
   <br>
-  <input type="text" name="cellPhone">
+  <input type="text" name="cellPhone" id="cellPhone">
   <br>
   <label for="homePhone">Home Phone</label>
   <br>
-  <input type="text" name="homePhone">
+  <input type="text" name="homePhone" id="homePhone">
   <br>
   <label for="commentary">Commentary</label>
   <br>
-  <textarea name="commentary"></textarea>
-  <br>
-  <label for="mainContact">Main contact</label>
-  <br>
-  <input type="checkbox" name="mainContact" value="true">
+  <textarea name="commentary" id="commentary"></textarea>
   <br>
   <label for="address">Address</label>
   <br>
-  <input type="number" name="address">
+  <input type="number" name="address" id="address">
   <br>
    <label for="login">Login</label>
   <br>
-  <input type="text" name="login">
+  <input type="text" name="login" id="login" required>
   <br>
   <label for="password">Password</label>
   <br>
-  <input type="password" name="password">
+  <input type="password" name="password" id="password" required>
   <br>
   <label for="role">Role</label>
   <br>
-  <select name="role">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
+  <select name="role" required>
+    <option value="ROLE_1">1</option>
+    <option value="ROLE_2">2</option>
+    <option value="ROLE_3">3</option>
   </select>
-  <br>
-
   <br><br>
   <input type="submit" value="Submit">
 </form>

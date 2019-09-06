@@ -1,11 +1,17 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -27,9 +33,20 @@ public class Address extends EntityDb {
   @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false, length = 5)
   private String postalCode;
 
-  @JsonProperty(value = AddressContract.COL_TOWN)
-  @Column(name = AddressContract.COL_TOWN, nullable = false)
-  private String town;
+  @JsonProperty(value = AddressContract.COL_CITY)
+  @Column(name = AddressContract.COL_CITY, nullable = false)
+  private String city;
+
+  @JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
+  @ManyToOne(targetEntity = Company.class)
+  @JoinColumn(name = AddressContract.COL_FK_ID_COMPANIES, referencedColumnName = CompanyContract.COL_ID)
+  private List<Company> companies ;
+
+  @JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
+  @ManyToOne(targetEntity = Candidate.class)
+  @JoinColumn(name = AddressContract.COL_FK_ID_CANDIDATES, referencedColumnName = CandidateContract.COL_ID)
+  private List<Candidate> candidates ;
+
 
   /**
    * Empty constructor.
@@ -43,13 +60,13 @@ public class Address extends EntityDb {
    *
    * @param address    = the address
    * @param postalCode = the postalCode
-   * @param town       = the town
+   * @param city       = the city
    */
-  public Address(String address, String postalCode, String town) {
+  public Address(String address, String postalCode, String city) {
     super();
     this.address = address;
     this.postalCode = postalCode;
-    this.town = town;
+    this.city = city;
   }
 
 
@@ -60,7 +77,7 @@ public class Address extends EntityDb {
   @Override
   public String toString() {
     return "Adresse [Id = " + getId() + ", adresse postale = " + address + ", code postal = "
-        + postalCode + ", ville = " + town + "]";
+        + postalCode + ", ville = " + city + "]";
   }
 
 
@@ -103,21 +120,21 @@ public class Address extends EntityDb {
   }
 
   /**
-   * The town.
+   * The city.
    *
-   * @return the town
+   * @return the city
    */
-  public String getTown() {
-    return town;
+  public String getCity() {
+    return city;
   }
 
   /**
-   * Set the town.
+   * Set the city.
    *
-   * @param town = the town
+   * @param city = the city
    */
-  public void setTown(String town) {
-    this.town = town;
+  public void setCity(String city) {
+    this.city = city;
   }
 
 }

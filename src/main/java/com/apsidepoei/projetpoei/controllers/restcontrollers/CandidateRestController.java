@@ -18,6 +18,7 @@ import com.apsidepoei.projetpoei.entities.Candidate;
 @RestController
 @RequestMapping("/api/candidates")
 public class CandidateRestController extends BaseRestController<Candidate, Integer>{
+
   public CandidateRestController(@Autowired CandidateRepository repository) {
     super(repository);
   }

@@ -17,7 +17,9 @@ import com.apsidepoei.projetpoei.entities.CompanyCandidatesSession;
  */
 @RestController
 @RequestMapping("/api/candidBySessionAndCompany")
-public class CompanyCandidatesSessionRestController extends BaseRestController<CompanyCandidatesSession, Integer>{
+
+public class CompanyCandidatesSessionRestController extends BaseRestController<CompanyCandidatesSession, Integer> {
+
   public CompanyCandidatesSessionRestController(@Autowired CompanyCandidatesSessionRepository repository) {
     super(repository);
   }

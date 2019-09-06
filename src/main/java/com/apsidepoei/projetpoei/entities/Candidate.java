@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
@@ -45,52 +46,45 @@ public class Candidate extends Person {
   @JoinTable(name = "candidate_degree", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = DegreeContract.COL_ID) })
-  private List<Degree> degrees;
+  private List<Degree> degrees = new ArrayList<>();
 
   @JsonProperty(value = CandidateContract.COL_MATTERS)
   @ManyToMany(targetEntity = Matter.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = MatterContract.COL_ID) })
-  private List<Matter> matters;
+  private List<Matter> matters = new ArrayList<>();
 
   @JsonProperty(value = CandidateContract.COL_SESSIONS)
   @ManyToMany(targetEntity = Session.class)
   @JoinTable(name = "candidate_session", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = SessionContract.COL_ID) })
-  private List<Session> sessions;
+  private List<Session> sessions = new ArrayList<>();
+
+  @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
+  @ManyToOne(targetEntity = Address.class, optional = true)
+  @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
+  protected Address address;
 
   /**
    * Empty constructor.
    */
   public Candidate() {
     super();
-    this.degrees = new ArrayList<Degree>();
-    this.sessions = new ArrayList<Session>();
-    this.matters = new ArrayList<Matter>();
   }
 
   /**
    * Constructor with id for new Feedback.
    *
-   * @param firstname = the firstname
-   * @param lastname  = the lastname
-   * @param email     = the email
-   * @param cellPhone = the cellPhone
+   * @param firstname   = the firstname
+   * @param lastname    = the lastname
+   * @param email       = the email
+   * @param cellPhone   = the cellPhone
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone) {
-    super();
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
-    this.degrees = new ArrayList<Degree>();
-    this.sessions = new ArrayList<Session>();
-    this.matters = new ArrayList<Matter>();
+    super(firstname, lastname, email, cellPhone);
   }
-
-
 
   /**
    * @param ranking
@@ -99,18 +93,15 @@ public class Candidate extends Person {
    * @param matters
    * @param sessions
    */
-  public Candidate(String firstname, String lastname, String email, String cellPhone, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
+  public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
       List<Matter> matters, List<Session> sessions) {
-    super();
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.cellPhone = cellPhone;
+    super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.feedback = feedback;
     this.degrees = degrees;
     this.matters = matters;
     this.sessions = sessions;
+    this.address = address;
   }
 
 
@@ -200,5 +191,18 @@ public class Candidate extends Person {
    */
   public void setSessions(List<Session> sessions) {
     this.sessions = sessions;
+  }
+  /**
+   * @return the address
+   */
+  public Address getAddress() {
+    return address;
+  }
+
+  /**
+   * @param address the address to set
+   */
+  public void setAddress(Address address) {
+    this.address = address;
   }
 }

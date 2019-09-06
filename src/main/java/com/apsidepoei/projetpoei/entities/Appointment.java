@@ -35,8 +35,8 @@ public class Appointment extends EntityDb {
   @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
   private String informations;
 
-  @JsonProperty(value = AppointmentContract.COL_DATETIME)
-  @Column(name = AppointmentContract.COL_DATETIME, nullable = false)
+  @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
+  @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
 

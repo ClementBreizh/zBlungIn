@@ -3,15 +3,15 @@
 <form method="POST" action="/api/addresses">
 	<label for="address">Address</label>
 	<br>
-	<input type="text" name="address">
+	<input type="text" name="address" id="address" required>
 	<br>
 	<label for="postalCode">Postal Code</label>
 	<br>
-	<input type="text" name="postalCode">
+	<input type="text" name="postalCode" id="postalCode" required>
 	<br>
-	<label for="town">Town</label>
+	<label for="city">City</label>
 	<br>
-	<input type="text" name="town">
+	<input type="text" name="city" id="city" required>
 	<br><br>
 	<input type="submit" value="Submit">
 </form>

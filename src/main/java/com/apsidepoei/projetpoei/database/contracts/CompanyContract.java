@@ -52,7 +52,7 @@ public class CompanyContract extends BaseContract {
   /**
    * Define the name of the address column.
    */
-  public static final String COL_FK_ID_ADRESS = "address";
+  public static final String COL_FK_ID_ADDRESS = "address";
 
   /**
    * Define the name of the sessions column.

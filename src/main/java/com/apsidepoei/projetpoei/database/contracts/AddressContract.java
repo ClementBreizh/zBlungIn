@@ -31,20 +31,30 @@ public class AddressContract extends BaseContract {
   /**
    * defines the name of the column="town".
    */
-  public static final String COL_TOWN = "town";
+  public static final String COL_CITY = "city";
+
+  /**
+   * defines the name of the column="companies".
+   */
+  public static final String COL_FK_ID_COMPANIES = "companies";
+
+  /**
+   * defines the name of the column="candidates".
+   */
+  public static final String COL_FK_ID_CANDIDATES = "candidates";
 
   /**
    * Define a table with all column.
    */
   public static final String[] COLS = new String[] { COL_ID, COL_ADDRESS, COL_POSTAL_CODE,
-      COL_TOWN };
+    COL_CITY };
 
   /**
    * Define the sql request used for create the table in database.
    */
   public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + "(" + COL_ID
       + " int NOT NULL AUTO_INCREMENT PRIMARY KEY," + COL_ADDRESS + " VARCHAR(255) NOT NULL,"
-      + COL_POSTAL_CODE + " VARCHAR(5) NOT NULL," + COL_TOWN + " VARCHAR(255) NOT NULL" + ")";
+      + COL_POSTAL_CODE + " VARCHAR(5) NOT NULL," + COL_CITY + " VARCHAR(255) NOT NULL" + ")";
 
   /**
    * Constructor.
