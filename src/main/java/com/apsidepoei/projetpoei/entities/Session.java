@@ -14,8 +14,8 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * This class is the session entity.
@@ -34,14 +34,12 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
-  //@DateTimeFormat(pattern = "yyyy-MM-dd")
-  @JsonFormat(pattern="yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate startDate;
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
- // @DateTimeFormat(pattern = "yyyy-MM-dd")
-  @JsonFormat(pattern="yyyy-MM-dd")
+ @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)
