@@ -3,11 +3,10 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,11 +19,8 @@ import javax.persistence.Table;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import com.apsidepoei.projetpoei.entities.RankingCandidate;
-import com.apsidepoei.projetpoei.entities.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -46,10 +42,18 @@ public class Candidate extends Person {
   private Feedback feedback;
 
   @JsonProperty(value = CandidateContract.COL_DEGREES)
-  @ManyToMany(targetEntity = Degree.class)
-  @JoinTable(name = "candidate_degree", joinColumns = {
-      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = DegreeContract.COL_ID) })
+//  @ManyToMany(targetEntity = Degree.class)
+//  @JoinTable(name = "candidate_degree", joinColumns = {
+//      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
+//          @JoinColumn(name = DegreeContract.COL_ID) })
+  @ManyToMany(fetch = FetchType.EAGER,
+  cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
+  @JoinTable(name = "candidate_degree",
+          joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
+          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
   private List<Degree> degrees = new ArrayList<>();
 
   @JsonProperty(value = CandidateContract.COL_MATTERS)
@@ -115,8 +119,8 @@ public class Candidate extends Person {
    */
   @Override
   public String toString() {
-    return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
+    return "Candidate [" + "Id = " + this.getId() + ", prénom = " + this.firstname + ", nom = " + this.lastname
+        + ", rang = "+ this.ranking.label + ", email = " + this.email + ", téléphone = " + this.cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
   // GETTER/SETTER
@@ -125,14 +129,14 @@ public class Candidate extends Person {
    * @return the ranking
    */
   public RankingCandidate getRanking() {
-    return ranking;
+    return this.ranking;
   }
 
   /**
    * @return the ranking label
    */
   public String getRankingLabel() {
-    return ranking.label;
+    return this.ranking.label;
   }
 
   /**
@@ -146,7 +150,7 @@ public class Candidate extends Person {
    * @return the feedback
    */
   public Feedback getFeedback() {
-    return feedback;
+    return this.feedback;
   }
 
   /**
@@ -160,7 +164,7 @@ public class Candidate extends Person {
    * @return the degrees
    */
   public List<Degree> getDegrees() {
-    return degrees;
+    return this.degrees;
   }
 
   /**
@@ -174,7 +178,7 @@ public class Candidate extends Person {
    * @return the matters
    */
   public List<Matter> getMatters() {
-    return matters;
+    return this.matters;
   }
 
   /**
@@ -197,7 +201,7 @@ public class Candidate extends Person {
    * @return the sessions
    */
   public List<Session> getSessions() {
-    return sessions;
+    return this.sessions;
   }
 
   /**
@@ -210,7 +214,7 @@ public class Candidate extends Person {
    * @return the address
    */
   public Address getAddress() {
-    return address;
+    return this.address;
   }
 
   /**

@@ -3,7 +3,6 @@ package com.apsidepoei.projetpoeitest.restTest;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.tomcat.jni.Address;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -47,7 +46,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    */
   @Override
   protected JpaRepository<Person, Integer> getRepository() {
-    return repository;
+    return this.repository;
   }
 
   /**
@@ -87,7 +86,8 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    */
   @Override
   protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212233443", "this is a comment", false, null);
+//    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212233443", "this is a comment", false, null);
+    Person item = null;
     return item;
   }
 

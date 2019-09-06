@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -35,11 +34,17 @@ public class Degree extends EntityDb {
   private String level;
 
   @JsonProperty(value = DegreeContract.COL_CANDIDATES)
-  @ManyToMany(targetEntity = Candidate.class)
-  @JoinTable(name = "degree_candidates", joinColumns = {
-      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = CandidateContract.COL_ID) })
-  private List<Candidate> candidates;
+//  @ManyToMany(targetEntity = Candidate.class)
+//  @JoinTable(name = "candidate_degree", joinColumns = {
+//      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
+//          @JoinColumn(name = CandidateContract.COL_ID) })
+  @ManyToMany(fetch = FetchType.EAGER,
+  cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  },
+  mappedBy = "degrees")
+  private List<Candidate> candidates = new ArrayList<>();
 
 
   /**
@@ -47,7 +52,7 @@ public class Degree extends EntityDb {
    */
   public Degree() {
     super();
-    this.candidates = new ArrayList<Candidate>();
+    this.candidates = new ArrayList<>();
   }
 
   /**
@@ -60,7 +65,7 @@ public class Degree extends EntityDb {
     super();
     this.name = name;
     this.level = level;
-    this.candidates = new ArrayList<Candidate>();
+    this.candidates = new ArrayList<>();
   }
 
   /**
@@ -81,7 +86,7 @@ public class Degree extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+    return "Diplome [Id = " + this.getId() + ", nom=" + this.name + ", niveau=" + this.level + "]";
   }
 
 
@@ -93,7 +98,7 @@ public class Degree extends EntityDb {
    * @return the name.
    */
   public String getName() {
-    return name;
+    return this.name;
   }
 
   /**
@@ -111,7 +116,7 @@ public class Degree extends EntityDb {
    * @return the name.
    */
   public String getLevel() {
-    return level;
+    return this.level;
   }
 
   /**
@@ -141,7 +146,7 @@ public class Degree extends EntityDb {
    * @return the candidates
    */
   public List<Candidate> getCandidates() {
-    return candidates;
+    return this.candidates;
   }
 
   /**
