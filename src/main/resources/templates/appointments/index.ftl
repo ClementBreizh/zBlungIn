@@ -8,6 +8,10 @@
   <label for="informations">Informations</label>
   <br>
   <input type="text" name="informations" id="informations">
+   <br>
+      <label for="organizer">Organizer</label>
+      <br>
+      <input type="number" name="organizer" id="organizer">
   <br>
   <label for="guestAppointment">Invités</label>
   <br>

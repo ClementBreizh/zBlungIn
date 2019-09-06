@@ -56,7 +56,7 @@ public class Appointment extends EntityDb {
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
-  private List<Person> persons = new ArrayList<>();
+  private List<Person> persons = new ArrayList<Person>();
 
   @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
   @ManyToOne(targetEntity = Person.class, optional = true)

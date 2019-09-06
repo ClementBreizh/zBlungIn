@@ -3,17 +3,16 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author vianney
@@ -54,6 +53,8 @@ public class Person extends EntityDb {
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean mainContact = false;
 
+  @ManyToMany(mappedBy = "persons")
+  private List<Appointment> appointments = new ArrayList<Appointment>();
 
   /**
    * Empty constructor.
