@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -50,17 +52,15 @@ public class Appointment extends EntityDb {
   private Boolean status = false;
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
-  @ManyToOne(targetEntity = Person.class)
+  @ManyToMany(targetEntity = Person.class)
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
 
   @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
-  @ManyToOne(targetEntity = Person.class)
-  @JoinTable(name = "appointment_persons", joinColumns = {
-      @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = PersonContract.COL_ID) })
+  @ManyToOne(targetEntity = Person.class, optional = true)
+  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID)
   private Person organizer;
 
   /**
@@ -204,5 +204,12 @@ public class Appointment extends EntityDb {
     this.persons = persons;
   }
 
+  public Person getOrganizer() {
+    return organizer;
+  }
+
+  public void setOrganizer(Person organizer) {
+    this.organizer = organizer;
+  }
 
 }
