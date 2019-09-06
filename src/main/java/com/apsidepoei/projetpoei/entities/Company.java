@@ -89,27 +89,6 @@ public class Company extends EntityDb {
     this.sessions = new ArrayList<Session>();
   }
 
-  /**
-   * @param name
-   * @param antennaName
-   * @param siret
-   * @param apeCode
-   * @param mainContact
-   * @param address
-   */
-  public Company(String name, String antennaName, String siret, String apeCode, Person mainContact,
-      Address address) {
-    super();
-    this.name = name;
-    this.antennaName = antennaName;
-    this.siret = siret;
-    this.apeCode = apeCode;
-    this.mainContact = mainContact;
-    this.address = address;
-    this.contacts = new ArrayList<Person>();
-    this.sessions = new ArrayList<Session>();
-  }
-
 
   /**
    * @param name

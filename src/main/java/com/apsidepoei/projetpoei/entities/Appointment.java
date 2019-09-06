@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -49,29 +50,24 @@ public class Appointment extends EntityDb {
   private Boolean status = false;
 
   @JsonProperty(value = AppointmentContract.COL_PERSONS)
-  @ManyToMany(targetEntity = Person.class)
+  @ManyToOne(targetEntity = Person.class)
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
 
+  @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
+  @ManyToOne(targetEntity = Person.class)
+  @JoinTable(name = "appointment_persons", joinColumns = {
+      @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
+          @JoinColumn(name = PersonContract.COL_ID) })
+  private Person organizer;
 
   /**
    * Empty constructor.
    */
   public Appointment() {
     super();
-    this.persons = new ArrayList<Person>();
-  }
-
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param appointmentDate     = appointmentDate
-   */
-  public Appointment(LocalDateTime appointmentDate) {
-    super();
-    this.appointmentDate = appointmentDate;
     this.persons = new ArrayList<Person>();
   }
 
@@ -97,17 +93,18 @@ public class Appointment extends EntityDb {
    * @param report
    * @param status
    * @param persons
+   * @param organizer
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, List<Person> persons) {
+      Boolean status, List<Person> persons, Person organizer) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
     this.persons = persons;
+    this.organizer = organizer;
   }
-
 
   /**
    * Override toString() function.

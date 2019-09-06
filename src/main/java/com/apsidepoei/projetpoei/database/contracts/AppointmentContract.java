@@ -38,6 +38,11 @@ public class AppointmentContract extends BaseContract {
   public static final String COL_PERSONS = "persons";
 
   /**
+   * defines the name of the column="organizer".
+   */
+  public static final String COL_ORGANIZER = "organizer";
+
+  /**
    * Define a table with all column.
    */
   public static final String[] COLS = new String[] { COL_ID, COL_INFORMATIONS, COL_DATETIME,

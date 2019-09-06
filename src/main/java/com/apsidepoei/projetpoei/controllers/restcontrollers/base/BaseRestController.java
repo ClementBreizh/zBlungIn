@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.apsidepoei.projetpoei.controllers.restcontrollers.LocalDateDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * @author vianney
  *
@@ -51,7 +54,8 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
 
   @PostMapping(value= {"","/","/index"})
   @Override
-  public T save(@RequestBody T item) {
+  @JsonDeserialize(using=LocalDateDeserializer.class)
+  public T save(T item) {
     return repository.save(item);
   }
 

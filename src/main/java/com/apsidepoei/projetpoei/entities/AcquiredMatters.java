@@ -81,7 +81,7 @@ public class AcquiredMatters extends EntityDb {
    this.candidate = candidate;
  }
 
- 
+
  // GETTER/SETTER
 
  /**
