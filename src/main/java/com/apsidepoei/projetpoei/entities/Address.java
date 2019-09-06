@@ -45,6 +45,7 @@ public class Address extends EntityDb {
 
   @JsonProperty(value = AddressContract.COL_CANDIDATES)
   @OneToMany(targetEntity = Candidate.class)
+//  @OneToMany(mappedBy = "address")
   private List<Candidate> candidates = new ArrayList<>();
 
   /**

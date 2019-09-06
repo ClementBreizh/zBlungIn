@@ -3,11 +3,14 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -37,8 +40,9 @@ public class Candidate extends Person {
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
-  @ManyToOne(targetEntity = Feedback.class, optional = true)
-  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
+//  @ManyToOne(targetEntity = Feedback.class, optional = true)
+  @ManyToOne()
+//  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
   private Feedback feedback;
 
   @JsonProperty(value = CandidateContract.COL_DEGREES)
@@ -61,10 +65,11 @@ public class Candidate extends Person {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions = new ArrayList<>();
-
+//
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
+//  @ManyToOne()
   protected Address address;
 
   /**
@@ -179,6 +184,15 @@ public class Candidate extends Person {
     this.matters = matters;
   }
 
+  public void addMatter(Matter matter) {
+    if (!this.matters.contains(matter)) {
+      this.matters.add(matter);
+      if (matter.getCandidates().contains(this)) {
+          matter.getCandidates().add(this);
+      }
+    }
+  }
+
   /**
    * @return the sessions
    */
@@ -204,5 +218,6 @@ public class Candidate extends Person {
    */
   public void setAddress(Address address) {
     this.address = address;
+//    address.getCandidates().add(this);
   }
 }

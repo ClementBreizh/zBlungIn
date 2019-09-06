@@ -131,7 +131,7 @@ public class DatasInsertors {
           faker.address().streetAddress(),
           faker.address().zipCode(),
           faker.address().city());
-      addressRepository.save(address);
+      addressRepository.saveAndFlush(address);
     }
     addressList.addAll(addressRepository.findAll());
     System.out.println("Address ok");
@@ -144,7 +144,7 @@ public class DatasInsertors {
           faker.lorem().sentence(), false);
 
       appointment.setInformations(faker.lorem().sentence());
-      appointmentRepository.save(appointment);
+      appointmentRepository.saveAndFlush(appointment);
     }
     appointmentList.addAll(appointmentRepository.findAll());
     System.out.println("Appointment ok");
@@ -153,16 +153,16 @@ public class DatasInsertors {
     // Assessment
     Assessment assessment1 = new Assessment("Culture générale",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-    assessmentRepository.save(assessment1);
+    assessmentRepository.saveAndFlush(assessment1);
     Assessment assessment2 = new Assessment("Mathématiques",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-    assessmentRepository.save(assessment2);
+    assessmentRepository.saveAndFlush(assessment2);
     Assessment assessment3 = new Assessment("Culture informatique",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-    assessmentRepository.save(assessment3);
+    assessmentRepository.saveAndFlush(assessment3);
     Assessment assessment4 = new Assessment("Logique",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-    assessmentRepository.save(assessment4);
+    assessmentRepository.saveAndFlush(assessment4);
     assessmentList.addAll(assessmentRepository.findAll());
     System.out.println("Assessment ok");
 
@@ -175,7 +175,7 @@ public class DatasInsertors {
           faker.phoneNumber().cellPhone().replaceAll(" ", ""));
       candidate.setRanking(RankingCandidate.RANK_2);
       candidate.setAddress(addressRepository.findById(faker.random().nextInt(1, nbEntities)).get());
-      candidateRepository.save(candidate);
+      candidateRepository.saveAndFlush(candidate);
     }
     candidateList.addAll(candidateRepository.findAll());
     System.out.println("Candidate ok");
@@ -187,7 +187,7 @@ public class DatasInsertors {
       company.setApeCode(faker.number().digits(5));
       company.setAddress(addressRepository.findById(faker.random().nextInt(1, nbEntities)).get());
 
-      companyRepository.save(company);
+      companyRepository.saveAndFlush(company);
     }
     companyList.addAll(companyRepository.findAll());
     System.out.println("Company ok");
@@ -195,7 +195,7 @@ public class DatasInsertors {
     // Degrees
     for (int i = 1; i < nbEntities + 1; i++) {
       Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
-      degreeRepository.save(degree);
+      degreeRepository.saveAndFlush(degree);
     }
     degreeList.addAll(degreeRepository.findAll());
     System.out.println("Degrees ok");
@@ -203,24 +203,24 @@ public class DatasInsertors {
     // Feedback
     for (int i = 1; i < nbEntities + 1; i++) {
       Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word());
-      feedbackRepository.save(feedback);
+      feedbackRepository.saveAndFlush(feedback);
     }
     feedbackList.addAll(feedbackRepository.findAll());
     System.out.println("Feedback ok");
 
     // Matter
     Matter matter1 = new Matter("Angular");
-    matterRepository.save(matter1);
+    matterRepository.saveAndFlush(matter1);
     Matter matter2 = new Matter("Java");
-    matterRepository.save(matter2);
+    matterRepository.saveAndFlush(matter2);
     Matter matter3 = new Matter("HTML");
-    matterRepository.save(matter3);
+    matterRepository.saveAndFlush(matter3);
     Matter matter4 = new Matter("CSS");
-    matterRepository.save(matter4);
+    matterRepository.saveAndFlush(matter4);
     Matter matter5 = new Matter("C#");
-    matterRepository.save(matter5);
+    matterRepository.saveAndFlush(matter5);
     Matter matter6 = new Matter("C++");
-    matterRepository.save(matter6);
+    matterRepository.saveAndFlush(matter6);
 
     matterList.addAll(matterRepository.findAll());
     System.out.println("Matter ok");
@@ -234,7 +234,7 @@ public class DatasInsertors {
 //          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
 //      person.setEmail(faker.internet().emailAddress());
 //      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      personRepository.save(person);
+//      personRepository.saveAndFlush(person);
 //    }
     personList.addAll(personRepository.findAll());
     System.out.println("Person ok");
@@ -245,7 +245,7 @@ public class DatasInsertors {
       Session session = new Session(faker.gameOfThrones().house(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      sessionRepository.save(session);
+      sessionRepository.saveAndFlush(session);
     }
     sessionList.addAll(sessionRepository.findAll());
     System.out.println("Session ok");
@@ -259,7 +259,7 @@ public class DatasInsertors {
 //          faker.name().lastName(),
 //          faker.internet().emailAddress(),
 //          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      userRepository.save(user);
+//      userRepository.saveAndFlush(user);
 //    }
     userList.addAll(userRepository.findAll());
     System.out.println("User ok");
@@ -271,20 +271,26 @@ public class DatasInsertors {
 //  -----------------------------Champs supplémentaires------------------------------------
 //  --------------------------------------------------------------------------------
 
-    for (int i = 0; i < nbEntities; i++) {
+    Feedback feedback = feedbackList.get(1);
+
+    for (int i = 0; i < candidateList.size(); i++) {
+//      Address address = addressList.get(i);
+
       Candidate candidate = candidateList.get(i);
-      candidate.setFeedback(feedbackRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+      candidate.setFeedback(feedback);
       candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
       candidate.setCommentary(faker.lorem().sentence());
-      candidateRepository.save(candidate);
+//      candidate.setAddress(address);
+      candidateRepository.saveAndFlush(candidate);
 
-      Address address = addressList.get(i);
-      List<Candidate> candidates = new ArrayList<Candidate>();
+//      List<Candidate> candidates = new ArrayList<Candidate>();
 //      candidates.add(candidateRepository.findById(1).get());
+
+
 //      address.setCandidates(candidates);
 //      address.getCandidates().add(candidateRepository.findById(1).get());
 
-      addressRepository.save(address);
+//      addressRepository.saveAndFlush(address);
     }
 
 //  -----------------------------------Tests-----------------------------------------------
