@@ -77,15 +77,6 @@ ignoreFailures = true
   }
 }
 
-apply plugin: "com.github.spotbugs"
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-ignoreFailures = true
-  reports {
-    xml.enabled = true
-    html.enabled = false
-  }
-}
-
 test {
     systemProperties 'property': 'value'
     ignoreFailures = true
@@ -161,21 +152,6 @@ task checkstyleMain (type: Checkstyle, overwrite: true) {
         xml.destination "$project.buildDir/reports/checkstyle/main.xml"
     }
     classpath = fileTree(classesJava)
-    configFile = file("${rootProject.rootDir}/checkstyle.xml")
-}
-
-task checkstyleTest (type: Checkstyle, overwrite: true){
-    ignoreFailures = true
-    showViolations = false
-    source fileTree('src/test/java')
-    include '**/*.java'
-    exclude '**/gen/**'
-    exclude '**/R.java'
-    exclude '**/BuildConfig.java'
-    reports {
-        xml.destination "$project.buildDir/reports/checkstyle/test.xml"
-    }
-    classpath = fileTree("$project.buildDir/classes/test/")
     configFile = file("${rootProject.rootDir}/checkstyle.xml")
 }
 

@@ -10,8 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -55,23 +58,16 @@ public class Appointment extends EntityDb {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons = new ArrayList<>();
 
+  @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
+  @ManyToOne(targetEntity = Person.class, optional = true)
+  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID)
+  private Person organizer;
 
   /**
    * Empty constructor.
    */
   public Appointment() {
     super();
-    this.persons = new ArrayList<Person>();
-  }
-
-  /**
-   * Constructor for a new Appointment.
-   *
-   * @param appointmentDate     = appointmentDate
-   */
-  public Appointment(LocalDateTime appointmentDate) {
-    super();
-    this.appointmentDate = appointmentDate;
     this.persons = new ArrayList<Person>();
   }
 
@@ -97,17 +93,18 @@ public class Appointment extends EntityDb {
    * @param report
    * @param status
    * @param persons
+   * @param organizer
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, List<Person> persons) {
+      Boolean status, List<Person> persons, Person organizer) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
     this.persons = persons;
+    this.organizer = organizer;
   }
-
 
   /**
    * Override toString() function.
@@ -207,5 +204,12 @@ public class Appointment extends EntityDb {
     this.persons = persons;
   }
 
+  public Person getOrganizer() {
+    return organizer;
+  }
+
+  public void setOrganizer(Person organizer) {
+    this.organizer = organizer;
+  }
 
 }

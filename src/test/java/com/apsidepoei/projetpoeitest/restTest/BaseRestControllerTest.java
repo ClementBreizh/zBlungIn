@@ -157,7 +157,7 @@ public abstract class BaseRestControllerTest<T, ID> {
     conn.setDoOutput(true);
     conn.setInstanceFollowRedirects(false);
     conn.setRequestMethod("POST");
-    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+    conn.setRequestProperty("Content-Type", "application/json");
     conn.setRequestProperty("charset", "utf-8");
     conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
     conn.setUseCaches(false);

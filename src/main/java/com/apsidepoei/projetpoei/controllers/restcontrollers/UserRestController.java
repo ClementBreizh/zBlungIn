@@ -9,13 +9,15 @@ import com.apsidepoei.projetpoei.database.repositories.UserRepository;
 import com.apsidepoei.projetpoei.entities.User;
 
 /**
-* @author vianney
-*
-*/
+ * @author vianney
+ *
+ */
 @RestController
 @RequestMapping("/api/users")
-public class UserRestController extends BaseRestController<User, Integer>{
- public UserRestController(@Autowired UserRepository repository) {
-   super(repository);
- }
+
+public class UserRestController extends BaseRestController<User, Integer> {
+
+  public UserRestController(@Autowired UserRepository repository) {
+    super(repository);
+  }
 }

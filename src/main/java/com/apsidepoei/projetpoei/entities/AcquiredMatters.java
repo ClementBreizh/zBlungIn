@@ -27,12 +27,12 @@ public class AcquiredMatters extends EntityDb {
 
  @JsonProperty(value = AcquiredMattersContract.COL_SCORE)
  @Column(name = AcquiredMattersContract.COL_SCORE, nullable = true)
- protected Float score;
+ private Float score;
 
  @JsonProperty(value = AcquiredMattersContract.COL_VALIDATION_DATE)
  @Column(name = AcquiredMattersContract.COL_VALIDATION_DATE, nullable = true)
  @DateTimeFormat(pattern = "yyyy-MM-dd")
- protected LocalDate validationLocalDate;
+ private LocalDate validationLocalDate;
 
  @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_MATTER)
  @ManyToOne(targetEntity = Matter.class, optional = false)
@@ -56,8 +56,8 @@ public class AcquiredMatters extends EntityDb {
  /**
   * Constructor for a new HasDoneAssessment.
   *
-  * @param assessment = assessment
-  * @param candidate  = candidate
+  * @param matter is the matter that the candidate acquired.
+  * @param candidate  is the candidate who acquired the matter.
   */
  public AcquiredMatters(Matter matter, Candidate candidate) {
    super();
@@ -68,10 +68,10 @@ public class AcquiredMatters extends EntityDb {
  /**
   * Constructor for a new HasDoneAssessment.
   *
-  * @param score                = score
-  * @param validationLocalDate  = validationLocalDate
-  * @param assessment           = assessment
-  * @param candidate            = candidate
+  * @param score is the candidate's score.
+  * @param validationLocalDate is the date when the candidate validated the assessment.
+  * @param matter is the matter of this assessment.
+  * @param candidate is the candidate.
   */
  public AcquiredMatters(Float score, LocalDate validationLocalDate, Matter matter, Candidate candidate) {
    super();
@@ -81,7 +81,7 @@ public class AcquiredMatters extends EntityDb {
    this.candidate = candidate;
  }
 
- 
+
  // GETTER/SETTER
 
  /**

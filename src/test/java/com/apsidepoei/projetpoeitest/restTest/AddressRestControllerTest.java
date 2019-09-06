@@ -65,7 +65,7 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
   @Override
   protected boolean compareTo(Address item1, Address item2) {
     return item1.getId().equals(item2.getId()) && item1.getPostalCode().equals(item2.getPostalCode())
-        && item1.getAddress().equals(item2.getAddress()) && item1.getTown().equals(item2.getTown());
+        && item1.getStreet().equals(item2.getStreet()) && item1.getCity().equals(item2.getCity());
   }
 
   /**
@@ -105,7 +105,7 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "address=4352&postalCode=35000&town=ville";
+    String urlParameters  = "street=4352&postalCode=35000&city=ville";
     return urlParameters;
   }
   /**

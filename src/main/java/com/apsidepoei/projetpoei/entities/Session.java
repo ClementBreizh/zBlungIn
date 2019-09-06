@@ -2,7 +2,6 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -13,10 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -36,12 +34,14 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  //@DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern="yyyy-MM-dd")
   private LocalDate startDate;
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+ // @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @JsonFormat(pattern="yyyy-MM-dd")
   private LocalDate endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)

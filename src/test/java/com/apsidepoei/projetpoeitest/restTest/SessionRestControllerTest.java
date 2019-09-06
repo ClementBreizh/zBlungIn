@@ -90,9 +90,9 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected Session getObjectTest() throws ParseException {
-    LocalDate localDate = LocalDate.of(2016, 8, 19);
+    LocalDate localDate = LocalDate.of(2018, 8, 19);
     Session item = new Session("Session1", localDate, localDate);
-    System.out.println("TTTEEESSTTTT" + item);
+    System.out.println("getObjectTest() return =>>> " + item);
     return item;
 
 
@@ -109,7 +109,7 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "name=Session1&startDate=2016-8-19&endDate=2016-8-19";
+    String urlParameters  = "name=Session1&startDate=2018-08-19&endDate=2018-08-19";
     return urlParameters;
   }
   /**
