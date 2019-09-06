@@ -30,14 +30,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
 
-  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
-  @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
-  private String informations;
-
   @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
   @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
+
+  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
+  @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
+  private String informations;
 
   @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
@@ -53,7 +53,7 @@ public class Appointment extends EntityDb {
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
-  private List<Person> persons;
+  private List<Person> persons = new ArrayList<>();
 
 
   /**

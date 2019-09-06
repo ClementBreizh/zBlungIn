@@ -36,12 +36,12 @@ public class AddressContract extends BaseContract {
   /**
    * defines the name of the column="companies".
    */
-  public static final String COL_FK_ID_COMPANIES = "companies";
+  public static final String COL_COMPANIES = "companies";
 
   /**
    * defines the name of the column="candidates".
    */
-  public static final String COL_FK_ID_CANDIDATES = "candidates";
+  public static final String COL_CANDIDATES = "candidates";
 
   /**
    * Define a table with all column.

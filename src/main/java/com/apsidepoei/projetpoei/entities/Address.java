@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
@@ -37,16 +39,13 @@ public class Address extends EntityDb {
   @Column(name = AddressContract.COL_TOWN, nullable = false)
   private String town;
 
-  @JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
-  @ManyToOne(targetEntity = Company.class)
-  @JoinColumn(name = AddressContract.COL_FK_ID_COMPANIES, referencedColumnName = CompanyContract.COL_ID)
-  private List<Company> companies ;
+  @JsonProperty(value = AddressContract.COL_COMPANIES)
+  @OneToMany(targetEntity = Company.class)
+  private List<Company> companies = new ArrayList<>();
 
-  @JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
-  @ManyToOne(targetEntity = Candidate.class)
-  @JoinColumn(name = AddressContract.COL_FK_ID_CANDIDATES, referencedColumnName = CandidateContract.COL_ID)
-  private List<Candidate> candidates ;
-
+  @JsonProperty(value = AddressContract.COL_CANDIDATES)
+  @OneToMany(targetEntity = Candidate.class)
+  private List<Candidate> candidates = new ArrayList<>();
 
   /**
    * Empty constructor.
@@ -69,6 +68,21 @@ public class Address extends EntityDb {
     this.town = town;
   }
 
+  /**
+   * Constructor with id for new Address.
+   *
+   * @param address    = the address
+   * @param postalCode = the postalCode
+   * @param town       = the town
+   */
+  public Address(String address, String postalCode, String town, List<Company> companies, List<Candidate> candidates) {
+    super();
+    this.address = address;
+    this.postalCode = postalCode;
+    this.town = town;
+    this.companies = companies;
+    this.candidates = candidates;
+  }
 
 
   /**
@@ -136,5 +150,34 @@ public class Address extends EntityDb {
   public void setTown(String town) {
     this.town = town;
   }
+
+  /**
+   * @return the companies
+   */
+  public List<Company> getCompanies() {
+    return companies;
+  }
+
+  /**
+   * @param companies the companies to set
+   */
+  public void setCompanies(List<Company> companies) {
+    this.companies = companies;
+  }
+
+  /**
+   * @return the candidates
+   */
+  public List<Candidate> getCandidates() {
+    return candidates;
+  }
+
+  /**
+   * @param candidates the candidates to set
+   */
+  public void setCandidates(List<Candidate> candidates) {
+    this.candidates = candidates;
+  }
+
 
 }

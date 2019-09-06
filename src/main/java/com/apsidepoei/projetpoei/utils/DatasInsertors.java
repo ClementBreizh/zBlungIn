@@ -100,7 +100,6 @@ public class DatasInsertors {
   @Autowired
   private AcquiredMattersRepository acquiredMattersRepository;
 
-
   // Lists
 
   private List<Company> companyList = new ArrayList<>();
@@ -127,19 +126,20 @@ public class DatasInsertors {
     Faker faker = new Faker(Locale.FRENCH);
 
     // Address
-    for (int i = 1; i < nbEntities+1; i++) {
-      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(),
+    for (int i = 1; i < nbEntities + 1; i++) {
+      Address address = new Address(
+          faker.address().streetAddress(),
+          faker.address().zipCode(),
           faker.address().city());
       addressRepository.save(address);
     }
     addressList.addAll(addressRepository.findAll());
     System.out.println("Address ok");
 
-    // Appointment
 
+    // Appointment
     for (int i = 0; i < nbEntities; i++) {
-      Appointment appointment = new Appointment(
-          faker.lorem().sentence(),
+      Appointment appointment = new Appointment(faker.lorem().sentence(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
           faker.lorem().sentence(), false);
 
@@ -149,45 +149,51 @@ public class DatasInsertors {
     appointmentList.addAll(appointmentRepository.findAll());
     System.out.println("Appointment ok");
 
+
     // Assessment
-    Assessment assessment1 = new Assessment("Culture générale", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    Assessment assessment1 = new Assessment("Culture générale",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment1);
-    Assessment assessment2 = new Assessment("Mathématiques", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    Assessment assessment2 = new Assessment("Mathématiques",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment2);
-    Assessment assessment3 = new Assessment("Culture informatique", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    Assessment assessment3 = new Assessment("Culture informatique",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment3);
-    Assessment assessment4 = new Assessment("Logique", faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    Assessment assessment4 = new Assessment("Logique",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     assessmentRepository.save(assessment4);
     assessmentList.addAll(assessmentRepository.findAll());
     System.out.println("Assessment ok");
 
     // Candidate
-//    for (int i = 0; i < nbEntities; i++) {
-//      Candidate candidate = new Candidate(
-//          faker.name().firstName(),
-//          faker.name().lastName(),
-//          faker.internet().emailAddress(),
-//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      candidate.setRanking(RankingCandidate.RANK_2);
-//      candidateRepository.save(candidate);
-//    }
+    for (int i = 0; i < nbEntities; i++) {
+      Candidate candidate = new Candidate(
+          faker.name().firstName(),
+          faker.name().lastName(),
+          faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      candidate.setRanking(RankingCandidate.RANK_2);
+      candidate.setAddress(addressRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+      candidateRepository.save(candidate);
+    }
     candidateList.addAll(candidateRepository.findAll());
     System.out.println("Candidate ok");
 
-
     // Company
-    for (int i = 1; i < nbEntities+1; i++) {
+    for (int i = 1; i < nbEntities + 1; i++) {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
       company.setApeCode(faker.number().digits(5));
+      company.setAddress(addressRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+
       companyRepository.save(company);
     }
     companyList.addAll(companyRepository.findAll());
     System.out.println("Company ok");
 
-
     // Degrees
-    for (int i = 1; i < nbEntities+1; i++) {
+    for (int i = 1; i < nbEntities + 1; i++) {
       Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
       degreeRepository.save(degree);
     }
@@ -195,7 +201,7 @@ public class DatasInsertors {
     System.out.println("Degrees ok");
 
     // Feedback
-    for (int i = 1; i < nbEntities+1; i++) {
+    for (int i = 1; i < nbEntities + 1; i++) {
       Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word());
       feedbackRepository.save(feedback);
     }
@@ -221,13 +227,13 @@ public class DatasInsertors {
 
     // Person
 //    for (int i = 0; i < nbEntities; i++) {
-//      Integer addressSize = faker.random().nextInt(0, addressList.size());
 //      Person person = new Person(
 //          faker.name().firstName(),
-//          faker.name().lastName());
+//          faker.name().lastName(),
+//          faker.internet().emailAddress(),
+//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
 //      person.setEmail(faker.internet().emailAddress());
 //      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//
 //      personRepository.save(person);
 //    }
     personList.addAll(personRepository.findAll());
@@ -236,8 +242,7 @@ public class DatasInsertors {
     // Session
 
     for (int i = 0; i < nbEntities; i++) {
-      Session session = new Session(
-          faker.gameOfThrones().house(),
+      Session session = new Session(faker.gameOfThrones().house(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       sessionRepository.save(session);
@@ -259,20 +264,33 @@ public class DatasInsertors {
     userList.addAll(userRepository.findAll());
     System.out.println("User ok");
 
-//  ------------------------Relations---------------------------
-//  ------------------------------------------------------------
+//  -----------------------------------Relations-----------------------------
+//  -------------------------------------------------------------------------
 
 
-//  -----------------------------Derniers champs------------------------------------
+//  -----------------------------Champs supplémentaires------------------------------------
 //  --------------------------------------------------------------------------------
 
+    for (int i = 0; i < nbEntities; i++) {
+      Candidate candidate = candidateList.get(i);
+      candidate.setFeedback(feedbackRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+      candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
+      candidate.setCommentary(faker.lorem().sentence());
+      candidateRepository.save(candidate);
+
+      Address address = addressList.get(i);
+      List<Candidate> candidates = new ArrayList<Candidate>();
+//      candidates.add(candidateRepository.findById(1).get());
+//      address.setCandidates(candidates);
+//      address.getCandidates().add(candidateRepository.findById(1).get());
+
+      addressRepository.save(address);
+    }
 
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
     System.out.println(personRepository.count());
-
-
 
 //for (int i = 1; i < nbEntities; i++) {
 ////  personRepository.findById(i).get().setAddress(addressRepository.findById(1).get());
@@ -283,7 +301,6 @@ public class DatasInsertors {
 //  personList.add(person);
 //
 //}
-
 
     System.out.println("DatasInsertors totalement chargé");
 
