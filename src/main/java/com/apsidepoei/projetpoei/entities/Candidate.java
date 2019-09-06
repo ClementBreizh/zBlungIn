@@ -6,8 +6,10 @@ package com.apsidepoei.projetpoei.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,11 +19,8 @@ import javax.persistence.Table;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import com.apsidepoei.projetpoei.entities.RankingCandidate;
-import com.apsidepoei.projetpoei.entities.Person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -37,15 +36,24 @@ public class Candidate extends Person {
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
-  @ManyToOne(targetEntity = Feedback.class, optional = true)
-  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
+//  @ManyToOne(targetEntity = Feedback.class, optional = true)
+  @ManyToOne()
+//  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
   private Feedback feedback;
 
   @JsonProperty(value = CandidateContract.COL_DEGREES)
-  @ManyToMany(targetEntity = Degree.class)
-  @JoinTable(name = "candidate_degree", joinColumns = {
-      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = DegreeContract.COL_ID) })
+//  @ManyToMany(targetEntity = Degree.class)
+//  @JoinTable(name = "candidate_degree", joinColumns = {
+//      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
+//          @JoinColumn(name = DegreeContract.COL_ID) })
+  @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
+  cascade = {
+      CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
+      CascadeType.MERGE
+  }) // By default table table will be candidate_degrees
+//  @JoinTable(name = "candidate_degree", // Table unique
+//          joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
+//          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
   private List<Degree> degrees = new ArrayList<>();
 
   @JsonProperty(value = CandidateContract.COL_MATTERS)
@@ -61,10 +69,11 @@ public class Candidate extends Person {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = SessionContract.COL_ID) })
   private List<Session> sessions = new ArrayList<>();
-
+//
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
+//  @ManyToOne()
   protected Address address;
 
   /**
@@ -110,8 +119,8 @@ public class Candidate extends Person {
    */
   @Override
   public String toString() {
-    return "Candidate [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-        + ", rang = "+ ranking.label + ", email = " + email + ", téléphone = " + cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
+    return "Candidate [" + "Id = " + this.getId() + ", prénom = " + this.firstname + ", nom = " + this.lastname
+        + ", rang = "+ this.ranking.label + ", email = " + this.email + ", téléphone = " + this.cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
   // GETTER/SETTER
@@ -120,14 +129,14 @@ public class Candidate extends Person {
    * @return the ranking
    */
   public RankingCandidate getRanking() {
-    return ranking;
+    return this.ranking;
   }
 
   /**
    * @return the ranking label
    */
   public String getRankingLabel() {
-    return ranking.label;
+    return this.ranking.label;
   }
 
   /**
@@ -141,7 +150,7 @@ public class Candidate extends Person {
    * @return the feedback
    */
   public Feedback getFeedback() {
-    return feedback;
+    return this.feedback;
   }
 
   /**
@@ -155,7 +164,7 @@ public class Candidate extends Person {
    * @return the degrees
    */
   public List<Degree> getDegrees() {
-    return degrees;
+    return this.degrees;
   }
 
   /**
@@ -169,7 +178,7 @@ public class Candidate extends Person {
    * @return the matters
    */
   public List<Matter> getMatters() {
-    return matters;
+    return this.matters;
   }
 
   /**
@@ -180,10 +189,35 @@ public class Candidate extends Person {
   }
 
   /**
+   * Two way setter, adds {@link Matter} to {@link Candidate#matters matter list}
+   * and {@link Candidate} to {@link Matter#getCandidates() candidates list}.
+   *
+   * @param matter to add
+   */
+  public void addMatter(Matter matter) {
+    if (!this.matters.contains(matter)) {
+      this.matters.add(matter);
+      if (matter.getCandidates().contains(this)) {
+        matter.getCandidates().add(this);
+      }
+    }
+  }
+
+  public void addDegree(final Degree degree) {
+    if (!this.degrees.contains(degree)) {
+      this.degrees.add(degree);
+      if (!degree.getCandidates().contains(this)) {
+        degree.getCandidates().add(this);
+      }
+    }
+  }
+
+
+  /**
    * @return the sessions
    */
   public List<Session> getSessions() {
-    return sessions;
+    return this.sessions;
   }
 
   /**
@@ -196,7 +230,7 @@ public class Candidate extends Person {
    * @return the address
    */
   public Address getAddress() {
-    return address;
+    return this.address;
   }
 
   /**
@@ -204,5 +238,6 @@ public class Candidate extends Person {
    */
   public void setAddress(Address address) {
     this.address = address;
+//    address.getCandidates().add(this);
   }
 }

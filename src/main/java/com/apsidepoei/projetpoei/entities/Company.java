@@ -48,7 +48,7 @@ public class Company extends EntityDb {
 
   @JsonProperty(value = CompanyContract.COL_FK_ID_CONTACTS)
   @OneToMany(targetEntity = Person.class)
-  private List<Person> contacts;
+  private List<Person> contacts = new ArrayList<>();
 
   @JsonProperty(value = CompanyContract.COL_FK_ID_MAINCONTACT)
   @ManyToOne(targetEntity = Person.class, optional = true)
@@ -65,7 +65,7 @@ public class Company extends EntityDb {
   @JoinTable(name = "company_session", joinColumns = {
       @JoinColumn(name = CompanyContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = SessionContract.COL_ID) })
-  private List<Session> sessions;
+  private List<Session> sessions = new ArrayList<>();
 
 
   /**
@@ -73,8 +73,6 @@ public class Company extends EntityDb {
    */
   public Company() {
     super();
-    this.contacts = new ArrayList<Person>();
-    this.sessions = new ArrayList<Session>();
   }
 
   /**
@@ -85,8 +83,25 @@ public class Company extends EntityDb {
   public Company(String name) {
     super();
     this.name = name;
-    this.contacts = new ArrayList<Person>();
-    this.sessions = new ArrayList<Session>();
+  }
+
+  /**
+   * @param name
+   * @param antennaName
+   * @param siret
+   * @param apeCode
+   * @param mainContact
+   * @param address
+   */
+  public Company(String name, String antennaName, String siret, String apeCode, Person mainContact,
+      Address address) {
+    super();
+    this.name = name;
+    this.antennaName = antennaName;
+    this.siret = siret;
+    this.apeCode = apeCode;
+    this.mainContact = mainContact;
+    this.address = address;
   }
 
 
