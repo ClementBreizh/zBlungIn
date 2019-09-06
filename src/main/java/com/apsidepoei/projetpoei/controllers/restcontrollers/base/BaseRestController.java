@@ -5,11 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.LocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -55,9 +51,18 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
   @PostMapping(value= {"","/","/index"})
   @Override
   @JsonDeserialize(using=LocalDateDeserializer.class)
-  public T save(T item) {
+  public T save(@ModelAttribute T item) {
     return repository.save(item);
   }
+
+ /*JSON ok
+
+  @PostMapping(value= {"","/","/index"})
+  @Override
+  @JsonDeserialize(using=LocalDateDeserializer.class)
+  public T save(@RequestBody T item) {
+    return repository.save(item);
+  }*/
 
   @GetMapping("/count")
   @Override

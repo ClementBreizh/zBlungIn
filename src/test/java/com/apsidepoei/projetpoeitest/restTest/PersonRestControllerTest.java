@@ -87,7 +87,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
    */
   @Override
   protected Person getObjectTest() {
-    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212233443", "this is a comment", false, null);
+    Person item = new Person("José", "Phine", "josephine@gmail.com", "0712233443", "0212233443", "this is a comment", false);
     return item;
   }
 
@@ -98,7 +98,7 @@ public class PersonRestControllerTest extends BaseRestControllerTest<Person, Int
   protected String getObjectToStringToPost() {
     String urlParameters  = "firstname=José&lastname=Phine&email=josephine@gmail.com"
         + "&cellPhone=0712233443&homePhone=0213234323&commentary=thsiisacomment"
-        + "&mainContact=false&adress=null";
+        + "&mainContact=false";
     return urlParameters;
   }
 

@@ -25,9 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = AddressContract.COL_ID))
 public class Address extends EntityDb {
 
-  @JsonProperty(value = AddressContract.COL_ADDRESS)
-  @Column(name = AddressContract.COL_ADDRESS, nullable = false)
-  private String address;
+  @JsonProperty(value = AddressContract.COL_STREET)
+  @Column(name = AddressContract.COL_STREET, nullable = false)
+  private String street;
 
   @JsonProperty(value = AddressContract.COL_POSTAL_CODE)
   @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false, length = 5)
@@ -58,13 +58,13 @@ public class Address extends EntityDb {
   /**
    * Constructor with id for new Address.
    *
-   * @param address    = the address
+   * @param street    = the street
    * @param postalCode = the postalCode
    * @param city       = the city
    */
-  public Address(String address, String postalCode, String city) {
+  public Address(String street, String postalCode, String city) {
     super();
-    this.address = address;
+    this.street = street;
     this.postalCode = postalCode;
     this.city = city;
   }
@@ -76,7 +76,7 @@ public class Address extends EntityDb {
    */
   @Override
   public String toString() {
-    return "Adresse [Id = " + getId() + ", adresse postale = " + address + ", code postal = "
+    return "Adresse [Id = " + getId() + ", adresse postale = " + street + ", code postal = "
         + postalCode + ", ville = " + city + "]";
   }
 
@@ -84,21 +84,21 @@ public class Address extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * The address.
+   * The street.
    *
-   * @return the address
+   * @return the street
    */
-  public String getAddress() {
-    return address;
+  public String getStreet() {
+    return street;
   }
 
   /**
-   * Set the address.
+   * Set the street.
    *
-   * @param address = the address
+   * @param street = the street
    */
-  public void setAddress(String address) {
-    this.address = address;
+  public void setStreet(String street) {
+    this.street = street;
   }
 
   /**

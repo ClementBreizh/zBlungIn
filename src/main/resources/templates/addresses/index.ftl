@@ -1,9 +1,9 @@
 <h1>Address form</h1>
 
 <form method="POST" action="/api/addresses">
-	<label for="address">Address</label>
+	<label for="street">Street</label>
 	<br>
-	<input type="text" name="address" id="address" required>
+	<input type="text" name="street" id="street" required>
 	<br>
 	<label for="postalCode">Postal Code</label>
 	<br>
