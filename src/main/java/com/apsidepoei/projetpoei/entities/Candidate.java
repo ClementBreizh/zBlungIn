@@ -50,10 +50,10 @@ public class Candidate extends Person {
   cascade = {
       CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
       CascadeType.MERGE
-  })
-  @JoinTable(name = "candidate_degree", // Table unique
-          joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
-          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
+  }) // By default table table will be candidate_degrees
+//  @JoinTable(name = "candidate_degree", // Table unique
+//          joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
+//          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
   private List<Degree> degrees = new ArrayList<>();
 
   @JsonProperty(value = CandidateContract.COL_MATTERS)
@@ -191,16 +191,27 @@ public class Candidate extends Person {
   /**
    * Two way setter, adds {@link Matter} to {@link Candidate#matters matter list}
    * and {@link Candidate} to {@link Matter#getCandidates() candidates list}.
+   *
    * @param matter to add
    */
-public void addMatter(Matter matter) {
+  public void addMatter(Matter matter) {
     if (!this.matters.contains(matter)) {
       this.matters.add(matter);
       if (matter.getCandidates().contains(this)) {
-          matter.getCandidates().add(this);
+        matter.getCandidates().add(this);
       }
     }
   }
+
+  public void addDegree(final Degree degree) {
+    if (!this.degrees.contains(degree)) {
+      this.degrees.add(degree);
+      if (!degree.getCandidates().contains(this)) {
+        degree.getCandidates().add(this);
+      }
+    }
+  }
+
 
   /**
    * @return the sessions

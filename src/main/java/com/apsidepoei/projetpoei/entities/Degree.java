@@ -35,7 +35,7 @@ public class Degree extends EntityDb {
 
   @JsonProperty(value = DegreeContract.COL_CANDIDATES)
 //  @ManyToMany(targetEntity = Candidate.class)
-//  @JoinTable(name = "candidate_degree", joinColumns = {
+//  @JoinTable(name = "degree_candidate", joinColumns = {
 //      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
 //          @JoinColumn(name = CandidateContract.COL_ID) })
   @ManyToMany(fetch = FetchType.EAGER,
@@ -44,15 +44,14 @@ public class Degree extends EntityDb {
       CascadeType.MERGE
   },
   mappedBy = "degrees") // Degree sera esclave de la relation voir https://stackoverflow.com/a/14111651/8899653
-  private List<Candidate> candidates = new ArrayList<>();
+  private final List<Candidate> candidates = new ArrayList<>();
 
 
   /**
-   * Empty constructor.
+   *
    */
   public Degree() {
     super();
-    this.candidates = new ArrayList<>();
   }
 
   /**
@@ -65,7 +64,6 @@ public class Degree extends EntityDb {
     super();
     this.name = name;
     this.level = level;
-    this.candidates = new ArrayList<>();
   }
 
   /**
@@ -77,7 +75,9 @@ public class Degree extends EntityDb {
     super();
     this.name = name;
     this.level = level;
-    this.candidates = candidates;
+    for (Candidate candidate : candidates) {
+      this.addCandidate(candidate);
+    }
   }
 
 
@@ -152,9 +152,26 @@ public class Degree extends EntityDb {
   /**
    * @param candidates the candidates to set
    */
-  public void setCandidates(List<Candidate> candidates) {
-    this.candidates = candidates;
+//  public void setCandidates(List<Candidate> candidates) {
+//    this.candidates = candidates;
+//  }
+
+  public void addCandidate(final Candidate candidate) {
+    if (!this.candidates.contains(candidate)) {
+      this.candidates.add(candidate);
+      if (!candidate.getDegrees().contains(this)) {
+        candidate.getDegrees().add(this);
+      }
+    }
   }
 
+  public void removeCandidate(final Candidate candidate) {
+    if (this.candidates.contains(candidate)) {
+      this.candidates.remove(candidate);
+      if (candidate.getDegrees().contains(this)) {
+        candidate.getDegrees().remove(this);
+      }
+    }
+  }
 
 }
