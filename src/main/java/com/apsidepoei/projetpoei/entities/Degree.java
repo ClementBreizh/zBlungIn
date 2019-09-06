@@ -43,7 +43,7 @@ public class Degree extends EntityDb {
       CascadeType.PERSIST,
       CascadeType.MERGE
   },
-  mappedBy = "degrees")
+  mappedBy = "degrees") // Degree sera esclave de la relation voir https://stackoverflow.com/a/14111651/8899653
   private List<Candidate> candidates = new ArrayList<>();
 
 

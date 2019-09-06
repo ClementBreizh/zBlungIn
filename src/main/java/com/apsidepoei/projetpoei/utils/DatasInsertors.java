@@ -262,7 +262,7 @@ public class DatasInsertors {
     for (int i = 0; i < this.nbEntities; i++) {
         degree = this.degreeList.get(i);
         candidate = this.candidateList.get(i);
-        /** Should have twe way setters in entities Cf add*/
+        // Should have twe way setters in entities Cf candidate.addMatter(matter);
         degree.getCandidates().add(candidate);
         candidate.getDegrees().add(degree);
         this.candidateRepository.saveAndFlush(candidate);

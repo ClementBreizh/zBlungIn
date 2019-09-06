@@ -46,12 +46,12 @@ public class Candidate extends Person {
 //  @JoinTable(name = "candidate_degree", joinColumns = {
 //      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
 //          @JoinColumn(name = DegreeContract.COL_ID) })
-  @ManyToMany(fetch = FetchType.EAGER,
+  @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
   cascade = {
-      CascadeType.PERSIST,
+      CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
       CascadeType.MERGE
   })
-  @JoinTable(name = "candidate_degree",
+  @JoinTable(name = "candidate_degree", // Table unique
           joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
           inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
   private List<Degree> degrees = new ArrayList<>();
@@ -188,7 +188,12 @@ public class Candidate extends Person {
     this.matters = matters;
   }
 
-  public void addMatter(Matter matter) {
+  /**
+   * Two way setter, adds {@link Matter} to {@link Candidate#matters matter list}
+   * and {@link Candidate} to {@link Matter#getCandidates() candidates list}.
+   * @param matter to add
+   */
+public void addMatter(Matter matter) {
     if (!this.matters.contains(matter)) {
       this.matters.add(matter);
       if (matter.getCandidates().contains(this)) {
