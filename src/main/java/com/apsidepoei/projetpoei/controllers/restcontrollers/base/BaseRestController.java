@@ -51,18 +51,9 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
   @PostMapping(value= {"","/","/index"})
   @Override
   @JsonDeserialize(using=LocalDateDeserializer.class)
-  public T save(@ModelAttribute T item) {
+  public T save(T item) {
     return repository.save(item);
   }
-
- /*JSON ok
-
-  @PostMapping(value= {"","/","/index"})
-  @Override
-  @JsonDeserialize(using=LocalDateDeserializer.class)
-  public T save(@RequestBody T item) {
-    return repository.save(item);
-  }*/
 
   @GetMapping("/count")
   @Override
