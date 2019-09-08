@@ -33,7 +33,7 @@ public class CompanyCandidatesSession extends EntityDb {
 
   @JsonProperty(value = CompanyCandidatesSessionContract.COL_CANDIDATES)
   @OneToMany(targetEntity = Candidate.class)
-  private List<Candidate> candidates;
+  private List<Candidate> candidates = new ArrayList<>();
 
   @JsonProperty(value = CompanyCandidatesSessionContract.COL_SESSION)
   @OneToOne(targetEntity=Session.class,optional=false)
@@ -46,7 +46,6 @@ public class CompanyCandidatesSession extends EntityDb {
    */
   public CompanyCandidatesSession() {
     super();
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -57,7 +56,6 @@ public class CompanyCandidatesSession extends EntityDb {
     super();
     this.company = company;
     this.session = session;
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**

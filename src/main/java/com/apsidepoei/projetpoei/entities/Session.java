@@ -39,7 +39,7 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
- @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)
@@ -47,7 +47,7 @@ public class Session extends EntityDb {
   @JoinTable(name = "session_candidates", joinColumns = {
       @JoinColumn(name = SessionContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = CandidateContract.COL_ID) })
-  private List<Candidate> candidates;
+  private List<Candidate> candidates = new ArrayList<>();
 
 
   /**
@@ -55,7 +55,6 @@ public class Session extends EntityDb {
    */
   public Session() {
     super();
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -70,7 +69,6 @@ public class Session extends EntityDb {
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**

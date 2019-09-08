@@ -90,26 +90,6 @@ public class Company extends EntityDb {
    * @param antennaName
    * @param siret
    * @param apeCode
-   * @param mainContact
-   * @param address
-   */
-  public Company(String name, String antennaName, String siret, String apeCode, Person mainContact,
-      Address address) {
-    super();
-    this.name = name;
-    this.antennaName = antennaName;
-    this.siret = siret;
-    this.apeCode = apeCode;
-    this.mainContact = mainContact;
-    this.address = address;
-  }
-
-
-  /**
-   * @param name
-   * @param antennaName
-   * @param siret
-   * @param apeCode
    * @param contacts
    * @param mainContact
    * @param address

@@ -29,7 +29,7 @@ public class Matter extends EntityDb {
   @JoinTable(name = "matter_candidate", joinColumns = {
       @JoinColumn(name = MatterContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = CandidateContract.COL_ID) })
-  private List<Candidate> candidates;
+  private List<Candidate> candidates = new ArrayList<>();
 
 
   /**
@@ -37,7 +37,6 @@ public class Matter extends EntityDb {
    */
   public Matter() {
     super();
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -46,7 +45,6 @@ public class Matter extends EntityDb {
   public Matter(String name) {
     super();
     this.name = name;
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**

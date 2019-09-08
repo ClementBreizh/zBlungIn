@@ -18,7 +18,6 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
-import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;

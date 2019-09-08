@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -72,19 +70,11 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * @param informations
    * @param appointmentDate
-   * @param report
-   * @param status
    */
-  public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status) {
+  public Appointment(LocalDateTime appointmentDate) {
     super();
-    this.informations = informations;
     this.appointmentDate = appointmentDate;
-    this.report = report;
-    this.status = status;
-    this.persons = new ArrayList<Person>();
   }
 
   /**
@@ -92,17 +82,16 @@ public class Appointment extends EntityDb {
    * @param appointmentDate
    * @param report
    * @param status
-   * @param persons
+
    * @param organizer
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, List<Person> persons, Person organizer) {
+      Boolean status, Person organizer) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
-    this.persons = persons;
     this.organizer = organizer;
   }
 

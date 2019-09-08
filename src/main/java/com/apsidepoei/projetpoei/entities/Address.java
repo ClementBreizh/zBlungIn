@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
@@ -40,12 +41,12 @@ public class Address extends EntityDb {
   @JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
   @ManyToOne(targetEntity = Company.class)
   @JoinColumn(name = AddressContract.COL_FK_ID_COMPANIES, referencedColumnName = CompanyContract.COL_ID)
-  private List<Company> companies ;
+  private List<Company> companies = new ArrayList<>() ;
 
   @JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
   @ManyToOne(targetEntity = Candidate.class)
   @JoinColumn(name = AddressContract.COL_FK_ID_CANDIDATES, referencedColumnName = CandidateContract.COL_ID)
-  private List<Candidate> candidates ;
+  private List<Candidate> candidates = new ArrayList<>();
 
 
   /**
@@ -69,7 +70,22 @@ public class Address extends EntityDb {
     this.city = city;
   }
 
-
+  /**
+   *
+   * @param street
+   * @param postalCode
+   * @param city
+   * @param companies
+   * @param candidates
+   */
+  public Address(String street, String postalCode, String city, List<Company> companies, List<Candidate> candidates) {
+    super();
+    this.street = street;
+    this.postalCode = postalCode;
+    this.city = city;
+    this.companies = companies;
+    this.candidates = candidates;
+  }
 
   /**
    * Override toString() function.
