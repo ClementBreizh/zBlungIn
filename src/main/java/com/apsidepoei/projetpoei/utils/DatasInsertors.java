@@ -130,7 +130,7 @@ public class DatasInsertors {
     for (int i = 0; i < this.nbEntities; i++) {
       Appointment appointment = new Appointment(faker.lorem().sentence(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
-          faker.lorem().sentence(), false, new Person());
+          faker.lorem().sentence(), false);
 
       appointment.setInformations(faker.lorem().sentence());
       this.appointmentRepository.saveAndFlush(appointment);
