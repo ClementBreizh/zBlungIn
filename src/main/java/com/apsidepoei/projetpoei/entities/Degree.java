@@ -1,5 +1,7 @@
 package com.apsidepoei.projetpoei.entities;
 
+import static org.mockito.Mockito.RETURNS_SELF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -38,7 +41,7 @@ public class Degree extends EntityDb {
 //  @JoinTable(name = "degree_candidate", joinColumns = {
 //      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
 //          @JoinColumn(name = CandidateContract.COL_ID) })
-  @ManyToMany(fetch = FetchType.EAGER,
+  @ManyToMany(fetch = FetchType.LAZY,
   cascade = {
       CascadeType.PERSIST,
       CascadeType.MERGE
