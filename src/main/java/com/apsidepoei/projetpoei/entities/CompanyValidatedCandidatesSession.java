@@ -3,13 +3,7 @@ package com.apsidepoei.projetpoei.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
@@ -26,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
 public class CompanyValidatedCandidatesSession extends EntityDb {
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_COMPANY)
-  @OneToOne(targetEntity = Company.class, optional = false)
+  @ManyToOne(targetEntity = Company.class, optional = false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
