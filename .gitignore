@@ -23,6 +23,7 @@ src/main/resources/application.properties
 .idea/
 Projet_Zbleugin.eml
 *.iml
+hs_err_*
 
 
 # External tool builders

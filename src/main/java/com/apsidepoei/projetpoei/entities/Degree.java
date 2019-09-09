@@ -1,7 +1,5 @@
 package com.apsidepoei.projetpoei.entities;
 
-import static org.mockito.Mockito.RETURNS_SELF;
-
 import java.util.ArrayList;
 import java.util.List;
 
