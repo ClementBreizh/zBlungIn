@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.entities;
 
 import java.text.ParseException;
@@ -10,16 +11,20 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.entities.Appointment;
 
+*/
 /**
  * @author thomas This test is for the toString function
- */
+ *//*
+
 public class AppointmentTest {
 
-  /**
+  */
+/**
    * Test the toString()
    *
    * @throws ParseException
-   */
+   *//*
+
 //  @Test
 //  public void testToString() throws ParseException {
 //    LocalDate localDate = LocalDate.of(2016, 8, 19);
@@ -29,3 +34,4 @@ public class AppointmentTest {
 //    Assert.assertEquals(expected, appointment.toString());
 //  }
 }
+*/

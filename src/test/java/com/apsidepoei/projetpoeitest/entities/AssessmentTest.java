@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.entities;
 
 import com.apsidepoei.projetpoei.entities.Assessment;
@@ -9,14 +10,18 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Test;
 
+*/
 /**
  * Test to string function.
- */
+ *//*
+
 public class AssessmentTest {
 
-  /**
+  */
+/**
    * Test the toString().
-   */
+   *//*
+
   @Test
   public void testToString() throws ParseException {
     LocalDate localDate = LocalDate.of(2016, 8, 19);
@@ -27,3 +32,4 @@ public class AssessmentTest {
     Assert.assertEquals(expected, assessment.toString());
   }
 }
+*/

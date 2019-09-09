@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.entities;
 
 import java.text.ParseException;
@@ -9,17 +10,21 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.entities.Session;
 
+*/
 /**
  *
  * @author benjamin-m
  *
- */
+ *//*
+
 public class SessionTest {
 
-  /**
+  */
+/**
    * Test the toString()
    * @throws ParseException
-   */
+   *//*
+
     @Test
     public void testToString() throws ParseException {
 
@@ -31,3 +36,4 @@ public class SessionTest {
         Assert.assertEquals(expected, session.toString());
     }
 }
+*/
