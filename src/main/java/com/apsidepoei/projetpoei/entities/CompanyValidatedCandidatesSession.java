@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
 public class CompanyValidatedCandidatesSession extends EntityDb {
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_COMPANY)
-  @OneToOne(targetEntity = Session.class, optional = false)
+  @OneToOne(targetEntity = Company.class, optional = false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
