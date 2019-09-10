@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.entities;
 
 import java.text.ParseException;
@@ -7,16 +8,20 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.entities.Degree;
 
+*/
 /**
  * @author thomas
  * This test is for the toString function
- */
+ *//*
+
 public class DegreeTest {
 
-	/**
+	*/
+/**
 	 * Test the toString()
 	 * @throws ParseException
-	 */
+	 *//*
+
     @Test
     public void testToString() throws ParseException
     {
@@ -26,3 +31,4 @@ public class DegreeTest {
         Assert.assertEquals(expected, degree.toString());
     }
 }
+*/

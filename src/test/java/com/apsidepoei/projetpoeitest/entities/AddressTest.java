@@ -1,6 +1,7 @@
 /**
  *
- */
+ *//*
+
 package com.apsidepoei.projetpoeitest.entities;
 
 import org.junit.Assert;
@@ -8,10 +9,12 @@ import org.junit.Test;
 
 import com.apsidepoei.projetpoei.entities.Address;
 
+*/
 /**
  * @author vianney
  *
- */
+ *//*
+
 public class AddressTest {
 
   @Test
@@ -23,3 +26,4 @@ public class AddressTest {
     Assert.assertEquals(expected, address.toString());
   }
 }
+*/

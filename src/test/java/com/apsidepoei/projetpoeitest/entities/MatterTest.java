@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.entities;
 
 import com.apsidepoei.projetpoei.entities.Matter;
@@ -5,13 +6,17 @@ import java.text.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
+*/
 /**
  * Test to string function.
- */
+ *//*
+
 public class MatterTest {
-  /**
+  */
+/**
    * Test the toString().
-   */
+   *//*
+
   @Test
   public void testToString() throws ParseException {
 
@@ -21,3 +26,4 @@ public class MatterTest {
     Assert.assertEquals(expected, matters.toString());
   }
 }
+*/
