@@ -21,6 +21,7 @@ import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -41,7 +42,8 @@ public class Candidate extends Person {
 //  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
   private Feedback feedback;
 
-  @JsonProperty(value = CandidateContract.COL_DEGREES)
+  //@JsonProperty(value = CandidateContract.COL_DEGREES)
+  @JsonIgnore
 //  @ManyToMany(targetEntity = Degree.class)
 //  @JoinTable(name = "candidate_degree", joinColumns = {
 //      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
@@ -56,14 +58,16 @@ public class Candidate extends Person {
 //          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
   private List<Degree> degrees = new ArrayList<>();
 
-  @JsonProperty(value = CandidateContract.COL_MATTERS)
+  //@JsonProperty(value = CandidateContract.COL_MATTERS)
+  @JsonIgnore
   @ManyToMany(targetEntity = Matter.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = MatterContract.COL_ID) })
   private List<Matter> matters = new ArrayList<>();
 
-  @JsonProperty(value = CandidateContract.COL_SESSIONS)
+ // @JsonProperty(value = CandidateContract.COL_SESSIONS)
+  @JsonIgnore
   @ManyToMany(targetEntity = Session.class)
   @JoinTable(name = "candidate_session", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
@@ -120,7 +124,7 @@ public class Candidate extends Person {
   @Override
   public String toString() {
     return "Candidate [" + "Id = " + this.getId() + ", prénom = " + this.firstname + ", nom = " + this.lastname
-        + ", rang = "+ this.ranking.label + ", email = " + this.email + ", téléphone = " + this.cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
+        + ", rang = "+ this.ranking.toValue() + ", email = " + this.email + ", téléphone = " + this.cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
   // GETTER/SETTER
@@ -135,8 +139,9 @@ public class Candidate extends Person {
   /**
    * @return the ranking label
    */
+  @JsonIgnore
   public String getRankingLabel() {
-    return this.ranking.label;
+    return this.ranking.toValue();
   }
 
   /**
