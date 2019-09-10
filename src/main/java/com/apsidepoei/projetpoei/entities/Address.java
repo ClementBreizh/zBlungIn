@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -37,12 +38,14 @@ public class Address extends EntityDb {
   @Column(name = AddressContract.COL_CITY, nullable = false)
   private String city;
 
-  @JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
+  //@JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
+  @JsonIgnore
   @ManyToOne(targetEntity = Company.class)
   @JoinColumn(name = AddressContract.COL_FK_ID_COMPANIES, referencedColumnName = CompanyContract.COL_ID)
   private List<Company> companies ;
 
-  @JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
+  //@JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
+  @JsonIgnore
   @ManyToOne(targetEntity = Candidate.class)
   @JoinColumn(name = AddressContract.COL_FK_ID_CANDIDATES, referencedColumnName = CandidateContract.COL_ID)
   private List<Candidate> candidates ;

@@ -34,7 +34,8 @@ public class Degree extends EntityDb {
   @Column(name = DegreeContract.COL_LEVEL, nullable = false, length = 50)
   private String level;
 
-  @JsonProperty(value = DegreeContract.COL_CANDIDATES)
+  //@JsonProperty(value = DegreeContract.COL_CANDIDATES)
+  @JsonIgnore
 //  @ManyToMany(targetEntity = Candidate.class)
 //  @JoinTable(name = "degree_candidate", joinColumns = {
 //      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
