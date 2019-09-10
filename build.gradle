@@ -155,6 +155,21 @@ task checkstyleMain (type: Checkstyle, overwrite: true) {
     configFile = file("${rootProject.rootDir}/checkstyle.xml")
 }
 
+task checkstyleTest (type: Checkstyle, overwrite: true){
+    ignoreFailures = true
+    showViolations = false
+    source fileTree('src/test/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+    reports {
+        xml.destination "$project.buildDir/reports/checkstyle/test.xml"
+    }
+    classpath = fileTree("$project.buildDir/classes/test/")
+    configFile = file("${rootProject.rootDir}/checkstyle.xml")
+}
+
 task checkstyleReport << {
     checkType = project.ext.get("checkType")
     if (file("$buildDir/reports/checkstyle/${checkType}1.xml").exists()) {
