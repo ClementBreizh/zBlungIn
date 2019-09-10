@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
-import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,11 +57,11 @@ public class Candidate extends Person {
   private List<Matter> matters;
 
   @JsonIgnore
-  @ManyToMany(targetEntity = CompanyValidatedCandidatesSession.class)
+  @ManyToMany(targetEntity = CompanySession.class)
   @JoinTable(name = "company_session", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = CompanyValidatedCandidatesSessionContract.COL_ID) })
-  private List<CompanyValidatedCandidatesSession> companySessions;
+          @JoinColumn(name = CompanySessionContract.COL_ID) })
+  private List<CompanySession> companySessions;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
@@ -101,7 +101,7 @@ public class Candidate extends Person {
    * @param sessions
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
-      List<Matter> matters, List<CompanyValidatedCandidatesSession> sessions) {
+      List<Matter> matters, List<CompanySession> sessions) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.feedback = feedback;
@@ -195,7 +195,7 @@ public class Candidate extends Person {
     this.matters = matters;
   }
 
-  public void addCompanySession(final CompanyValidatedCandidatesSession session) {
+  public void addCompanySession(final CompanySession session) {
     if (!this.companySessions.contains(session)) {
       this.companySessions.add(session);
     }
@@ -204,14 +204,14 @@ public class Candidate extends Person {
   /**
    * @return the sessions
    */
-  public List<CompanyValidatedCandidatesSession> getSessions() {
+  public List<CompanySession> getSessions() {
     return this.companySessions;
   }
 
   /**
    * @param sessions the sessions to set
    */
-  public void setSessions(List<CompanyValidatedCandidatesSession> sessions) {
+  public void setSessions(List<CompanySession> sessions) {
     this.companySessions = sessions;
   }
   /**

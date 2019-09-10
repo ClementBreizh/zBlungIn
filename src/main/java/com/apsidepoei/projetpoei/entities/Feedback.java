@@ -60,6 +60,7 @@ public class Feedback extends EntityDb {
     this.typeOfContract = typeOfContract;
   }
 
+  
   /**
    * @param typeOfContract
    * @param durationOfContract

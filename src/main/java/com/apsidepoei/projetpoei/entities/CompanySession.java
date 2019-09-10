@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
-import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,28 +17,28 @@ import lombok.ToString;
  */
 @Entity
 @ToString
-@Table(name = CompanyValidatedCandidatesSessionContract.TABLE)
-@AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
-public class CompanyValidatedCandidatesSession extends EntityDb {
-  @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_COMPANY)
+@Table(name = CompanySessionContract.TABLE)
+@AttributeOverride(name = "id", column = @Column(name = CompanySessionContract.COL_ID))
+public class CompanySession extends EntityDb {
+  @JsonProperty(value = CompanySessionContract.COL_COMPANY)
   @ManyToOne(targetEntity = Company.class, optional = false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
-  @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_SESSION)
+  @JsonProperty(value = CompanySessionContract.COL_SESSION)
   @OneToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
-  @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_VALIDATED)
-  @Column(name = CompanyValidatedCandidatesSessionContract.COL_VALIDATED, nullable = false)
+  @JsonProperty(value = CompanySessionContract.COL_VALIDATED)
+  @Column(name = CompanySessionContract.COL_VALIDATED, nullable = false)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean validated = false;
 
   /**
    * Empty constructor.
    */
-  public CompanyValidatedCandidatesSession() {
+  public CompanySession() {
     super();
   }
 
@@ -46,7 +46,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
    * @param company
    * @param session
    */
-  public CompanyValidatedCandidatesSession(Company company, Session session) {
+  public CompanySession(Company company, Session session) {
     super();
     this.company = company;
     this.session = session;
@@ -57,7 +57,7 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
    * @param session
    * @param validated
    */
-  public CompanyValidatedCandidatesSession(Company company, Session session, Boolean validated) {
+  public CompanySession(Company company, Session session, Boolean validated) {
     super();
     this.company = company;
     this.session = session;

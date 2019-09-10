@@ -15,9 +15,8 @@ import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
-import com.apsidepoei.projetpoei.database.repositories.CompanyCandidatesSessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
-import com.apsidepoei.projetpoei.database.repositories.CompanyValidatedCandidatesSessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.CompanySessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
 import com.apsidepoei.projetpoei.database.repositories.FeedbackRepository;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
@@ -69,9 +68,6 @@ public class DatasInsertors {
   private CompanyRepository companyRepository;
 
   @Autowired
-  private CompanyCandidatesSessionRepository companyCandidatesSessionRepository;
-
-  @Autowired
   private DegreeRepository degreeRepository;
 
   @Autowired
@@ -84,7 +80,7 @@ public class DatasInsertors {
   private SessionRepository sessionRepository;
 
   @Autowired
-  private CompanyValidatedCandidatesSessionRepository companyValidatedCandidatesSessionRepository;
+  private CompanySessionRepository companySessionRepository;
 
   @Autowired
   private AcquiredMattersRepository acquiredMattersRepository;
@@ -110,20 +106,14 @@ public class DatasInsertors {
   public DatasInsertors() {
   }
 
-
-
-
-
-
   @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
 
-    // ----------------------------------- Address -----------------------------------
+    // ----------------------------------- Address
+    // -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
-      Address address = new Address(
-          faker.address().streetAddress(),
-          faker.address().zipCode(),
+      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(),
           faker.address().city());
       this.addressRepository.saveAndFlush(address);
       System.out.println(address.toString());
@@ -132,8 +122,8 @@ public class DatasInsertors {
     this.addressList.addAll(this.addressRepository.findAll());
     System.out.println("Address ok");
 
-
-    // ----------------------------------- Appointment -----------------------------------
+    // ----------------------------------- Appointment
+    // -----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
       Appointment appointment = new Appointment(faker.lorem().sentence(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
@@ -147,8 +137,8 @@ public class DatasInsertors {
     this.appointmentList.addAll(this.appointmentRepository.findAll());
     System.out.println("Appointment ok");
 
-
-    // ----------------------------------- Assessment -----------------------------------
+    // ----------------------------------- Assessment
+    // -----------------------------------
     Assessment assessment1 = new Assessment("Culture générale",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     this.assessmentRepository.saveAndFlush(assessment1);
@@ -164,15 +154,14 @@ public class DatasInsertors {
     this.assessmentList.addAll(this.assessmentRepository.findAll());
     System.out.println("Assessment ok");
 
-    // ----------------------------------- Candidate -----------------------------------
+    // ----------------------------------- Candidate
+    // -----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
-      Candidate candidate = new Candidate(
-          faker.name().firstName(),
-          faker.name().lastName(),
-          faker.internet().emailAddress(),
-          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
+          faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
       candidate.setRanking(RankingCandidate.RANK_2);
-      candidate.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+      candidate.setAddress(
+          this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
       this.candidateRepository.saveAndFlush(candidate);
       System.out.println(candidate.toString());
 
@@ -180,12 +169,14 @@ public class DatasInsertors {
     this.candidateList.addAll(this.candidateRepository.findAll());
     System.out.println("Candidate ok");
 
-    // ----------------------------------- Company -----------------------------------
+    // ----------------------------------- Company
+    // -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
       company.setApeCode(faker.number().digits(5));
-      company.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+      company.setAddress(
+          this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
 
       this.companyRepository.saveAndFlush(company);
       System.out.println(company.toString());
@@ -195,7 +186,8 @@ public class DatasInsertors {
     this.companyList.addAll(this.companyRepository.findAll());
     System.out.println("Company ok");
 
-    // ----------------------------------- Degrees -----------------------------------
+    // ----------------------------------- Degrees
+    // -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
       this.degreeRepository.saveAndFlush(degree);
@@ -205,9 +197,11 @@ public class DatasInsertors {
     this.degreeList.addAll(this.degreeRepository.findAll());
     System.out.println("Degrees ok");
 
-    // ----------------------------------- Feedback -----------------------------------
+    // ----------------------------------- Feedback
+    // -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
-      Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word());
+      Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word(),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.feedbackRepository.saveAndFlush(feedback);
       System.out.println(feedback.toString());
 
@@ -215,7 +209,8 @@ public class DatasInsertors {
     this.feedbackList.addAll(this.feedbackRepository.findAll());
     System.out.println("Feedback ok");
 
-    // ----------------------------------- Matter -----------------------------------
+    // ----------------------------------- Matter
+    // -----------------------------------
     Matter matter1 = new Matter("Angular");
     this.matterRepository.saveAndFlush(matter1);
     Matter matter2 = new Matter("Java");
@@ -232,7 +227,8 @@ public class DatasInsertors {
     this.matterList.addAll(this.matterRepository.findAll());
     System.out.println("Matter ok");
 
-    // ----------------------------------- Person -----------------------------------
+    // ----------------------------------- Person
+    // -----------------------------------
 //    for (int i = 0; i < nbEntities; i++) {
 //      Person person = new Person(
 //          faker.name().firstName(),
@@ -246,7 +242,8 @@ public class DatasInsertors {
     this.personList.addAll(this.personRepository.findAll());
     System.out.println("Person ok");
 
-    // ----------------------------------- Session -----------------------------------
+    // ----------------------------------- Session
+    // -----------------------------------
 
     for (int i = 0; i < this.nbEntities; i++) {
       Session session = new Session(faker.gameOfThrones().house(),
@@ -280,12 +277,11 @@ public class DatasInsertors {
     Candidate candidate = null;
 
     for (int i = 0; i < this.nbEntities; i++) {
-        degree = this.degreeList.get(i);
-        candidate = this.candidateList.get(i);
-        candidate.getDegrees().add(degree);
-        this.candidateRepository.saveAndFlush(candidate);
+      degree = this.degreeList.get(i);
+      candidate = this.candidateList.get(i);
+      candidate.getDegrees().add(degree);
+      this.candidateRepository.saveAndFlush(candidate);
 
-        degree.getCandidates();
     }
 
 //  -----------------------------Champs supplémentaires------------------------------------
@@ -305,7 +301,6 @@ public class DatasInsertors {
 
 //      List<Candidate> candidates = new ArrayList<Candidate>();
 //      candidates.add(candidateRepository.findById(1).get());
-
 
 //      address.setCandidates(candidates);
 //      address.getCandidates().add(candidateRepository.findById(1).get());
