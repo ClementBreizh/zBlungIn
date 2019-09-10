@@ -1,30 +1,22 @@
 package com.apsidepoei.projetpoei.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import lombok.ToString;
 
 /**
  * This class is the session entity.
  *
- * @author benjamin-m
+ * @author vianney
  *
  */
 @Entity
@@ -34,7 +26,7 @@ import lombok.ToString;
 public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_NAME)
-  @Column(name = SessionContract.COL_NAME, nullable = false, length = 50)
+  @Column(name = SessionContract.COL_NAME, length = 50, nullable = false)
   private String name;
 
   @JsonProperty(value = SessionContract.COL_DATE_START)
@@ -47,20 +39,12 @@ public class Session extends EntityDb {
  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
-  @JsonProperty(value = SessionContract.COL_CANDIDATES)
-  @ManyToMany(targetEntity = Candidate.class)
-  @JoinTable(name = "session_candidates", joinColumns = {
-      @JoinColumn(name = SessionContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = CandidateContract.COL_ID) })
-  private List<Candidate> candidates;
-
 
   /**
    * Empty constructor.
    */
   public Session() {
     super();
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -75,34 +59,7 @@ public class Session extends EntityDb {
     this.name = name;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.candidates = new ArrayList<Candidate>();
   }
-
-  /**
-   * Constructor with id for a new Session.
-   *
-   * @param id        = the id
-   * @param name      = the name
-   * @param startDate = the startDate
-   * @param endDate   = the endDate
-   */
-  public Session(int id, String name, LocalDate startDate, LocalDate endDate, List<Candidate> candidates) {
-    super();
-    this.name = name;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.candidates = candidates;
-  }
-
-
-//  /**
-//   * Override toString() function.
-//   */
-//  @Override
-//  public String toString() {
-//    return "session [Id = " + getId() + ", name=" + name + ", startDate=" + startDate + ", endDate="
-//        + endDate + "]";
-//  }
 
 
   // GETTER/SETTER
@@ -124,8 +81,6 @@ public class Session extends EntityDb {
   public void setName(String name) {
     this.name = name;
   }
-
-
 
   /**
    * @return the startDate
@@ -154,20 +109,4 @@ public class Session extends EntityDb {
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
-
-  /**
-   * @return the candidates
-   */
-  public List<Candidate> getCandidates() {
-    return candidates;
-  }
-
-  /**
-   * @param candidates the candidates to set
-   */
-  public void setCandidates(List<Candidate> candidates) {
-    this.candidates = candidates;
-  }
-
-
 }

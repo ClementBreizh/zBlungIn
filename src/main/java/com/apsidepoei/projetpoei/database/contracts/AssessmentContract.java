@@ -11,6 +11,20 @@ public class AssessmentContract extends BaseContract {
    * defines the name of the column="id_assessment".
    */
   public static final String COL_ID = "id_assessment";
+
+  public final static String COL_SCORE = "score";
+  /**
+   * defines the name of the column="validation_date".
+   */
+  public final static String COL_VALIDATION_DATE = "validation_date";
+  /**
+   * defines the name of the column="candidate_id".
+   */
+  public final static String COL_FK_ID_CANDIDATE = "id_candidate";
+  /**
+   * defines the name of the column="candidate_id".
+   */
+  public final static String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
   /**
    * defines the name of the column="category".
    */

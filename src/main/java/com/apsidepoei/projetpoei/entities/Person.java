@@ -5,16 +5,11 @@ package com.apsidepoei.projetpoei.entities;
 
 import javax.persistence.*;
 
-import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 import lombok.ToString;
 
 /**
@@ -57,9 +52,6 @@ public class Person extends EntityDb {
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean mainContact = false;
 
-  @ManyToMany(mappedBy = "persons")
-  private List<Appointment> appointments = new ArrayList<Appointment>();
-
   /**
    * Empty constructor.
    */
@@ -86,7 +78,8 @@ public class Person extends EntityDb {
   /**
    * @param firstname
    * @param lastname
-
+   * @param email
+   * @param cellPhone
    * @param homePhone
    * @param commentary
    * @param mainContact
@@ -102,18 +95,6 @@ public class Person extends EntityDb {
     this.commentary = commentary;
     this.mainContact = mainContact;
   }
-
-
-//  /**
-//   * Override toString() function.
-//   */
-//  @Override
-//  public String toString() {
-//    return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-//
-//        + ", email = " + email + ", téléphone = " + cellPhone + "]";
-//
-//  }
 
 
   // GETTER/SETTER
@@ -215,5 +196,4 @@ public class Person extends EntityDb {
   public void setMainContact(Boolean mainContact) {
     this.mainContact = mainContact;
   }
-
 }

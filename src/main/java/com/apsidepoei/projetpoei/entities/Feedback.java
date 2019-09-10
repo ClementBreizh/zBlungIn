@@ -1,14 +1,17 @@
 package com.apsidepoei.projetpoei.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.ToString;
 import lombok.ToString;
 
 /**
@@ -35,6 +38,10 @@ public class Feedback extends EntityDb {
   @Column(name = FeedbackContract.COL_COMMENT, nullable = true)
   private String comment;
 
+  @JsonProperty(value = FeedbackContract.COL_UPDATED_AT)
+  @Column(name = FeedbackContract.COL_UPDATED_AT, nullable = true)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  protected LocalDate updatedAt;
 
   /**
    * Empty constructor.
@@ -54,27 +61,18 @@ public class Feedback extends EntityDb {
   }
 
   /**
-   * Constructor with id for new Feedback.
-   *
-   * @param typeOfContract     = the typeOfContract
-   * @param durationOfContract = the durationOfContract
-   * @param comment            = the comment
+   * @param typeOfContract
+   * @param durationOfContract
+   * @param comment
+   * @param updatedAt
    */
-  public Feedback(String typeOfContract, Integer durationOfContract, String comment) {
+  public Feedback(String typeOfContract, Integer durationOfContract, String comment,
+      LocalDate updatedAt) {
     super();
     this.typeOfContract = typeOfContract;
     this.durationOfContract = durationOfContract;
     this.comment = comment;
-  }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Feedback [" + "Id = " + getId() + ", type de contrat = " + typeOfContract
-        + ", durée de contrat = " + durationOfContract + ", commentaire = " + comment + "]";
+    this.updatedAt = updatedAt;
   }
 
   // GETTER/SETTER
@@ -132,5 +130,4 @@ public class Feedback extends EntityDb {
   public void setComment(String comment) {
     this.comment = comment;
   }
-
 }

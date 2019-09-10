@@ -18,17 +18,18 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
-import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
-import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 /**
  * @author vianney
  *
  */
 @Entity
+@ToString
 @Table(name = CandidateContract.TABLE)
 public class Candidate extends Person {
 
@@ -37,47 +38,34 @@ public class Candidate extends Person {
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
-//  @ManyToOne(targetEntity = Feedback.class, optional = true)
   @ManyToOne()
-//  @JoinColumn(name = CandidateContract.COL_FK_ID_FEEDBACK, referencedColumnName = FeedbackContract.COL_ID)
   private Feedback feedback;
 
-  //@JsonProperty(value = CandidateContract.COL_DEGREES)
   @JsonIgnore
-//  @ManyToMany(targetEntity = Degree.class)
-//  @JoinTable(name = "candidate_degree", joinColumns = {
-//      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-//          @JoinColumn(name = DegreeContract.COL_ID) })
   @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
   cascade = {
       CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
       CascadeType.MERGE
-  }) // By default table table will be candidate_degrees
-//  @JoinTable(name = "candidate_degree", // Table unique
-//          joinColumns = { @JoinColumn( name = CandidateContract.COL_ID) },
-//          inverseJoinColumns = { @JoinColumn(name = DegreeContract.COL_ID) })
+  })
   private List<Degree> degrees = new ArrayList<>();
 
-  //@JsonProperty(value = CandidateContract.COL_MATTERS)
   @JsonIgnore
   @ManyToMany(targetEntity = Matter.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = MatterContract.COL_ID) })
-  private List<Matter> matters = new ArrayList<>();
+  private List<Matter> matters;
 
- // @JsonProperty(value = CandidateContract.COL_SESSIONS)
   @JsonIgnore
-  @ManyToMany(targetEntity = Session.class)
-  @JoinTable(name = "candidate_session", joinColumns = {
+  @ManyToMany(targetEntity = CompanyValidatedCandidatesSession.class)
+  @JoinTable(name = "company_session", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = SessionContract.COL_ID) })
-  private List<Session> sessions = new ArrayList<>();
-//
+          @JoinColumn(name = CompanyValidatedCandidatesSessionContract.COL_ID) })
+  private List<CompanyValidatedCandidatesSession> companySessions;
+
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
-//  @ManyToOne()
   protected Address address;
 
   /**
@@ -85,6 +73,9 @@ public class Candidate extends Person {
    */
   public Candidate() {
     super();
+    this.degrees = new ArrayList<>();
+    this.matters = new ArrayList<>();
+    this.companySessions = new ArrayList<>();
   }
 
   /**
@@ -97,6 +88,9 @@ public class Candidate extends Person {
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone) {
     super(firstname, lastname, email, cellPhone);
+    this.degrees = new ArrayList<>();
+    this.matters = new ArrayList<>();
+    this.companySessions = new ArrayList<>();
   }
 
   /**
@@ -107,24 +101,14 @@ public class Candidate extends Person {
    * @param sessions
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
-      List<Matter> matters, List<Session> sessions) {
+      List<Matter> matters, List<CompanyValidatedCandidatesSession> sessions) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.feedback = feedback;
     this.degrees = degrees;
     this.matters = matters;
-    this.sessions = sessions;
+    this.companySessions = sessions;
     this.address = address;
-  }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Candidate [" + "Id = " + this.getId() + ", prénom = " + this.firstname + ", nom = " + this.lastname
-        + ", rang = "+ this.ranking.toValue() + ", email = " + this.email + ", téléphone = " + this.cellPhone + /* ", diplômes = " + degrees + */" adresse = ]";
   }
 
   // GETTER/SETTER
@@ -165,6 +149,12 @@ public class Candidate extends Person {
     this.feedback = feedback;
   }
 
+  public void addDegree(final Degree degree) {
+    if (!this.degrees.contains(degree)) {
+      this.degrees.add(degree);
+    }
+  }
+
   /**
    * @return the degrees
    */
@@ -177,6 +167,18 @@ public class Candidate extends Person {
    */
   public void setDegrees(List<Degree> degrees) {
     this.degrees = degrees;
+  }
+
+  /**
+   * Two way setter, adds {@link Matter} to {@link Candidate#matters matter list}
+   * and {@link Candidate} to {@link Matter#getCandidates() candidates list}.
+   *
+   * @param matter to add
+   */
+  public void addMatter(Matter matter) {
+    if (!this.matters.contains(matter)) {
+      this.matters.add(matter);
+    }
   }
 
   /**
@@ -193,43 +195,24 @@ public class Candidate extends Person {
     this.matters = matters;
   }
 
-  /**
-   * Two way setter, adds {@link Matter} to {@link Candidate#matters matter list}
-   * and {@link Candidate} to {@link Matter#getCandidates() candidates list}.
-   *
-   * @param matter to add
-   */
-  public void addMatter(Matter matter) {
-    if (!this.matters.contains(matter)) {
-      this.matters.add(matter);
-      if (matter.getCandidates().contains(this)) {
-        matter.getCandidates().add(this);
-      }
+  public void addCompanySession(final CompanyValidatedCandidatesSession session) {
+    if (!this.companySessions.contains(session)) {
+      this.companySessions.add(session);
     }
   }
-
-  public void addDegree(final Degree degree) {
-    if (!this.degrees.contains(degree)) {
-      this.degrees.add(degree);
-      if (!degree.getCandidates().contains(this)) {
-        degree.getCandidates().add(this);
-      }
-    }
-  }
-
 
   /**
    * @return the sessions
    */
-  public List<Session> getSessions() {
-    return this.sessions;
+  public List<CompanyValidatedCandidatesSession> getSessions() {
+    return this.companySessions;
   }
 
   /**
    * @param sessions the sessions to set
    */
-  public void setSessions(List<Session> sessions) {
-    this.sessions = sessions;
+  public void setSessions(List<CompanyValidatedCandidatesSession> sessions) {
+    this.companySessions = sessions;
   }
   /**
    * @return the address
@@ -243,6 +226,5 @@ public class Candidate extends Person {
    */
   public void setAddress(Address address) {
     this.address = address;
-//    address.getCandidates().add(this);
   }
 }

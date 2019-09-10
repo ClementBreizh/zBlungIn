@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 /**
 * This class is the relation entity Assessment and Candidate.
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 *
 */
 @Entity
+@ToString
 @Table(name = AcquiredMattersContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = AcquiredMattersContract.COL_ID))
 public class AcquiredMatters extends EntityDb {

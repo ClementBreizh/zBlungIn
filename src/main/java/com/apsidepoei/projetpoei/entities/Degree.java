@@ -1,21 +1,16 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.ToString;
 import lombok.ToString;
 
 /**
@@ -35,26 +30,16 @@ public class Degree extends EntityDb {
   private String name;
 
   @JsonProperty(value = DegreeContract.COL_LEVEL)
-  @Column(name = DegreeContract.COL_LEVEL, nullable = false, length = 50)
+  @Column(name = DegreeContract.COL_LEVEL, length = 50, nullable = false)
   private String level;
 
-  //@JsonProperty(value = DegreeContract.COL_CANDIDATES)
-  @JsonIgnore
-//  @ManyToMany(targetEntity = Candidate.class)
-//  @JoinTable(name = "degree_candidate", joinColumns = {
-//      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
-//          @JoinColumn(name = CandidateContract.COL_ID) })
-  @ManyToMany(fetch = FetchType.LAZY,
-  cascade = {
-      CascadeType.PERSIST,
-      CascadeType.MERGE
-  },
-  mappedBy = "degrees") // Degree sera esclave de la relation voir https://stackoverflow.com/a/14111651/8899653
-  private final List<Candidate> candidates = new ArrayList<>();
-
+  @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
+  @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true)
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  protected LocalDate validationDate;
 
   /**
-   *
+   * Empty constructor.
    */
   public Degree() {
     super();
@@ -75,15 +60,13 @@ public class Degree extends EntityDb {
   /**
    * @param name
    * @param level
-   * @param candidates
+   * @param validationDate
    */
-  public Degree(String name, String level, List<Candidate> candidates) {
+  public Degree(String name, String level, LocalDate validationDate) {
     super();
     this.name = name;
     this.level = level;
-    for (Candidate candidate : candidates) {
-      this.addCandidate(candidate);
-    }
+    this.validationDate = validationDate;
   }
 
   // GETTER/SETTER
@@ -125,49 +108,16 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * Constructor with id for new degree.
-   *
-   * @param id    = the id
-   * @param name  = the name
-   * @param level = the level
+   * @return the validationDate
    */
-  public Degree(int id, String name, String level) {
-    super();
-    this.setId(id);
-    this.name = name;
-    this.level = level;
+  public LocalDate getValidationDate() {
+    return validationDate;
   }
 
   /**
-   * @return the candidates
+   * @param validationDate the validationDate to set
    */
-  public List<Candidate> getCandidates() {
-    return this.candidates;
+  public void setValidationDate(LocalDate validationDate) {
+    this.validationDate = validationDate;
   }
-
-  /**
-   * @param candidates the candidates to set
-   */
-//  public void setCandidates(List<Candidate> candidates) {
-//    this.candidates = candidates;
-//  }
-
-  public void addCandidate(final Candidate candidate) {
-    if (!this.candidates.contains(candidate)) {
-      this.candidates.add(candidate);
-      if (!candidate.getDegrees().contains(this)) {
-        candidate.getDegrees().add(this);
-      }
-    }
-  }
-
-  public void removeCandidate(final Candidate candidate) {
-    if (this.candidates.contains(candidate)) {
-      this.candidates.remove(candidate);
-      if (candidate.getDegrees().contains(this)) {
-        candidate.getDegrees().remove(this);
-      }
-    }
-  }
-
 }

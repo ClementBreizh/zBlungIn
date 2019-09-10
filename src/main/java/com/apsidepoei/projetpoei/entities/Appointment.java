@@ -13,14 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 /**
  * This class is the Appointment entity.
@@ -29,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = AppointmentContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
@@ -106,22 +106,7 @@ public class Appointment extends EntityDb {
     this.organizer = organizer;
   }
 
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + appointmentDate
-        + ", report=" + report + ", status=" + status + "]";
-  }
-
-
-
-  // GETTER/SETTER
-
-
+  // GETTER/SETTE
   /**
    * The informations.
    *

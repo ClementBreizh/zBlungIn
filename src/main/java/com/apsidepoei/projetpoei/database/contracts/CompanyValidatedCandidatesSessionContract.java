@@ -14,21 +14,18 @@ public class CompanyValidatedCandidatesSessionContract extends BaseContract {
    * Define the table name .
    */
   public static final String TABLE = "compValCandSession";
-
   /**
    * defines the name of the column="company".
    */
   public static final String COL_ID= "id_compValCandSession";
-
   /**
    * defines the name of the column="company".
    */
   public static final String COL_COMPANY = "company";
-
   /**
-   * defines the name of the column="candidate".
+   * Define name of column mainContact
    */
-  public static final String COL_VALIDATED_CANDIDATES = "validatedCandidates";
+  public static final String COL_VALIDATED = "validated";
 
   /**
    * defines the name of the column="session".

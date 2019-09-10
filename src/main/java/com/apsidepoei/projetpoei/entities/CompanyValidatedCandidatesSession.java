@@ -1,16 +1,13 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.CompanyValidatedCandidatesSessionContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.ToString;
 import lombok.ToString;
 
 /**
@@ -28,22 +25,21 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
-  @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_VALIDATED_CANDIDATES)
-  @ManyToMany(targetEntity = Candidate.class)
-  private List<Candidate> validatedCandidates;
-
   @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_SESSION)
   @OneToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
+  @JsonProperty(value = CompanyValidatedCandidatesSessionContract.COL_VALIDATED)
+  @Column(name = CompanyValidatedCandidatesSessionContract.COL_VALIDATED, nullable = false)
+  @Type(type = "org.hibernate.type.NumericBooleanType")
+  private Boolean validated = false;
 
   /**
    * Empty constructor.
    */
   public CompanyValidatedCandidatesSession() {
     super();
-    this.validatedCandidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -54,22 +50,19 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
     super();
     this.company = company;
     this.session = session;
-    this.validatedCandidates = new ArrayList<Candidate>();
   }
 
   /**
    * @param company
-   * @param validatedCandidates
    * @param session
+   * @param validated
    */
-  public CompanyValidatedCandidatesSession(Company company, List<Candidate> validatedCandidates,
-      Session session) {
+  public CompanyValidatedCandidatesSession(Company company, Session session, Boolean validated) {
     super();
     this.company = company;
-    this.validatedCandidates = validatedCandidates;
     this.session = session;
+    this.validated = validated;
   }
-
 
   /**
    * Override toString() function.
@@ -106,24 +99,6 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   }
 
   /**
-   * Getter for the validated candidates.
-   *
-   * @return a list of candidates.
-   */
-  public List<Candidate> getValidatedCandidates() {
-    return validatedCandidates;
-  }
-
-  /**
-   * Setter for the validated candidates
-   *
-   * @param candidates = list of candidates
-   */
-  public void setValidatedCandidates(List<Candidate> candidates) {
-    this.validatedCandidates = candidates;
-  }
-
-  /**
    * Getter for the session
    *
    * @return the session.
@@ -140,4 +115,19 @@ public class CompanyValidatedCandidatesSession extends EntityDb {
   public void setSession(Session session) {
     this.session = session;
   }
+
+  /**
+   * @return the validated
+   */
+  public Boolean getValidated() {
+    return validated;
+  }
+
+  /**
+   * @param validated the validated to set
+   */
+  public void setValidated(Boolean validated) {
+    this.validated = validated;
+  }
+
 }
