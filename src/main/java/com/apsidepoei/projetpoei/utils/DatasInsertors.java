@@ -110,36 +110,45 @@ public class DatasInsertors {
   public DatasInsertors() {
   }
 
+
+
+
+
+
   @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
 
-    // Address
+    // ----------------------------------- Address -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Address address = new Address(
           faker.address().streetAddress(),
           faker.address().zipCode(),
           faker.address().city());
       this.addressRepository.saveAndFlush(address);
+      System.out.println(address.toString());
+      System.out.println("address " + i + " ok");
     }
     this.addressList.addAll(this.addressRepository.findAll());
     System.out.println("Address ok");
 
 
-    // Appointment
+    // ----------------------------------- Appointment -----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
       Appointment appointment = new Appointment(faker.lorem().sentence(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
           faker.lorem().sentence(), false);
 
       appointment.setInformations(faker.lorem().sentence());
+      System.out.println(appointment.toString());
+
       this.appointmentRepository.saveAndFlush(appointment);
     }
     this.appointmentList.addAll(this.appointmentRepository.findAll());
     System.out.println("Appointment ok");
 
 
-    // Assessment
+    // ----------------------------------- Assessment -----------------------------------
     Assessment assessment1 = new Assessment("Culture générale",
         faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     this.assessmentRepository.saveAndFlush(assessment1);
@@ -155,7 +164,7 @@ public class DatasInsertors {
     this.assessmentList.addAll(this.assessmentRepository.findAll());
     System.out.println("Assessment ok");
 
-    // Candidate
+    // ----------------------------------- Candidate -----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
       Candidate candidate = new Candidate(
           faker.name().firstName(),
@@ -165,11 +174,13 @@ public class DatasInsertors {
       candidate.setRanking(RankingCandidate.RANK_2);
       candidate.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
       this.candidateRepository.saveAndFlush(candidate);
+      System.out.println(candidate.toString());
+
     }
     this.candidateList.addAll(this.candidateRepository.findAll());
     System.out.println("Candidate ok");
 
-    // Company
+    // ----------------------------------- Company -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
@@ -177,27 +188,34 @@ public class DatasInsertors {
       company.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
 
       this.companyRepository.saveAndFlush(company);
+      System.out.println(company.toString());
+      System.out.println(company.toString());
+
     }
     this.companyList.addAll(this.companyRepository.findAll());
     System.out.println("Company ok");
 
-    // Degrees
+    // ----------------------------------- Degrees -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
       this.degreeRepository.saveAndFlush(degree);
+      System.out.println(degree.toString());
+
     }
     this.degreeList.addAll(this.degreeRepository.findAll());
     System.out.println("Degrees ok");
 
-    // Feedback
+    // ----------------------------------- Feedback -----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word());
       this.feedbackRepository.saveAndFlush(feedback);
+      System.out.println(feedback.toString());
+
     }
     this.feedbackList.addAll(this.feedbackRepository.findAll());
     System.out.println("Feedback ok");
 
-    // Matter
+    // ----------------------------------- Matter -----------------------------------
     Matter matter1 = new Matter("Angular");
     this.matterRepository.saveAndFlush(matter1);
     Matter matter2 = new Matter("Java");
@@ -214,7 +232,7 @@ public class DatasInsertors {
     this.matterList.addAll(this.matterRepository.findAll());
     System.out.println("Matter ok");
 
-    // Person
+    // ----------------------------------- Person -----------------------------------
 //    for (int i = 0; i < nbEntities; i++) {
 //      Person person = new Person(
 //          faker.name().firstName(),
@@ -228,18 +246,20 @@ public class DatasInsertors {
     this.personList.addAll(this.personRepository.findAll());
     System.out.println("Person ok");
 
-    // Session
+    // ----------------------------------- Session -----------------------------------
 
     for (int i = 0; i < this.nbEntities; i++) {
       Session session = new Session(faker.gameOfThrones().house(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.sessionRepository.saveAndFlush(session);
+      System.out.println(session.toString());
+
     }
     this.sessionList.addAll(this.sessionRepository.findAll());
     System.out.println("Session ok");
 
-    // User
+    // ----------------------------------- User -----------------------------------
 //    for (int i = 0; i < nbEntities; i++) {
 //      User user = new User(
 //          faker.name().username(),
@@ -262,9 +282,9 @@ public class DatasInsertors {
     for (int i = 0; i < this.nbEntities; i++) {
         degree = this.degreeList.get(i);
         candidate = this.candidateList.get(i);
-//        candidate.addDegree(degree); // two way setter
         candidate.getDegrees().add(degree);
         this.candidateRepository.saveAndFlush(candidate);
+
         degree.getCandidates();
     }
 

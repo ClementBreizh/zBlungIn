@@ -11,14 +11,18 @@ import org.hibernate.annotations.Type;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
+import lombok.ToString;
 
 /**
  * @author vianney
  *
  */
 @Entity
+@ToString
 @Table(name = PersonContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -100,16 +104,16 @@ public class Person extends EntityDb {
   }
 
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-
-        + ", email = " + email + ", téléphone = " + cellPhone + "]";
-
-  }
+//  /**
+//   * Override toString() function.
+//   */
+//  @Override
+//  public String toString() {
+//    return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
+//
+//        + ", email = " + email + ", téléphone = " + cellPhone + "]";
+//
+//  }
 
 
   // GETTER/SETTER

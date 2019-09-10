@@ -15,6 +15,9 @@ import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+import lombok.ToString;
+
 /**
  * This class is the Degree entity.
  *
@@ -22,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = DegreeContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = DegreeContract.COL_ID))
 public class Degree extends EntityDb {
@@ -80,16 +84,6 @@ public class Degree extends EntityDb {
       this.addCandidate(candidate);
     }
   }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Diplome [Id = " + this.getId() + ", nom=" + this.name + ", niveau=" + this.level + "]";
-  }
-
 
   // GETTER/SETTER
 

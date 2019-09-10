@@ -19,12 +19,16 @@ import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import com.apsidepoei.projetpoei.database.contracts.HasDoneAssessmentContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+import lombok.ToString;
+
 /**
  * This class is the relation entity Assessment and Candidate.
  * @author vianney
  *
  */
 @Entity
+@ToString
 @Table(name = HasDoneAssessmentContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = HasDoneAssessmentContract.COL_ID))
 public class HasDoneAssessment extends EntityDb {

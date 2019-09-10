@@ -18,6 +18,8 @@ import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
+import lombok.ToString;
 
 /**
  * This class is the business entity.
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = CompanyContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = CompanyContract.COL_ID))
 public class Company extends EntityDb {
@@ -126,23 +129,6 @@ public class Company extends EntityDb {
     this.mainContact = mainContact;
     this.address = address;
     this.sessions = sessions;
-  }
-
-
-  /**
-   * override toString() function.
-   */
-//  @Override
-//  public String toString() {
-//    return "Entreprise [Id = " + getId() + ", name = " + getName() + ", antennaName = " + getAntennaName()
-//        + ", siret = " + getSiret() + ", apeCode = " + getApeCode() + ", contacts = " + getContacts()
-//        + ", mainContact = " + getMainContact() + ", address = " + getAddress() + ", sessions = " + getSessions()
-//        + "]";
-//  }
-  @Override
-  public String toString() {
-    return "Entreprise [Id = " + getId() + ", name = " + getName() + ", antennaName = " + getAntennaName()
-        + ", siret = " + getSiret() + ", apeCode = " + getApeCode() + "]";
   }
 
 

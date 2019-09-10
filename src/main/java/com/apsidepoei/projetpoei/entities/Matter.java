@@ -15,7 +15,11 @@ import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+import lombok.ToString;
+
 @Entity
+@ToString
 @Table(name = MatterContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = MatterContract.COL_ID))
 public class Matter extends EntityDb {

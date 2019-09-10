@@ -1,19 +1,13 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.List;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
-import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import lombok.ToString;
 /**
  * This class is the Address entity.
  *
@@ -21,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = AddressContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = AddressContract.COL_ID))
 public class Address extends EntityDb {
@@ -36,16 +31,6 @@ public class Address extends EntityDb {
   @JsonProperty(value = AddressContract.COL_CITY)
   @Column(name = AddressContract.COL_CITY, nullable = false)
   private String city;
-
-  @JsonProperty(value = AddressContract.COL_FK_ID_COMPANIES)
-  @ManyToOne(targetEntity = Company.class)
-  @JoinColumn(name = AddressContract.COL_FK_ID_COMPANIES, referencedColumnName = CompanyContract.COL_ID)
-  private List<Company> companies ;
-
-  @JsonProperty(value = AddressContract.COL_FK_ID_CANDIDATES)
-  @ManyToOne(targetEntity = Candidate.class)
-  @JoinColumn(name = AddressContract.COL_FK_ID_CANDIDATES, referencedColumnName = CandidateContract.COL_ID)
-  private List<Candidate> candidates ;
 
 
   /**
@@ -67,17 +52,6 @@ public class Address extends EntityDb {
     this.street = street;
     this.postalCode = postalCode;
     this.city = city;
-  }
-
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Adresse [Id = " + getId() + ", adresse postale = " + street + ", code postal = "
-        + postalCode + ", ville = " + city + "]";
   }
 
 

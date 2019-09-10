@@ -16,12 +16,16 @@ import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+import lombok.ToString;
+
 /**
  * This class is the CompanyCandidateValidatedSession entity.
  * @author thomas
  *
  */
 @Entity
+@ToString
 @Table(name = CompanyValidatedCandidatesSessionContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = CompanyValidatedCandidatesSessionContract.COL_ID))
 public class CompanyValidatedCandidatesSession extends EntityDb {

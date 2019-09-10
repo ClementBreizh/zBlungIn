@@ -15,7 +15,11 @@ import javax.persistence.Table;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.ToString;
+
 import org.springframework.format.annotation.DateTimeFormat;
+import lombok.ToString;
 
 /**
  * This class is the session entity.
@@ -24,6 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  */
 @Entity
+@ToString
 @Table(name = SessionContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = SessionContract.COL_ID))
 public class Session extends EntityDb {
@@ -90,14 +95,14 @@ public class Session extends EntityDb {
   }
 
 
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "session [Id = " + getId() + ", name=" + name + ", startDate=" + startDate + ", endDate="
-        + endDate + "]";
-  }
+//  /**
+//   * Override toString() function.
+//   */
+//  @Override
+//  public String toString() {
+//    return "session [Id = " + getId() + ", name=" + name + ", startDate=" + startDate + ", endDate="
+//        + endDate + "]";
+//  }
 
 
   // GETTER/SETTER

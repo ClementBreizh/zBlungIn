@@ -8,6 +8,9 @@ import javax.persistence.Table;
 import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+import lombok.ToString;
+
 /**
  * This class is the Feedback entity.
  *
@@ -15,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = FeedbackContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = FeedbackContract.COL_ID))
 public class Feedback extends EntityDb {
