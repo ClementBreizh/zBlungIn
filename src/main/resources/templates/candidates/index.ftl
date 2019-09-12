@@ -51,9 +51,9 @@
   <br>
   <input type="number" name="matters" id="matters">
   <br>
-  <label for="sessions">Sessions</label>
+  <label for="companySessions">Company and Sessions</label>
   <br>
-  <input type="number" name="sessions" id="sessions">
+  <input type="number" name="companySessions" id="companySessions">
   <br><br>
   <input type="submit" value="Submit">
 </form>

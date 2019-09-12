@@ -41,7 +41,7 @@ public class Candidate extends Person {
   @ManyToOne()
   private Feedback feedback;
 
-  @JsonIgnore
+//  @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
   cascade = {
       CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
@@ -49,19 +49,19 @@ public class Candidate extends Person {
   })
   private List<Degree> degrees = new ArrayList<>();
 
-  @JsonIgnore
+//  @JsonIgnore
   @ManyToMany(targetEntity = Matter.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = MatterContract.COL_ID) })
   private List<Matter> matters;
 
-  @JsonIgnore
+//  @JsonIgnore
   @ManyToMany(targetEntity = CompanySession.class)
-  @JoinTable(name = "company_session", joinColumns = {
-      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = CompanySessionContract.COL_ID) })
-  private List<CompanySession> companySessions;
+  @JoinTable(joinColumns = {
+    @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
+    @JoinColumn(name = CompanySessionContract.COL_ID) })
+  private List<CompanySession> companySession;
 
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
@@ -75,7 +75,7 @@ public class Candidate extends Person {
     super();
     this.degrees = new ArrayList<>();
     this.matters = new ArrayList<>();
-    this.companySessions = new ArrayList<>();
+    this.companySession = new ArrayList<>();
   }
 
   /**
@@ -90,7 +90,7 @@ public class Candidate extends Person {
     super(firstname, lastname, email, cellPhone);
     this.degrees = new ArrayList<>();
     this.matters = new ArrayList<>();
-    this.companySessions = new ArrayList<>();
+    this.companySession = new ArrayList<>();
   }
 
   /**
@@ -98,16 +98,16 @@ public class Candidate extends Person {
    * @param feedback
    * @param degrees
    * @param matters
-   * @param sessions
+   * @param companySession
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
-      List<Matter> matters, List<CompanySession> sessions) {
+      List<Matter> matters, List<CompanySession> companySession) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.feedback = feedback;
     this.degrees = degrees;
     this.matters = matters;
-    this.companySessions = sessions;
+    this.companySession = companySession;
     this.address = address;
   }
 
@@ -195,9 +195,9 @@ public class Candidate extends Person {
     this.matters = matters;
   }
 
-  public void addCompanySession(final CompanySession session) {
-    if (!this.companySessions.contains(session)) {
-      this.companySessions.add(session);
+  public void addCompanySession(final CompanySession companySession) {
+    if (!this.companySession.contains(companySession)) {
+      this.companySession.add(companySession);
     }
   }
 
@@ -205,14 +205,14 @@ public class Candidate extends Person {
    * @return the sessions
    */
   public List<CompanySession> getSessions() {
-    return this.companySessions;
+    return this.companySession;
   }
 
   /**
-   * @param sessions the sessions to set
+   * @param companySession the sessions to set
    */
-  public void setSessions(List<CompanySession> sessions) {
-    this.companySessions = sessions;
+  public void setSessions(List<CompanySession> companySession) {
+    this.companySession = companySession;
   }
   /**
    * @return the address
