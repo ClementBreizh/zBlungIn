@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 /**
 *
 * @author clemb
@@ -90,10 +93,13 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected Session getObjectTest() throws ParseException {
-    LocalDate localDate = LocalDate.of(2018, 8, 19);
-    Session item = new Session("Session1", localDate, localDate);
-    System.out.println("getObjectTest() return =>>> " + item);
-    return item;
+    Faker faker = new Faker();
+    String name = "Mickael";
+    LocalDate startDate = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate endDate = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    Session item = new Session(name, startDate, endDate);
+
+      return item;
 
 
   }

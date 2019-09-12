@@ -39,7 +39,7 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
- @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
   @JsonProperty(value = SessionContract.COL_CANDIDATES)
@@ -76,12 +76,11 @@ public class Session extends EntityDb {
   /**
    * Constructor with id for a new Session.
    *
-   * @param id        = the id
    * @param name      = the name
    * @param startDate = the startDate
    * @param endDate   = the endDate
    */
-  public Session(int id, String name, LocalDate startDate, LocalDate endDate, List<Candidate> candidates) {
+  public Session(String name, LocalDate startDate, LocalDate endDate, List<Candidate> candidates) {
     super();
     this.name = name;
     this.startDate = startDate;
