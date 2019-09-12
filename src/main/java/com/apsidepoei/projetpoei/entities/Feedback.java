@@ -60,7 +60,7 @@ public class Feedback extends EntityDb {
     this.typeOfContract = typeOfContract;
   }
 
-  
+
   /**
    * @param typeOfContract
    * @param durationOfContract
@@ -75,6 +75,7 @@ public class Feedback extends EntityDb {
     this.comment = comment;
     this.updatedAt = updatedAt;
   }
+
 
   // GETTER/SETTER
 

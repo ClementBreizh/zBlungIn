@@ -109,6 +109,9 @@ public class Company extends EntityDb {
     this.address = address;
   }
 
+
+  // GETTER/SETTER
+
   /**
    * @return the name
    */

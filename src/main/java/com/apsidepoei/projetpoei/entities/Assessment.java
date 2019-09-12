@@ -39,7 +39,7 @@ public class Assessment extends EntityDb {
   protected LocalDate validationDate;
 
   @JsonProperty(value = AssessmentContract.COL_FK_ID_CANDIDATE)
-  @ManyToOne(targetEntity = Candidate.class, optional = true)
+  @ManyToOne(targetEntity = Candidate.class)
   @JoinColumn(name = AssessmentContract.COL_FK_ID_CANDIDATE, referencedColumnName = AssessmentContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 
@@ -51,19 +51,16 @@ public class Assessment extends EntityDb {
   }
 
   /**
-   * Constructor for a new Assessment.
+   * @param category
+   * @param updatingDate
+   * @param candidate
    */
-  public Assessment(String category, LocalDate updatingDate) {
+  public Assessment(String category, LocalDate updatingDate,
+      Candidate candidate) {
     super();
     this.category = category;
     this.updatingDate = updatingDate;
-  }
-
-  /**
-   * @param validationDate the validationDate to set
-   */
-  public void setValidationDate(LocalDate validationDate) {
-    this.validationDate = validationDate;
+    this.candidate = candidate;
   }
 
   /**

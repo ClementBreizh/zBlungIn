@@ -59,7 +59,7 @@ public class Appointment extends EntityDb {
   private List<Person> persons;
 
   @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
-  @ManyToOne(targetEntity = Person.class, optional = true)
+  @ManyToOne(targetEntity = Person.class)
   @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID)
   private Person organizer;
 
@@ -72,18 +72,30 @@ public class Appointment extends EntityDb {
   }
 
   /**
+   * @param appointmentDate
+   * @param organizer
+   */
+  public Appointment(LocalDateTime appointmentDate, Person organizer) {
+    super();
+    this.appointmentDate = appointmentDate;
+    this.organizer = organizer;
+    this.persons = new ArrayList<Person>();
+  }
+
+  /**
    * @param informations
    * @param appointmentDate
    * @param report
    * @param status
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status) {
+      Boolean status, Person organizer) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
+    this.organizer = organizer;
     this.persons = new ArrayList<Person>();
   }
 
@@ -106,7 +118,7 @@ public class Appointment extends EntityDb {
     this.organizer = organizer;
   }
 
-  // GETTER/SETTE
+  // GETTER/SETTER
   /**
    * The informations.
    *
@@ -198,5 +210,4 @@ public class Appointment extends EntityDb {
   public void setOrganizer(Person organizer) {
     this.organizer = organizer;
   }
-
 }

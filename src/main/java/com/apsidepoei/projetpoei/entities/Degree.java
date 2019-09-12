@@ -69,6 +69,7 @@ public class Degree extends EntityDb {
     this.validationDate = validationDate;
   }
 
+
   // GETTER/SETTER
 
   /**

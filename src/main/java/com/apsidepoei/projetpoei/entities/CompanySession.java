@@ -64,19 +64,6 @@ public class CompanySession extends EntityDb {
     this.validated = validated;
   }
 
-  /**
-   * Override toString() function.
-   */
-//  @Override
-//  public String toString() {
-//    return "Association Company/Candidates/Session [Id = " + getId() + ", company = " + getCompany().getName()
-//        + ", session = " + getSession().getName() + "]";
-//  }
-
-  @Override
-  public String toString() {
-    return "Association Company/Candidates/Session [Id = ]";
-  }
 
   // GETTER/SETTER
 

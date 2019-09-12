@@ -34,7 +34,7 @@ public class User extends Person {
   protected String password;
 
   @JsonProperty(value = UserContract.COL_ROLE)
-  @Column(name = UserContract.COL_ROLE, nullable = true)
+  @Column(name = UserContract.COL_ROLE)
   private RoleUser role = RoleUser.ROLE_3;
 
 
