@@ -249,14 +249,18 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 
+  /**
+   * Test for save objet, get him to URL + repo and test if is the same.
+   * @throws Exception
+   */
   @Test
   public void save() throws Exception {
     getRepository().deleteAll();
     String objJson = this.objectMapper.writeValueAsString(getObjectTest());
 
-// Prepare Request
+    // Prepare Request
     MockHttpServletRequestBuilder request = post(BASE_API + entityPath).contentType("application/json")
-        // .param("sendWelcomeMail", "true") // in URL
+
         .content(objJson);
 
     MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
@@ -266,10 +270,6 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
     // Transform to Object
     Matter item = parseJsonToObject(new StringBuilder(result.getResponse().getContentAsString()));
-
-    // Tests
-//  assertNotNull(newSess);
-//  assertThat("Mickael").isEqualTo(newSess.getName());
 
     Optional<Matter> dbItem = getRepository().findById(getItemIdTest(item));
 

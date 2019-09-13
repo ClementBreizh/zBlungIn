@@ -1,11 +1,19 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.ManyToOne;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,10 +22,14 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
 import com.apsidepoei.projetpoei.entities.Assessment;
+import com.apsidepoei.projetpoei.entities.Candidate;
+import com.apsidepoei.projetpoei.entities.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -89,8 +101,7 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
    */
   @Override
   protected Assessment getObjectTest() throws ParseException {
-    LocalDate localDate = LocalDate.of(2016, 8, 19);
-    Assessment item = new Assessment("categorie", localDate);
+    Assessment item = new Assessment();
     return item;
   }
   /**
@@ -115,4 +126,39 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   protected boolean compareToList(List<Assessment> items, List<Assessment> dbItems) { // TODO Auto-generated method stub
     return false;
   }
+
+//  @Test
+//  public void test() throws Exception {
+//
+//      // Make object
+//    Candidate candidate = new Candidate();
+//    Assessment sess = new Assessment();
+//      sess.setCategory("Cat42");
+//      sess.setUpdatingDate(LocalDate.now());
+//      sess.setCandidate(candidate);
+//
+//      // Transform to JSON
+//      String objJson = this.objectMapper.writeValueAsString(sess);
+//
+//      // Prepare Request
+//      MockHttpServletRequestBuilder request = post(BASE_API + entityPath)
+//              .contentType("application/json")
+//
+//              .content(objJson);
+//
+//      MvcResult result = this.mockMvc.perform(request)
+//              .andExpect(status().isOk())
+//              .andReturn();
+//
+//
+//      System.out.println(result.getResponse().getStatus());
+//      System.out.println(result.getResponse().getContentAsString());
+//
+//      // Transform to Object
+//      Assessment newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Assessment.class);
+//
+//      // Tests
+//      assertNotNull(newSess);
+//      assertThat("Cate42").isEqualTo(newSess.getCategory());
+//  }
 }

@@ -132,4 +132,13 @@ public class Feedback extends EntityDb {
   public void setComment(String comment) {
     this.comment = comment;
   }
+
+  public LocalDate getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDate updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
 }

@@ -14,6 +14,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
 import lombok.ToString;
 
 /**

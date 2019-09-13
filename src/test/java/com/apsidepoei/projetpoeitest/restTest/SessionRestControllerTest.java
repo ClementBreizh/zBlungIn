@@ -1,13 +1,16 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
-
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
@@ -125,6 +130,44 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
   protected boolean compareToList(List<Session> items, List<Session> dbItems) {
     return false;
   }
+  /**
+   * Test function via HTTP
+   * @throws Exception
+   */
+  @Test
+  public void test() throws Exception {
+
+      // Make object
+      Session sess = new Session();
+      sess.setName("Clement");
+      sess.setStartDate(LocalDate.now());
+      sess.setEndDate(LocalDate.now());
+
+      // Transform to JSON
+      String objJson = this.objectMapper.writeValueAsString(sess);
+
+      // Prepare Request
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath)
+              .contentType("application/json")
+
+              .content(objJson);
+
+      MvcResult result = this.mockMvc.perform(request)
+              .andExpect(status().isOk())
+              .andReturn();
+
+
+      System.out.println(result.getResponse().getStatus());
+      System.out.println(result.getResponse().getContentAsString());
+
+      // Transform to Object
+      Session newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Session.class);
+
+      // Tests
+      assertNotNull(newSess);
+      assertThat("Clement").isEqualTo(newSess.getName());
+  }
+
 }
 
 

@@ -1,21 +1,33 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
 import com.apsidepoei.projetpoei.entities.AcquiredMatters;
+import com.apsidepoei.projetpoei.entities.Person;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -30,6 +42,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
 public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<AcquiredMatters, Integer> {
+
+
 
   @Autowired
   private AcquiredMattersRepository repository;
@@ -62,8 +76,8 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   @Override
   protected boolean compareTo(AcquiredMatters item1, AcquiredMatters item2) {
     return item1.getId().equals(item2.getId())
-        && item1.getScore().equals(item2.getScore())
-            && item1.getValidationLocalDate().equals(item2.getValidationLocalDate());
+        && item1.getMatter().equals(item2.getMatter())
+            && item1.getCandidate().equals(item2.getCandidate());
   }
 
   /**
@@ -73,6 +87,7 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   protected AcquiredMatters parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
+    mapper.registerSubtypes(Person.class);
     return mapper.readValue(builder.toString(), new TypeReference<AcquiredMatters>() {
     });
   }
@@ -113,6 +128,160 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   protected boolean compareToList(List<AcquiredMatters> items, List<AcquiredMatters> dbItems) {
     return false;
   }
+
+//  /**
+//   * Test to getAll.
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void getAll() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//
+//    List<AcquiredMatters> dbItems = getRepository().findAll();
+//    List<AcquiredMatters> httpItems = parseJsonToList(builder);
+//
+//    assertEquals("List sized are not same", dbItems.size(), httpItems.size());
+////    if (dbItems.size() != httpItems.size()) {
+////      fail("List sized are not same");
+////    }
+//    for (int i = 0; i < httpItems.size(); i++) {
+//      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
+//        fail();
+//      }
+//    }
+//  }
+//
+//  /**
+//   * Test to getById.
+//   *
+//   * @throws IOException
+//   * @throws ParseException
+//   */
+//  @Test
+//  public void getById() throws IOException, ParseException {
+//    StringBuilder builder = new StringBuilder();
+//    AcquiredMatters item = getRepository().save(getObjectTest());
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.GET);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//
+//    Optional<AcquiredMatters> dbItem = getRepository().findById(getItemIdTest(item));
+//
+//    AcquiredMatters httpItem = parseJsonToObject(builder);
+//
+//    if (dbItem == null && httpItem == null) {
+//      fail("One of object is null");
+//    }
+//
+//    if (!compareTo(dbItem.get(), httpItem)) {
+//      fail();
+//    }
+//
+//  }
+//
+//  /**
+//   * Test if data is deleted.
+//   *
+//   * @throws IOException
+//   * @throws ParseException
+//   */
+//  @Test(expected = NoSuchElementException.class)
+//  public void deleteById() throws IOException, ParseException {
+//    StringBuilder builder = new StringBuilder();
+//    AcquiredMatters item = getRepository().save(getObjectTest());
+//    getRepository().flush();
+//    try {
+//      httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.DELETE);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//    Optional<AcquiredMatters> deleteItem = getRepository().findById(getItemIdTest(item));
+//    deleteItem.get();
+//  }
+//
+//  /**
+//   * Test if table is clear
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void deleteAll() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.DELETE);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//    List<AcquiredMatters> httpItems = parseJsonToList(builder);
+//
+//    if (!httpItems.isEmpty()) {
+//      fail();
+//    }
+//  }
+//
+//  /**
+//   * Test if size of item is the same
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void count() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//
+//    List<AcquiredMatters> dbItems = getRepository().findAll();
+//    List<AcquiredMatters> httpItems = parseJsonToList(builder);
+//    if (dbItems.size() != httpItems.size()) {
+//      fail();
+//    }
+//  }
+//
+//  /**
+//   * Test for save objet, get him to URL + repo and test if is the same.
+//   *
+//   * @throws Exception
+//   */
+//  @Test
+//  public void save() throws Exception {
+//    getRepository().deleteAll();
+//    String objJson = this.objectMapper.writeValueAsString(getObjectTest());
+//
+//    // Prepare Request
+//    MockHttpServletRequestBuilder request = post(BASE_API + entityPath).contentType("application/json")
+//
+//        .content(objJson);
+//
+//    MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
+//
+//    System.out.println(result.getResponse().getStatus());
+//    System.out.println(result.getResponse().getContentAsString());
+//
+//    // Transform to Object
+//    AcquiredMatters item = parseJsonToObject(new StringBuilder(result.getResponse().getContentAsString()));
+//
+//    Optional<AcquiredMatters> dbItem = getRepository().findById(getItemIdTest(item));
+//
+//    if (dbItem == null && item == null) {
+//      fail("One of object is null");
+//    }
+//
+//    if (!compareTo(dbItem.get(), item)) {
+//      fail();
+//    }
+//  }
+
 }
 
 
