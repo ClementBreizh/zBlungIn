@@ -1,10 +1,13 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.junit.Assert.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -17,6 +20,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
@@ -35,7 +40,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
 public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Integer> {
-
 
   @Autowired
   private MatterRepository repository;
@@ -127,6 +131,11 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     return false;
   }
 
+  /**
+   * Test to getAll.
+   *
+   * @throws IOException
+   */
   @Test
   public void getAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -150,6 +159,12 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 
+  /**
+   * Test to getById.
+   *
+   * @throws IOException
+   * @throws ParseException
+   */
   @Test
   public void getById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -175,4 +190,95 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
   }
 
+  /**
+   * Test if data is deleted.
+   *
+   * @throws IOException
+   * @throws ParseException
+   */
+  @Test(expected = NoSuchElementException.class)
+  public void deleteById() throws IOException, ParseException {
+    StringBuilder builder = new StringBuilder();
+    Matter item = getRepository().save(getObjectTest());
+    getRepository().flush();
+    try {
+      httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.DELETE);
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+    Optional<Matter> deleteItem = getRepository().findById(getItemIdTest(item));
+    deleteItem.get();
+  }
+
+  /**
+   * Test if table is clear
+   *
+   * @throws IOException
+   */
+  @Test
+  public void deleteAll() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    try {
+      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.DELETE);
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+    List<Matter> httpItems = parseJsonToList(builder);
+
+    if (!httpItems.isEmpty()) {
+      fail();
+    }
+  }
+
+  /**
+   * Test if size of item is the same
+   *
+   * @throws IOException
+   */
+  @Test
+  public void count() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+
+    List<Matter> dbItems = getRepository().findAll();
+    List<Matter> httpItems = parseJsonToList(builder);
+    if (dbItems.size() != httpItems.size()) {
+      fail();
+    }
+  }
+
+  @Test
+  public void save() throws Exception {
+    getRepository().deleteAll();
+    String objJson = this.objectMapper.writeValueAsString(getObjectTest());
+
+// Prepare Request
+    MockHttpServletRequestBuilder request = post(BASE_API + entityPath).contentType("application/json")
+        // .param("sendWelcomeMail", "true") // in URL
+        .content(objJson);
+
+    MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
+
+    System.out.println(result.getResponse().getStatus());
+    System.out.println(result.getResponse().getContentAsString());
+
+    // Transform to Object
+    Matter item = parseJsonToObject(new StringBuilder(result.getResponse().getContentAsString()));
+
+    // Tests
+//  assertNotNull(newSess);
+//  assertThat("Mickael").isEqualTo(newSess.getName());
+
+    Optional<Matter> dbItem = getRepository().findById(getItemIdTest(item));
+
+    if (dbItem == null && item == null) {
+      fail("One of object is null");
+    }
+
+    if (!compareTo(dbItem.get(), item)) {
+      fail();
+    }
+  }
 }

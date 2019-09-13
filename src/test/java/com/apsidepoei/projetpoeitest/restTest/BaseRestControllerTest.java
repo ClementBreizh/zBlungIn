@@ -37,10 +37,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public abstract class BaseRestControllerTest<T, ID> {
 
   @Autowired
-  private MockMvc mockMvc;
+  protected MockMvc mockMvc;
 
   @Autowired
-  private ObjectMapper objectMapper;
+  protected ObjectMapper objectMapper;
 
   public static final String BASE_API = "/api";
   protected String entityPath;
