@@ -43,8 +43,24 @@ public abstract class BaseRestControllerTest<T, ID> {
   private ObjectMapper objectMapper;
 
   public static final String BASE_API = "/api";
-  private String entityPath;
-  private HttpUtils httpUtils = new HttpUtils();
+  protected String entityPath;
+  protected HttpUtils httpUtils = new HttpUtils();
+
+  protected abstract T getObjectTest() throws ParseException;
+
+  protected abstract ID getItemIdTest(T item);
+
+  protected abstract String getObjectToStringToPost();
+
+  protected abstract T parseJsonToObject(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException;
+
+  protected abstract List<T> parseJsonToList(StringBuilder builder)
+      throws JsonParseException, JsonMappingException, IOException;
+
+  protected abstract boolean compareTo(T item1, T item2);
+
+  protected abstract boolean compareToList(List<T> items, List<T> dbItems);
 
   public BaseRestControllerTest(String entityPath) {
     this.entityPath = entityPath;
@@ -77,13 +93,6 @@ public abstract class BaseRestControllerTest<T, ID> {
 //    }
 //  }
 
-  protected abstract List<T> parseJsonToList(StringBuilder builder)
-      throws JsonParseException, JsonMappingException, IOException;
-
-  protected abstract boolean compareTo(T item1, T item2);
-
-  protected abstract boolean compareToList(List<T> items, List<T> dbItems);
-
 //  @Test
 //  public void getById() throws IOException, ParseException {
 //    StringBuilder builder = new StringBuilder();
@@ -108,9 +117,6 @@ public abstract class BaseRestControllerTest<T, ID> {
 //    }
 //
 //  }
-
-  protected abstract T parseJsonToObject(StringBuilder builder)
-      throws JsonParseException, JsonMappingException, IOException;
 
   /**
    * Test of data selected by Id is deleted.
@@ -243,23 +249,16 @@ public abstract class BaseRestControllerTest<T, ID> {
 //      fail("items not same");
 //    }
 
-
-  @Test
-  public void count() throws IOException {
-    StringBuilder builder = new StringBuilder();
-    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
-
-    List<T> dbItems = getRepository().findAll();
-    List<T> httpItems = parseJsonToList(builder);
-    if (dbItems.size() != httpItems.size()) {
-      fail();
-    }
-  }
-
-  protected abstract T getObjectTest() throws ParseException;
-
-  protected abstract ID getItemIdTest(T item);
-
-  protected abstract String getObjectToStringToPost();
+//  @Test
+//  public void count() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//
+//    List<T> dbItems = getRepository().findAll();
+//    List<T> httpItems = parseJsonToList(builder);
+//    if (dbItems.size() != httpItems.size()) {
+//      fail();
+//    }
+//  }
 
 }
