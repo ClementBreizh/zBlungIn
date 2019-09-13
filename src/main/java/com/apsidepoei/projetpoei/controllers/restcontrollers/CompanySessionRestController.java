@@ -16,11 +16,11 @@ import com.apsidepoei.projetpoei.entities.CompanySession;
 *
 */
 @RestController
-@RequestMapping("/api/valCandidBySessionAndCompany")
+@RequestMapping("/api/companyBySession")
 
-public class CompanyValidatedCandidatesSessionRestController extends BaseRestController<CompanySession, Integer>{
+public class CompanySessionRestController extends BaseRestController<CompanySession, Integer>{
 
- public CompanyValidatedCandidatesSessionRestController(@Autowired CompanySessionRepository repository) {
+ public CompanySessionRestController(@Autowired CompanySessionRepository repository) {
    super(repository);
  }
 }

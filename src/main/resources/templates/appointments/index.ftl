@@ -13,9 +13,9 @@
       <br>
       <input type="number" name="organizer" id="organizer">
   <br>
-  <label for="guestAppointment">Invités</label>
+  <label for="persons">Invités</label>
   <br>
-  <input type="number" name="guestAppointment" id="guestAppointment">
+  <input type="number" name="persons" id="persons">
   <br>
   <label for="report">Report</label>
   <br>

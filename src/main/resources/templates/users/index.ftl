@@ -21,14 +21,6 @@
   <br>
   <input type="text" name="homePhone" id="homePhone">
   <br>
-  <label for="commentary">Commentary</label>
-  <br>
-  <textarea name="commentary" id="commentary"></textarea>
-  <br>
-  <label for="address">Address</label>
-  <br>
-  <input type="number" name="address" id="address">
-  <br>
    <label for="login">Login</label>
   <br>
   <input type="text" name="login" id="login" required>

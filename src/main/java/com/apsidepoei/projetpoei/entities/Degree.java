@@ -1,17 +1,14 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.time.LocalDate;
+import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.ToString;
+import java.time.Year;
 
 /**
  * This class is the Degree entity.
@@ -34,9 +31,8 @@ public class Degree extends EntityDb {
   private String level;
 
   @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
-  @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true)
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
-  protected LocalDate validationDate;
+  @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
+  protected Year validationDate;
 
   /**
    * Empty constructor.
@@ -62,7 +58,7 @@ public class Degree extends EntityDb {
    * @param level
    * @param validationDate
    */
-  public Degree(String name, String level, LocalDate validationDate) {
+  public Degree(String name, String level, Year validationDate) {
     super();
     this.name = name;
     this.level = level;
@@ -111,14 +107,14 @@ public class Degree extends EntityDb {
   /**
    * @return the validationDate
    */
-  public LocalDate getValidationDate() {
+  public Year getValidationDate() {
     return validationDate;
   }
 
   /**
    * @param validationDate the validationDate to set
    */
-  public void setValidationDate(LocalDate validationDate) {
+  public void setValidationDate(Year validationDate) {
     this.validationDate = validationDate;
   }
 }

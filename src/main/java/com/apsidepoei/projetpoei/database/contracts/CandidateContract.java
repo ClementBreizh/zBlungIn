@@ -36,9 +36,9 @@ public class CandidateContract extends BaseContract {
    */
   public static final String COL_MATTERS = "matters";
   /**
-   * defines the name of the column="sessions".
+   * defines the name of the column="companySession".
    */
-  public static final String COL_SESSIONS = "sessions";
+  public static final String COL_FK_ID_COMPANYSESSION = "companySession" ;
   /**
    * defines the name of the column="address_id".
    */
