@@ -14,16 +14,19 @@ import com.apsidepoei.projetpoei.entities.Person;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+
 /**
  * @author vianney
  *
  */
 @Entity
+@ToString
 @Table(name = UserContract.TABLE)
 public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_NAME)
-  @Column(name = UserContract.COL_NAME, nullable = false, length = 50)
+  @Column(name = UserContract.COL_NAME, length = 50, unique = true, nullable = false)
   protected String login;
 
   @JsonProperty(value = UserContract.COL_PASSWORD)
@@ -31,7 +34,7 @@ public class User extends Person {
   protected String password;
 
   @JsonProperty(value = UserContract.COL_ROLE)
-  @Column(name = UserContract.COL_ROLE, nullable = true)
+  @Column(name = UserContract.COL_ROLE)
   private RoleUser role = RoleUser.ROLE_3;
 
 
@@ -74,17 +77,6 @@ public class User extends Person {
     this.password = password;
     this.role = role;
   }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Person [" + "Id = " + getId() + "identifiant = " + login + ", mot de passe = " + password + ", prénom = " + firstname + ", nom = " + lastname
-        + ", email = " + email + ", téléphone = " + cellPhone + "]";
-  }
-
 
   // GETTER/SETTER
 

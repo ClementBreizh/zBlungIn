@@ -30,6 +30,11 @@ public class FeedbackContract extends BaseContract {
    * defines the name of the column="comment".
    */
   public static final String COL_COMMENT = "comment";
+  /**
+   * defines the name of the column="updated_at".
+   */
+  public final static String COL_UPDATED_AT = "updated_at";
+
 
   /**
    * Define a table with all column.
