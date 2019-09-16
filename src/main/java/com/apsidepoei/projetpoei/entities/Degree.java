@@ -8,6 +8,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import java.time.Year;
 
 /**
@@ -32,7 +33,8 @@ public class Degree extends EntityDb {
 
   @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
   @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
-  protected Year validationDate;
+  @Pattern(regexp = "20\\d{2}")
+  protected String validationDate;
 
   /**
    * Empty constructor.
@@ -58,7 +60,7 @@ public class Degree extends EntityDb {
    * @param level
    * @param validationDate
    */
-  public Degree(String name, String level, Year validationDate) {
+  public Degree(String name, String level, String validationDate) {
     super();
     this.name = name;
     this.level = level;
@@ -107,14 +109,14 @@ public class Degree extends EntityDb {
   /**
    * @return the validationDate
    */
-  public Year getValidationDate() {
+  public String getValidationDate() {
     return validationDate;
   }
 
   /**
    * @param validationDate the validationDate to set
    */
-  public void setValidationDate(Year validationDate) {
+  public void setValidationDate(String validationDate) {
     this.validationDate = validationDate;
   }
 }
