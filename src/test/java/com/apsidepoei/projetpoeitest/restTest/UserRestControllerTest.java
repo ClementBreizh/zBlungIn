@@ -155,7 +155,7 @@ public class UserRestControllerTest extends BaseRestControllerTest <User, Intege
       String objJson = this.objectMapper.writeValueAsString(sess);
 
       // Prepare Request
-      MockHttpServletRequestBuilder request = post(BASE_API + entityPath)
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
               .contentType("application/json")
 
               .content(objJson);

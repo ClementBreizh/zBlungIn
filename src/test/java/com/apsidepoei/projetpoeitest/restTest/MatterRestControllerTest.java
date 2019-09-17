@@ -259,7 +259,7 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     String objJson = this.objectMapper.writeValueAsString(getObjectTest());
 
     // Prepare Request
-    MockHttpServletRequestBuilder request = post(BASE_API + entityPath).contentType("application/json")
+    MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test").contentType("application/json")
 
         .content(objJson);
 

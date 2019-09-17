@@ -148,7 +148,7 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
       String objJson = this.objectMapper.writeValueAsString(sess);
 
       // Prepare Request
-      MockHttpServletRequestBuilder request = post(BASE_API + entityPath)
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
               .contentType("application/json")
 
               .content(objJson);
