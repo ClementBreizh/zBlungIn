@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoei.entities;
 import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -31,12 +32,12 @@ import lombok.ToString;
 public class AcquiredMatters extends EntityDb {
 
   @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_MATTER)
-  @ManyToOne(targetEntity = Matter.class, optional = false)
+  @ManyToOne(targetEntity = Matter.class, optional = false, cascade = CascadeType.PERSIST)
   @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_MATTER, referencedColumnName = MatterContract.COL_ID)
   private Matter matter;
 
   @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_CANDIDATE)
-  @ManyToOne(targetEntity = Candidate.class, optional = false)
+  @ManyToOne(targetEntity = Candidate.class, optional = false, cascade = CascadeType.PERSIST)
   @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_CANDIDATE, referencedColumnName = AcquiredMattersContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 
