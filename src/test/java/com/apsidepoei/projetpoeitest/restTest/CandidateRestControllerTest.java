@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
@@ -24,7 +23,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
-import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Candidate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;

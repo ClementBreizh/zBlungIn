@@ -18,7 +18,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.apsidepoei.projetpoei.securityservice.UserDetailsServiceImpl;
 
 @Configuration
-@Profile({"prod", "default"})
 @EnableWebSecurity
 @EnableAutoConfiguration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
