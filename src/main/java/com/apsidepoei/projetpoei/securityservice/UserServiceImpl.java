@@ -21,17 +21,17 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
-  
-  
+
+
   @Override
-  public void save(@Valid User user) {
+  public User save(@Valid User user) {
     String idForEncode = "bcrypt";
     Map<String, PasswordEncoder> encoders = new HashMap<String, PasswordEncoder>();
     encoders.put(idForEncode, new BCryptPasswordEncoder());
 
     PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder(idForEncode, encoders);
     user.setPassword(passwordEncoder.encode(user.getNoEncodedPassword()));
-    userRepository.save(user);
+    return userRepository.save(user);
   }
 
   @Override

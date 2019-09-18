@@ -43,7 +43,6 @@ public class User extends Person {
 
   @PasswordValidatorConstraint
   @Transient
-  @JsonIgnore
   private String noEncodedPassword;
 
   /**
@@ -138,12 +137,10 @@ public class User extends Person {
     this.role = role;
   }
 
-  @JsonIgnore
   public String getNoEncodedPassword() {
     return noEncodedPassword;
   }
 
-  @JsonIgnore
   public void setNoEncodedPassword(String noEncodedPassword) {
     this.noEncodedPassword = noEncodedPassword;
   }
