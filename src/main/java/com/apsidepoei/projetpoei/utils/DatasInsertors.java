@@ -127,7 +127,7 @@ public class DatasInsertors {
 
     // -----------------------------------Appointment-----------------------------------
       Person person = new Person("prénom", "nom", "email", "0600000000");
-      personRepository.save(person);
+      personRepository.saveAndFlush(person);
       System.out.println(personRepository.findById(1).get().toString());
 
     for (int i = 0; i < this.nbEntities; i++) {
@@ -136,7 +136,7 @@ public class DatasInsertors {
                 personRepository.findById(1).get(),
                 AppointmentType.TYPE_1);
       appointment.setInformations(faker.lorem().sentence());
-      this.appointmentRepository.save(appointment);
+      this.appointmentRepository.saveAndFlush(appointment);
 //      System.out.println(appointment.toString());
       }
 
