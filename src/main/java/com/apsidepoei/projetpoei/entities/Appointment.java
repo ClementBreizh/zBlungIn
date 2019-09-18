@@ -38,6 +38,10 @@ public class Appointment extends EntityDb {
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
 
+  @JsonProperty(value = AppointmentContract.COL_APPOINTMENT_TYPE)
+  @Column(name = AppointmentContract.COL_APPOINTMENT_TYPE, nullable = false)
+  private AppointmentType appointmentType;
+
   @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
   @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
   private String informations;
@@ -74,25 +78,29 @@ public class Appointment extends EntityDb {
   /**
    * @param appointmentDate
    * @param organizer
+   * @param appointmentType
    */
-  public Appointment(LocalDateTime appointmentDate, Person organizer) {
+  public Appointment(LocalDateTime appointmentDate, Person organizer, AppointmentType appointmentType) {
     super();
     this.appointmentDate = appointmentDate;
     this.organizer = organizer;
+    this.appointmentType = appointmentType;
     this.persons = new ArrayList<Person>();
   }
 
   /**
    * @param informations
+   * @param appointmentType
    * @param appointmentDate
    * @param report
    * @param status
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, Person organizer) {
+      Boolean status, Person organizer, AppointmentType appointmentType) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
+    this.appointmentType = appointmentType;
     this.report = report;
     this.status = status;
     this.organizer = organizer;
@@ -101,6 +109,7 @@ public class Appointment extends EntityDb {
 
   /**
    * @param informations
+   * @param appointmentType
    * @param appointmentDate
    * @param report
    * @param status
@@ -108,9 +117,10 @@ public class Appointment extends EntityDb {
    * @param organizer
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, List<Person> persons, Person organizer) {
+      Boolean status, List<Person> persons, Person organizer, AppointmentType appointmentType) {
     super();
     this.informations = informations;
+    this.appointmentType = appointmentType;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
@@ -210,4 +220,19 @@ public class Appointment extends EntityDb {
   public void setOrganizer(Person organizer) {
     this.organizer = organizer;
   }
+
+  /**
+   * @return the appointmentType
+   */
+  public AppointmentType getAppointmentType() {
+    return appointmentType;
+  }
+
+  /**
+   * @param appointmentType the appointmentType to set
+   */
+  public void setAppointmentType(AppointmentType appointmentType) {
+    this.appointmentType = appointmentType;
+  }
+
 }

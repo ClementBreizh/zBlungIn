@@ -27,11 +27,11 @@ public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_NAME)
   @Column(name = UserContract.COL_NAME, length = 50, unique = true, nullable = false)
-  protected String login;
+  private String login;
 
   @JsonProperty(value = UserContract.COL_PASSWORD)
   @Column(name = UserContract.COL_PASSWORD, nullable = false, length = 50)
-  protected String password;
+  private String password;
 
   @JsonProperty(value = UserContract.COL_ROLE)
   @Column(name = UserContract.COL_ROLE)
