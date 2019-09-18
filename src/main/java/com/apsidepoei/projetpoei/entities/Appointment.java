@@ -64,8 +64,8 @@ public class Appointment extends EntityDb {
   private List<Person> persons;
 
   @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
-  @ManyToOne(targetEntity = Person.class, cascade = CascadeType.PERSIST)
-  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID)
+  @ManyToOne(targetEntity = Person.class)
+  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
   private Person organizer;
 
   /**
