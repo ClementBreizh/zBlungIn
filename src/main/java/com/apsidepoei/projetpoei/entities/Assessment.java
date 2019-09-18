@@ -2,6 +2,7 @@ package com.apsidepoei.projetpoei.entities;
 
 import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,7 +40,7 @@ public class Assessment extends EntityDb {
   private LocalDate validationDate;
 
   @JsonProperty(value = AssessmentContract.COL_FK_ID_CANDIDATE)
-  @ManyToOne(targetEntity = Candidate.class)
+  @ManyToOne(targetEntity = Candidate.class, cascade = CascadeType.PERSIST)
   @JoinColumn(name = AssessmentContract.COL_FK_ID_CANDIDATE, referencedColumnName = AssessmentContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 

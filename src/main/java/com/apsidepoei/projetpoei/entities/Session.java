@@ -36,7 +36,7 @@ public class Session extends EntityDb {
 
   @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
- @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;
 
 
@@ -60,7 +60,6 @@ public class Session extends EntityDb {
     this.startDate = startDate;
     this.endDate = endDate;
   }
-
 
   // GETTER/SETTER
 

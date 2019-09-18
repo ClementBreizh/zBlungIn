@@ -1,21 +1,37 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.FeedbackRepository;
 import com.apsidepoei.projetpoei.entities.Feedback;
+import com.apsidepoei.projetpoei.entities.Matter;
+import com.apsidepoei.projetpoei.entities.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -88,7 +104,7 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
    */
   @Override
   protected Feedback getObjectTest() throws ParseException {
-    Feedback item = new Feedback("CDI", 24, "no comment test");
+    Feedback item = new Feedback();
     return item;
   }
   /**
@@ -112,6 +128,45 @@ public class FeedbackRestControllerTest extends BaseRestControllerTest<Feedback,
   @Override
   protected boolean compareToList(List<Feedback> items, List<Feedback> dbItems) {
     return false;
+  }
+
+  /**
+   * Test function via HTTP
+   * @throws Exception
+   */
+  @Test
+  public void test() throws Exception {
+
+      // Make object
+    Feedback sess = new Feedback();
+      sess.setTypeOfContract("CDI");
+      sess.setDurationOfContract(24);
+      sess.setComment("blablabla");
+      sess.setUpdatedAt(LocalDate.now());
+
+      // Transform to JSON
+      String objJson = this.objectMapper.writeValueAsString(sess);
+
+      // Prepare Request
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
+              .contentType("application/json")
+
+              .content(objJson);
+
+      MvcResult result = this.mockMvc.perform(request)
+              .andExpect(status().isOk())
+              .andReturn();
+
+
+      System.out.println(result.getResponse().getStatus());
+      System.out.println(result.getResponse().getContentAsString());
+
+      // Transform to Object
+      Feedback newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Feedback.class);
+
+      // Tests
+      assertNotNull(newSess);
+      assertThat("CDI").isEqualTo(newSess.getTypeOfContract());
   }
 }
 

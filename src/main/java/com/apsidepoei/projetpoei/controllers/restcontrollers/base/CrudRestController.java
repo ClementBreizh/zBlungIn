@@ -11,4 +11,5 @@ public interface CrudRestController<T, ID> {
   void deleteAll();
   T save(T item);
   Long count();
+  T savetest(T item);
 }

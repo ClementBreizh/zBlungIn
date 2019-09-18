@@ -1,8 +1,14 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
@@ -124,5 +132,47 @@ public class UserRestControllerTest extends BaseRestControllerTest <User, Intege
   @Override
   protected boolean compareToList(List<User> items, List<User> dbItems) {
     return false;
+  }
+
+  /**
+   * Test function via HTTP
+   * @throws Exception
+   */
+  @Test
+  public void test() throws Exception {
+
+      // Make object
+    User sess = new User();
+    sess.setFirstname("Clement");
+    sess.setLastname("BOUCHEREAU");
+    sess.setEmail("moemain@gmail.com");
+    sess.setCellPhone("9809877786");
+    sess.setLogin("monlog");
+    sess.setPassword("monpwd");
+
+
+      // Transform to JSON
+      String objJson = this.objectMapper.writeValueAsString(sess);
+
+      // Prepare Request
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
+              .contentType("application/json")
+
+              .content(objJson);
+
+      MvcResult result = this.mockMvc.perform(request)
+              .andExpect(status().isOk())
+              .andReturn();
+
+
+      System.out.println(result.getResponse().getStatus());
+      System.out.println(result.getResponse().getContentAsString());
+
+      // Transform to Object
+      User newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), User.class);
+
+      // Tests
+      assertNotNull(newSess);
+      assertThat("Clement").isEqualTo(newSess.getFirstname());
   }
 }
