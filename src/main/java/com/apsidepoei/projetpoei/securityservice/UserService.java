@@ -6,6 +6,6 @@ import com.apsidepoei.projetpoei.entities.User;
 
 public interface UserService {
 
-  void save(@Valid User user);
+  User save(@Valid User user);
   User findByLogin(String login);
 }

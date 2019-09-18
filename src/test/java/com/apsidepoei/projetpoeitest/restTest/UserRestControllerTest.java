@@ -2,12 +2,15 @@ package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
@@ -35,8 +43,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@AutoConfigureMockMvc
 @ContextConfiguration(classes = ZbleuginApplication.class)
+@AutoConfigureMockMvc
 public class UserRestControllerTest extends BaseRestControllerTest <User, Integer> {
 
   @Autowired
@@ -134,45 +142,63 @@ public class UserRestControllerTest extends BaseRestControllerTest <User, Intege
     return false;
   }
 
+  @Autowired
+  private WebApplicationContext context;
+
+  private MockMvc mvc;
+
+  @Before
+  public void setup() {
+      mvc = MockMvcBuilders
+        .webAppContextSetup(context)
+        .apply(springSecurity())
+        .build();
+  }
+
   /**
    * Test function via HTTP
    * @throws Exception
    */
+  @WithMockUser(username="admin",password="adminadmin")
   @Test
   public void test() throws Exception {
+    mvc.perform(get("/api/users").contentType(MediaType.APPLICATION_JSON))
+    .andExpect(status().isOk());
+}
 
-      // Make object
+  @WithMockUser(username="lol",password="plop")
+  @Test
+  public void test1() throws Exception {
+    // Make object
     User sess = new User();
     sess.setFirstname("Clement");
     sess.setLastname("BOUCHEREAU");
     sess.setEmail("moemain@gmail.com");
     sess.setCellPhone("9809877786");
     sess.setLogin("monlog");
-    sess.setPassword("monpwd");
+    sess.setNoEncodedPassword("monpwdkjghhgkjbj");
 
+    // Transform to JSON
+    String objJson = this.objectMapper.writeValueAsString(sess);
 
-      // Transform to JSON
-      String objJson = this.objectMapper.writeValueAsString(sess);
+    // Prepare Request
+//    MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test").contentType("application/json")
+//        .content(objJson);
 
-      // Prepare Request
-      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
-              .contentType("application/json")
+//    MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
+    MvcResult result = mvc.perform(post(BASE_API + entityPath + "/test").contentType(MediaType.APPLICATION_JSON)
+        .content(objJson))
+        //.andExpect(status().isOk())
+        .andReturn();
 
-              .content(objJson);
+    System.out.println(result.getResponse().getStatus());
+    System.out.println(result.getResponse().getContentAsString());
 
-      MvcResult result = this.mockMvc.perform(request)
-              .andExpect(status().isOk())
-              .andReturn();
+    // Transform to Object
+    User newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), User.class);
 
-
-      System.out.println(result.getResponse().getStatus());
-      System.out.println(result.getResponse().getContentAsString());
-
-      // Transform to Object
-      User newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), User.class);
-
-      // Tests
-      assertNotNull(newSess);
-      assertThat("Clement").isEqualTo(newSess.getFirstname());
+    // Tests
+    assertNotNull(newSess);
+    assertThat("Clement").isEqualTo(newSess.getFirstname());
   }
 }
