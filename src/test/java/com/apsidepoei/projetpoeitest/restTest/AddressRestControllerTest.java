@@ -1,15 +1,20 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +23,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.entities.Address;
+import com.apsidepoei.projetpoei.entities.Assessment;
+import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -128,132 +139,190 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     return false;
   }
 
-  /**
-   * Test to getAll.
-   *
-   * @throws IOException
-   */
-  @Test
-  public void getAll() throws IOException {
-    StringBuilder builder = new StringBuilder();
-    try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    }
+//  /**
+//   * Test to getAll.
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void getAll() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//
+//    List<Address> dbItems = getRepository().findAll();
+//    List<Address> httpItems = parseJsonToList(builder);
+//
+//    if (dbItems.size() != httpItems.size()) {
+//      fail("List sized are not same");
+//    }
+//    for (int i = 0; i < httpItems.size(); i++) {
+//      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
+//        fail();
+//      }
+//    }
+//  }
+//
+//  /**
+//   * Test to getById.
+//   *
+//   * @throws IOException
+//   * @throws ParseException
+//   */
+//  @Test
+//  public void getById() throws IOException, ParseException {
+//    StringBuilder builder = new StringBuilder();
+//    Address item = getRepository().save(getObjectTest());
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.GET);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//
+//    Optional<Address> dbItem = getRepository().findById(getItemIdTest(item));
+//
+//    Address httpItem = parseJsonToObject(builder);
+//
+//    if (dbItem == null && httpItem == null) {
+//      fail("One of object is null");
+//    }
+//
+//    if (!compareTo(dbItem.get(), httpItem)) {
+//      fail();
+//    }
+//
+//  }
+//
+//  /**
+//   * Test if data is deleted.
+//   *
+//   * @throws IOException
+//   * @throws ParseException
+//   */
+//  @Test(expected = NoSuchElementException.class)
+//  public void deleteById() throws IOException, ParseException {
+//    StringBuilder builder = new StringBuilder();
+//    Address item = getRepository().save(getObjectTest());
+//    getRepository().flush();
+//    try {
+//      httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.DELETE);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//    Optional<Address> deleteItem = getRepository().findById(getItemIdTest(item));
+//    deleteItem.get();
+//  }
+//
+//  /**
+//   * Test if table is clear
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void deleteAll() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.DELETE);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//    List<Address> httpItems = parseJsonToList(builder);
+//
+//    if (!httpItems.isEmpty()) {
+//      fail();
+//    }
+//  }
+//
+//  /**
+//   * Test if size of item is the same
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void count() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//
+//    List<Address> dbItems = getRepository().findAll();
+//    List<Address> httpItems = parseJsonToList(builder);
+//    if (dbItems.size() != httpItems.size()) {
+//      fail();
+//    }
+//  }
+//
+//
+//  /**
+//   * Test function via HTTP
+//   * @throws Exception
+//   */
+//  @WithMockUser(username="admin",password="adminadmin")
+//  @Test
+//  public void save() throws Exception {
+//    getRepository().deleteAll();
+//    String objJson = this.objectMapper.writeValueAsString(getObjectTest());
+//
+//    // Prepare Request
+//    MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test").contentType("application/json")
+//
+//        .content(objJson);
+//
+//    MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
+//
+//    System.out.println(result.getResponse().getStatus());
+//    System.out.println(result.getResponse().getContentAsString());
+//
+//    // Transform to Object
+//    Address item = parseJsonToObject(new StringBuilder(result.getResponse().getContentAsString()));
+//
+//    Optional<Address> dbItem = getRepository().findById(getItemIdTest(item));
+//
+//    if (dbItem == null && item == null) {
+//      fail("One of object is null");
+//    }
+//
+//    if (!compareTo(dbItem.get(), item)) {
+//      fail();
+//    }
+//  }
 
-    List<Address> dbItems = getRepository().findAll();
-    List<Address> httpItems = parseJsonToList(builder);
+  @Autowired
+  private WebApplicationContext context;
 
-    if (dbItems.size() != httpItems.size()) {
-      fail("List sized are not same");
-    }
-    for (int i = 0; i < httpItems.size(); i++) {
-      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
-        fail();
-      }
-    }
+  private MockMvc mvc;
+
+  @Before
+  public void setup() {
+      mvc = MockMvcBuilders
+        .webAppContextSetup(context)
+        .apply(springSecurity())
+        .build();
   }
 
   /**
-   * Test to getById.
-   *
-   * @throws IOException
-   * @throws ParseException
-   */
-  @Test
-  public void getById() throws IOException, ParseException {
-    StringBuilder builder = new StringBuilder();
-    Address item = getRepository().save(getObjectTest());
-    try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.GET);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    }
-
-    Optional<Address> dbItem = getRepository().findById(getItemIdTest(item));
-
-    Address httpItem = parseJsonToObject(builder);
-
-    if (dbItem == null && httpItem == null) {
-      fail("One of object is null");
-    }
-
-    if (!compareTo(dbItem.get(), httpItem)) {
-      fail();
-    }
-
-  }
-
-  /**
-   * Test if data is deleted.
-   *
-   * @throws IOException
-   * @throws ParseException
-   */
-  @Test(expected = NoSuchElementException.class)
-  public void deleteById() throws IOException, ParseException {
-    StringBuilder builder = new StringBuilder();
-    Address item = getRepository().save(getObjectTest());
-    getRepository().flush();
-    try {
-      httpUtils.callServer(builder, BASE_API + entityPath + "/" + getItemIdTest(item), HttpMethod.DELETE);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    }
-    Optional<Address> deleteItem = getRepository().findById(getItemIdTest(item));
-    deleteItem.get();
-  }
-
-  /**
-   * Test if table is clear
-   *
-   * @throws IOException
-   */
-  @Test
-  public void deleteAll() throws IOException {
-    StringBuilder builder = new StringBuilder();
-    try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.DELETE);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    }
-    List<Address> httpItems = parseJsonToList(builder);
-
-    if (!httpItems.isEmpty()) {
-      fail();
-    }
-  }
-
-  /**
-   * Test if size of item is the same
-   *
-   * @throws IOException
-   */
-  @Test
-  public void count() throws IOException {
-    StringBuilder builder = new StringBuilder();
-    builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
-
-    List<Address> dbItems = getRepository().findAll();
-    List<Address> httpItems = parseJsonToList(builder);
-    if (dbItems.size() != httpItems.size()) {
-      fail();
-    }
-  }
-
-  /**
-   * Test for save objet, get him to URL + repo and test if is the same.
+   * Test function via HTTP
    * @throws Exception
    */
+  @WithMockUser(username="admin",password="adminadmin")
   @Test
-  public void save() throws Exception {
-    getRepository().deleteAll();
-    String objJson = this.objectMapper.writeValueAsString(getObjectTest());
+  public void test() throws Exception {
+
+    // Make object
+
+
+    Address sess = new Address();
+    sess.setStreet("Rue du pont");
+    sess.setPostalCode("35000");
+    sess.setCity("RENNES");
+
+    // Transform to JSON
+    String objJson = this.objectMapper.writeValueAsString(sess);
 
     // Prepare Request
     MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test").contentType("application/json")
@@ -266,16 +335,10 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     System.out.println(result.getResponse().getContentAsString());
 
     // Transform to Object
-    Address item = parseJsonToObject(new StringBuilder(result.getResponse().getContentAsString()));
+    Address newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Address.class);
 
-    Optional<Address> dbItem = getRepository().findById(getItemIdTest(item));
-
-    if (dbItem == null && item == null) {
-      fail("One of object is null");
-    }
-
-    if (!compareTo(dbItem.get(), item)) {
-      fail();
-    }
+    // Tests
+    assertNotNull(newSess);
+    assertThat(sess.getCity()).isEqualTo(newSess.getCity());
   }
 }
