@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
-import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.LearnSessionRepository;
 import com.apsidepoei.projetpoei.entities.Session;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -42,7 +42,7 @@ import com.github.javafaker.Faker;
 public class SessionRestControllerTest extends BaseRestControllerTest<Session, Integer> {
 
   @Autowired
-  private SessionRepository repository;
+  private LearnSessionRepository repository;
   /**
    * Empty Constructor.
    */

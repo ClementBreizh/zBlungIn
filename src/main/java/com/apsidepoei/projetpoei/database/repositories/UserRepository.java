@@ -5,4 +5,5 @@ import com.apsidepoei.projetpoei.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+  User findByLogin(String login);
 }

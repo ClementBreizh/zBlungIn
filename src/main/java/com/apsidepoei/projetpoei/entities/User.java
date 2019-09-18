@@ -4,14 +4,17 @@
 package com.apsidepoei.projetpoei.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.apsidepoei.projetpoei.converters.StringToAESConverter;
 import com.apsidepoei.projetpoei.database.contracts.UserContract;
 import com.apsidepoei.projetpoei.entities.RoleUser;
+import com.apsidepoei.projetpoei.validators.PasswordValidatorConstraint;
 import com.apsidepoei.projetpoei.entities.Person;
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
@@ -27,16 +30,21 @@ public class User extends Person {
 
   @JsonProperty(value = UserContract.COL_NAME)
   @Column(name = UserContract.COL_NAME, length = 50, unique = true, nullable = false)
+  @Convert(converter = StringToAESConverter.class)
   protected String login;
 
   @JsonProperty(value = UserContract.COL_PASSWORD)
-  @Column(name = UserContract.COL_PASSWORD, nullable = false, length = 50)
+  @Column(name = UserContract.COL_PASSWORD, nullable = false)
   protected String password;
 
   @JsonProperty(value = UserContract.COL_ROLE)
   @Column(name = UserContract.COL_ROLE)
   private RoleUser role = RoleUser.ROLE_3;
 
+  @PasswordValidatorConstraint
+  @Transient
+  @JsonIgnore
+  private String noEncodedPassword;
 
   /**
    * Empty constructor.
@@ -69,17 +77,17 @@ public class User extends Person {
    * @param email     = the email
    * @param cellPhone = the cellPhone
    * @param role      = the role
-
+   *
    */
-  public User(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, String login, String password, RoleUser role) {
+  public User(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary,
+      Boolean mainContact, String login, String noEncodedPassword, RoleUser role) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.login = login;
-    this.password = password;
+    this.noEncodedPassword = noEncodedPassword;
     this.role = role;
   }
 
   // GETTER/SETTER
-
 
   /**
    * @return the name
@@ -128,5 +136,15 @@ public class User extends Person {
    */
   public void setRole(RoleUser role) {
     this.role = role;
+  }
+
+  @JsonIgnore
+  public String getNoEncodedPassword() {
+    return noEncodedPassword;
+  }
+
+  @JsonIgnore
+  public void setNoEncodedPassword(String noEncodedPassword) {
+    this.noEncodedPassword = noEncodedPassword;
   }
 }
