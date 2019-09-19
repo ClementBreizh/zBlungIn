@@ -66,12 +66,22 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
   /**
    * Parse Json to List for test.
+   * @throws IOException
+   * @throws JsonMappingException
+   * @throws JsonParseException
    */
   @Override
   protected List<Matter> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
+    return this.parseJsonToList(builder.toString());
+  }
+
+  /**
+   * Parse Json to List for test.
+   */
+  protected List<Matter> parseJsonToList(String content) throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Matter>>() {
+    return mapper.readValue(content, new TypeReference<List<Matter>>() {
     });
   }
 
@@ -339,9 +349,11 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
     MockHttpServletRequestBuilder getting = get(BASE_API + entityPath).contentType("application/json");
 
-    MvcResult result = this.mockMvc.perform(getting).andReturn();
-
+    List<Matter> result = parseJsonToList(this.mockMvc.perform(getting).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+   // MvcResult result = this.mockMvc.perform(getting).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    System.out.println(result);
     List<Matter> dbItems = getRepository().findAll();
+    System.out.println(dbItems);
 
 
     //TODO faire method pour transformer le Json récuperé en liste pour comparer
