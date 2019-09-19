@@ -22,6 +22,8 @@ import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -29,7 +31,7 @@ import lombok.ToString;
  *
  */
 @Entity
-@ToString
+@ToString(of = {"ranking", "sex", "status"}, callSuper = true)
 @Table(name = CandidateContract.TABLE)
 public class Candidate extends Person {
 
@@ -108,7 +110,7 @@ public class Candidate extends Person {
    * @param companySession
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, StatusCandidate status, SexCandidate sex, Feedback feedback, List<Degree> degrees,
-      List<AcquiredMatters> matters, List<CompanySession> companySession) {
+      List<AcquiredMatters> matters, @NonNull List<CompanySession> companySession) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.status = status;
