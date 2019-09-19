@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
-  @Query("SELECT e FROM #{#entityName} e WHERE (:lastname is null OR e.lastname like :lastname)")
+  @Query("SELECT e FROM #{#entityName} e WHERE (:lastname is NULL OR e.lastname LIKE %:lastname%)")
   Page<Candidate> findAll(Pageable pageable, @Param("lastname") String lastname);
 }
