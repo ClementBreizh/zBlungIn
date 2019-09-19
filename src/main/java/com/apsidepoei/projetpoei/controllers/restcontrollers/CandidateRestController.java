@@ -1,10 +1,11 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
@@ -21,6 +22,17 @@ public class CandidateRestController extends BaseRestController<Candidate, Integ
 
   public CandidateRestController(@Autowired CandidateRepository repository) {
     super(repository);
+  }
+
+  @GetMapping("filtered")
+  public Page<Candidate> getAllFiltered(
+        final Pageable pageable,
+        @RequestParam(required = false) final String lastname) {
+    return this.getRepository().findAll(pageable, lastname);
+  }
+  
+  protected CandidateRepository getRepository() {
+    return (CandidateRepository) this.repository;
   }
 }
 

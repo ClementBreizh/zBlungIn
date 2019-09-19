@@ -19,8 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  */
 public abstract class BaseRestController<T, ID> implements CrudRestController<T, ID> {
-
-  @Autowired
+  
   protected JpaRepository<T, ID> repository;
 
   public BaseRestController(JpaRepository<T, ID> repository) {
