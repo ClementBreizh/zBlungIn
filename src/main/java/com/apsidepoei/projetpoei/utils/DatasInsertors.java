@@ -106,7 +106,7 @@ public class DatasInsertors {
 
   Faker faker = new Faker(Locale.FRENCH);
 
-  Integer nbEntities = 10;
+  Integer nbEntities = 100;
 
   public DatasInsertors() {
   }
