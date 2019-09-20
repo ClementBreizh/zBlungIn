@@ -26,7 +26,7 @@ public class CompanySession extends EntityDb {
   private Company company;
 
   @JsonProperty(value = CompanySessionContract.COL_SESSION)
-  @OneToOne(targetEntity = Session.class, optional = false)
+  @ManyToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
