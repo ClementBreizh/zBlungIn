@@ -16,6 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
@@ -56,15 +59,22 @@ public class Candidate extends Person {
       CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
       CascadeType.MERGE
   })
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
+  @JsonIgnore
   @ManyToMany(targetEntity = AcquiredMatters.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
       @JoinColumn(name = AcquiredMattersContract.COL_ID) })
   private List<AcquiredMatters> matters;
 
-  @ManyToMany(targetEntity = CompanySession.class)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany(targetEntity = CompanySession.class,
+  cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinTable(joinColumns = {
     @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
     @JoinColumn(name = CompanySessionContract.COL_ID) })
@@ -219,6 +229,8 @@ public class Candidate extends Person {
     return this.companySession;
   }
 
+
+
   /**
    * @param companySession the sessions to set
    */
@@ -265,5 +277,13 @@ public class Candidate extends Person {
    */
   public void setSex(SexCandidate sex) {
     this.sex = sex;
+  }
+
+  public void setCompanySession(List<CompanySession> companySession) {
+    this.companySession = companySession;
+  }
+
+  public List<CompanySession> getCompanySession() {
+    return companySession;
   }
 }

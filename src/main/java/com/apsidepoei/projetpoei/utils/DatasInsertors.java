@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository
 import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
+import com.apsidepoei.projetpoei.database.repositories.CandidateManualRepository;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanySessionRepository;
@@ -35,6 +37,7 @@ import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoei.entities.CompanySession;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Feedback;
+import com.apsidepoei.projetpoei.entities.LevelDegree;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
@@ -42,9 +45,7 @@ import com.apsidepoei.projetpoei.entities.Session;
 import com.apsidepoei.projetpoei.entities.SexCandidate;
 import com.apsidepoei.projetpoei.entities.StatusCandidate;
 import com.apsidepoei.projetpoei.entities.User;
-import com.apsidepoei.projetpoei.services.fixtures.MatterFixtureService;
 import com.github.javafaker.Faker;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -53,14 +54,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service(value = "baseDatasInsertors")
-@Transactional
 public class DatasInsertors {
-
-//  @Autowired
-//  private EntityManager manager;
-
-  @Autowired
-  private MatterFixtureService matterFixtures;
 
   // Repositories
 
@@ -103,10 +97,12 @@ public class DatasInsertors {
   @Autowired
   private AcquiredMattersRepository acquiredMattersRepository;
 
+  @Autowired
+  private CandidateManualRepository candidateManualRepository;
+
   // Lists
 
   private List<Company> companyList = new ArrayList<>();
-  private List<CompanySession> companySessionList = new ArrayList<>();
   private List<Address> addressList = new ArrayList<>();
   private List<Degree> degreeList = new ArrayList<>();
   private List<Feedback> feedbackList = new ArrayList<>();
@@ -117,9 +113,6 @@ public class DatasInsertors {
   private List<Session> sessionList = new ArrayList<>();
   private List<User> userList = new ArrayList<>();
   private List<Candidate> candidateList = new ArrayList<>();
-  private List<AcquiredMatters> acquiredMattersList = new ArrayList<>();
-
-
 
   Faker faker = new Faker(Locale.FRENCH);
 
@@ -128,10 +121,13 @@ public class DatasInsertors {
   public DatasInsertors() {
   }
 
+  @Transactional
   @PostConstruct
   public void InsertData() {
-    log.debug("Inserting fixtures...");
     Faker faker = new Faker(Locale.FRENCH);
+    log.info("Création des fixtures");
+    log.info("Si fail, relancer, erreur dûe aux id uniques");
+
 
     // -----------------------------------Address-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
@@ -140,7 +136,8 @@ public class DatasInsertors {
       this.addressRepository.saveAndFlush(address);
     }
     this.addressList.addAll(this.addressRepository.findAll());
-    System.out.println("Address ok");
+    log.debug("Address ok");
+
 
     // -----------------------------------Appointment-----------------------------------
       Person person = new Person("prénom", "nom", "email", "0600000000");
@@ -156,7 +153,7 @@ public class DatasInsertors {
       }
 
     this.appointmentList.addAll(this.appointmentRepository.findAll());
-    System.out.println("Appointment ok");
+    log.debug("Appointment ok");
 
     // -----------------------------------Assessment-----------------------------------
 //    Assessment assessment1 = new Assessment("Culture générale",
@@ -172,7 +169,7 @@ public class DatasInsertors {
 //        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 //    this.assessmentRepository.saveAndFlush(assessment4);
 //    this.assessmentList.addAll(this.assessmentRepository.findAll());
-//    System.out.println("Assessment ok");
+//    log.debug("Assessment ok");
 
     // -----------------------------------Candidate-----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
@@ -184,9 +181,10 @@ public class DatasInsertors {
       candidate.setAddress(
           this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
       this.candidateRepository.saveAndFlush(candidate);
+
     }
-    this.candidateList = this.candidateRepository.toto();
-    System.out.println("Candidate ok");
+    this.candidateList.addAll(this.candidateRepository.findAll());
+    log.debug("Candidate ok");
 
     // -----------------------------------Company-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
@@ -199,27 +197,29 @@ public class DatasInsertors {
       this.companyRepository.saveAndFlush(company);
     }
     this.companyList.addAll(this.companyRepository.findAll());
-    System.out.println("Company ok");
-
+    log.debug("Company ok");
 
     // -----------------------------------Degrees-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
-      Degree degree = new Degree(faker.book().title(), faker.random().nextInt(0, 5).toString());
+      Degree degree = new Degree(
+          faker.book().title(),
+          LevelDegree.LEVEL_0);
       degree.setValidationDate("2014");
 
       this.degreeRepository.saveAndFlush(degree);
     }
     this.degreeList.addAll(this.degreeRepository.findAll());
-    System.out.println("Degrees ok");
+    log.debug("Degree ok");
 
     // -----------------------------------Feedback-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
       Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.feedbackRepository.saveAndFlush(feedback);
+
     }
     this.feedbackList.addAll(this.feedbackRepository.findAll());
-    System.out.println("Feedback ok");
+    log.debug("Feedback ok");
 
     // -----------------------------------Matter-----------------------------------
     Matter matter1 = new Matter("Angular");
@@ -236,7 +236,7 @@ public class DatasInsertors {
     this.matterRepository.saveAndFlush(matter6);
 
     this.matterList.addAll(this.matterRepository.findAll());
-    System.out.println("Matter ok");
+    log.debug("Matter ok");
 
     // -----------------------------------Person-----------------------------------
 //    for (int i = 0; i < nbEntities; i++) {
@@ -250,7 +250,7 @@ public class DatasInsertors {
 //      personRepository.saveAndFlush(person);
 //    }
 //    this.personList.addAll(this.personRepository.findAll());
-    System.out.println("Person ok");
+//    log.debug("Person ok");
 
     // -----------------------------------Session-----------------------------------
 
@@ -262,34 +262,25 @@ public class DatasInsertors {
 
     }
     this.sessionList.addAll(this.sessionRepository.findAll());
-    System.out.println("Session ok");
+    log.debug("Session ok");
 
     // -----------------------------------User-----------------------------------
-//    for (int i = 0; i < nbEntities; i++) {
-//      User user = new User(
-//          faker.name().username(),
-//          faker.internet().password(),
-//          faker.name().firstName(),
-//          faker.name().lastName(),
-//          faker.internet().emailAddress(),
-//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      userRepository.saveAndFlush(user);
-//    }
+    for (int i = 0; i < nbEntities; i++) {
+      User user = new User(
+          faker.name().firstName(),
+          faker.name().lastName(),
+          faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""),
+          faker.name().fullName(),
+          faker.internet().password()
+          );
+      userRepository.saveAndFlush(user);
+    }
     this.userList.addAll(this.userRepository.findAll());
-    System.out.println("User ok");
+    log.debug("User ok");
 
 //  -----------------------------------Relations-----------------------------
 //  -------------------------------------------------------------------------
-
-    // --------------------------------CompanySession--------------------------------
-    for (int i = 1; i < 20 + 1; i++) {
-      CompanySession companySession = new CompanySession(
-          this.companyRepository.findById(i).get(),
-          this.sessionRepository.findById(i).get());
-      this.companySessionRepository.saveAndFlush(companySession);
-    }
-    this.companyList.addAll(this.companyRepository.findAll());
-    System.out.println("CompanySession ok");
 
     Degree degree = null;
     Candidate candidate = null;
@@ -299,7 +290,9 @@ public class DatasInsertors {
       candidate = this.candidateList.get(i);
       candidate.getDegrees().add(degree);
       this.candidateRepository.saveAndFlush(candidate);
+
     }
+
 
     candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get());
     candidateRepository.findAll().get(0);
@@ -308,19 +301,52 @@ public class DatasInsertors {
 //  --------------------------------------------------------------------------------
 
     Feedback feedback = this.feedbackList.get(1);
+
     for (int i = 0; i < this.candidateList.size(); i++) {
       candidate = this.candidateList.get(i);
       candidate.setFeedback(feedback);
       candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
       candidate.setCommentary(faker.lorem().sentence());
-      candidate.addCompanySession(companySessionRepository.findById(faker.random().nextInt(1, 20)).get());
-
       this.candidateRepository.saveAndFlush(candidate);
     }
 
+//  -----------------------------Candidate Matters------------------------------------
+//  --------------------------------------------------------------------------------
 
-    this.matterFixtures.make();
+    this.acquiredMattersRepository.save(new AcquiredMatters(10.0f,LocalDate.now(),this.matterRepository.findById(1).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(15.0f,LocalDate.now(),this.matterRepository.findById(2).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(12.0f,LocalDate.now(),this.matterRepository.findById(3).get(), this.candidateRepository.findById(2).get()));
 
-    System.out.println("DatasInsertors totalement chargé");
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false));
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(2).get(), true));
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(2).get(), this.sessionRepository.findById(1).get(), false));
+
+    Candidate c1 = this.candidateRepository.findById(2).get();
+    c1.setCompanySession(this.companySessionRepository.findAll());
+   this.candidateRepository.save(c1);
+
+
+    Candidate getCandidate = this.candidateManualRepository.loadWithChildrens(2);
+
+    // Eagered mod
+    getCandidate.addDegree(new Degree("testDeg", LevelDegree.LEVEL_0, "1990"));
+    getCandidate.getDegrees().remove(0);
+
+    getCandidate.addCompanySession(new CompanySession(this.companyRepository.findById(3).get(), this.sessionRepository.findById(3).get(), false));
+    getCandidate.getCompanySession().remove(0);
+
+    // Lazy mod
+    getCandidate.getMatters().remove(0);
+    AcquiredMatters m1 = this.acquiredMattersRepository.save(new AcquiredMatters(10f, LocalDate.now(), this.matterRepository.findById(4).get(), getCandidate));
+    getCandidate.addMatter(m1);
+
+    this.candidateRepository.save(getCandidate);
+
+//  -----------------------------------Tests-----------------------------------------------
+//  ---------------------------------------------------------------------------------------
+
+
+    log.debug("Fixtures totalement chargées");
+
   }
 }
