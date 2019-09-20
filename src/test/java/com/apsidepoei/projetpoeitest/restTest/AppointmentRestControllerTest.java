@@ -110,7 +110,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   Person organizer = new Person();
   @Override
   protected Appointment getObjectTest() throws ParseException {
-    Appointment item = new Appointment(date, organizer);
+    Appointment item = new Appointment();
     return item;
   }
   /**

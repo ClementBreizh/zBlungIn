@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.ZoneId;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository
 import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
+import com.apsidepoei.projetpoei.database.repositories.CandidateManualRepository;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanySessionRepository;
@@ -25,12 +28,14 @@ import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
 import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
+import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Appointment;
 import com.apsidepoei.projetpoei.entities.AppointmentType;
 import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Company;
+import com.apsidepoei.projetpoei.entities.CompanySession;
 import com.apsidepoei.projetpoei.entities.Degree;
 import com.apsidepoei.projetpoei.entities.Feedback;
 import com.apsidepoei.projetpoei.entities.Matter;
@@ -90,6 +95,9 @@ public class DatasInsertors {
   @Autowired
   private AcquiredMattersRepository acquiredMattersRepository;
 
+  @Autowired
+  private CandidateManualRepository candidateManualRepository;
+
   // Lists
 
   private List<Company> companyList = new ArrayList<>();
@@ -111,6 +119,7 @@ public class DatasInsertors {
   public DatasInsertors() {
   }
 
+  @Transactional
   @PostConstruct
   public void InsertData() {
     Faker faker = new Faker(Locale.FRENCH);
@@ -300,6 +309,42 @@ public class DatasInsertors {
       candidate.setCommentary(faker.lorem().sentence());
       this.candidateRepository.saveAndFlush(candidate);
     }
+
+//  -----------------------------Candidate Matters------------------------------------
+//  --------------------------------------------------------------------------------
+
+    //Candidate candidateWithMatters = this.candidateRepository.findAll().get(1);
+    this.acquiredMattersRepository.save(new AcquiredMatters(10.0f,LocalDate.now(),this.matterRepository.findById(1).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(15.0f,LocalDate.now(),this.matterRepository.findById(2).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(12.0f,LocalDate.now(),this.matterRepository.findById(3).get(), this.candidateRepository.findById(2).get()));
+
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false));
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(2).get(), true));
+    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(2).get(), this.sessionRepository.findById(1).get(), false));
+
+    Candidate c1 = this.candidateRepository.findById(2).get();
+    c1.setCompanySession(this.companySessionRepository.findAll());
+   this.candidateRepository.save(c1);
+
+
+    Candidate getCandidate = this.candidateManualRepository.loadWithChildrens(2);
+
+    // Eagered mod
+    getCandidate.addDegree(new Degree("testDeg", "doifjodijf", "1990"));
+    getCandidate.getDegrees().remove(0);
+
+    getCandidate.addCompanySession(new CompanySession(this.companyRepository.findById(3).get(), this.sessionRepository.findById(3).get(), false));
+    getCandidate.getCompanySession().remove(0);
+
+    // Lazy mod
+    getCandidate.getMatters().remove(0);
+    AcquiredMatters m1 = this.acquiredMattersRepository.save(new AcquiredMatters(10f, LocalDate.now(), this.matterRepository.findById(4).get(), getCandidate));
+    getCandidate.addMatter(m1);
+
+    this.candidateRepository.save(getCandidate);
+
+    System.out.println(getCandidate.getMatters());
+    //candidateWithMatters.addMatter(this.acquiredMattersRepository.findAll().get(0));
 
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
