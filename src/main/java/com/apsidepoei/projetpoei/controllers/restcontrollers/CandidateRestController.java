@@ -26,11 +26,14 @@ public class CandidateRestController extends BaseRestController<Candidate, Integ
 
   @GetMapping("filtered")
   public Page<Candidate> getAllFiltered(
-        final Pageable pageable,
-        @RequestParam(required = false) final String lastname) {
-    return this.getRepository().findAll(pageable, lastname);
+      final Pageable pageable,
+      @RequestParam(defaultValue = "") final String lastname,
+      @RequestParam(defaultValue = "") final String firstname,
+      @RequestParam(defaultValue = "") final String email,
+      @RequestParam(defaultValue = "") final String cellPhone){
+    return this.getRepository().findAll(pageable, lastname, firstname);
   }
-  
+
   protected CandidateRepository getRepository() {
     return (CandidateRepository) this.repository;
   }

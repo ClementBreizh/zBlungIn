@@ -60,6 +60,7 @@ public class Candidate extends Person {
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
+  @JsonIgnore
   @ManyToMany(targetEntity = AcquiredMatters.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {

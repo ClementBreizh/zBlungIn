@@ -12,9 +12,11 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
 //  @Query("SELECT e FROM #{#entityName} e WHERE (:lastname is NULL OR e.lastname LIKE %:lastname%)")
 //  Page<Candidate> findAll(Pageable pageable, @Param("lastname") String lastname);
 
-  
-  
-  @Query("SELECT e FROM #{#entityName} e WHERE (:lastname is NULL OR e.lastname LIKE %:lastname%)")
-  Page<Candidate> findAll(Pageable pageable, @Param("lastname") String lastname);
+
+
+  @Query("SELECT e FROM #{#entityName} e "
+      + "WHERE e.lastname LIKE %:lastname% "
+      + "AND e.firstname LIKE %:firstname%")
+  Page<Candidate> findAll(Pageable pageable, @Param("lastname") String lastname, @Param("firstname") String firstname);
 
 }

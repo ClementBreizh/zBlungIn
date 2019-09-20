@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
+import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Person;
 
 /**
@@ -27,8 +28,11 @@ public class PersonRestController extends BaseRestController<Person, Integer> {
   @GetMapping("filtered")
   public Page<Person> getAllFiltered(
         final Pageable pageable,
-        @RequestParam(required = false) final String lastname) {
-    return this.getRepository().findAll(pageable, lastname);
+        @RequestParam(required = false) final String lastname,
+        @RequestParam(required = false) final String firstname,
+        @RequestParam(required = false) final String email,
+        @RequestParam(required = false) final String cellPhone){
+    return this.getRepository().findAll(pageable, lastname, firstname, email, cellPhone);
   }
 
   protected PersonRepository getRepository() {

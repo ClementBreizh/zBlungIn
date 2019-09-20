@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
@@ -26,9 +27,13 @@ public class Degree extends EntityDb {
   @Column(name = DegreeContract.COL_NAME, nullable = false)
   private String name;
 
+//  @JsonProperty(value = DegreeContract.COL_LEVEL)
+//  @Column(name = DegreeContract.COL_LEVEL, length = 50, nullable = false)
+//  private String level;
+
   @JsonProperty(value = DegreeContract.COL_LEVEL)
-  @Column(name = DegreeContract.COL_LEVEL, length = 50, nullable = false)
-  private String level;
+  @Column(name = DegreeContract.COL_LEVEL)
+  private LevelDegree level;
 
   @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
   @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
@@ -48,7 +53,7 @@ public class Degree extends EntityDb {
    * @param name  = the name
    * @param level = the level
    */
-  public Degree(String name, String level) {
+  public Degree(String name, LevelDegree level) {
     super();
     this.name = name;
     this.level = level;
@@ -59,7 +64,7 @@ public class Degree extends EntityDb {
    * @param level
    * @param validationDate
    */
-  public Degree(String name, String level, String validationDate) {
+  public Degree(String name, LevelDegree level, String validationDate) {
     super();
     this.name = name;
     this.level = level;
@@ -88,24 +93,6 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * The level.
-   *
-   * @return the name.
-   */
-  public String getLevel() {
-    return this.level;
-  }
-
-  /**
-   * Set the level.
-   *
-   * @param level = the level
-   */
-  public void setLevel(String level) {
-    this.level = level;
-  }
-
-  /**
    * @return the validationDate
    */
   public String getValidationDate() {
@@ -117,5 +104,19 @@ public class Degree extends EntityDb {
    */
   public void setValidationDate(String validationDate) {
     this.validationDate = validationDate;
+  }
+
+  /**
+   * @return the level
+   */
+  public LevelDegree getLevel() {
+    return level;
+  }
+
+  /**
+   * @param level the level to set
+   */
+  public void setLevel(LevelDegree level) {
+    this.level = level;
   }
 }
