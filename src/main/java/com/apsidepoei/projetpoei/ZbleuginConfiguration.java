@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class ZbleuginConfiguration {
-  
+
   /**
    * CORS Configuration.
    * @return the configuration for disable CORS restrictions.
