@@ -49,11 +49,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
-*
-* @author clemb
-* Tests for Appointment Entity.
-*/
+ *
+ * @author clemb Tests for Appointment Entity.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -62,12 +62,18 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
 
   @Autowired
   private AppointmentRepository repository;
+
+
+  @Autowired
+  private PersonRepository personrepo;
+
   /**
    * Empty Constructor.
    */
   public AppointmentRestControllerTest() {
     super("/appointments");
   }
+
   /**
    * Create repository.
    */
@@ -75,6 +81,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   protected JpaRepository<Appointment, Integer> getRepository() {
     return repository;
   }
+
   /**
    * Parse Adress in Json to List for test.
    */
@@ -85,14 +92,17 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return mapper.readValue(builder.toString(), new TypeReference<List<Appointment>>() {
     });
   }
+
   /**
    * Compare if data is the same.
    */
   @Override
   protected boolean compareTo(Appointment item1, Appointment item2) {
     return item1.getId().equals(item2.getId()) && item1.getInformations().equals(item2.getInformations())
-        && item1.getAppointmentDate().compareTo(item2.getAppointmentDate()) == 0 && item1.getReport().equals(item2.getReport());
+        && item1.getAppointmentDate().compareTo(item2.getAppointmentDate()) == 0
+        && item1.getReport().equals(item2.getReport());
   }
+
   /**
    * Parse Json to a Object Appointment for run test.
    */
@@ -103,6 +113,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     return mapper.readValue(builder.toString(), new TypeReference<Appointment>() {
     });
   }
+
   /**
    * Generate a Id for run test.
    */
@@ -110,16 +121,19 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   protected Integer getItemIdToTest() {
     return 1;
   }
+
   /**
    * Create a object for run test.
    */
   LocalDateTime date = LocalDateTime.now();
   Person organizer = new Person();
+
   @Override
   protected Appointment getObjectTest() throws ParseException {
     Appointment item = new Appointment(date, organizer, AppointmentType.TYPE_0);
     return item;
   }
+
   /**
    * Return Id of Object for run test.
    */
@@ -127,14 +141,16 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   protected Integer getItemIdTest(Appointment item) {
     return item.getId();
   }
+
   /**
    * Create a string for POST method API.
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "informations=Commentaire&dateTime=2019/12/15&report=Report";
+    String urlParameters = "informations=Commentaire&dateTime=2019/12/15&report=Report";
     return urlParameters;
   }
+
   /**
    * Method to compare list.
    */
@@ -150,53 +166,46 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
 
   @Before
   public void setup() {
-      mvc = MockMvcBuilders
-        .webAppContextSetup(context)
-        .apply(springSecurity())
-        .build();
+    mvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
   }
 
   /**
    * Test function via HTTP
+   *
    * @throws Exception
    */
-  @WithMockUser(username="admin",password="adminadmin")
+  @WithMockUser(username = "admin", password = "adminadmin")
   @Test
   public void test() throws Exception {
 
-      // Make objects
-      Person pers = new Person();
-      pers.setFirstname("Clement");
-      pers.setLastname("BOUCHEREAU");
-      pers.setEmail("moemain@gmail.com");
-      pers.setCellPhone("9809877786");
+    // Make objects
+    Person pers = personrepo.findById(getItemIdToTest()).get();
 
-      Appointment sess = new Appointment();
-      sess.setAppointmentDate(LocalDateTime.now());
-      sess.setOrganizer(pers);
+    AppointmentType type = AppointmentType.TYPE_1;
 
-      // Transform to JSON
-      String objJson = this.objectMapper.writeValueAsString(sess);
+    Appointment sess = new Appointment();
+    sess.setAppointmentDate(LocalDateTime.now());
+    sess.setOrganizer(pers);
+    sess.setAppointmentType(type);
 
-      // Prepare Request
-      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
-              .contentType("application/json")
+    // Transform to JSON
+    String objJson = this.objectMapper.writeValueAsString(sess);
 
-              .content(objJson);
+    // Prepare Request
+    MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test").contentType("application/json")
 
-      MvcResult result = this.mockMvc.perform(request)
-              .andExpect(status().isOk())
-              .andReturn();
+        .content(objJson);
 
+    MvcResult result = this.mockMvc.perform(request).andExpect(status().isOk()).andReturn();
 
-      System.out.println(result.getResponse().getStatus());
-      System.out.println(result.getResponse().getContentAsString());
+    System.out.println(result.getResponse().getStatus());
+    System.out.println(result.getResponse().getContentAsString());
 
-      // Transform to Object
-      Appointment newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Appointment.class);
+    // Transform to Object
+    Appointment newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Appointment.class);
 
-      // Tests
-      assertNotNull(newSess);
-      assertThat(sess.getAppointmentDate()).isEqualTo(newSess.getAppointmentDate());
+    // Tests
+    assertNotNull(newSess);
+    assertThat(sess.getAppointmentDate()).isEqualTo(newSess.getAppointmentDate());
   }
 }
