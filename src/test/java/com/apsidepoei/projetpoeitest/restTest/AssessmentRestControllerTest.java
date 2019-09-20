@@ -2,7 +2,9 @@ package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,7 +37,9 @@ import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
 import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Candidate;
+import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Session;
+import com.apsidepoei.projetpoeitest.utils.RestResponsePage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -71,13 +75,25 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
 
   /**
    * Parse Json to List for test.
+   * @throws IOException
+   * @throws JsonMappingException
+   * @throws JsonParseException
    */
   @Override
   protected List<Assessment> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
+    return this.parseJsonToList(builder.toString());
+  }
+
+  /**
+   * Parse Json to List for test.
+   */
+  protected List<Assessment> parseJsonToList(String content)
+      throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Assessment>>() {
-    });
+    RestResponsePage<Assessment> pMatter = mapper.readValue(content, new TypeReference<RestResponsePage<Assessment>>() {});
+
+    return pMatter.getContent();
   }
 
   /**
@@ -194,5 +210,21 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     // Tests
     assertNotNull(newSess);
     assertThat(sess.getCandidate().getFirstname()).isEqualTo(newSess.getCandidate().getFirstname());
+  }
+  @WithMockUser(username="admin",password="adminadmin")
+  @Test
+  public void getTest() throws Exception {
+
+    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
+
+    List<Assessment> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    System.out.println("http = " + result);
+    List<Assessment> dbItems = getRepository().findAll();
+    System.out.println("DB = " + dbItems);
+
+    // Tests
+    assertTrue(compareToList(result, dbItems));
+
   }
 }

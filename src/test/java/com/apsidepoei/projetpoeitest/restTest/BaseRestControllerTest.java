@@ -60,7 +60,17 @@ public abstract class BaseRestControllerTest<T, ID> {
 
   protected abstract boolean compareTo(T item1, T item2);
 
-  protected abstract boolean compareToList(List<T> items, List<T> dbItems);
+  protected boolean compareToList(List<T> items, List<T> dbItems) {
+    boolean result = true;
+    if (items != null) {
+      for (int i = 0; i < items.size(); i++) {
+        if (!compareTo(items.get(i), dbItems.get(i))) {
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
 
   public BaseRestControllerTest(String entityPath) {
     this.entityPath = entityPath;

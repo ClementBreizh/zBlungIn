@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -146,41 +147,34 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     return urlParameters;
   }
 
-  /**
-   * Method to compare list.
-   */
-  @Override
-  protected boolean compareToList(List<Matter> items, List<Matter> dbItems) {
-    return false;
-  }
 
-  /**
-   * Test to getAll.
-   *
-   * @throws IOException
-   */
-  @Test
-  public void getAll() throws IOException {
-    StringBuilder builder = new StringBuilder();
-    try {
-      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw e;
-    }
-
-    List<Matter> dbItems = getRepository().findAll();
-    List<Matter> httpItems = parseJsonToList(builder);
-
-    if (dbItems.size() != httpItems.size()) {
-      fail("List sized are not same");
-    }
-    for (int i = 0; i < httpItems.size(); i++) {
-      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
-        fail();
-      }
-    }
-  }
+//  /**
+//   * Test to getAll.
+//   *
+//   * @throws IOException
+//   */
+//  @Test
+//  public void getAll() throws IOException {
+//    StringBuilder builder = new StringBuilder();
+//    try {
+//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//      throw e;
+//    }
+//
+//    List<Matter> dbItems = getRepository().findAll();
+//    List<Matter> httpItems = parseJsonToList(builder);
+//
+//    if (dbItems.size() != httpItems.size()) {
+//      fail("List sized are not same");
+//    }
+//    for (int i = 0; i < httpItems.size(); i++) {
+//      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
+//        fail();
+//      }
+//    }
+//  }
 //
 //  /**
 //   * Test to getById.
@@ -359,16 +353,12 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
     List<Matter> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
    // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-    System.out.println(result);
+    System.out.println("http = " + result);
     List<Matter> dbItems = getRepository().findAll();
-    System.out.println(dbItems);
-
-
-    //TODO faire method pour transformer le Json récuperé en liste pour comparer
+    System.out.println("DB = " + dbItems);
 
     // Tests
-   // assertNotNull(result);
-   // assertNotNull(dbItems);;
+    assertTrue(compareToList(result, dbItems));
 
   }
 }

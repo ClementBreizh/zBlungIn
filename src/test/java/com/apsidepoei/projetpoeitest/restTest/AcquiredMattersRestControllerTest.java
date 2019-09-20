@@ -2,7 +2,9 @@ package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +36,7 @@ import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoeitest.securityservicetest.Securityconf;
+import com.apsidepoei.projetpoeitest.utils.RestResponsePage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -69,13 +72,25 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
 
   /**
    * Parse Json to List for test.
+   * @throws IOException
+   * @throws JsonMappingException
+   * @throws JsonParseException
    */
   @Override
   protected List<AcquiredMatters> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
+    return this.parseJsonToList(builder.toString());
+  }
+
+  /**
+   * Parse Json to List for test.
+   */
+  protected List<AcquiredMatters> parseJsonToList(String content)
+      throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<AcquiredMatters>>() {
-    });
+    RestResponsePage<AcquiredMatters> pAcquireMatt = mapper.readValue(content, new TypeReference<RestResponsePage<Matter>>() {});
+
+    return pAcquireMatt.getContent();
   }
 
   /**
@@ -201,4 +216,23 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
     assertThat(sess.getCandidate().getFirstname()).isEqualTo(newSess.getCandidate().getFirstname());
   }
 
+  @WithMockUser(username="admin",password="adminadmin")
+  @Test
+  public void getTest() throws Exception {
+
+    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
+
+    List<AcquiredMatters> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    System.out.println(result);
+    List<AcquiredMatters> dbItems = getRepository().findAll();
+    System.out.println(dbItems);
+
+
+    //TODO faire method pour transformer le Json récuperé en liste pour comparer
+
+    // Tests
+    assertTrue(compareToList(result, dbItems));
+
+  }
 }
