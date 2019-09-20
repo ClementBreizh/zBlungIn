@@ -155,21 +155,7 @@ public class DatasInsertors {
     this.appointmentList.addAll(this.appointmentRepository.findAll());
     log.debug("Appointment ok");
 
-    // -----------------------------------Assessment-----------------------------------
-//    Assessment assessment1 = new Assessment("Culture générale",
-//        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//    this.assessmentRepository.saveAndFlush(assessment1);
-//    Assessment assessment2 = new Assessment("Mathématiques",
-//        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//    this.assessmentRepository.saveAndFlush(assessment2);
-//    Assessment assessment3 = new Assessment("Culture informatique",
-//        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//    this.assessmentRepository.saveAndFlush(assessment3);
-//    Assessment assessment4 = new Assessment("Logique",
-//        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//    this.assessmentRepository.saveAndFlush(assessment4);
-//    this.assessmentList.addAll(this.assessmentRepository.findAll());
-//    log.debug("Assessment ok");
+
 
     // -----------------------------------Candidate-----------------------------------
     for (int i = 0; i < this.nbEntities; i++) {
@@ -185,6 +171,26 @@ public class DatasInsertors {
     }
     this.candidateList.addAll(this.candidateRepository.findAll());
     log.debug("Candidate ok");
+
+    // -----------------------------------Assessment-----------------------------------
+    Assessment assessment1 = new Assessment(
+        "Culture générale",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+    this.assessmentRepository.saveAndFlush(assessment1);
+    Assessment assessment2 = new Assessment("Mathématiques",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+    this.assessmentRepository.saveAndFlush(assessment2);
+    Assessment assessment3 = new Assessment("Culture informatique",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+    this.assessmentRepository.saveAndFlush(assessment3);
+    Assessment assessment4 = new Assessment("Logique",
+        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
+    this.assessmentRepository.saveAndFlush(assessment4);
+    log.debug("Assessment ok");
 
     // -----------------------------------Company-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {

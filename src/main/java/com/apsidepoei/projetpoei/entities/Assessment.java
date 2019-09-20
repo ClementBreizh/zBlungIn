@@ -40,7 +40,7 @@ public class Assessment extends EntityDb {
   private LocalDate validationDate;
 
   @JsonProperty(value = AssessmentContract.COL_FK_ID_CANDIDATE)
-  @ManyToOne(targetEntity = Candidate.class, cascade = CascadeType.PERSIST)
+  @ManyToOne(targetEntity = Candidate.class)
   @JoinColumn(name = AssessmentContract.COL_FK_ID_CANDIDATE, referencedColumnName = AssessmentContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 
@@ -56,8 +56,7 @@ public class Assessment extends EntityDb {
    * @param updatingDate
    * @param candidate
    */
-  public Assessment(String category, LocalDate updatingDate,
-      Candidate candidate) {
+  public Assessment(String category, LocalDate updatingDate, Candidate candidate) {
     super();
     this.category = category;
     this.updatingDate = updatingDate;
