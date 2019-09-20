@@ -3,6 +3,7 @@ package com.apsidepoei.projetpoeitest.restTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -147,33 +149,33 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     return false;
   }
 
-//  /**
-//   * Test to getAll.
-//   *
-//   * @throws IOException
-//   */
-//  @Test
-//  public void getAll() throws IOException {
-//    StringBuilder builder = new StringBuilder();
-//    try {
-//      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//      throw e;
-//    }
-//
-//    List<Matter> dbItems = getRepository().findAll();
-//    List<Matter> httpItems = parseJsonToList(builder);
-//
-//    if (dbItems.size() != httpItems.size()) {
-//      fail("List sized are not same");
-//    }
-//    for (int i = 0; i < httpItems.size(); i++) {
-//      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
-//        fail();
-//      }
-//    }
-//  }
+  /**
+   * Test to getAll.
+   *
+   * @throws IOException
+   */
+  @Test
+  public void getAll() throws IOException {
+    StringBuilder builder = new StringBuilder();
+    try {
+      builder = httpUtils.callServer(builder, BASE_API + entityPath, HttpMethod.GET);
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw e;
+    }
+
+    List<Matter> dbItems = getRepository().findAll();
+    List<Matter> httpItems = parseJsonToList(builder);
+
+    if (dbItems.size() != httpItems.size()) {
+      fail("List sized are not same");
+    }
+    for (int i = 0; i < httpItems.size(); i++) {
+      if (!compareTo(dbItems.get(i), httpItems.get(i))) {
+        fail();
+      }
+    }
+  }
 //
 //  /**
 //   * Test to getById.
