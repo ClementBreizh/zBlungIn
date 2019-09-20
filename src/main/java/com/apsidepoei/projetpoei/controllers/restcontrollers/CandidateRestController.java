@@ -30,8 +30,9 @@ public class CandidateRestController extends BaseRestController<Candidate, Integ
       @RequestParam(defaultValue = "") final String lastname,
       @RequestParam(defaultValue = "") final String firstname,
       @RequestParam(defaultValue = "") final String email,
-      @RequestParam(defaultValue = "") final String cellPhone){
-    return this.getRepository().findAll(pageable, lastname, firstname);
+      @RequestParam(defaultValue = "") final String cellPhone,
+      @RequestParam(defaultValue = "") final String homePhone){
+    return this.getRepository().findAll(pageable, lastname, firstname, email, cellPhone, homePhone);
   }
 
   protected CandidateRepository getRepository() {
