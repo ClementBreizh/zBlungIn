@@ -16,9 +16,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -33,6 +36,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.entities.Matter;
+import com.apsidepoei.projetpoeitest.utils.RestResponsePage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -84,8 +88,9 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
   protected List<Matter> parseJsonToList(String content)
       throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(content, new TypeReference<List<Matter>>() {
-    });
+    RestResponsePage<Matter> pMatter = mapper.readValue(content, new TypeReference<RestResponsePage<Matter>>() {});
+
+    return pMatter.getContent();
   }
 
   /**
