@@ -303,18 +303,7 @@ public class DatasInsertors {
     candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get());
     candidateRepository.findAll().get(0);
 
-//  -----------------------------Champs supplémentaires------------------------------------
-//  --------------------------------------------------------------------------------
 
-    Feedback feedback = this.feedbackList.get(1);
-
-    for (int i = 0; i < this.candidateList.size(); i++) {
-      candidate = this.candidateList.get(i);
-      candidate.setFeedback(feedback);
-      candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
-      candidate.setCommentary(faker.lorem().sentence());
-      this.candidateRepository.saveAndFlush(candidate);
-    }
 
 //  -----------------------------Candidate Matters------------------------------------
 //  --------------------------------------------------------------------------------
@@ -323,9 +312,16 @@ public class DatasInsertors {
     this.acquiredMattersRepository.save(new AcquiredMatters(15.0f,LocalDate.now(),this.matterRepository.findById(2).get(), this.candidateRepository.findById(2).get()));
     this.acquiredMattersRepository.save(new AcquiredMatters(12.0f,LocalDate.now(),this.matterRepository.findById(3).get(), this.candidateRepository.findById(2).get()));
 
-    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false));
-    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(2).get(), true));
-    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(2).get(), this.sessionRepository.findById(1).get(), false));
+    CompanySession cs1 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
+    CompanySession cs2 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
+    CompanySession cs3 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
+    companySessionRepository.saveAndFlush(cs1);
+    companySessionRepository.saveAndFlush(cs2);
+    companySessionRepository.saveAndFlush(cs3);
+
+//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false));
+//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(2).get(), true));
+//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(2).get(), this.sessionRepository.findById(1).get(), false));
 
     Candidate c1 = this.candidateRepository.findById(2).get();
     c1.setCompanySession(this.companySessionRepository.findAll());
@@ -347,6 +343,20 @@ public class DatasInsertors {
     getCandidate.addMatter(m1);
 
     this.candidateRepository.save(getCandidate);
+
+//  -----------------------------Champs supplémentaires------------------------------------
+//  --------------------------------------------------------------------------------
+
+    Feedback feedback = this.feedbackList.get(1);
+
+    for (int i = 0; i < this.candidateList.size(); i++) {
+      candidate = this.candidateList.get(i);
+      candidate.setFeedback(feedback);
+      candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
+      candidate.setCommentary(faker.lorem().sentence());
+      candidate.addCompanySession(companySessionRepository.findById(faker.random().nextInt(1, 3)).get());
+      this.candidateRepository.saveAndFlush(candidate);
+    }
 
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
