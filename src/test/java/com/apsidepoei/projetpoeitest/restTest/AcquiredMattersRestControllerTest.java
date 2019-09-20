@@ -216,23 +216,23 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
     assertThat(sess.getCandidate().getFirstname()).isEqualTo(newSess.getCandidate().getFirstname());
   }
 
-  @WithMockUser(username="admin",password="adminadmin")
-  @Test
-  public void getTest() throws Exception {
-
-    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
-
-    List<AcquiredMatters> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
-   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-    System.out.println(result);
-    List<AcquiredMatters> dbItems = getRepository().findAll();
-    System.out.println(dbItems);
-
-
-    //TODO faire method pour transformer le Json récuperé en liste pour comparer
-
-    // Tests
-    assertTrue(compareToList(result, dbItems));
-
-  }
+//  @WithMockUser(username="admin",password="adminadmin")
+//  @Test
+//  public void getTest() throws Exception {
+//
+//    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
+//
+//    List<AcquiredMatters> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+//   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+//    System.out.println(result);
+//    List<AcquiredMatters> dbItems = getRepository().findAll();
+//    System.out.println(dbItems);
+//
+//
+//    //TODO faire method pour transformer le Json récuperé en liste pour comparer
+//
+//    // Tests
+//    assertTrue(compareToList(result, dbItems));
+//
+//  }
 }

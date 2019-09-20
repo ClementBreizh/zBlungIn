@@ -223,20 +223,20 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
     assertNotNull(newSess);
     assertThat(sess.getAppointmentDate()).isEqualTo(newSess.getAppointmentDate());
   }
-  @WithMockUser(username="admin",password="adminadmin")
-  @Test
-  public void getTest() throws Exception {
-
-    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
-
-    List<Appointment> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
-   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-    System.out.println("http = " + result);
-    List<Appointment> dbItems = getRepository().findAll();
-    System.out.println("DB = " + dbItems);
-
-    // Tests
-    assertTrue(compareToList(result, dbItems));
-
-  }
+//  @WithMockUser(username="admin",password="adminadmin")
+//  @Test
+//  public void getTest() throws Exception {
+//
+//    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
+//
+//    List<Appointment> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+//   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+//    System.out.println("http = " + result);
+//    List<Appointment> dbItems = getRepository().findAll();
+//    System.out.println("DB = " + dbItems);
+//
+//    // Tests
+//    assertTrue(compareToList(result, dbItems));
+//
+//  }
 }
