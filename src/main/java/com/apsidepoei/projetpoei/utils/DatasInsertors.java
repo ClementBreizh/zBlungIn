@@ -106,7 +106,7 @@ public class DatasInsertors {
 
   Faker faker = new Faker(Locale.FRENCH);
 
-  Integer nbEntities = 100;
+  Integer nbEntities = 10;
 
   public DatasInsertors() {
   }
@@ -256,16 +256,17 @@ public class DatasInsertors {
     System.out.println("Session ok");
 
     // -----------------------------------User-----------------------------------
-//    for (int i = 0; i < nbEntities; i++) {
-//      User user = new User(
-//          faker.name().username(),
-//          faker.internet().password(),
-//          faker.name().firstName(),
-//          faker.name().lastName(),
-//          faker.internet().emailAddress(),
-//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      userRepository.saveAndFlush(user);
-//    }
+    for (int i = 0; i < nbEntities; i++) {
+      User user = new User(
+          faker.name().firstName(),
+          faker.name().lastName(),
+          faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""),
+          faker.name().username(),
+          faker.internet().password()
+          );
+      userRepository.saveAndFlush(user);
+    }
     this.userList.addAll(this.userRepository.findAll());
     System.out.println("User ok");
 
