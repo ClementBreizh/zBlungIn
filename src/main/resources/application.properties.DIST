@@ -13,5 +13,5 @@ security.admin.password=admin
 
 spring.session.store-type=jdbc
 
-server.servlet.session.timeout=1d
-spring.session.jdbc.initialize-schema: always
+spring.data.rest.default-page-size=20
+spring.data.rest.sort-param-name=id

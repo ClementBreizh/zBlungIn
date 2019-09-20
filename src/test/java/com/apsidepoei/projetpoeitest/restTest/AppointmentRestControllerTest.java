@@ -41,6 +41,7 @@ import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
 import com.apsidepoei.projetpoei.entities.Appointment;
+import com.apsidepoei.projetpoei.entities.AppointmentType;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.Session;
@@ -116,7 +117,7 @@ public class AppointmentRestControllerTest extends BaseRestControllerTest<Appoin
   Person organizer = new Person();
   @Override
   protected Appointment getObjectTest() throws ParseException {
-    Appointment item = new Appointment(date, organizer);
+    Appointment item = new Appointment(date, organizer, AppointmentType.TYPE_0);
     return item;
   }
   /**

@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-import java.time.Year;
 
 /**
  * This class is the Degree entity.
@@ -33,7 +32,7 @@ public class Degree extends EntityDb {
 
   @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
   @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
-  @Pattern(regexp = "20\\d{2}")
+  @Pattern(regexp = "\\d{4}")
   protected String validationDate;
 
   /**

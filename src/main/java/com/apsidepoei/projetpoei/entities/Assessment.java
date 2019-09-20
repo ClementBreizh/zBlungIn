@@ -32,12 +32,12 @@ public class Assessment extends EntityDb {
 
   @JsonProperty(value = AssessmentContract.COL_SCORE)
   @Column(name = AssessmentContract.COL_SCORE, nullable = true)
-  protected Float score;
+  private Float score;
 
   @JsonProperty(value = AssessmentContract.COL_VALIDATION_DATE)
   @Column(name = AssessmentContract.COL_VALIDATION_DATE, nullable = true)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  protected LocalDate validationDate;
+  private LocalDate validationDate;
 
   @JsonProperty(value = AssessmentContract.COL_FK_ID_CANDIDATE)
   @ManyToOne(targetEntity = Candidate.class, cascade = CascadeType.PERSIST)
