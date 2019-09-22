@@ -32,32 +32,20 @@ public class CompanyContract extends BaseContract {
    * defines the name of the column="apeCode".
    */
   public static  final String COL_APECODE = "apeCode";
-
-  /**
-   * Define a table with all column.
-   */
-  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_ANTENNANAME, COL_SIRET,
-      COL_APECODE };
-
   /**
    * Define name of the contacts column.
    */
   public static final String COL_FK_ID_CONTACTS = "contacts";
-
-  /**
-   * Define name of the main contact column.
-   */
-  public static final String COL_FK_ID_MAINCONTACT = "mainContact";
-
   /**
    * Define the name of the address column.
    */
   public static final String COL_FK_ID_ADDRESS = "address";
 
   /**
-   * Define the name of the sessions column.
+   * Define a table with all column.
    */
-  public static final String COL_SESSIONS = "sessions";
+  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_ANTENNANAME, COL_SIRET,
+      COL_APECODE };
 
 
   /**

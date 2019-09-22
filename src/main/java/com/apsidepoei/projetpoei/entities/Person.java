@@ -3,23 +3,21 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.ToString;
+
 /**
  * @author vianney
  *
  */
 @Entity
+@ToString
 @Table(name = PersonContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -27,33 +25,32 @@ public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
-  protected String firstname;
+  private String firstname;
 
   @JsonProperty(value = PersonContract.COL_LASTNAME)
   @Column(name = PersonContract.COL_LASTNAME, nullable = false, length = 50)
-  protected String lastname;
+  private String lastname;
 
   @JsonProperty(value = PersonContract.COL_EMAIL)
   @Column(name = PersonContract.COL_EMAIL, nullable = false)
-  protected String email;
+  private String email;
 
   @JsonProperty(value = PersonContract.COL_CELL_PHONE)
   @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
-  protected String cellPhone;
+  private String cellPhone;
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
   @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)
-  protected String homePhone;
+  private String homePhone;
 
   @JsonProperty(value = PersonContract.COL_COMMENTARY)
   @Column(name = PersonContract.COL_COMMENTARY, nullable = true)
-  protected String commentary;
+  private String commentary;
 
   @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
   @Type(type = "org.hibernate.type.NumericBooleanType")
-  protected Boolean mainContact = false;
-
+  private Boolean mainContact = false;
 
   /**
    * Empty constructor.
@@ -81,7 +78,8 @@ public class Person extends EntityDb {
   /**
    * @param firstname
    * @param lastname
-
+   * @param email
+   * @param cellPhone
    * @param homePhone
    * @param commentary
    * @param mainContact
@@ -96,18 +94,6 @@ public class Person extends EntityDb {
     this.homePhone = homePhone;
     this.commentary = commentary;
     this.mainContact = mainContact;
-  }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Person [" + "Id = " + getId() + ", prénom = " + firstname + ", nom = " + lastname
-
-        + ", email = " + email + ", téléphone = " + cellPhone + "]";
-
   }
 
 
@@ -210,5 +196,4 @@ public class Person extends EntityDb {
   public void setMainContact(Boolean mainContact) {
     this.mainContact = mainContact;
   }
-
 }

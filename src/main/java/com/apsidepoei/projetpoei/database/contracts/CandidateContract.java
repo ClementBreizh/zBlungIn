@@ -24,6 +24,14 @@ public class CandidateContract extends BaseContract {
    */
   public static final String COL_RANKING_CANDIDATE = "rankingCandidate";
   /**
+   * defines the name of the column="statusCandidate".
+   */
+  public static final String COL_STATUS_CANDIDATE = "statusCandidate";
+  /**
+   * defines the name of the column="sexCandidate".
+   */
+  public static final String COL_SEX_CANDIDATE = "sexCandidate";
+  /**
    * defines the name of the column="feedback_id".
    */
   public static final String COL_FK_ID_FEEDBACK = "feedback_id";
@@ -36,9 +44,9 @@ public class CandidateContract extends BaseContract {
    */
   public static final String COL_MATTERS = "matters";
   /**
-   * defines the name of the column="sessions".
+   * defines the name of the column="companySession".
    */
-  public static final String COL_SESSIONS = "sessions";
+  public static final String COL_FK_ID_COMPANYSESSION = "companySession" ;
   /**
    * defines the name of the column="address_id".
    */

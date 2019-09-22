@@ -1,11 +1,16 @@
 package com.apsidepoei.projetpoeitest.restTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
-
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
@@ -22,6 +29,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 /**
 *
 * @author clemb
@@ -90,10 +98,13 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected Session getObjectTest() throws ParseException {
-    LocalDate localDate = LocalDate.of(2016, 8, 19);
-    Session item = new Session("Session1", localDate, localDate);
-    System.out.println("TTTEEESSTTTT" + item);
-    return item;
+    Faker faker = new Faker();
+    String name = "Mickael";
+    LocalDate startDate = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate endDate = faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    Session item = new Session(name, startDate, endDate);
+
+      return item;
 
 
   }
@@ -109,7 +120,7 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
    */
   @Override
   protected String getObjectToStringToPost() {
-    String urlParameters  = "name=Session1&startDate=2016-8-19&endDate=2016-8-19";
+    String urlParameters  = "name=Session1&startDate=2018-08-19&endDate=2018-08-19";
     return urlParameters;
   }
   /**
@@ -119,6 +130,44 @@ public class SessionRestControllerTest extends BaseRestControllerTest<Session, I
   protected boolean compareToList(List<Session> items, List<Session> dbItems) {
     return false;
   }
+  /**
+   * Test function via HTTP
+   * @throws Exception
+   */
+  @Test
+  public void test() throws Exception {
+
+      // Make object
+      Session sess = new Session();
+      sess.setName("Clement");
+      sess.setStartDate(LocalDate.now());
+      sess.setEndDate(LocalDate.now());
+
+      // Transform to JSON
+      String objJson = this.objectMapper.writeValueAsString(sess);
+
+      // Prepare Request
+      MockHttpServletRequestBuilder request = post(BASE_API + entityPath + "/test")
+              .contentType("application/json")
+
+              .content(objJson);
+
+      MvcResult result = this.mockMvc.perform(request)
+              .andExpect(status().isOk())
+              .andReturn();
+
+
+      System.out.println(result.getResponse().getStatus());
+      System.out.println(result.getResponse().getContentAsString());
+
+      // Transform to Object
+      Session newSess = this.objectMapper.readValue(result.getResponse().getContentAsString(), Session.class);
+
+      // Tests
+      assertNotNull(newSess);
+      assertThat("Clement").isEqualTo(newSess.getName());
+  }
+
 }
 
 

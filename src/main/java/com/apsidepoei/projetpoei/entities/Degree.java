@@ -1,19 +1,15 @@
 package com.apsidepoei.projetpoei.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
+import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
-import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.Pattern;
 
 /**
  * This class is the Degree entity.
@@ -22,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = DegreeContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = DegreeContract.COL_ID))
 public class Degree extends EntityDb {
@@ -30,24 +27,24 @@ public class Degree extends EntityDb {
   @Column(name = DegreeContract.COL_NAME, nullable = false)
   private String name;
 
+//  @JsonProperty(value = DegreeContract.COL_LEVEL)
+//  @Column(name = DegreeContract.COL_LEVEL, length = 50, nullable = false)
+//  private String level;
+
   @JsonProperty(value = DegreeContract.COL_LEVEL)
-  @Column(name = DegreeContract.COL_LEVEL, nullable = false, length = 50)
-  private String level;
+  @Column(name = DegreeContract.COL_LEVEL)
+  private LevelDegree level;
 
-  @JsonProperty(value = DegreeContract.COL_CANDIDATES)
-  @ManyToMany(targetEntity = Candidate.class)
-  @JoinTable(name = "degree_candidates", joinColumns = {
-      @JoinColumn(name = DegreeContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = CandidateContract.COL_ID) })
-  private List<Candidate> candidates;
-
+  @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
+  @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
+  @Pattern(regexp = "\\d{4}")
+  protected String validationDate;
 
   /**
    * Empty constructor.
    */
   public Degree() {
     super();
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
@@ -56,32 +53,22 @@ public class Degree extends EntityDb {
    * @param name  = the name
    * @param level = the level
    */
-  public Degree(String name, String level) {
+  public Degree(String name, LevelDegree level) {
     super();
     this.name = name;
     this.level = level;
-    this.candidates = new ArrayList<Candidate>();
   }
 
   /**
    * @param name
    * @param level
-   * @param candidates
+   * @param validationDate
    */
-  public Degree(String name, String level, List<Candidate> candidates) {
+  public Degree(String name, LevelDegree level, String validationDate) {
     super();
     this.name = name;
     this.level = level;
-    this.candidates = candidates;
-  }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Diplome [Id = " + getId() + ", nom=" + name + ", niveau=" + level + "]";
+    this.validationDate = validationDate;
   }
 
 
@@ -93,7 +80,7 @@ public class Degree extends EntityDb {
    * @return the name.
    */
   public String getName() {
-    return name;
+    return this.name;
   }
 
   /**
@@ -106,50 +93,30 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * The level.
-   *
-   * @return the name.
+   * @return the validationDate
    */
-  public String getLevel() {
+  public String getValidationDate() {
+    return validationDate;
+  }
+
+  /**
+   * @param validationDate the validationDate to set
+   */
+  public void setValidationDate(String validationDate) {
+    this.validationDate = validationDate;
+  }
+
+  /**
+   * @return the level
+   */
+  public LevelDegree getLevel() {
     return level;
   }
 
   /**
-   * Set the level.
-   *
-   * @param level = the level
+   * @param level the level to set
    */
-  public void setLevel(String level) {
+  public void setLevel(LevelDegree level) {
     this.level = level;
   }
-
-  /**
-   * Constructor with id for new degree.
-   *
-   * @param id    = the id
-   * @param name  = the name
-   * @param level = the level
-   */
-  public Degree(int id, String name, String level) {
-    super();
-    this.setId(id);
-    this.name = name;
-    this.level = level;
-  }
-
-  /**
-   * @return the candidates
-   */
-  public List<Candidate> getCandidates() {
-    return candidates;
-  }
-
-  /**
-   * @param candidates the candidates to set
-   */
-  public void setCandidates(List<Candidate> candidates) {
-    this.candidates = candidates;
-  }
-
-
 }

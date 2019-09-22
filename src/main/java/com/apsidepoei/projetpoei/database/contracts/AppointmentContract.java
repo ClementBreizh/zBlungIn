@@ -17,6 +17,10 @@ public class AppointmentContract extends BaseContract {
    */
   public static final String COL_ID = "id_appointment";
   /**
+   * defines the name of the column="appointmentType".
+   */
+  public static final String COL_APPOINTMENT_TYPE = "appointmentType";
+  /**
    * defines the name of the column="informations".
    */
   public static final String COL_INFORMATIONS = "informations";
@@ -36,6 +40,11 @@ public class AppointmentContract extends BaseContract {
    * defines the name of the column="persons".
    */
   public static final String COL_PERSONS = "persons";
+
+  /**
+   * defines the name of the column="organizer".
+   */
+  public static final String COL_ORGANIZER = "organizer";
 
   /**
    * Define a table with all column.

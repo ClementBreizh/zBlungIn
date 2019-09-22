@@ -66,15 +66,9 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
 
-apply plugin: "com.github.spotbugs"
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-ignoreFailures = true
-  reports {
-    xml.enabled = true
-    html.enabled = false
-  }
+      compileOnly 'org.projectlombok:lombok:1.18.8'
+  annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
 
 apply plugin: "com.github.spotbugs"

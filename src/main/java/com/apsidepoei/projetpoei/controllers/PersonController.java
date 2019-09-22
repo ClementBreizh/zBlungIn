@@ -36,6 +36,5 @@ public class PersonController extends BaseController {
    */
   public PersonController() {
     super("/persons");
-    System.out.println("test");
   }
 }

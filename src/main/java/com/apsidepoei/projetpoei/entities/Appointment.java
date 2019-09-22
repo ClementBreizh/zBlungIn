@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -18,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.ToString;
 
 /**
  * This class is the Appointment entity.
@@ -26,18 +29,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @Entity
+@ToString
 @Table(name = AppointmentContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
-
-  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
-  @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
-  private String informations;
 
   @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
   @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
+
+  @JsonProperty(value = AppointmentContract.COL_APPOINTMENT_TYPE)
+  @Column(name = AppointmentContract.COL_APPOINTMENT_TYPE, nullable = false)
+  private AppointmentType appointmentType;
+
+  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
+  @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
+  private String informations;
 
   @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
@@ -55,6 +63,10 @@ public class Appointment extends EntityDb {
           @JoinColumn(name = PersonContract.COL_ID) })
   private List<Person> persons;
 
+  @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
+  @ManyToOne(targetEntity = Person.class)
+  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
+  private Person organizer;
 
   /**
    * Empty constructor.
@@ -65,64 +77,59 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * Constructor for a new Appointment.
-   *
-   * @param appointmentDate     = appointmentDate
+   * @param appointmentDate
+   * @param organizer
+   * @param appointmentType
    */
-  public Appointment(LocalDateTime appointmentDate) {
+  public Appointment(LocalDateTime appointmentDate, Person organizer, AppointmentType appointmentType) {
     super();
     this.appointmentDate = appointmentDate;
+    this.organizer = organizer;
+    this.appointmentType = appointmentType;
     this.persons = new ArrayList<Person>();
   }
 
   /**
    * @param informations
+   * @param appointmentType
    * @param appointmentDate
    * @param report
    * @param status
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status) {
+      Boolean status, Person organizer, AppointmentType appointmentType) {
     super();
     this.informations = informations;
     this.appointmentDate = appointmentDate;
+    this.appointmentType = appointmentType;
     this.report = report;
     this.status = status;
+    this.organizer = organizer;
     this.persons = new ArrayList<Person>();
   }
 
   /**
    * @param informations
+   * @param appointmentType
    * @param appointmentDate
    * @param report
    * @param status
    * @param persons
+   * @param organizer
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
-      Boolean status, List<Person> persons) {
+      Boolean status, List<Person> persons, Person organizer, AppointmentType appointmentType) {
     super();
     this.informations = informations;
+    this.appointmentType = appointmentType;
     this.appointmentDate = appointmentDate;
     this.report = report;
     this.status = status;
     this.persons = persons;
+    this.organizer = organizer;
   }
-
-
-  /**
-   * Override toString() function.
-   */
-  @Override
-  public String toString() {
-    return "Rendez-vous [Id = " + getId() + ", informations=" + informations + ", date=" + appointmentDate
-        + ", report=" + report + ", status=" + status + "]";
-  }
-
-
 
   // GETTER/SETTER
-
-
   /**
    * The informations.
    *
@@ -207,5 +214,26 @@ public class Appointment extends EntityDb {
     this.persons = persons;
   }
 
+  public Person getOrganizer() {
+    return organizer;
+  }
+
+  public void setOrganizer(Person organizer) {
+    this.organizer = organizer;
+  }
+
+  /**
+   * @return the appointmentType
+   */
+  public AppointmentType getAppointmentType() {
+    return appointmentType;
+  }
+
+  /**
+   * @param appointmentType the appointmentType to set
+   */
+  public void setAppointmentType(AppointmentType appointmentType) {
+    this.appointmentType = appointmentType;
+  }
 
 }
