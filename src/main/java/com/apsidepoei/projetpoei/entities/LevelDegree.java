@@ -26,7 +26,7 @@ public enum LevelDegree {
   private static Map<String, LevelDegree> namesMap = new HashMap<String, LevelDegree>(6);
 
   static {
-      namesMap.put("Sans diplôme", LEVEL_0);
+      namesMap.put("Niveau inconnu", LEVEL_0);
       namesMap.put("CAP, BEP, MC", LEVEL_1);
       namesMap.put("Bac", LEVEL_2);
       namesMap.put("Bac+2", LEVEL_3);

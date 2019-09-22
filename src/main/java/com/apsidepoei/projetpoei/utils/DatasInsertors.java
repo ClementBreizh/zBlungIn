@@ -325,7 +325,7 @@ public class DatasInsertors {
 
     Candidate c1 = this.candidateRepository.findById(2).get();
     c1.setCompanySession(this.companySessionRepository.findAll());
-   this.candidateRepository.save(c1);
+    this.candidateRepository.save(c1);
 
 
     Candidate getCandidate = this.candidateManualRepository.loadWithChildrens(2);

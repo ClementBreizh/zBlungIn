@@ -8,17 +8,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
   List<Person> findAllByFirstnameAndLastname(String firstname, String lastname);
 
-  @Query("SELECT e FROM #{#entityName} e WHERE (e.lastname LIKE %:lastname%) OR (e.firstname LIKE %:firstname%) OR (e.email LIKE %:email%) OR (e.cellPhone LIKE %:cellPhone%)")
-  Page<Person> findAll(Pageable pageable,
-      @Param("lastname") String lastname,
-      @Param("firstname") String firstname,
-      @Param("email") String email,
-      @Param("cellPhone") String cellPhone);
+  @Query("SELECT e FROM #{#entityName} e "
+      + "WHERE e.lastname LIKE %:lastname% "
+      + "AND e.firstname LIKE %:firstname% "
+      + "AND e.email LIKE %:email% "
+      + "AND e.cellPhone LIKE %:cellPhone% "
+      + "AND e.homePhone LIKE %:homePhone%")
+  Page<Person> findAll(Pageable pageable, @Param("lastname") String lastname, @Param("firstname") String firstname, @Param("email") String email, @Param("cellPhone") String cellPhone, @Param("homePhone") String homePhone);
 }
