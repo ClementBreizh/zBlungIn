@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.junit.Assert.fail;
@@ -31,11 +32,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+*/
 /**
 *
 * @author clemb
 * Tests for Degree Entity.
-*/
+*//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -44,22 +47,28 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
 
   @Autowired
   private DegreeRepository repository;
-  /**
+  */
+/**
    * Empty Constructor.
-   */
+   *//*
+
   public DegreeRestControllerTest() {
     super("/degrees");
   }
-  /**
+  */
+/**
    * Create repository.
-   */
+   *//*
+
   @Override
   protected JpaRepository<Degree, Integer> getRepository() {
     return repository;
   }
-  /**
+  */
+/**
    * Parse Json to List for test.
-   */
+   *//*
+
   @Override
   protected List<Degree> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -67,17 +76,21 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     return mapper.readValue(builder.toString(), new TypeReference<List<Degree>>() {
     });
   }
-  /**
+  */
+/**
    * Compare if data is the same.
-   */
+   *//*
+
   @Override
   protected boolean compareTo(Degree item1, Degree item2) {
     return item1.getId().equals(item2.getId()) && item1.getName().equals(item2.getName())
         && item1.getLevel().equals(item2.getLevel());
   }
-  /**
+  */
+/**
    * Parse Json to a Object for run test.
-   */
+   *//*
+
   @Override
   protected Degree parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -85,49 +98,61 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     return mapper.readValue(builder.toString(), new TypeReference<Degree>() {
     });
   }
-  /**
+  */
+/**
    * Generate a Id for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
-  /**
+  */
+/**
    * Create a object for run test.
-   */
+   *//*
+
   @Override
   protected Degree getObjectTest() {
     Degree item = new Degree("BTS","Developpement Test");
     return item;
   }
-  /**
+  */
+/**
    * Return Id of Object for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdTest(Degree item) {
     return item.getId();
   }
-  /**
+  */
+/**
    * Create a string for POST method API.
-   */
+   *//*
+
   @Override
   protected String getObjectToStringToPost() {
     String urlParameters  = "name=BTS&level=Developpement";
     return urlParameters;
   }
-  /**
+  */
+/**
    * Method to compare list.
-   */
+   *//*
+
   @Override
   protected boolean compareToList(List<Degree> items, List<Degree> dbItems) {
     return false;
   }
 
-  /**
+  */
+/**
    * Test to getAll.
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void getAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -151,12 +176,14 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     }
   }
 
-  /**
+  */
+/**
    * Test to getById.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test
   public void getById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -182,12 +209,14 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
 
   }
 
-  /**
+  */
+/**
    * Test if data is deleted.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test(expected = NoSuchElementException.class)
   public void deleteById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -203,11 +232,13 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     deleteItem.get();
   }
 
-  /**
+  */
+/**
    * Test if table is clear
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void deleteAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -224,11 +255,13 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     }
   }
 
-  /**
+  */
+/**
    * Test if size of item is the same
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void count() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -241,10 +274,12 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
     }
   }
 
-  /**
+  */
+/**
    * Test for save objet, get him to URL + repo and test if is the same.
    * @throws Exception
-   */
+   *//*
+
   @Test
   public void save() throws Exception {
     getRepository().deleteAll();
@@ -275,3 +310,4 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
   }
 }
 
+*/
