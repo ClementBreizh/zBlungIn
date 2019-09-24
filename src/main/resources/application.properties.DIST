@@ -9,8 +9,9 @@ logging.level.root=ERROR
 logging.level.com.apsidepoei=DEBUG
 logging.level.com.apsidepoei.projetpoei.ZbleuginApplication=ERROR
 
-spring.data.rest.default-page-size=20
-spring.data.rest.sort-param-name=id
+#spring.data.rest.default-page-size=20
+#spring.data.rest.sort-param-name=id
+
 spring.jpa.show-sql=false
 spring.jpa.properties.hibernate.format_sql=false
 logging.level.org.hibernate.SQL=DEBUG
