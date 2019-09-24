@@ -16,12 +16,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
-import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -29,7 +34,7 @@ import lombok.ToString;
  *
  */
 @Entity
-@ToString
+@ToString(of = {"ranking", "sex", "status"}, callSuper = true)
 @Table(name = CandidateContract.TABLE)
 public class Candidate extends Person {
 
@@ -37,27 +42,39 @@ public class Candidate extends Person {
   @Column(name = CandidateContract.COL_RANKING_CANDIDATE)
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
+  @JsonProperty(value = CandidateContract.COL_STATUS_CANDIDATE)
+  @Column(name = CandidateContract.COL_STATUS_CANDIDATE)
+  private StatusCandidate status = StatusCandidate.STATUS_0;
+
+  @JsonProperty(value = CandidateContract.COL_SEX_CANDIDATE)
+  @Column(name = CandidateContract.COL_SEX_CANDIDATE)
+  private SexCandidate sex = SexCandidate.SEX_0;
+
   @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
   @ManyToOne()
   private Feedback feedback;
 
-//  @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
   cascade = {
       CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
       CascadeType.MERGE
   })
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
-//  @JsonIgnore
-  @ManyToMany(targetEntity = Matter.class)
+  @JsonIgnore
+  @ManyToMany(targetEntity = AcquiredMatters.class)
   @JoinTable(name = "candidate_matter", joinColumns = {
       @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-          @JoinColumn(name = MatterContract.COL_ID) })
-  private List<Matter> matters;
+      @JoinColumn(name = AcquiredMattersContract.COL_ID) })
+  private List<AcquiredMatters> matters;
 
-//  @JsonIgnore
-  @ManyToMany(targetEntity = CompanySession.class)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @ManyToMany(targetEntity = CompanySession.class,
+  cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinTable(joinColumns = {
     @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
     @JoinColumn(name = CompanySessionContract.COL_ID) })
@@ -66,7 +83,7 @@ public class Candidate extends Person {
   @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
-  protected Address address;
+  private Address address;
 
   /**
    * Empty constructor.
@@ -95,15 +112,19 @@ public class Candidate extends Person {
 
   /**
    * @param ranking
+   * @param status
+   * @param sex
    * @param feedback
    * @param degrees
    * @param matters
    * @param companySession
    */
-  public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, Feedback feedback, List<Degree> degrees,
-      List<Matter> matters, List<CompanySession> companySession) {
+  public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, StatusCandidate status, SexCandidate sex, Feedback feedback, List<Degree> degrees,
+      List<AcquiredMatters> matters, @NonNull List<CompanySession> companySession) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
+    this.status = status;
+    this.sex = sex;
     this.feedback = feedback;
     this.degrees = degrees;
     this.matters = matters;
@@ -175,7 +196,7 @@ public class Candidate extends Person {
    *
    * @param matter to add
    */
-  public void addMatter(Matter matter) {
+  public void addMatter(AcquiredMatters matter) {
     if (!this.matters.contains(matter)) {
       this.matters.add(matter);
     }
@@ -184,14 +205,14 @@ public class Candidate extends Person {
   /**
    * @return the matters
    */
-  public List<Matter> getMatters() {
+  public List<AcquiredMatters> getMatters() {
     return this.matters;
   }
 
   /**
    * @param matters the matters to set
    */
-  public void setMatters(List<Matter> matters) {
+  public void setMatters(List<AcquiredMatters> matters) {
     this.matters = matters;
   }
 
@@ -207,6 +228,8 @@ public class Candidate extends Person {
   public List<CompanySession> getSessions() {
     return this.companySession;
   }
+
+
 
   /**
    * @param companySession the sessions to set
@@ -226,5 +249,41 @@ public class Candidate extends Person {
    */
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  /**
+   * @return the status
+   */
+  public StatusCandidate getStatus() {
+    return status;
+  }
+
+  /**
+   * @param status the status to set
+   */
+  public void setStatus(StatusCandidate status) {
+    this.status = status;
+  }
+
+  /**
+   * @return the sex
+   */
+  public SexCandidate getSex() {
+    return sex;
+  }
+
+  /**
+   * @param sex the sex to set
+   */
+  public void setSex(SexCandidate sex) {
+    this.sex = sex;
+  }
+
+  public void setCompanySession(List<CompanySession> companySession) {
+    this.companySession = companySession;
+  }
+
+  public List<CompanySession> getCompanySession() {
+    return companySession;
   }
 }

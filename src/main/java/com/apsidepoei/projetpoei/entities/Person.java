@@ -25,19 +25,19 @@ public class Person extends EntityDb {
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
-  protected String firstname;
+  private String firstname;
 
   @JsonProperty(value = PersonContract.COL_LASTNAME)
   @Column(name = PersonContract.COL_LASTNAME, nullable = false, length = 50)
-  protected String lastname;
+  private String lastname;
 
   @JsonProperty(value = PersonContract.COL_EMAIL)
   @Column(name = PersonContract.COL_EMAIL, nullable = false)
-  protected String email;
+  private String email;
 
   @JsonProperty(value = PersonContract.COL_CELL_PHONE)
   @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
-  protected String cellPhone;
+  private String cellPhone;
 
   @JsonProperty(value = PersonContract.COL_HOME_PHONE)
   @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)

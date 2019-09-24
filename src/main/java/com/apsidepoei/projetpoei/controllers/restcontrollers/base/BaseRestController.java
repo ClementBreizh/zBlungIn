@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.LocalDateDeserializer;
@@ -15,8 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  */
 public abstract class BaseRestController<T, ID> implements CrudRestController<T, ID> {
-
-  @Autowired
+  
   protected JpaRepository<T, ID> repository;
 
   public BaseRestController(JpaRepository<T, ID> repository) {
@@ -24,10 +27,10 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
     this.repository = repository;
   }
 
-  @GetMapping(value= {"","/","/index"})
+  @GetMapping(value = {"","/","/index"})
   @Override
-  public List<T> getAll() {
-    return repository.findAll();
+  public Page<T> getAll(final Pageable pageable) {
+    return repository.findAll(pageable);
   }
 
   @GetMapping(value= {"/{id}"})

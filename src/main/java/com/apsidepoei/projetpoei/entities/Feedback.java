@@ -41,7 +41,7 @@ public class Feedback extends EntityDb {
   @JsonProperty(value = FeedbackContract.COL_UPDATED_AT)
   @Column(name = FeedbackContract.COL_UPDATED_AT, nullable = true)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  protected LocalDate updatedAt = LocalDate.now();
+  private LocalDate updatedAt = LocalDate.now();
 
   /**
    * Empty constructor.

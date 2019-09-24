@@ -58,7 +58,7 @@ public class DegreeCandidateDto extends Person {
     this.setCellPhone(candidate.getCellPhone());
     this.setFirstname(candidate.getFirstname());
     this.setLastname(candidate.getLastname());
-    this.getMatters().addAll(candidate.getMatters());
+//    this.getMatters().addAll(candidate.getMatters());
 
     return this;
   }
@@ -69,7 +69,7 @@ public class DegreeCandidateDto extends Person {
     candidate.setCellPhone(this.getCellPhone());
     candidate.setFirstname(this.getFirstname());
     candidate.setLastname(this.getLastname());
-    candidate.getMatters().addAll(this.getMatters());
+//    candidate.getMatters().addAll(this.getMatters());
 
     return candidate;
   }
