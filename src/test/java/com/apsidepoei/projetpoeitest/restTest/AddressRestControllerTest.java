@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.junit.Assert.fail;
@@ -31,11 +32,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+*/
 /**
 *
 * @author clemb
 * Tests for Adress Entity.
-*/
+*//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -45,24 +48,30 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
   @Autowired
   private AddressRepository repository;
 
-  /**
+  */
+/**
    * Empty Constructor.
-   */
+   *//*
+
   public AddressRestControllerTest() {
     super("/addresses");
   }
 
-  /**
+  */
+/**
    * Create repository.
-   */
+   *//*
+
   @Override
   protected JpaRepository<Address, Integer> getRepository() {
     return repository;
   }
 
-  /**
+  */
+/**
    * Parse Json to List for test.
-   */
+   *//*
+
   @Override
   protected List<Address> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -71,18 +80,22 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     });
   }
 
-  /**
+  */
+/**
    * Compare if data is the same.
-   */
+   *//*
+
   @Override
   protected boolean compareTo(Address item1, Address item2) {
     return item1.getId().equals(item2.getId()) && item1.getPostalCode().equals(item2.getPostalCode())
         && item1.getStreet().equals(item2.getStreet()) && item1.getCity().equals(item2.getCity());
   }
 
-  /**
+  */
+/**
    * Parse Json to a Object for run test.
-   */
+   *//*
+
   @Override
   protected Address parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -90,49 +103,61 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     return mapper.readValue(builder.toString(), new TypeReference<Address>() {
     });
   }
-  /**
+  */
+/**
    * Generate a Id for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
-  /**
+  */
+/**
    * Create a object for run test.
-   */
+   *//*
+
   @Override
   protected Address getObjectTest() {
     Address item = new Address("adressepostale", "35000", "ville");
     return item;
   }
-  /**
+  */
+/**
    * Return Id of Object for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdTest(Address item) {
     return item.getId();
   }
-  /**
+  */
+/**
    * Create a string for POST method API.
-   */
+   *//*
+
   @Override
   protected String getObjectToStringToPost() {
     String urlParameters  = "street=4352&postalCode=35000&city=ville";
     return urlParameters;
   }
-  /**
+  */
+/**
    * Method to compare list.
-   */
+   *//*
+
   @Override
   protected boolean compareToList(List<Address> items, List<Address> dbItems) {
     return false;
   }
 
-  /**
+  */
+/**
    * Test to getAll.
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void getAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -156,12 +181,14 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     }
   }
 
-  /**
+  */
+/**
    * Test to getById.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test
   public void getById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -187,12 +214,14 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
 
   }
 
-  /**
+  */
+/**
    * Test if data is deleted.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test(expected = NoSuchElementException.class)
   public void deleteById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -208,11 +237,13 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     deleteItem.get();
   }
 
-  /**
+  */
+/**
    * Test if table is clear
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void deleteAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -229,11 +260,13 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     }
   }
 
-  /**
+  */
+/**
    * Test if size of item is the same
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void count() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -246,10 +279,12 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     }
   }
 
-  /**
+  */
+/**
    * Test for save objet, get him to URL + repo and test if is the same.
    * @throws Exception
-   */
+   *//*
+
   @Test
   public void save() throws Exception {
     getRepository().deleteAll();
@@ -279,3 +314,4 @@ public class AddressRestControllerTest extends BaseRestControllerTest<Address, I
     }
   }
 }
+*/

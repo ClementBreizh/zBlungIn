@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.junit.Assert.fail;
@@ -31,10 +32,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+*/
 /**
  *
  * @author clemb Tests for Matter Entity.
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -44,24 +47,30 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
   @Autowired
   private MatterRepository repository;
 
-  /**
+  */
+/**
    * Empty Constructor.
-   */
+   *//*
+
   public MatterRestControllerTest() {
     super("/matters");
   }
 
-  /**
+  */
+/**
    * Create repository.
-   */
+   *//*
+
   @Override
   protected JpaRepository<Matter, Integer> getRepository() {
     return repository;
   }
 
-  /**
+  */
+/**
    * Parse Json to List for test.
-   */
+   *//*
+
   @Override
   protected List<Matter> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -70,17 +79,21 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     });
   }
 
-  /**
+  */
+/**
    * Compare if data is the same.
-   */
+   *//*
+
   @Override
   protected boolean compareTo(Matter item1, Matter item2) {
     return item1.getId().equals(item2.getId()) && item1.getName().equals(item2.getName());
   }
 
-  /**
+  */
+/**
    * Parse Json to a Object for run test.
-   */
+   *//*
+
   @Override
   protected Matter parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -89,53 +102,65 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     });
   }
 
-  /**
+  */
+/**
    * Generate a Id for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
 
-  /**
+  */
+/**
    * Create a object for run test.
-   */
+   *//*
+
   @Override
   protected Matter getObjectTest() throws ParseException {
     Matter item = new Matter("MatièreTest1");
     return item;
   }
 
-  /**
+  */
+/**
    * Return Id of Object for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdTest(Matter item) {
     return item.getId();
   }
 
-  /**
+  */
+/**
    * Create a string for POST method API.
-   */
+   *//*
+
   @Override
   protected String getObjectToStringToPost() {
     String urlParameters = "name=MatièreTest1";
     return urlParameters;
   }
 
-  /**
+  */
+/**
    * Method to compare list.
-   */
+   *//*
+
   @Override
   protected boolean compareToList(List<Matter> items, List<Matter> dbItems) {
     return false;
   }
 
-  /**
+  */
+/**
    * Test to getAll.
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void getAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -159,12 +184,14 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 
-  /**
+  */
+/**
    * Test to getById.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test
   public void getById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -190,12 +217,14 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
 
   }
 
-  /**
+  */
+/**
    * Test if data is deleted.
    *
    * @throws IOException
    * @throws ParseException
-   */
+   *//*
+
   @Test(expected = NoSuchElementException.class)
   public void deleteById() throws IOException, ParseException {
     StringBuilder builder = new StringBuilder();
@@ -211,11 +240,13 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     deleteItem.get();
   }
 
-  /**
+  */
+/**
    * Test if table is clear
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void deleteAll() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -232,11 +263,13 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 
-  /**
+  */
+/**
    * Test if size of item is the same
    *
    * @throws IOException
-   */
+   *//*
+
   @Test
   public void count() throws IOException {
     StringBuilder builder = new StringBuilder();
@@ -249,10 +282,12 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 
-  /**
+  */
+/**
    * Test for save objet, get him to URL + repo and test if is the same.
    * @throws Exception
-   */
+   *//*
+
   @Test
   public void save() throws Exception {
     getRepository().deleteAll();
@@ -282,3 +317,4 @@ public class MatterRestControllerTest extends BaseRestControllerTest<Matter, Int
     }
   }
 }
+*/
