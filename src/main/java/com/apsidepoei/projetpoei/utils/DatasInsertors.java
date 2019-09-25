@@ -271,7 +271,7 @@ public class DatasInsertors {
     log.debug("Session ok");
 
     // -----------------------------------User-----------------------------------
-    for (int i = 0; i < nbEntities; i++) {
+    for (int i = 0; i < 3; i++) {
       User user = new User(
           faker.name().firstName(),
           faker.name().lastName(),

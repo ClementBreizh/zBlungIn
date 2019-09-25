@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
 import com.apsidepoei.projetpoei.entities.Degree;
+import com.apsidepoei.projetpoei.entities.LevelDegree;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -97,7 +98,7 @@ public class DegreeRestControllerTest extends BaseRestControllerTest<Degree, Int
    */
   @Override
   protected Degree getObjectTest() {
-    Degree item = new Degree("BTS","Developpement Test");
+    Degree item = new Degree("BTS", LevelDegree.LEVEL_1);
     return item;
   }
   /**
