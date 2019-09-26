@@ -114,9 +114,12 @@ public class DatasInsertors {
   private List<User> userList = new ArrayList<>();
   private List<Candidate> candidateList = new ArrayList<>();
 
+  private List<Degree> degreeListCandidates = new ArrayList<>();
+
+
   Faker faker = new Faker(Locale.FRENCH);
 
-  Integer nbEntities = 100;
+  Integer nbEntities = 50;
 
   public DatasInsertors() {
   }
@@ -143,21 +146,106 @@ public class DatasInsertors {
       Person person = new Person("prénom", "nom", "email", "0600000000");
       personRepository.saveAndFlush(person);
 
-    for (int i = 0; i < this.nbEntities; i++) {
-      Appointment appointment = new Appointment(
-                LocalDateTime.now(),
-                personRepository.findById(1).get(),
-                AppointmentType.TYPE_1);
-      appointment.setInformations(faker.lorem().sentence());
-      this.appointmentRepository.saveAndFlush(appointment);
-      }
-
-    this.appointmentList.addAll(this.appointmentRepository.findAll());
-    log.debug("Appointment ok");
+//    for (int i = 0; i < this.nbEntities; i++) {
+//      Appointment appointment = new Appointment(
+//                LocalDateTime.now(),
+//                personRepository.findById(1).get(),
+//                AppointmentType.TYPE_1);
+//      appointment.setInformations(faker.lorem().sentence());
+//      this.appointmentRepository.saveAndFlush(appointment);
+//      }
+//
+//    this.appointmentList.addAll(this.appointmentRepository.findAll());
+//    log.debug("Appointment ok");
 
 
 
     // -----------------------------------Candidate-----------------------------------
+
+    Degree degree1 = new Degree(
+       "Diplôme d'état d'infirmier",
+        LevelDegree.LEVEL_4);
+    degree1.setValidationDate("2014");
+    this.degreeRepository.saveAndFlush(degree1);
+
+    Degree degree2 = new Degree(
+        "BTS NRC",
+         LevelDegree.LEVEL_3);
+    degree2.setValidationDate("2013");
+    this.degreeRepository.saveAndFlush(degree2);
+
+   Degree degree3 = new Degree(
+       "Bac pro comptabilité",
+        LevelDegree.LEVEL_2);
+   degree3.setValidationDate("2012");
+   this.degreeRepository.saveAndFlush(degree3);
+
+   Degree degree4 = new Degree(
+      "BEP technicien de surface",
+       LevelDegree.LEVEL_1);
+   degree4.setValidationDate("2010");
+   this.degreeRepository.saveAndFlush(degree4);
+
+   Degree degree5 = new Degree(
+       "Brevet des collèges",
+        LevelDegree.LEVEL_0);
+    degree5.setValidationDate("2007");
+    this.degreeRepository.saveAndFlush(degree5);
+
+    Degree degree6 = new Degree(
+        "Master RH",
+         LevelDegree.LEVEL_5);
+    degree6.setValidationDate("2012");
+     this.degreeRepository.saveAndFlush(degree6);
+
+     Degree degree7 = new Degree(
+         "BEP coiffure",
+          LevelDegree.LEVEL_2);
+     degree7.setValidationDate("2008");
+      this.degreeRepository.saveAndFlush(degree7);
+
+    Candidate candidate1 = new Candidate("Thomas", "Rousseau",
+        "rousseau@apside.fr", faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+    candidate1.setRanking(RankingCandidate.RANK_2);
+    candidate1.setSex(SexCandidate.SEX_1);
+    candidate1.setStatus(StatusCandidate.STATUS_3);
+    candidate1.setAddress(
+        this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+    this.candidateRepository.saveAndFlush(candidate1);
+
+    candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get()));
+    candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(2).get()));
+
+
+
+
+    Candidate candidate2 = new Candidate("Vianney", "Rousselot",
+        "rousselot@apside.fr", faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+    candidate2.setRanking(RankingCandidate.RANK_1);
+    candidate2.setSex(SexCandidate.SEX_1);
+    candidate2.setStatus(StatusCandidate.STATUS_1);
+    candidate2.setAddress(
+        this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+
+    this.candidateRepository.saveAndFlush(candidate2);
+    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(5).get()));
+    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(3).get()));
+    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(4).get()));
+
+
+    Candidate candidate3 = new Candidate("Clément", "Bouchereau",
+        "bouchereau@apside.fr", faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+    candidate3.setRanking(RankingCandidate.RANK_3);
+    candidate3.setSex(SexCandidate.SEX_0);
+    candidate3.setStatus(StatusCandidate.STATUS_5);
+    candidate3.setAddress(
+        this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+    this.candidateRepository.saveAndFlush(candidate3);
+
+    candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(6).get()));
+    candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(7).get()));
+
+
     for (int i = 0; i < this.nbEntities; i++) {
       Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
           faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
@@ -219,7 +307,7 @@ public class DatasInsertors {
 
     // -----------------------------------Feedback-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
-      Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.lorem().word(),
+      Feedback feedback = new Feedback("CDD", faker.random().nextInt(6, 24), faker.company().name(),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.feedbackRepository.saveAndFlush(feedback);
 
@@ -245,18 +333,18 @@ public class DatasInsertors {
     log.debug("Matter ok");
 
     // -----------------------------------Person-----------------------------------
-//    for (int i = 0; i < nbEntities; i++) {
-//      Person person = new Person(
-//          faker.name().firstName(),
-//          faker.name().lastName(),
-//          faker.internet().emailAddress(),
-//          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      person.setEmail(faker.internet().emailAddress());
-//      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-//      personRepository.saveAndFlush(person);
-//    }
-//    this.personList.addAll(this.personRepository.findAll());
-//    log.debug("Person ok");
+    for (int i = 0; i < nbEntities; i++) {
+      Person persons = new Person(
+          faker.name().firstName(),
+          faker.name().lastName(),
+          faker.internet().emailAddress(),
+          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      person.setEmail(faker.internet().emailAddress());
+      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      personRepository.saveAndFlush(persons);
+    }
+    this.personList.addAll(this.personRepository.findAll());
+    log.debug("Person ok");
 
     // -----------------------------------Session-----------------------------------
 
@@ -285,25 +373,6 @@ public class DatasInsertors {
     this.userList.addAll(this.userRepository.findAll());
     log.debug("User ok");
 
-//  -----------------------------------Relations-----------------------------
-//  -------------------------------------------------------------------------
-
-    Degree degree = null;
-    Candidate candidate = null;
-
-    for (int i = 0; i < this.nbEntities; i++) {
-      degree = this.degreeList.get(i);
-      candidate = this.candidateList.get(i);
-      candidate.getDegrees().add(degree);
-      this.candidateRepository.saveAndFlush(candidate);
-
-    }
-
-
-    candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get());
-    candidateRepository.findAll().get(0);
-
-
 
 //  -----------------------------Candidate Matters------------------------------------
 //  --------------------------------------------------------------------------------
@@ -331,8 +400,8 @@ public class DatasInsertors {
     Candidate getCandidate = this.candidateManualRepository.loadWithChildrens(2);
 
     // Eagered mod
-    getCandidate.addDegree(new Degree("testDeg", LevelDegree.LEVEL_0, "1990"));
-    getCandidate.getDegrees().remove(0);
+//    getCandidate.addDegree(new Degree("testDeg", LevelDegree.LEVEL_0, "1990"));
+//    getCandidate.getDegrees().remove(0);
 
     getCandidate.addCompanySession(new CompanySession(this.companyRepository.findById(3).get(), this.sessionRepository.findById(3).get(), false));
     getCandidate.getCompanySession().remove(0);
@@ -348,6 +417,7 @@ public class DatasInsertors {
 //  --------------------------------------------------------------------------------
 
     Feedback feedback = this.feedbackList.get(1);
+    Candidate candidate = null;
 
     for (int i = 0; i < this.candidateList.size(); i++) {
       candidate = this.candidateList.get(i);
@@ -361,8 +431,15 @@ public class DatasInsertors {
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
+    Appointment app = new Appointment(
+        LocalDateTime.now(),
+        personRepository.findById(1).get(),
+        AppointmentType.TYPE_1);
+    app.addPerson(personRepository.findById(1).get());
+    app.addPerson(candidateRepository.findById(4).get());
+
+    appointmentRepository.saveAndFlush(app);
 
     log.debug("Fixtures totalement chargées");
-
   }
 }

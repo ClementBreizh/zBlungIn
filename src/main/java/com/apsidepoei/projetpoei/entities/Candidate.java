@@ -170,10 +170,11 @@ public class Candidate extends Person {
     this.feedback = feedback;
   }
 
-  public void addDegree(final Degree degree) {
+  public Candidate addDegree(final Degree degree) {
     if (!this.degrees.contains(degree)) {
       this.degrees.add(degree);
     }
+    return this;
   }
 
   /**
