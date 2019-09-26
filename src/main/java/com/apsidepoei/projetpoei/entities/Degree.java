@@ -1,6 +1,5 @@
 package com.apsidepoei.projetpoei.entities;
 
-import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;

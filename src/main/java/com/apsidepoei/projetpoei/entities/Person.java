@@ -220,5 +220,11 @@ public class Person extends EntityDb {
     this.appointments = appointments;
   }
 
+  public Person addAppointment(final Appointment appointment) {
+    if (!this.appointments.contains(appointment)) {
+      this.appointments.add(appointment);
+    }
+    return this;
+  }
 
 }
