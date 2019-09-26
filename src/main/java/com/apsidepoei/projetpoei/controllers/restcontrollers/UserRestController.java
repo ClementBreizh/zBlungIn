@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
-import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.User;
+import com.apsidepoei.projetpoei.securityservice.UserServiceImpl;
 
 /**
  * @author vianney
@@ -21,6 +21,9 @@ import com.apsidepoei.projetpoei.entities.User;
 @RequestMapping("/api/users")
 
 public class UserRestController extends BaseRestController<User, Integer> {
+
+  @Autowired
+  private UserServiceImpl userService;
 
   public UserRestController(@Autowired UserRepository repository) {
     super(repository);

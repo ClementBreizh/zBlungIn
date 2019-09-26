@@ -2,14 +2,15 @@ package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
-import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Candidate;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -133,6 +137,24 @@ public class CandidateRestControllerTest extends BaseRestControllerTest<Candidat
     return false;
   }
 
+  @Autowired
+  private WebApplicationContext context;
+
+  private MockMvc mvc;
+
+  @Before
+  public void setup() {
+      mvc = MockMvcBuilders
+        .webAppContextSetup(context)
+        .apply(springSecurity())
+        .build();
+  }
+
+  /**
+   * Test function via HTTP
+   * @throws Exception
+   */
+  @WithMockUser(username="admin",password="adminadmin")
   @Test
   public void test() throws Exception {
 

@@ -22,6 +22,5 @@ public class ZbleuginApplication {
    */
   public static void main(String[] args) throws ParseException, SQLException {
     SpringApplication.run(ZbleuginApplication.class, args);
-
   }
 }

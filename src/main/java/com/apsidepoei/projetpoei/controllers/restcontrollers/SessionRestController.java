@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
-import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.LearnSessionRepository;
 import com.apsidepoei.projetpoei.entities.Session;
 
 /**
@@ -15,7 +15,7 @@ import com.apsidepoei.projetpoei.entities.Session;
 @RestController
 @RequestMapping("/api/sessions")
 public class SessionRestController extends BaseRestController<Session, Integer> {
-  public SessionRestController(@Autowired SessionRepository repository) {
+  public SessionRestController(@Autowired LearnSessionRepository repository) {
     super(repository);
   }
 }

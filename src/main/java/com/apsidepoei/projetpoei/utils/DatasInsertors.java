@@ -10,6 +10,7 @@ import java.util.Locale;
 import javax.annotation.PostConstruct;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
@@ -24,7 +25,7 @@ import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
 import com.apsidepoei.projetpoei.database.repositories.FeedbackRepository;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
-import com.apsidepoei.projetpoei.database.repositories.SessionRepository;
+import com.apsidepoei.projetpoei.database.repositories.LearnSessionRepository;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
 import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Address;
@@ -40,10 +41,12 @@ import com.apsidepoei.projetpoei.entities.LevelDegree;
 import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.RankingCandidate;
+import com.apsidepoei.projetpoei.entities.RoleUser;
 import com.apsidepoei.projetpoei.entities.Session;
 import com.apsidepoei.projetpoei.entities.SexCandidate;
 import com.apsidepoei.projetpoei.entities.StatusCandidate;
 import com.apsidepoei.projetpoei.entities.User;
+import com.apsidepoei.projetpoei.securityservice.UserServiceImpl;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,7 +91,7 @@ public class DatasInsertors {
   private MatterRepository matterRepository;
 
   @Autowired
-  private SessionRepository sessionRepository;
+  private LearnSessionRepository sessionRepository;
 
   @Autowired
   private CompanySessionRepository companySessionRepository;
@@ -133,8 +136,7 @@ public class DatasInsertors {
 
     // -----------------------------------Address-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
-      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(),
-          faker.address().city());
+      Address address = new Address(faker.address().streetAddress(), faker.address().zipCode(), faker.address().city());
       this.addressRepository.saveAndFlush(address);
     }
     this.addressList.addAll(this.addressRepository.findAll());
@@ -251,11 +253,14 @@ public class DatasInsertors {
     for (int i = 0; i < this.nbEntities; i++) {
       Candidate candidate = new Candidate(faker.name().firstName(), faker.name().lastName(),
           faker.internet().emailAddress(), faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+
+//      candidate.setRanking(RankingCandidate.RANK_2);
+      candidate.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+
       candidate.setRanking(RankingCandidate.RANK_2);
       candidate.setSex(SexCandidate.SEX_1);
       candidate.setStatus(StatusCandidate.STATUS_3);
-      candidate.setAddress(
-          this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+
       this.candidateRepository.saveAndFlush(candidate);
 
     }
@@ -287,8 +292,7 @@ public class DatasInsertors {
       Company company = new Company(faker.company().name());
       company.setSiret(faker.number().digits(14));
       company.setApeCode(faker.number().digits(5));
-      company.setAddress(
-          this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
+      company.setAddress(this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
 
       this.companyRepository.saveAndFlush(company);
     }
@@ -476,4 +480,16 @@ public class DatasInsertors {
 
     log.debug("Fixtures totalement chargées");
   }
+
+  @Value("${security.admin.login}")private String login;
+  @Value("${security.admin.password}")private String password;
+  @PostConstruct
+  public void securityInsertor() {
+
+    User admin = new User("Administrateur", "Administrateur", "learning-admin@tactfactory.com", "0183642533", null, null, true, login, password, RoleUser.ROLE_1);
+    userServiceImpl.save(admin);
+  }
+
+  @Autowired
+  private UserServiceImpl userServiceImpl;
 }

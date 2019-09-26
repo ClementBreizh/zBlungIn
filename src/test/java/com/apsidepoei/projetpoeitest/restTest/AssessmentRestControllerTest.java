@@ -1,8 +1,10 @@
-/*
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 import javax.persistence.ManyToOne;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +24,31 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.apsidepoei.projetpoei.ZbleuginApplication;
 import com.apsidepoei.projetpoei.database.repositories.AssessmentRepository;
 import com.apsidepoei.projetpoei.entities.Assessment;
 import com.apsidepoei.projetpoei.entities.Candidate;
+import com.apsidepoei.projetpoei.entities.Matter;
 import com.apsidepoei.projetpoei.entities.Session;
+import com.apsidepoei.projetpoeitest.utils.RestResponsePage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-*/
 /**
  *
  * @author clemb Tests for Assessment Entity.
- *//*
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -51,42 +59,51 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
   @Autowired
   private AssessmentRepository repository;
 
-  */
-/**
+  /**
    * Empty Constructor.
-   *//*
+   */
 
   public AssessmentRestControllerTest() {
     super("/assessments");
   }
 
-  */
-/**
+  /**
    * Create repository.
-   *//*
+   */
 
   @Override
   protected JpaRepository<Assessment, Integer> getRepository() {
     return repository;
   }
 
-  */
-/**
+  /**
    * Parse Json to List for test.
-   *//*
-
+   *
+   * @throws IOException
+   * @throws JsonMappingException
+   * @throws JsonParseException
+   */
   @Override
   protected List<Assessment> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(builder.toString(), new TypeReference<List<Assessment>>() {
-    });
+    return this.parseJsonToList(builder.toString());
   }
 
-  */
-/**
+  /**
+   * Parse Json to List for test.
+   */
+  protected List<Assessment> parseJsonToList(String content)
+      throws JsonParseException, JsonMappingException, IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    RestResponsePage<Assessment> pMatter = mapper.readValue(content, new TypeReference<RestResponsePage<Assessment>>() {
+    });
+
+    return pMatter.getContent();
+  }
+
+  /**
    * Compare if data is the same.
-   *//*
+   */
 
   @Override
   protected boolean compareTo(Assessment item1, Assessment item2) {
@@ -94,10 +111,9 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
         && item1.getUpdatingDate().compareTo(item2.getUpdatingDate()) == 0;
   }
 
-  */
-/**
+  /**
    * Parse Json to a Object for run test.
-   *//*
+   */
 
   @Override
   protected Assessment parseJsonToObject(StringBuilder builder)
@@ -107,20 +123,18 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     });
   }
 
-  */
-/**
+  /**
    * Generate a Id for run test.
-   *//*
+   */
 
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
 
-  */
-/**
+  /**
    * Create a object for run test.
-   *//*
+   */
 
   @Override
   protected Assessment getObjectTest() throws ParseException {
@@ -128,20 +142,18 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     return item;
   }
 
-  */
-/**
+  /**
    * Return Id of Object for run test.
-   *//*
+   */
 
   @Override
   protected Integer getItemIdTest(Assessment item) {
     return item.getId();
   }
 
-  */
-/**
+  /**
    * Create a string for POST method API.
-   *//*
+   */
 
   @Override
   protected String getObjectToStringToPost() {
@@ -149,16 +161,31 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     return urlParameters;
   }
 
-  */
-/**
+  /**
    * Method to compare list.
-   *//*
+   */
 
   @Override
   protected boolean compareToList(List<Assessment> items, List<Assessment> dbItems) { // TODO Auto-generated method stub
     return false;
   }
 
+  @Autowired
+  private WebApplicationContext context;
+
+  private MockMvc mvc;
+
+  @Before
+  public void setup() {
+    mvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
+  }
+
+  /**
+   * Test function via HTTP
+   *
+   * @throws Exception
+   */
+  @WithMockUser(username = "admin", password = "adminadmin")
   @Test
   public void test() throws Exception {
 
@@ -194,5 +221,20 @@ public class AssessmentRestControllerTest extends BaseRestControllerTest<Assessm
     assertNotNull(newSess);
     assertThat(sess.getCandidate().getFirstname()).isEqualTo(newSess.getCandidate().getFirstname());
   }
+//  @WithMockUser(username="admin",password="adminadmin")
+//  @Test
+//  public void getTest() throws Exception {
+//
+//    MockHttpServletRequestBuilder getresult = get(BASE_API + entityPath).contentType("application/json");
+//
+//    List<Assessment> result = parseJsonToList(this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString());
+//   // MvcResult result = this.mockMvc.perform(getresult).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+//    System.out.println("http = " + result);
+//    List<Assessment> dbItems = getRepository().findAll();
+//    System.out.println("DB = " + dbItems);
+//
+//    // Tests
+//    assertTrue(compareToList(result, dbItems));
+//
+//  }
 }
-*/

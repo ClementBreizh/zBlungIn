@@ -21,4 +21,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
       + "AND e.cellPhone LIKE %:cellPhone% "
       + "AND e.homePhone LIKE %:homePhone%")
   Page<User> findAll(Pageable pageable, @Param("login") String login, @Param("lastname") String lastname, @Param("firstname") String firstname, @Param("email") String email, @Param("cellPhone") String cellPhone, @Param("homePhone") String homePhone);
+  User findByLogin(String login);
 }
