@@ -25,13 +25,12 @@ public class CompanyRestController extends BaseRestController<Company, Integer> 
 
   @GetMapping("filtered")
   public Page<Company> getAllFiltered(
-    final Pageable pageable,
-    @RequestParam(defaultValue = "") final String name,
-    @RequestParam(defaultValue = "") final String antennaName,
-    @RequestParam(defaultValue = "") final String siret,
-    @RequestParam(defaultValue = "") final String apeCode,
-    @RequestParam(defaultValue = "") final String homePhone){
-    return this.getRepository().findAll(pageable);
+      final Pageable pageable,
+      @RequestParam(defaultValue = "") final String name,
+      @RequestParam(defaultValue = "") final String siret,
+      @RequestParam(defaultValue = "") final String apeCode){
+    return this.getRepository().findAll(pageable, name, siret, apeCode);
+
   }
 
   protected CompanyRepository getRepository() {

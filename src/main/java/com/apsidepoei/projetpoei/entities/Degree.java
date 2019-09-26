@@ -27,10 +27,6 @@ public class Degree extends EntityDb {
   @Column(name = DegreeContract.COL_NAME, nullable = false)
   private String name;
 
-//  @JsonProperty(value = DegreeContract.COL_LEVEL)
-//  @Column(name = DegreeContract.COL_LEVEL, length = 50, nullable = false)
-//  private String level;
-
   @JsonProperty(value = DegreeContract.COL_LEVEL)
   @Column(name = DegreeContract.COL_LEVEL)
   private LevelDegree level;
