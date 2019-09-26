@@ -145,21 +145,20 @@ public class DatasInsertors {
 
 
 
-//      personRepository.saveAndFlush(new Person("Jean-Eude", "Chevalier du bois dormant", "dodo@gmail.com", "0600000000"));
-//      personRepository.saveAndFlush(new Person("Lucie", "Teho", "Lucy@gmail.com", "0600000000"));
+      personRepository.saveAndFlush(new Person("Lucie", "Teho", "Lucy@gmail.com", "0600000000"));
 
 
-//    for (int i = 0; i < this.nbEntities; i++) {
-//      Appointment appointment = new Appointment(
-//                LocalDateTime.now(),
-//                personRepository.findById(1).get(),
-//                AppointmentType.TYPE_1);
-//      appointment.setInformations(faker.lorem().sentence());
-//      this.appointmentRepository.saveAndFlush(appointment);
-//      }
-//
-//    this.appointmentList.addAll(this.appointmentRepository.findAll());
-//    log.debug("Appointment ok");
+    for (int i = 0; i < this.nbEntities; i++) {
+      Appointment appointment = new Appointment(
+                LocalDateTime.now(),
+                personRepository.findById(1).get(),
+                AppointmentType.TYPE_1);
+      appointment.setInformations(faker.lorem().sentence());
+      this.appointmentRepository.saveAndFlush(appointment);
+      }
+
+    this.appointmentList.addAll(this.appointmentRepository.findAll());
+    log.debug("Appointment ok");
 
 
 
@@ -453,19 +452,6 @@ public class DatasInsertors {
     }
 
 
-    // -----------------------------------Appointment-----------------------------------
-
-    for (int i = 0; i < this.nbEntities; i++) {
-      Appointment appointment = new Appointment(
-                LocalDateTime.now().plusDays(i),
-                personRepository.findById(faker.random().nextInt(1, this.nbEntities)).get(),
-                AppointmentType.TYPE_1);
-      appointment.setInformations(faker.lorem().sentence());
-      this.appointmentRepository.saveAndFlush(appointment);
-      }
-
-    this.appointmentList.addAll(this.appointmentRepository.findAll());
-    log.debug("Appointment ok");
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
