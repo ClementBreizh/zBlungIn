@@ -30,6 +30,7 @@ public class CompanyRestController extends BaseRestController<Company, Integer> 
       @RequestParam(defaultValue = "") final String siret,
       @RequestParam(defaultValue = "") final String apeCode){
     return this.getRepository().findAll(pageable, name, siret, apeCode);
+
   }
 
   protected CompanyRepository getRepository() {

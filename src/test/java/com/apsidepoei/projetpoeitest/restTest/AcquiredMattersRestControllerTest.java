@@ -1,3 +1,4 @@
+/*
 package com.apsidepoei.projetpoeitest.restTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,10 +40,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+*/
 /**
  *
  * @author clemb Tests for AcquiredMatters Entity.
- */
+ *//*
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
@@ -52,24 +55,30 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   @Autowired
   private AcquiredMattersRepository repository;
 
-  /**
+  */
+/**
    * Empty Constructor.
-   */
+   *//*
+
   public AcquiredMattersRestControllerTest() {
     super("/acquiredmatters");
   }
 
-  /**
+  */
+/**
    * Create repository.
-   */
+   *//*
+
   @Override
   protected JpaRepository<AcquiredMatters, Integer> getRepository() {
     return repository;
   }
 
-  /**
+  */
+/**
    * Parse Json to List for test.
-   */
+   *//*
+
   @Override
   protected List<AcquiredMatters> parseJsonToList(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -78,18 +87,22 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
     });
   }
 
-  /**
+  */
+/**
    * Compare if data is the same.
-   */
+   *//*
+
   @Override
   protected boolean compareTo(AcquiredMatters item1, AcquiredMatters item2) {
     return item1.getId().equals(item2.getId()) && item1.getMatter().equals(item2.getMatter())
         && item1.getCandidate().equals(item2.getCandidate());
   }
 
-  /**
+  */
+/**
    * Parse Json to a Object for run test.
-   */
+   *//*
+
   @Override
   protected AcquiredMatters parseJsonToObject(StringBuilder builder)
       throws JsonParseException, JsonMappingException, IOException {
@@ -99,53 +112,65 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
     });
   }
 
-  /**
+  */
+/**
    * Generate a Id for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdToTest() {
     return 1;
   }
 
-  /**
+  */
+/**
    * Create a object for run test.
-   */
+   *//*
+
   @Override
   protected AcquiredMatters getObjectTest() throws ParseException {
     AcquiredMatters item = new AcquiredMatters();
     return item;
   }
 
-  /**
+  */
+/**
    * Return Id of Object for run test.
-   */
+   *//*
+
   @Override
   protected Integer getItemIdTest(AcquiredMatters item) {
     return item.getId();
   }
 
-  /**
+  */
+/**
    * Create a string for POST method API.
-   */
+   *//*
+
   @Override
   protected String getObjectToStringToPost() {
     String urlParameters = "score=12&validationDate=2019/02/24";
     return urlParameters;
   }
 
-  /**
+  */
+/**
    * Method to compare list.
-   */
+   *//*
+
   @Override
   protected boolean compareToList(List<AcquiredMatters> items, List<AcquiredMatters> dbItems) {
     return false;
   }
 
-  /**
+  */
+/**
    * Test function via HTTP
    *
    * @throws Exception
-   */
+   *//*
+
   @Test
   public void test() throws Exception {
 
@@ -188,3 +213,4 @@ public class AcquiredMattersRestControllerTest extends BaseRestControllerTest<Ac
   }
 
 }
+*/

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class EntityDb {
+public abstract class EntityDb implements ResourceDb<Integer> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
