@@ -389,9 +389,9 @@ public class DatasInsertors {
           faker.internet().emailAddress(),
           faker.phoneNumber().cellPhone().replaceAll(" ", ""),
           faker.name().fullName(),
-          faker.internet().password()
+          faker.lorem().fixedString(10)
           );
-      userRepository.saveAndFlush(user);
+      userServiceImpl.save(user);
     }
     this.userList.addAll(this.userRepository.findAll());
     log.debug("User ok");

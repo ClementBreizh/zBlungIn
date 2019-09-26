@@ -63,7 +63,7 @@ public class User extends Person {
   public User(String firstname, String lastname, String email, String cellPhone, String login, String password) {
     super(firstname, lastname, email, cellPhone);
     this.login = login;
-    this.password = password;
+    this.noEncodedPassword = password;
   }
 
   /**
