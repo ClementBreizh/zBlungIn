@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {

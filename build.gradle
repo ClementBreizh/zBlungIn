@@ -67,8 +67,9 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-      compileOnly 'org.projectlombok:lombok:1.18.8'
-  annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }
 
 apply plugin: "com.github.spotbugs"
