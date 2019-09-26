@@ -8,6 +8,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -15,10 +16,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
@@ -61,11 +68,14 @@ public class Appointment extends EntityDb {
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
+  @JsonIgnoreProperties({"appointments"})
   private List<Person> persons;
 
   @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
-  @ManyToOne(targetEntity = Person.class)
+  @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
   @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
+  @Lazy(value = true)
+  @JsonIgnoreProperties({"appointments"})
   private Person organizer;
 
   /**
@@ -206,6 +216,11 @@ public class Appointment extends EntityDb {
     return persons;
   }
 
+  public void addPerson(Person person) {
+    if (!this.persons.contains(person)) {
+      this.persons.add(person);
+    }
+  }
   /**
    * Setter for the persons list.
    * @param persons is a list of persons, concerned in this appointment.
