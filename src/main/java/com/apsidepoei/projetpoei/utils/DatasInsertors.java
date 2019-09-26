@@ -141,9 +141,11 @@ public class DatasInsertors {
     log.debug("Address ok");
 
 
-    // -----------------------------------Appointment-----------------------------------
-      Person person = new Person("prénom", "nom", "email", "0600000000");
-      personRepository.saveAndFlush(person);
+
+
+//      personRepository.saveAndFlush(new Person("Jean-Eude", "Chevalier du bois dormant", "dodo@gmail.com", "0600000000"));
+//      personRepository.saveAndFlush(new Person("Lucie", "Teho", "Lucy@gmail.com", "0600000000"));
+
 
 //    for (int i = 0; i < this.nbEntities; i++) {
 //      Appointment appointment = new Appointment(
@@ -156,6 +158,7 @@ public class DatasInsertors {
 //
 //    this.appointmentList.addAll(this.appointmentRepository.findAll());
 //    log.debug("Appointment ok");
+
 
 
 
@@ -331,6 +334,21 @@ public class DatasInsertors {
     this.matterList.addAll(this.matterRepository.findAll());
     log.debug("Matter ok");
 
+//    // -----------------------------------Person-----------------------------------
+////    for (int i = 0; i < nbEntities; i++) {
+////      Person person = new Person(
+////          faker.name().firstName(),
+////          faker.name().lastName(),
+////          faker.internet().emailAddress(),
+////          faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+////      person.setEmail(faker.internet().emailAddress());
+////      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+////      personRepository.saveAndFlush(person);
+////    }
+////    this.personList.addAll(this.personRepository.findAll());
+////    log.debug("Person ok");
+//
+//    // -----------------------------------Session-----------------------------------
     // -----------------------------------Person-----------------------------------
     for (int i = 0; i < nbEntities; i++) {
       Person persons = new Person(
@@ -338,8 +356,8 @@ public class DatasInsertors {
           faker.name().lastName(),
           faker.internet().emailAddress(),
           faker.phoneNumber().cellPhone().replaceAll(" ", ""));
-      person.setEmail(faker.internet().emailAddress());
-      person.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
+      persons.setEmail(faker.internet().emailAddress());
+      persons.setCellPhone(faker.phoneNumber().cellPhone().replaceAll(" ", ""));
       personRepository.saveAndFlush(persons);
     }
     this.personList.addAll(this.personRepository.findAll());
@@ -358,7 +376,10 @@ public class DatasInsertors {
     log.debug("Session ok");
 
     // -----------------------------------User-----------------------------------
-    for (int i = 0; i < nbEntities; i++) {
+    Person person = new Person("jean", "cerien", "cerien@gmail.com", "0600000000");
+    personRepository.saveAndFlush(person);
+
+    for (int i = 0; i < 3; i++) {
       User user = new User(
           faker.name().firstName(),
           faker.name().lastName(),
@@ -427,6 +448,20 @@ public class DatasInsertors {
       this.candidateRepository.saveAndFlush(candidate);
     }
 
+
+    // -----------------------------------Appointment-----------------------------------
+
+    for (int i = 0; i < this.nbEntities; i++) {
+      Appointment appointment = new Appointment(
+                LocalDateTime.now().plusDays(i),
+                personRepository.findById(faker.random().nextInt(1, this.nbEntities)).get(),
+                AppointmentType.TYPE_1);
+      appointment.setInformations(faker.lorem().sentence());
+      this.appointmentRepository.saveAndFlush(appointment);
+      }
+
+    this.appointmentList.addAll(this.appointmentRepository.findAll());
+    log.debug("Appointment ok");
 //  -----------------------------------Tests-----------------------------------------------
 //  ---------------------------------------------------------------------------------------
 
