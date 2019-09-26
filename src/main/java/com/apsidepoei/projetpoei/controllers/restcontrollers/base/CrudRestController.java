@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers.base;
 
+import com.apsidepoei.projetpoei.exceptions.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,4 +18,6 @@ public interface CrudRestController<T, ID> {
   T save(T item);
   Long count();
   T savetest(T item);
+  T update(T item, ID id) throws NotFoundException;
+  
 }
