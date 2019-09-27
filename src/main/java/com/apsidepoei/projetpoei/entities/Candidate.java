@@ -57,7 +57,7 @@ public class Candidate extends Person {
       CascadeType.PERSIST,
       CascadeType.MERGE
   })
-//  @LazyCollection(LazyCollectionOption.FALSE)
+  @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
   @JsonIgnore
