@@ -6,13 +6,19 @@ package com.apsidepoei.projetpoei.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
@@ -27,6 +33,8 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends EntityDb {
+
+  private String type;
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
@@ -66,6 +74,11 @@ public class Person extends EntityDb {
    */
   public Person() {
     super();
+  }
+
+  @PrePersist
+  public void prePersist() {
+    this.type = this.getClass().getSimpleName();
   }
 
   /**

@@ -15,10 +15,15 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
   List<Person> findAllByFirstnameAndLastname(String firstname, String lastname);
 
   @Query("SELECT e FROM #{#entityName} e "
-      + "WHERE e.lastname LIKE %:lastname% "
+      + "WHERE e.type = 'Person' "
+      + "AND e.lastname LIKE %:lastname% "
       + "AND e.firstname LIKE %:firstname% "
       + "AND e.email LIKE %:email% "
       + "AND e.cellPhone LIKE %:cellPhone% "
-      + "AND e.homePhone LIKE %:homePhone%")
+      + "AND (e.homePhone = NULL OR e.homePhone LIKE %:homePhone%)")
   Page<Person> findAll(Pageable pageable, @Param("lastname") String lastname, @Param("firstname") String firstname, @Param("email") String email, @Param("cellPhone") String cellPhone, @Param("homePhone") String homePhone);
+
+  // @Query(value = "SELECT * FROM person WHERE type = 'person'", nativeQuery = true)
+  @Query(value = "SELECT e FROM #{#entityName} e WHERE e.type = 'Person' ORDER BY e.id ASC")
+  Page<Person> findAll(Pageable pageable);
 }

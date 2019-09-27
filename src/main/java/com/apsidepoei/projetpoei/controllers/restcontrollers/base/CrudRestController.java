@@ -13,9 +13,9 @@ public interface CrudRestController<T, ID> {
   Optional<T> getById(ID id);
   void deleteById(ID id);
   void deleteAll();
-  T save(T item);
+  T create(T item);
   Long count();
   T savetest(T item);
   T update(T item, ID id) throws NotFoundException;
-  
+
 }

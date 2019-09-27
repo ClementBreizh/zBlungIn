@@ -33,6 +33,7 @@ public class PersonRestController extends BaseRestController<Person, Integer> {
       @RequestParam(defaultValue = "") final String cellPhone,
       @RequestParam(defaultValue = "") final String homePhone){
     return this.getRepository().findAll(pageable, lastname, firstname, email, cellPhone, homePhone);
+
   }
   protected PersonRepository getRepository() {
     return (PersonRepository) this.repository;

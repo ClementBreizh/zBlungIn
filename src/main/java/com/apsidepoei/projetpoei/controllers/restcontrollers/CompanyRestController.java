@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
 import com.apsidepoei.projetpoei.entities.Company;
+import com.apsidepoei.projetpoei.services.CompanyService;
 
 /**
  * @author vianney
@@ -19,6 +20,9 @@ import com.apsidepoei.projetpoei.entities.Company;
 @RestController
 @RequestMapping("/api/companies")
 public class CompanyRestController extends BaseRestController<Company, Integer> {
+  @Autowired
+  private CompanyService service;
+
   public CompanyRestController(@Autowired CompanyRepository repository) {
     super(repository);
   }
@@ -35,5 +39,10 @@ public class CompanyRestController extends BaseRestController<Company, Integer> 
 
   protected CompanyRepository getRepository() {
     return (CompanyRepository) this.repository;
+  }
+
+  @Override
+  protected Company save(final Company item) {
+    return this.service.save(item);
   }
 }

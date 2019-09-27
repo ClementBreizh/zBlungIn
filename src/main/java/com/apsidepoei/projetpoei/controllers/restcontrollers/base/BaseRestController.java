@@ -50,7 +50,7 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
       throw new NotFoundException();
     }
     item.setId(id);
-    return repository.save(item);
+    return this.save(item);
   }
 
 
@@ -63,8 +63,8 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
 
   @PostMapping(value= {"","/","/index"})
   @Override
-  public T save(@Valid @RequestBody T item) {
-    return repository.save(item);
+  public T create(@Valid @RequestBody T item) {
+    return this.save(item);
   }
 
   @PostMapping(value= {"/test"})
@@ -77,5 +77,9 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
   @Override
   public Long count() {
     return repository.count();
+  }
+
+  protected T save(final T item) {
+    return repository.save(item);
   }
 }

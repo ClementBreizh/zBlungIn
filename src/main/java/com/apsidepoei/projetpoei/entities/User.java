@@ -4,6 +4,7 @@
 package com.apsidepoei.projetpoei.entities;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -21,6 +22,7 @@ import lombok.ToString;
  *
  */
 @Entity
+@DiscriminatorValue("User")
 @ToString
 @Table(name = UserContract.TABLE)
 public class User extends Person {
