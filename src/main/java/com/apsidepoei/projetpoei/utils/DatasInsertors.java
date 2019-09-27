@@ -31,6 +31,7 @@ import com.apsidepoei.projetpoei.entities.Address;
 import com.apsidepoei.projetpoei.entities.Appointment;
 import com.apsidepoei.projetpoei.entities.AppointmentType;
 import com.apsidepoei.projetpoei.entities.Assessment;
+import com.apsidepoei.projetpoei.entities.AssessmentSubject;
 import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoei.entities.CompanySession;
@@ -142,7 +143,7 @@ public class DatasInsertors {
 
 
     // -----------------------------------Appointment-----------------------------------
-      Person person = new Person("prénom", "nom", "email", "0600000000");
+      Person person = new Person("Antoine", "Cronier", "cronier@tact.fr", "0600000000");
       personRepository.saveAndFlush(person);
 
 //    for (int i = 0; i < this.nbEntities; i++) {
@@ -160,6 +161,51 @@ public class DatasInsertors {
 
 
     // -----------------------------------Candidate-----------------------------------
+      // -----------------------------------Assessment-----------------------------------
+      Assessment assessment1 = new Assessment(
+          AssessmentSubject.SUBJECT_2,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          LocalDate.now());
+      this.assessmentRepository.saveAndFlush(assessment1);
+      Assessment assessment2 = new Assessment(
+          AssessmentSubject.SUBJECT_0,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment2);
+      Assessment assessment3 = new Assessment(AssessmentSubject.SUBJECT_3,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment3);
+      Assessment assessment4 = new Assessment(AssessmentSubject.SUBJECT_1,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment4);
+      Assessment assessment5 = new Assessment(
+          AssessmentSubject.SUBJECT_2,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment5);
+      Assessment assessment6 = new Assessment(AssessmentSubject.SUBJECT_0,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment6);
+      Assessment assessment7 = new Assessment(AssessmentSubject.SUBJECT_3,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment7);
+      Assessment assessment8 = new Assessment(AssessmentSubject.SUBJECT_1,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      this.assessmentRepository.saveAndFlush(assessment8);
+      log.debug("Assessment ok");
 
     Degree degree1 = new Degree(
        "Diplôme d'état d'infirmier",
@@ -215,6 +261,10 @@ public class DatasInsertors {
     candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get()));
     candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(2).get()));
 
+    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(1).get()));
+    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(2).get()));
+    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(6).get()));
+
 
 
 
@@ -231,6 +281,10 @@ public class DatasInsertors {
     candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(3).get()));
     candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(4).get()));
 
+    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(4).get()));
+    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(3).get()));
+    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(5).get()));
+
 
     Candidate candidate3 = new Candidate("Clément", "Bouchereau",
         "bouchereau@apside.fr", faker.phoneNumber().cellPhone().replaceAll(" ", ""));
@@ -243,6 +297,9 @@ public class DatasInsertors {
 
     candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(6).get()));
     candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(7).get()));
+
+    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(7).get()));
+    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(8).get()));
 
 
     for (int i = 0; i < this.nbEntities; i++) {
@@ -259,25 +316,7 @@ public class DatasInsertors {
     this.candidateList.addAll(this.candidateRepository.findAll());
     log.debug("Candidate ok");
 
-    // -----------------------------------Assessment-----------------------------------
-    Assessment assessment1 = new Assessment(
-        "Culture générale",
-        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
-    this.assessmentRepository.saveAndFlush(assessment1);
-    Assessment assessment2 = new Assessment("Mathématiques",
-        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
-    this.assessmentRepository.saveAndFlush(assessment2);
-    Assessment assessment3 = new Assessment("Culture informatique",
-        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
-    this.assessmentRepository.saveAndFlush(assessment3);
-    Assessment assessment4 = new Assessment("Logique",
-        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-        candidateRepository.findById(faker.random().nextInt(1, nbEntities)).get());
-    this.assessmentRepository.saveAndFlush(assessment4);
-    log.debug("Assessment ok");
+
 
     // -----------------------------------Company-----------------------------------
     for (int i = 1; i < this.nbEntities + 1; i++) {
@@ -435,6 +474,8 @@ public class DatasInsertors {
         personRepository.findById(1).get(),
         AppointmentType.TYPE_1);
     app.addPerson(personRepository.findById(1).get());
+    app.addPerson(candidateRepository.findById(2).get());
+    app.addPerson(candidateRepository.findById(3).get());
     app.addPerson(candidateRepository.findById(4).get());
 
     appointmentRepository.saveAndFlush(app);

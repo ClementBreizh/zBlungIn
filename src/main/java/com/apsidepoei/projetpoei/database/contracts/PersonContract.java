@@ -40,9 +40,9 @@ public class PersonContract extends BaseContract {
    */
   public static final String COL_COMMENTARY = "commentary";
   /**
-   * Define name of column mainContact
+   * Define name of column main_contact
    */
-  public static final String COL_MAINCONTACT = "mainContact";
+  public static final String COL_MAINCONTACT = "main_contact";
 
   /**
    * Define a table with all column.

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,12 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 /**
@@ -41,29 +35,23 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
 
-  @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
   @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
 
-  @JsonProperty(value = AppointmentContract.COL_APPOINTMENT_TYPE)
   @Column(name = AppointmentContract.COL_APPOINTMENT_TYPE, nullable = false)
   private AppointmentType appointmentType;
 
-  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
   @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
   private String informations;
 
-  @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
   private String report;
 
-  @JsonProperty(value = AppointmentContract.COL_STATUS)
   @Column(name = AppointmentContract.COL_STATUS)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean status = false;
 
-  @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
@@ -71,7 +59,6 @@ public class Appointment extends EntityDb {
   @JsonIgnoreProperties({"appointments"})
   private List<Person> persons;
 
-  @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
   @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
   @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
   @Lazy(value = true)

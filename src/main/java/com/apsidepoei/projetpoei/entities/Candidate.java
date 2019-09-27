@@ -24,6 +24,7 @@ import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.NonNull;
@@ -38,28 +39,25 @@ import lombok.ToString;
 @Table(name = CandidateContract.TABLE)
 public class Candidate extends Person {
 
-  @JsonProperty(value = CandidateContract.COL_RANKING_CANDIDATE)
   @Column(name = CandidateContract.COL_RANKING_CANDIDATE)
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
-  @JsonProperty(value = CandidateContract.COL_STATUS_CANDIDATE)
   @Column(name = CandidateContract.COL_STATUS_CANDIDATE)
   private StatusCandidate status = StatusCandidate.STATUS_0;
 
-  @JsonProperty(value = CandidateContract.COL_SEX_CANDIDATE)
   @Column(name = CandidateContract.COL_SEX_CANDIDATE)
   private SexCandidate sex = SexCandidate.SEX_0;
 
-  @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
   @ManyToOne()
+  @JoinTable(name = CandidateContract.COL_FK_ID_FEEDBACK)
   private Feedback feedback;
 
-  @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
+  @ManyToMany(fetch = FetchType.EAGER,
   cascade = {
-      CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
+      CascadeType.PERSIST,
       CascadeType.MERGE
   })
-  @LazyCollection(LazyCollectionOption.FALSE)
+//  @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
   @JsonIgnore
@@ -80,10 +78,18 @@ public class Candidate extends Person {
     @JoinColumn(name = CompanySessionContract.COL_ID) })
   private List<CompanySession> companySession;
 
-  @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
   private Address address;
+
+  @ManyToMany(
+  cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
+  @JsonIgnoreProperties({"assessments"})
+  @LazyCollection(LazyCollectionOption.FALSE)
+  private List<Assessment> assessments;
 
   /**
    * Empty constructor.
@@ -93,6 +99,7 @@ public class Candidate extends Person {
     this.degrees = new ArrayList<>();
     this.matters = new ArrayList<>();
     this.companySession = new ArrayList<>();
+    this.assessments = new ArrayList<>();
   }
 
   /**
@@ -108,6 +115,7 @@ public class Candidate extends Person {
     this.degrees = new ArrayList<>();
     this.matters = new ArrayList<>();
     this.companySession = new ArrayList<>();
+    this.assessments = new ArrayList<>();
   }
 
   /**
@@ -120,7 +128,7 @@ public class Candidate extends Person {
    * @param companySession
    */
   public Candidate(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, Address address, RankingCandidate ranking, StatusCandidate status, SexCandidate sex, Feedback feedback, List<Degree> degrees,
-      List<AcquiredMatters> matters, @NonNull List<CompanySession> companySession) {
+      List<AcquiredMatters> matters, @NonNull List<CompanySession> companySession, List<Assessment> assessments) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.ranking = ranking;
     this.status = status;
@@ -130,6 +138,8 @@ public class Candidate extends Person {
     this.matters = matters;
     this.companySession = companySession;
     this.address = address;
+    this.assessments = assessments;
+
   }
 
   // GETTER/SETTER
@@ -291,5 +301,26 @@ public class Candidate extends Person {
 
   public List<CompanySession> getCompanySession() {
     return companySession;
+  }
+
+  /**
+   * @return the assessments
+   */
+  public List<Assessment> getAssessments() {
+    return assessments;
+  }
+
+  /**
+   * @param assessments the assessments to set
+   */
+  public void setAssessments(List<Assessment> assessments) {
+    this.assessments = assessments;
+  }
+
+  public Candidate addAssessment(final Assessment assessment) {
+    if (!this.assessments.contains(assessment)) {
+      this.assessments.add(assessment);
+    }
+    return this;
   }
 }

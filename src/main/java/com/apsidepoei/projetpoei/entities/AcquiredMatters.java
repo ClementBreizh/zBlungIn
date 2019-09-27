@@ -3,7 +3,6 @@ package com.apsidepoei.projetpoei.entities;
 import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,8 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.ToString;
 
 /**
@@ -30,21 +27,17 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = AcquiredMattersContract.COL_ID))
 public class AcquiredMatters extends EntityDb {
 
-  @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_MATTER)
   @ManyToOne(targetEntity = Matter.class, optional = false)
   @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_MATTER, referencedColumnName = MatterContract.COL_ID)
   private Matter matter;
 
-  @JsonProperty(value = AcquiredMattersContract.COL_FK_ID_CANDIDATE)
   @ManyToOne(targetEntity = Candidate.class, optional = false)
   @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_CANDIDATE, referencedColumnName = AcquiredMattersContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 
-  @JsonProperty(value = AcquiredMattersContract.COL_SCORE)
   @Column(name = AcquiredMattersContract.COL_SCORE, nullable = true)
   private Float score;
 
-  @JsonProperty(value = AcquiredMattersContract.COL_VALIDATION_DATE)
   @Column(name = AcquiredMattersContract.COL_VALIDATION_DATE, nullable = true)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate validationLocalDate;

@@ -20,13 +20,13 @@ public class SessionContract extends BaseContract {
    */
   public static final String COL_NAME = "name";
   /**
-   * defines the name of the column="startDate".
+   * defines the name of the column="start_date".
    */
-  public static final String COL_DATE_START = "startDate";
+  public static final String COL_DATE_START = "start_date";
   /**
    * defines the name of the column="endDate".
    */
-  public static final String COL_DATE_END = "endDate";
+  public static final String COL_DATE_END = "end_date";
   /**
    * defines the name of the column="candidates".
    */
