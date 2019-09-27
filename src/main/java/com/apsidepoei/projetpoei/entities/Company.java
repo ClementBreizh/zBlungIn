@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 /**
@@ -28,27 +27,21 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = CompanyContract.COL_ID))
 public class Company extends EntityDb {
 
-  @JsonProperty(value = CompanyContract.COL_NAME)
   @Column(name = CompanyContract.COL_NAME, nullable = false, length = 120)
   private String name;
 
-  @JsonProperty(value = CompanyContract.COL_ANTENNANAME)
   @Column(name = CompanyContract.COL_ANTENNANAME, nullable = true, length = 50)
   private String antennaName;
 
-  @JsonProperty(value = CompanyContract.COL_SIRET)
   @Column(name = CompanyContract.COL_SIRET, nullable = true, length = 14)
   private String siret;
 
-  @JsonProperty(value = CompanyContract.COL_APECODE)
   @Column(name = CompanyContract.COL_APECODE, nullable = true, length = 5)
   private String apeCode;
 
-  @JsonProperty(value = CompanyContract.COL_FK_ID_CONTACTS)
   @OneToMany(targetEntity = Person.class)
   private List<Person> contacts;
 
-  @JsonProperty(value = CompanyContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CompanyContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
   private Address address;

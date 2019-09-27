@@ -39,25 +39,22 @@ import lombok.ToString;
 @Table(name = CandidateContract.TABLE)
 public class Candidate extends Person {
 
-  @JsonProperty(value = CandidateContract.COL_RANKING_CANDIDATE)
   @Column(name = CandidateContract.COL_RANKING_CANDIDATE)
   private RankingCandidate ranking = RankingCandidate.RANK_0;
 
-  @JsonProperty(value = CandidateContract.COL_STATUS_CANDIDATE)
   @Column(name = CandidateContract.COL_STATUS_CANDIDATE)
   private StatusCandidate status = StatusCandidate.STATUS_0;
 
-  @JsonProperty(value = CandidateContract.COL_SEX_CANDIDATE)
   @Column(name = CandidateContract.COL_SEX_CANDIDATE)
   private SexCandidate sex = SexCandidate.SEX_0;
 
-  @JsonProperty(value = CandidateContract.COL_FK_ID_FEEDBACK)
   @ManyToOne()
+  @JoinTable(name = CandidateContract.COL_FK_ID_FEEDBACK)
   private Feedback feedback;
 
-  @ManyToMany(fetch = FetchType.EAGER, // dit à l'ORM de charger la liste d'objects degrees lorqu'il charge un object candidat
+  @ManyToMany(fetch = FetchType.EAGER,
   cascade = {
-      CascadeType.PERSIST, // Dit à l'ORM de persister la grappe d'object Degree lorsqu'il persiste un Candidat
+      CascadeType.PERSIST,
       CascadeType.MERGE
   })
 //  @LazyCollection(LazyCollectionOption.FALSE)
@@ -81,7 +78,6 @@ public class Candidate extends Person {
     @JoinColumn(name = CompanySessionContract.COL_ID) })
   private List<CompanySession> companySession;
 
-  @JsonProperty(value = CandidateContract.COL_FK_ID_ADDRESS)
   @ManyToOne(targetEntity = Address.class, optional = true)
   @JoinColumn(name = CandidateContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
   private Address address;

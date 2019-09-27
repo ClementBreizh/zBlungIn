@@ -164,28 +164,45 @@ public class DatasInsertors {
       // -----------------------------------Assessment-----------------------------------
       Assessment assessment1 = new Assessment(
           AssessmentSubject.SUBJECT_2,
-          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
+          LocalDate.now());
       this.assessmentRepository.saveAndFlush(assessment1);
-      Assessment assessment2 = new Assessment(AssessmentSubject.SUBJECT_0,
+      Assessment assessment2 = new Assessment(
+          AssessmentSubject.SUBJECT_0,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment2);
       Assessment assessment3 = new Assessment(AssessmentSubject.SUBJECT_3,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment3);
       Assessment assessment4 = new Assessment(AssessmentSubject.SUBJECT_1,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment4);
       Assessment assessment5 = new Assessment(
           AssessmentSubject.SUBJECT_2,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment5);
       Assessment assessment6 = new Assessment(AssessmentSubject.SUBJECT_0,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment6);
       Assessment assessment7 = new Assessment(AssessmentSubject.SUBJECT_3,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment7);
       Assessment assessment8 = new Assessment(AssessmentSubject.SUBJECT_1,
+          faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+          faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       this.assessmentRepository.saveAndFlush(assessment8);
       log.debug("Assessment ok");
@@ -281,8 +298,8 @@ public class DatasInsertors {
     candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(6).get()));
     candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(7).get()));
 
-    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(7).get()));
-    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(8).get()));
+    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(7).get()));
+    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(8).get()));
 
 
     for (int i = 0; i < this.nbEntities; i++) {
@@ -457,6 +474,8 @@ public class DatasInsertors {
         personRepository.findById(1).get(),
         AppointmentType.TYPE_1);
     app.addPerson(personRepository.findById(1).get());
+    app.addPerson(candidateRepository.findById(2).get());
+    app.addPerson(candidateRepository.findById(3).get());
     app.addPerson(candidateRepository.findById(4).get());
 
     appointmentRepository.saveAndFlush(app);

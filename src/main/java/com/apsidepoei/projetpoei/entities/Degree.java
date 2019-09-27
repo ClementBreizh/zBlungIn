@@ -1,7 +1,6 @@
 package com.apsidepoei.projetpoei.entities;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 import javax.persistence.AttributeOverride;
@@ -22,15 +21,12 @@ import javax.validation.constraints.Pattern;
 @AttributeOverride(name = "id", column = @Column(name = DegreeContract.COL_ID))
 public class Degree extends EntityDb {
 
-  @JsonProperty(value = DegreeContract.COL_NAME)
   @Column(name = DegreeContract.COL_NAME, nullable = false)
   private String name;
 
-  @JsonProperty(value = DegreeContract.COL_LEVEL)
   @Column(name = DegreeContract.COL_LEVEL)
   private LevelDegree level;
 
-  @JsonProperty(value = DegreeContract.COL_VALIDATION_DATE)
   @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
   @Pattern(regexp = "\\d{4}")
   protected String validationDate;

@@ -17,7 +17,7 @@ public class CompanySessionContract extends BaseContract {
   /**
    * defines the name of the column="company".
    */
-  public static final String COL_ID = "id_companySession";
+  public static final String COL_ID = "id_company_session";
   /**
    * defines the name of the column="company".
    */

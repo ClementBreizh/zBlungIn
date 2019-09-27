@@ -7,7 +7,6 @@ import org.hibernate.annotations.Type;
 import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 /**
@@ -20,17 +19,15 @@ import lombok.ToString;
 @Table(name = CompanySessionContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = CompanySessionContract.COL_ID))
 public class CompanySession extends EntityDb {
-  @JsonProperty(value = CompanySessionContract.COL_COMPANY)
+
   @ManyToOne(targetEntity = Company.class, optional = false)
   @JoinColumn(name = CompanyContract.COL_ID)
   private Company company;
 
-  @JsonProperty(value = CompanySessionContract.COL_SESSION)
   @ManyToOne(targetEntity = Session.class, optional = false)
   @JoinColumn(name = SessionContract.COL_ID)
   private Session session;
 
-  @JsonProperty(value = CompanySessionContract.COL_VALIDATED)
   @Column(name = CompanySessionContract.COL_VALIDATED, nullable = false)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean validated = false;
