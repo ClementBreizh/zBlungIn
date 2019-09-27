@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.MatterContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
 
@@ -16,7 +15,6 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = MatterContract.COL_ID))
 public class Matter extends EntityDb {
 
-  @JsonProperty(value = MatterContract.COL_NAME)
   @Column(name = MatterContract.COL_NAME, length = 50, nullable = false)
   private String name;
 

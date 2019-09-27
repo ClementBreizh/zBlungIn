@@ -34,33 +34,29 @@ import lombok.ToString;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends EntityDb {
 
+
   private String type;
 
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
+
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
   private String firstname;
 
-  @JsonProperty(value = PersonContract.COL_LASTNAME)
   @Column(name = PersonContract.COL_LASTNAME, nullable = false, length = 50)
   private String lastname;
 
-  @JsonProperty(value = PersonContract.COL_EMAIL)
   @Column(name = PersonContract.COL_EMAIL, nullable = false)
   private String email;
 
-  @JsonProperty(value = PersonContract.COL_CELL_PHONE)
   @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
   private String cellPhone;
 
-  @JsonProperty(value = PersonContract.COL_HOME_PHONE)
   @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)
   private String homePhone;
 
-  @JsonProperty(value = PersonContract.COL_COMMENTARY)
   @Column(name = PersonContract.COL_COMMENTARY, nullable = true)
   private String commentary;
 
-  @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean mainContact = false;
@@ -233,5 +229,11 @@ public class Person extends EntityDb {
     this.appointments = appointments;
   }
 
+  public Person addAppointment(final Appointment appointment) {
+    if (!this.appointments.contains(appointment)) {
+      this.appointments.add(appointment);
+    }
+    return this;
+  }
 
 }

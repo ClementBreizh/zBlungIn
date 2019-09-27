@@ -21,17 +21,17 @@ public class CompanyContract extends BaseContract {
    */
   public static final String COL_NAME = "name";
   /**
-   * defines the name of the column="antennaName".
+   * defines the name of the column="antenna_name".
    */
-  public static final String COL_ANTENNANAME = "antennaName";
+  public static final String COL_ANTENNANAME = "antenna_name";
   /**
    * defines the name of the column="siret".
    */
   public static final String COL_SIRET = "siret";
   /**
-   * defines the name of the column="apeCode".
+   * defines the name of the column="ape_code".
    */
-  public static  final String COL_APECODE = "apeCode";
+  public static  final String COL_APECODE = "ape_code";
   /**
    * Define name of the contacts column.
    */

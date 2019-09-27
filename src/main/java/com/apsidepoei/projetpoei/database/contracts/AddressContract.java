@@ -24,9 +24,9 @@ public class AddressContract extends BaseContract {
   public static final String COL_STREET = "street";
 
   /**
-   * defines the name of the column="postalCode".
+   * defines the name of the column="postal_code".
    */
-  public static final String COL_POSTAL_CODE = "postalCode";
+  public static final String COL_POSTAL_CODE = "postal_code";
 
   /**
    * defines the name of the column="town".

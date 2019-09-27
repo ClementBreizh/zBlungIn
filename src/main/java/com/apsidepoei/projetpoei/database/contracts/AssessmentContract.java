@@ -18,7 +18,7 @@ public class AssessmentContract extends BaseContract {
    */
   public final static String COL_VALIDATION_DATE = "validation_date";
   /**
-   * defines the name of the column="candidate_id".
+   * defines the name of the column="id_candidate".
    */
   public final static String COL_FK_ID_CANDIDATE = "id_candidate";
   /**
@@ -30,9 +30,9 @@ public class AssessmentContract extends BaseContract {
    */
   public static final String COL_CATEGORY = "category";
   /**
-   * defines the name of the column="updatingDate".
+   * defines the name of the column="updating_date".
    */
-  public static final String COL_DATE = "updatingDate";
+  public static final String COL_DATE = "updating_date";
 
 
   public static final String[] COLS = new String[] { COL_ID, COL_CATEGORY, COL_DATE };
