@@ -176,6 +176,11 @@ public class Candidate extends Person {
     }
     return this;
   }
+  
+  public Candidate removeDegree(@NonNull  final Degree degree) {
+    this.degrees.remove((degree));
+    return this;
+  }
 
   /**
    * @return the degrees
