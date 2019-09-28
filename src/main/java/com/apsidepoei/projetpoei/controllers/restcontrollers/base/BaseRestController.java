@@ -1,25 +1,23 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers.base;
 
-import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.apsidepoei.projetpoei.entities.ResourceDb;
+import com.apsidepoei.projetpoei.exceptions.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import com.apsidepoei.projetpoei.controllers.restcontrollers.LocalDateDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import javax.validation.Valid;
 
 /**
  * @author vianney
  *
  */
-public abstract class BaseRestController<T, ID> implements CrudRestController<T, ID> {
-  
+
+public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implements CrudRestController<T, ID> {
+
   protected JpaRepository<T, ID> repository;
 
   public BaseRestController(JpaRepository<T, ID> repository) {
@@ -33,19 +31,31 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
     return repository.findAll(pageable);
   }
 
-  @GetMapping(value= {"/{id}"})
+  @GetMapping(value = {"/{id}"})
   @Override
   public Optional<T> getById(@PathVariable(name="id") ID id) {
     return repository.findById(id);
   }
 
-  @DeleteMapping(value= {"/{id}"})
+  @DeleteMapping(value = {"/{id}"})
   @Override
   public void deleteById(@PathVariable(name="id") ID id) {
     repository.deleteById(id);
   }
 
-  @DeleteMapping(value= {"","/","/index"})
+  @PutMapping(value = "{id}")
+  @Override
+  public T update(@Valid @RequestBody T item, @PathVariable ID id) throws NotFoundException {
+    if (!repository.existsById(id)) {
+      throw new NotFoundException();
+    }
+    item.setId(id);
+    return this.save(item);
+  }
+
+
+
+  @DeleteMapping(value = {"","/","/index"})
   @Override
   public void deleteAll() {
     repository.deleteAll();
@@ -53,13 +63,13 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
 
   @PostMapping(value= {"","/","/index"})
   @Override
-  public T save(T item) {
-    return repository.save(item);
+  public T create(@Valid @RequestBody T item) {
+    return this.save(item);
   }
 
   @PostMapping(value= {"/test"})
   @Override
-  public T savetest(@RequestBody T item) {
+  public T savetest(@RequestBody T  item) {
     return repository.save(item);
   }
 
@@ -67,5 +77,9 @@ public abstract class BaseRestController<T, ID> implements CrudRestController<T,
   @Override
   public Long count() {
     return repository.count();
+  }
+
+  protected T save(final T item) {
+    return repository.save(item);
   }
 }

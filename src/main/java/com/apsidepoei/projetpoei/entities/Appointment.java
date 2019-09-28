@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -15,11 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.ToString;
 
 /**
@@ -34,38 +35,34 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = AppointmentContract.COL_ID))
 public class Appointment extends EntityDb {
 
-  @JsonProperty(value = AppointmentContract.COL_APPOINTMENTDATE)
   @Column(name = AppointmentContract.COL_APPOINTMENTDATE, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
   private LocalDateTime appointmentDate;
 
-  @JsonProperty(value = AppointmentContract.COL_APPOINTMENT_TYPE)
   @Column(name = AppointmentContract.COL_APPOINTMENT_TYPE, nullable = false)
   private AppointmentType appointmentType;
 
-  @JsonProperty(value = AppointmentContract.COL_INFORMATIONS)
   @Column(name = AppointmentContract.COL_INFORMATIONS, nullable = true)
   private String informations;
 
-  @JsonProperty(value = AppointmentContract.COL_REPORT)
   @Column(name = AppointmentContract.COL_REPORT, nullable = true)
   private String report;
 
-  @JsonProperty(value = AppointmentContract.COL_STATUS)
   @Column(name = AppointmentContract.COL_STATUS)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean status = false;
 
-  @JsonProperty(value = AppointmentContract.COL_PERSONS)
   @ManyToMany(targetEntity = Person.class)
   @JoinTable(name = "appointment_persons", joinColumns = {
       @JoinColumn(name = AppointmentContract.COL_ID) }, inverseJoinColumns = {
           @JoinColumn(name = PersonContract.COL_ID) })
+  @JsonIgnoreProperties({"appointments"})
   private List<Person> persons;
 
-  @JsonProperty(value = AppointmentContract.COL_ORGANIZER)
-  @ManyToOne(targetEntity = Person.class)
+  @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
   @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
+  @Lazy(value = true)
+  @JsonIgnoreProperties({"appointments"})
   private Person organizer;
 
   /**
@@ -206,6 +203,11 @@ public class Appointment extends EntityDb {
     return persons;
   }
 
+  public void addPerson(Person person) {
+    if (!this.persons.contains(person)) {
+      this.persons.add(person);
+    }
+  }
   /**
    * Setter for the persons list.
    * @param persons is a list of persons, concerned in this appointment.

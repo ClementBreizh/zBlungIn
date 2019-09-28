@@ -4,15 +4,13 @@
 package com.apsidepoei.projetpoei.entities;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.UserContract;
 import com.apsidepoei.projetpoei.entities.RoleUser;
 import com.apsidepoei.projetpoei.entities.Person;
-
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
 
@@ -21,19 +19,17 @@ import lombok.ToString;
  *
  */
 @Entity
+@DiscriminatorValue("User")
 @ToString
 @Table(name = UserContract.TABLE)
 public class User extends Person {
 
-  @JsonProperty(value = UserContract.COL_NAME)
   @Column(name = UserContract.COL_NAME, length = 50, unique = true, nullable = false)
   private String login;
 
-  @JsonProperty(value = UserContract.COL_PASSWORD)
   @Column(name = UserContract.COL_PASSWORD, nullable = false, length = 50)
   private String password;
 
-  @JsonProperty(value = UserContract.COL_ROLE)
   @Column(name = UserContract.COL_ROLE)
   private RoleUser role = RoleUser.ROLE_3;
 

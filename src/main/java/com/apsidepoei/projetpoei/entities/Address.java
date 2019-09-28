@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 /**
  * This class is the Address entity.
@@ -20,15 +19,12 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = AddressContract.COL_ID))
 public class Address extends EntityDb {
 
-  @JsonProperty(value = AddressContract.COL_STREET)
   @Column(name = AddressContract.COL_STREET, nullable = false)
   private String street;
 
-  @JsonProperty(value = AddressContract.COL_POSTAL_CODE)
   @Column(name = AddressContract.COL_POSTAL_CODE, nullable = false, length = 5)
   private String postalCode;
 
-  @JsonProperty(value = AddressContract.COL_CITY)
   @Column(name = AddressContract.COL_CITY, nullable = false)
   private String city;
 

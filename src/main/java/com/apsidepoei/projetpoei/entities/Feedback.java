@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
 
@@ -26,19 +25,15 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = FeedbackContract.COL_ID))
 public class Feedback extends EntityDb {
 
-  @JsonProperty(value = FeedbackContract.COL_TYPE_OF_CONTRACT)
   @Column(name = FeedbackContract.COL_TYPE_OF_CONTRACT, nullable = false, length = 50)
   private String typeOfContract;
 
-  @JsonProperty(value = FeedbackContract.COL_DURATION_OF_CONTRACT)
   @Column(name = FeedbackContract.COL_DURATION_OF_CONTRACT, nullable = true)
   private Integer durationOfContract;
 
-  @JsonProperty(value = FeedbackContract.COL_COMMENT)
   @Column(name = FeedbackContract.COL_COMMENT, nullable = true)
   private String comment;
 
-  @JsonProperty(value = FeedbackContract.COL_UPDATED_AT)
   @Column(name = FeedbackContract.COL_UPDATED_AT, nullable = true)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate updatedAt = LocalDate.now();

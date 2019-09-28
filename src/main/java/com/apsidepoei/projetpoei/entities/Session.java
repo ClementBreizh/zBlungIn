@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
 
@@ -25,16 +24,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AttributeOverride(name = "id", column = @Column(name = SessionContract.COL_ID))
 public class Session extends EntityDb {
 
-  @JsonProperty(value = SessionContract.COL_NAME)
   @Column(name = SessionContract.COL_NAME, length = 50, nullable = false)
   private String name;
 
-  @JsonProperty(value = SessionContract.COL_DATE_START)
   @Column(name = SessionContract.COL_DATE_START, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate startDate;
 
-  @JsonProperty(value = SessionContract.COL_DATE_END)
   @Column(name = SessionContract.COL_DATE_END, nullable = false)
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate endDate;

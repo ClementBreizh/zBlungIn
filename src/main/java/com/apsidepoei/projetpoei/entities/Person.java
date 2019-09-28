@@ -3,11 +3,22 @@
  */
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
 import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.ToString;
@@ -17,46 +28,53 @@ import lombok.ToString;
  *
  */
 @Entity
-@ToString
+@ToString(exclude = {"appointments"})
 @Table(name = PersonContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends EntityDb {
 
+
+  private String type;
+
   @JsonProperty(value = PersonContract.COL_FIRSTNAME)
+
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
   private String firstname;
 
-  @JsonProperty(value = PersonContract.COL_LASTNAME)
   @Column(name = PersonContract.COL_LASTNAME, nullable = false, length = 50)
   private String lastname;
 
-  @JsonProperty(value = PersonContract.COL_EMAIL)
   @Column(name = PersonContract.COL_EMAIL, nullable = false)
   private String email;
 
-  @JsonProperty(value = PersonContract.COL_CELL_PHONE)
   @Column(name = PersonContract.COL_CELL_PHONE, nullable = false, length = 12)
   private String cellPhone;
 
-  @JsonProperty(value = PersonContract.COL_HOME_PHONE)
   @Column(name = PersonContract.COL_HOME_PHONE, nullable = true, length = 12)
   private String homePhone;
 
-  @JsonProperty(value = PersonContract.COL_COMMENTARY)
   @Column(name = PersonContract.COL_COMMENTARY, nullable = true)
   private String commentary;
 
-  @JsonProperty(value = PersonContract.COL_MAINCONTACT)
   @Column(name = PersonContract.COL_MAINCONTACT, nullable = true)
   @Type(type = "org.hibernate.type.NumericBooleanType")
   private Boolean mainContact = false;
+
+  @ManyToMany(mappedBy = "persons")
+  @JsonIgnoreProperties({"persons"})
+  private List<Appointment> appointments = new ArrayList<>();
 
   /**
    * Empty constructor.
    */
   public Person() {
     super();
+  }
+
+  @PrePersist
+  public void prePersist() {
+    this.type = this.getClass().getSimpleName();
   }
 
   /**
@@ -196,4 +214,26 @@ public class Person extends EntityDb {
   public void setMainContact(Boolean mainContact) {
     this.mainContact = mainContact;
   }
+
+  /**
+   * @return the appointments
+   */
+  public List<Appointment> getAppointments() {
+    return appointments;
+  }
+
+  /**
+   * @param appointments the appointments to set
+   */
+  public void setAppointments(List<Appointment> appointments) {
+    this.appointments = appointments;
+  }
+
+  public Person addAppointment(final Appointment appointment) {
+    if (!this.appointments.contains(appointment)) {
+      this.appointments.add(appointment);
+    }
+    return this;
+  }
+
 }
