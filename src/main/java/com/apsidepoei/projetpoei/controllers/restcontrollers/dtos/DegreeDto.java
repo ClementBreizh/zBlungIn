@@ -14,11 +14,19 @@ public class DegreeDto {
   @JsonProperty(value = DegreeContract.COL_LEVEL)
   private String level;
 
-
+  /**
+   * Empty constructor.
+   */
   public DegreeDto() {
     super();
   }
 
+  /**
+   * Constructor.
+   * @param id is a number.
+   * @param name is a string.
+   * @param level is a string.
+   */
   public DegreeDto(Integer id, String name, String level) {
     this();
     this.id = id;

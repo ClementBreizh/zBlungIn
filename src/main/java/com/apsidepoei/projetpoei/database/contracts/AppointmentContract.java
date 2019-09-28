@@ -49,14 +49,16 @@ public class AppointmentContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_INFORMATIONS, COL_APPOINTMENTDATE, COL_REPORT };
+  public static final String[] COLS = new String[] {
+      COL_ID, COL_INFORMATIONS, COL_APPOINTMENTDATE, COL_REPORT
+  };
 
   /**
    * Define the string used for create the table.
    */
   public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + "(" + COL_ID
-      + " int NOT NULL AUTO_INCREMENT PRIMARY KEY," + COL_INFORMATIONS + " VARCHAR(255)," + COL_APPOINTMENTDATE
-      + " DATETIME NOT NULL," + COL_REPORT + " TEXT" + ")";
+      + " int NOT NULL AUTO_INCREMENT PRIMARY KEY," + COL_INFORMATIONS + " VARCHAR(255),"
+      + COL_APPOINTMENTDATE + " DATETIME NOT NULL," + COL_REPORT + " TEXT" + ")";
 
   /**
    * Constructor.

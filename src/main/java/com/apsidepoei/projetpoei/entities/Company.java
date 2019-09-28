@@ -1,5 +1,8 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
-import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
 import lombok.ToString;
 
 /**
@@ -43,7 +44,8 @@ public class Company extends EntityDb {
   private List<Person> contacts;
 
   @ManyToOne(targetEntity = Address.class, optional = true)
-  @JoinColumn(name = CompanyContract.COL_FK_ID_ADDRESS, referencedColumnName = AddressContract.COL_ID)
+  @JoinColumn(name = CompanyContract.COL_FK_ID_ADDRESS,
+      referencedColumnName = AddressContract.COL_ID)
   private Address address;
 
 
@@ -65,11 +67,12 @@ public class Company extends EntityDb {
   }
 
   /**
-   * @param name
-   * @param antennaName
-   * @param siret
-   * @param apeCode
-   * @param address
+   * Constructor.
+   * @param name Name of the company.
+   * @param antennaName Name of the antenna.
+   * @param siret Siret.
+   * @param apeCode Ape code.
+   * @param address Address.
    */
   public Company(String name, String antennaName, String siret, String apeCode,
       Address address) {
@@ -84,12 +87,13 @@ public class Company extends EntityDb {
 
 
   /**
-   * @param name
-   * @param antennaName
-   * @param siret
-   * @param apeCode
-   * @param contacts
-   * @param address
+   * Constructor.
+   * @param name Name of the company.
+   * @param antennaName Name of the antenna.
+   * @param siret Siret.
+   * @param apeCode Ape code.
+   * @param contacts Company's contacts.
+   * @param address Address.
    */
   public Company(String name, String antennaName, String siret, String apeCode,
       List<Person> contacts, Address address) {
@@ -106,86 +110,96 @@ public class Company extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * @return the name
+   * Return the name.
+   * @return the name.
    */
   public String getName() {
     return name;
   }
 
   /**
-   * @param name the name to set
+   * Setter for the name.
+   * @param name the name to set.
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * @return the antennaName
+   * Return the name of the antenna.
+   * @return the antennaName.
    */
   public String getAntennaName() {
     return antennaName;
   }
 
   /**
-   * @param antennaName the antennaName to set
+   * Setter for the name of the antenna.
+   * @param antennaName the antennaName to set.
    */
   public void setAntennaName(String antennaName) {
     this.antennaName = antennaName;
   }
 
-
-  // GETTER/SETTER
   /**
-   * @return the siret
+   * Return the siret.
+   * @return the siret.
    */
   public String getSiret() {
     return siret;
   }
 
   /**
-   * @param siret the siret to set
+   * Setter for the siret.
+   * @param siret the siret to set.
    */
   public void setSiret(String siret) {
     this.siret = siret;
   }
 
   /**
-   * @return the apeCode
+   * Return the APE code.
+   * @return the apeCode.
    */
   public String getApeCode() {
     return apeCode;
   }
 
   /**
-   * @param apeCode the apeCode to set
+   * Setter for the APE code.
+   * @param apeCode the apeCode to set.
    */
   public void setApeCode(String apeCode) {
     this.apeCode = apeCode;
   }
 
   /**
-   * @return the contacts
+   * Return a list of contacts.
+   * @return the contacts.
    */
   public List<Person> getContacts() {
     return contacts;
   }
 
   /**
-   * @param contacts the contacts to set
+   * Setter for the contacts list.
+   * @param contacts the contacts to set.
    */
   public void setContacts(List<Person> contacts) {
     this.contacts = contacts;
   }
 
   /**
-   * @return the address
+   * Return the address.
+   * @return the address.
    */
   public Address getAddress() {
     return address;
   }
 
   /**
-   * @param address the address to set
+   * Setter for the address.
+   * @param address the address to set.
    */
   public void setAddress(Address address) {
     this.address = address;

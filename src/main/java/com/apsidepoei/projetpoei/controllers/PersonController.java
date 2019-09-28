@@ -1,5 +1,8 @@
 package com.apsidepoei.projetpoei.controllers;
 
+import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
+import com.apsidepoei.projetpoei.entities.Person;
+
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -8,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
-import com.apsidepoei.projetpoei.entities.Person;
 
 /**
  * Controller for persons form.

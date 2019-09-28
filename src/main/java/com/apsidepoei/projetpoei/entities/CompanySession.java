@@ -1,13 +1,19 @@
 package com.apsidepoei.projetpoei.entities;
 
-import javax.persistence.*;
+import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
+import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
+import com.apsidepoei.projetpoei.database.contracts.SessionContract;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.ToString;
 
 import org.hibernate.annotations.Type;
-
-import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
-import com.apsidepoei.projetpoei.database.contracts.CompanyContract;
-import com.apsidepoei.projetpoei.database.contracts.SessionContract;
-import lombok.ToString;
 
 /**
  * This class is the CompanyCandidateValidatedSession entity.
@@ -40,8 +46,9 @@ public class CompanySession extends EntityDb {
   }
 
   /**
-   * @param company
-   * @param session
+   * Constructor.
+   * @param company is an object company.
+   * @param session is an object session.
    */
   public CompanySession(Company company, Session session) {
     super();
@@ -50,9 +57,10 @@ public class CompanySession extends EntityDb {
   }
 
   /**
-   * @param company
-   * @param session
-   * @param validated
+   * Constructor.
+   * @param company is an object company.
+   * @param session is an object session.
+   * @param validated is a boolean.
    */
   public CompanySession(Company company, Session session, Boolean validated) {
     super();
@@ -76,14 +84,14 @@ public class CompanySession extends EntityDb {
   /**
    * Setter for the company.
    *
-   * @param optional = object company
+   * @param company = object company
    */
   public void setCompany(Company company) {
     this.company = company;
   }
 
   /**
-   * Getter for the session
+   * Getter for the session.
    *
    * @return the session.
    */
@@ -101,6 +109,7 @@ public class CompanySession extends EntityDb {
   }
 
   /**
+   * Return the boolean.
    * @return the validated
    */
   public Boolean getValidated() {
@@ -108,6 +117,7 @@ public class CompanySession extends EntityDb {
   }
 
   /**
+   * Set the boolean.
    * @param validated the validated to set
    */
   public void setValidated(Boolean validated) {

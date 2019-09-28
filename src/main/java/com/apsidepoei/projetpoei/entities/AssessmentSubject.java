@@ -1,16 +1,14 @@
-/**
- *
- */
+
 package com.apsidepoei.projetpoei.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
+ * Assessment subject enumeration.
  * @author vianney
  *
  */
@@ -23,7 +21,8 @@ public enum AssessmentSubject {
   SUBJECT_3;
 
 
-  private static Map<String, AssessmentSubject> namesMap = new HashMap<String, AssessmentSubject>(4);
+  private static Map<String, AssessmentSubject> namesMap =
+      new HashMap<String, AssessmentSubject>(4);
 
   static {
     namesMap.put("Culture générale", SUBJECT_0);
@@ -37,14 +36,23 @@ public enum AssessmentSubject {
     return namesMap.get(value);
   }
 
+  /**
+   * Return the value of the enumeration.
+   *
+   * @return is a string.
+   */
   @JsonValue
   public String toValue() {
+    String data = null;
+
     for (Entry<String, AssessmentSubject> entry : namesMap.entrySet()) {
-      if (entry.getValue() == this)
-        return entry.getKey();
+      if (entry.getValue() == this) {
+        data = entry.getKey();
+      } else {
+        data = null;
+      }
+
     }
-
-    return null;
+    return data;
   }
-
 }

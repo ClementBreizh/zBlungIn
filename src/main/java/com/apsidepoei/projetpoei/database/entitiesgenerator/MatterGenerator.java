@@ -98,7 +98,8 @@
 //   * Generate and insert after a drop table with a parameter number.
 //   */
 //  public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
-//    ConsoleLogger generatedLogger = new ConsoleLogger("Matter generated data tests", Options.DEBUG);
+//    ConsoleLogger generatedLogger = new ConsoleLogger("Matter generated data tests",
+//    Options.DEBUG);
 //    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
 //
 //    DbManager.getInstance().getMatterDao().drop();

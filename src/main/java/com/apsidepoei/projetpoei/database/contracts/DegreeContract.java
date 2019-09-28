@@ -27,7 +27,7 @@ public class DegreeContract extends BaseContract {
   /**
    * defines the name of the column="validation_date".
    */
-  public final static String COL_VALIDATION_DATE = "validation_date";
+  public static final String COL_VALIDATION_DATE = "validation_date";
 
   /**
    * Define a table with all column.

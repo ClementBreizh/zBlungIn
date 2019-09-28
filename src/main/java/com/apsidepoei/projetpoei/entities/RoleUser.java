@@ -1,10 +1,8 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
 /**
- * @author vianney
+ * Rose enumeration for user.
+ * @author vianney.
  *
  */
 public enum RoleUser {
@@ -13,9 +11,9 @@ public enum RoleUser {
     ROLE_2("ROLE_DEV"),
     ROLE_3("ROLE_USER");
 
-    public final String role;
-    private RoleUser(String role) {
+  public final String role;
+  private RoleUser(String role) {
     this.role = role;
-    }
+  }
 
 }

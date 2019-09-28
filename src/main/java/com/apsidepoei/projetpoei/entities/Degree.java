@@ -1,13 +1,14 @@
 package com.apsidepoei.projetpoei.entities;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
-import lombok.ToString;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+
+import lombok.ToString;
 
 /**
  * This class is the Degree entity.
@@ -51,9 +52,10 @@ public class Degree extends EntityDb {
   }
 
   /**
-   * @param name
-   * @param level
-   * @param validationDate
+   * Constructor.
+   * @param name is the degree name.
+   * @param level is a level degree.
+   * @param validationDate is the validation date of the degree.
    */
   public Degree(String name, LevelDegree level, String validationDate) {
     super();
@@ -84,6 +86,7 @@ public class Degree extends EntityDb {
   }
 
   /**
+   * Return a date.
    * @return the validationDate
    */
   public String getValidationDate() {
@@ -91,6 +94,7 @@ public class Degree extends EntityDb {
   }
 
   /**
+   * Setter for the validation date.
    * @param validationDate the validationDate to set
    */
   public void setValidationDate(String validationDate) {
@@ -98,6 +102,7 @@ public class Degree extends EntityDb {
   }
 
   /**
+   * Return a level.
    * @return the level
    */
   public LevelDegree getLevel() {
@@ -105,6 +110,7 @@ public class Degree extends EntityDb {
   }
 
   /**
+   * Setter for the level.
    * @param level the level to set
    */
   public void setLevel(LevelDegree level) {

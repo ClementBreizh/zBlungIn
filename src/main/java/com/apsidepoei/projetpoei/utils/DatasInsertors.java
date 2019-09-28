@@ -1,17 +1,5 @@
 package com.apsidepoei.projetpoei.utils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.annotation.PostConstruct;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
 import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
@@ -46,9 +34,24 @@ import com.apsidepoei.projetpoei.entities.SexCandidate;
 import com.apsidepoei.projetpoei.entities.StatusCandidate;
 import com.apsidepoei.projetpoei.entities.User;
 import com.github.javafaker.Faker;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.annotation.PostConstruct;
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import org.springframework.transaction.annotation.Transactional;
+
 /**
+ * Data insertor.
  * @author vianney
  *
  */
@@ -124,9 +127,12 @@ public class DatasInsertors {
   public DatasInsertors() {
   }
 
+  /**
+   * Insert data in bdd.
+   */
   @Transactional
   @PostConstruct
-  public void InsertData() {
+  public void insertData() {
     Faker faker = new Faker(Locale.FRENCH);
     log.info("Création des fixtures");
     log.info("Si fail, relancer, erreur dûe aux id uniques");
@@ -143,72 +149,72 @@ public class DatasInsertors {
 
 
     // -----------------------------------Appointment-----------------------------------
-      Person person = new Person("Antoine", "Cronier", "cronier@tact.fr", "0600000000");
-      personRepository.saveAndFlush(person);
+    Person person = new Person("Antoine", "Cronier", "cronier@tact.fr", "0600000000");
+    personRepository.saveAndFlush(person);
 
-//    for (int i = 0; i < this.nbEntities; i++) {
-//      Appointment appointment = new Appointment(
-//                LocalDateTime.now(),
-//                personRepository.findById(1).get(),
-//                AppointmentType.TYPE_1);
-//      appointment.setInformations(faker.lorem().sentence());
-//      this.appointmentRepository.saveAndFlush(appointment);
-//      }
-//
-//    this.appointmentList.addAll(this.appointmentRepository.findAll());
-//    log.debug("Appointment ok");
+    //    for (int i = 0; i < this.nbEntities; i++) {
+    //      Appointment appointment = new Appointment(
+    //                LocalDateTime.now(),
+    //                personRepository.findById(1).get(),
+    //                AppointmentType.TYPE_1);
+    //      appointment.setInformations(faker.lorem().sentence());
+    //      this.appointmentRepository.saveAndFlush(appointment);
+    //      }
+    //
+    //    this.appointmentList.addAll(this.appointmentRepository.findAll());
+    //    log.debug("Appointment ok");
 
 
 
     // -----------------------------------Candidate-----------------------------------
-      // -----------------------------------Assessment-----------------------------------
-      Assessment assessment1 = new Assessment(
+    // -----------------------------------Assessment-----------------------------------
+    Assessment assessment1 = new Assessment(
           AssessmentSubject.SUBJECT_2,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           LocalDate.now());
-      this.assessmentRepository.saveAndFlush(assessment1);
-      Assessment assessment2 = new Assessment(
+    this.assessmentRepository.saveAndFlush(assessment1);
+    Assessment assessment2 = new Assessment(
           AssessmentSubject.SUBJECT_0,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment2);
-      Assessment assessment3 = new Assessment(AssessmentSubject.SUBJECT_3,
+    this.assessmentRepository.saveAndFlush(assessment2);
+    Assessment assessment3 = new Assessment(AssessmentSubject.SUBJECT_3,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment3);
-      Assessment assessment4 = new Assessment(AssessmentSubject.SUBJECT_1,
+    this.assessmentRepository.saveAndFlush(assessment3);
+    Assessment assessment4 = new Assessment(AssessmentSubject.SUBJECT_1,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment4);
-      Assessment assessment5 = new Assessment(
+    this.assessmentRepository.saveAndFlush(assessment4);
+    Assessment assessment5 = new Assessment(
           AssessmentSubject.SUBJECT_2,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment5);
-      Assessment assessment6 = new Assessment(AssessmentSubject.SUBJECT_0,
+    this.assessmentRepository.saveAndFlush(assessment5);
+    Assessment assessment6 = new Assessment(AssessmentSubject.SUBJECT_0,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment6);
-      Assessment assessment7 = new Assessment(AssessmentSubject.SUBJECT_3,
+    this.assessmentRepository.saveAndFlush(assessment6);
+    Assessment assessment7 = new Assessment(AssessmentSubject.SUBJECT_3,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment7);
-      Assessment assessment8 = new Assessment(AssessmentSubject.SUBJECT_1,
+    this.assessmentRepository.saveAndFlush(assessment7);
+    Assessment assessment8 = new Assessment(AssessmentSubject.SUBJECT_1,
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
           faker.random().nextInt(0, 20),
           faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      this.assessmentRepository.saveAndFlush(assessment8);
-      log.debug("Assessment ok");
+    this.assessmentRepository.saveAndFlush(assessment8);
+    log.debug("Assessment ok");
 
     Degree degree1 = new Degree(
-       "Diplôme d'état d'infirmier",
+        "Diplôme d'état d'infirmier",
         LevelDegree.LEVEL_4);
     degree1.setValidationDate("2014");
     this.degreeRepository.saveAndFlush(degree1);
@@ -219,20 +225,20 @@ public class DatasInsertors {
     degree2.setValidationDate("2013");
     this.degreeRepository.saveAndFlush(degree2);
 
-   Degree degree3 = new Degree(
-       "Bac pro comptabilité",
+    Degree degree3 = new Degree(
+        "Bac pro comptabilité",
         LevelDegree.LEVEL_2);
-   degree3.setValidationDate("2012");
-   this.degreeRepository.saveAndFlush(degree3);
+    degree3.setValidationDate("2012");
+    this.degreeRepository.saveAndFlush(degree3);
 
-   Degree degree4 = new Degree(
-      "BEP technicien de surface",
-       LevelDegree.LEVEL_1);
-   degree4.setValidationDate("2010");
-   this.degreeRepository.saveAndFlush(degree4);
+    Degree degree4 = new Degree(
+        "BEP technicien de surface",
+        LevelDegree.LEVEL_1);
+    degree4.setValidationDate("2010");
+    this.degreeRepository.saveAndFlush(degree4);
 
-   Degree degree5 = new Degree(
-       "Brevet des collèges",
+    Degree degree5 = new Degree(
+        "Brevet des collèges",
         LevelDegree.LEVEL_0);
     degree5.setValidationDate("2007");
     this.degreeRepository.saveAndFlush(degree5);
@@ -241,13 +247,13 @@ public class DatasInsertors {
         "Master RH",
          LevelDegree.LEVEL_5);
     degree6.setValidationDate("2012");
-     this.degreeRepository.saveAndFlush(degree6);
+    this.degreeRepository.saveAndFlush(degree6);
 
-     Degree degree7 = new Degree(
+    Degree degree7 = new Degree(
          "BEP coiffure",
           LevelDegree.LEVEL_2);
-     degree7.setValidationDate("2008");
-      this.degreeRepository.saveAndFlush(degree7);
+    degree7.setValidationDate("2008");
+    this.degreeRepository.saveAndFlush(degree7);
 
     Candidate candidate1 = new Candidate("Thomas", "Rousseau",
         "rousseau@apside.fr", faker.phoneNumber().cellPhone().replaceAll(" ", ""));
@@ -258,12 +264,17 @@ public class DatasInsertors {
         this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
     this.candidateRepository.saveAndFlush(candidate1);
 
-    candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(1).get()));
-    candidateRepository.save(candidateRepository.findById(2).get().addDegree(degreeRepository.findById(2).get()));
+    candidateRepository.save(candidateRepository.findById(2).get()
+        .addDegree(degreeRepository.findById(1).get()));
+    candidateRepository.save(candidateRepository.findById(2).get()
+        .addDegree(degreeRepository.findById(2).get()));
 
-    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(1).get()));
-    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(2).get()));
-    candidateRepository.save(candidateRepository.findById(2).get().addAssessment(assessmentRepository.findById(6).get()));
+    candidateRepository.save(candidateRepository.findById(2).get()
+        .addAssessment(assessmentRepository.findById(1).get()));
+    candidateRepository.save(candidateRepository.findById(2).get()
+        .addAssessment(assessmentRepository.findById(2).get()));
+    candidateRepository.save(candidateRepository.findById(2).get()
+        .addAssessment(assessmentRepository.findById(6).get()));
 
 
 
@@ -277,13 +288,19 @@ public class DatasInsertors {
         this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
 
     this.candidateRepository.saveAndFlush(candidate2);
-    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(5).get()));
-    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(3).get()));
-    candidateRepository.save(candidateRepository.findById(3).get().addDegree(degreeRepository.findById(4).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addDegree(degreeRepository.findById(5).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addDegree(degreeRepository.findById(3).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addDegree(degreeRepository.findById(4).get()));
 
-    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(4).get()));
-    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(3).get()));
-    candidateRepository.save(candidateRepository.findById(3).get().addAssessment(assessmentRepository.findById(5).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addAssessment(assessmentRepository.findById(4).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addAssessment(assessmentRepository.findById(3).get()));
+    candidateRepository.save(candidateRepository.findById(3).get()
+        .addAssessment(assessmentRepository.findById(5).get()));
 
 
     Candidate candidate3 = new Candidate("Clément", "Bouchereau",
@@ -295,11 +312,15 @@ public class DatasInsertors {
         this.addressRepository.findById(faker.random().nextInt(1, this.nbEntities)).get());
     this.candidateRepository.saveAndFlush(candidate3);
 
-    candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(6).get()));
-    candidateRepository.save(candidateRepository.findById(4).get().addDegree(degreeRepository.findById(7).get()));
+    candidateRepository.save(candidateRepository.findById(4).get()
+        .addDegree(degreeRepository.findById(6).get()));
+    candidateRepository.save(candidateRepository.findById(4).get()
+        .addDegree(degreeRepository.findById(7).get()));
 
-    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(7).get()));
-    candidateRepository.save(candidateRepository.findById(4).get().addAssessment(assessmentRepository.findById(8).get()));
+    candidateRepository.save(candidateRepository.findById(4).get()
+        .addAssessment(assessmentRepository.findById(7).get()));
+    candidateRepository.save(candidateRepository.findById(4).get()
+        .addAssessment(assessmentRepository.findById(8).get()));
 
 
     for (int i = 0; i < this.nbEntities; i++) {
@@ -412,23 +433,32 @@ public class DatasInsertors {
     log.debug("User ok");
 
 
-//  -----------------------------Candidate Matters------------------------------------
-//  --------------------------------------------------------------------------------
+    //  -----------------------------Candidate Matters------------------------------------
+    //  --------------------------------------------------------------------------------
 
-    this.acquiredMattersRepository.save(new AcquiredMatters(10.0f,LocalDate.now(),this.matterRepository.findById(1).get(), this.candidateRepository.findById(2).get()));
-    this.acquiredMattersRepository.save(new AcquiredMatters(15.0f,LocalDate.now(),this.matterRepository.findById(2).get(), this.candidateRepository.findById(2).get()));
-    this.acquiredMattersRepository.save(new AcquiredMatters(12.0f,LocalDate.now(),this.matterRepository.findById(3).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(10.0f,LocalDate.now(),
+        this.matterRepository.findById(1).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(15.0f,LocalDate.now(),
+        this.matterRepository.findById(2).get(), this.candidateRepository.findById(2).get()));
+    this.acquiredMattersRepository.save(new AcquiredMatters(12.0f,LocalDate.now(),
+        this.matterRepository.findById(3).get(), this.candidateRepository.findById(2).get()));
 
-    CompanySession cs1 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
-    CompanySession cs2 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
-    CompanySession cs3 = new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false);
+    CompanySession cs1 = new CompanySession(this.companyRepository.findById(1).get(),
+        this.sessionRepository.findById(1).get(), false);
+    CompanySession cs2 = new CompanySession(this.companyRepository.findById(1).get(),
+        this.sessionRepository.findById(1).get(), false);
+    CompanySession cs3 = new CompanySession(this.companyRepository.findById(1).get(),
+        this.sessionRepository.findById(1).get(), false);
     companySessionRepository.saveAndFlush(cs1);
     companySessionRepository.saveAndFlush(cs2);
     companySessionRepository.saveAndFlush(cs3);
 
-//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(1).get(), false));
-//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(1).get(), this.sessionRepository.findById(2).get(), true));
-//    this.companySessionRepository.save(new CompanySession(this.companyRepository.findById(2).get(), this.sessionRepository.findById(1).get(), false));
+    //    this.companySessionRepository.save(new CompanySession(this.companyRepository
+    //    .findById(1).get(), this.sessionRepository.findById(1).get(), false));
+    //    this.companySessionRepository.save(new CompanySession(this.companyRepository
+    //    .findById(1).get(), this.sessionRepository.findById(2).get(), true));
+    //    this.companySessionRepository.save(new CompanySession(this.companyRepository
+    //    .findById(2).get(), this.sessionRepository.findById(1).get(), false));
 
     Candidate c1 = this.candidateRepository.findById(2).get();
     c1.setCompanySession(this.companySessionRepository.findAll());
@@ -438,21 +468,23 @@ public class DatasInsertors {
     Candidate getCandidate = this.candidateManualRepository.loadWithChildrens(2);
 
     // Eagered mod
-//    getCandidate.addDegree(new Degree("testDeg", LevelDegree.LEVEL_0, "1990"));
-//    getCandidate.getDegrees().remove(0);
+    //    getCandidate.addDegree(new Degree("testDeg", LevelDegree.LEVEL_0, "1990"));
+    //    getCandidate.getDegrees().remove(0);
 
-    getCandidate.addCompanySession(new CompanySession(this.companyRepository.findById(3).get(), this.sessionRepository.findById(3).get(), false));
+    getCandidate.addCompanySession(new CompanySession(this.companyRepository.findById(3).get(),
+        this.sessionRepository.findById(3).get(), false));
     getCandidate.getCompanySession().remove(0);
 
     // Lazy mod
     getCandidate.getMatters().remove(0);
-    AcquiredMatters m1 = this.acquiredMattersRepository.save(new AcquiredMatters(10f, LocalDate.now(), this.matterRepository.findById(4).get(), getCandidate));
+    AcquiredMatters m1 = this.acquiredMattersRepository.save(new AcquiredMatters(10f,
+        LocalDate.now(), this.matterRepository.findById(4).get(), getCandidate));
     getCandidate.addMatter(m1);
 
     this.candidateRepository.save(getCandidate);
 
-//  -----------------------------Champs supplémentaires------------------------------------
-//  --------------------------------------------------------------------------------
+    //  -----------------------------Champs supplémentaires------------------------------------
+    //  --------------------------------------------------------------------------------
 
     Feedback feedback = this.feedbackList.get(1);
     Candidate candidate = null;
@@ -462,12 +494,13 @@ public class DatasInsertors {
       candidate.setFeedback(feedback);
       candidate.setHomePhone(faker.phoneNumber().phoneNumber().replaceAll(" ", ""));
       candidate.setCommentary(faker.lorem().sentence());
-      candidate.addCompanySession(companySessionRepository.findById(faker.random().nextInt(1, 3)).get());
+      candidate.addCompanySession(companySessionRepository.findById(faker.random().nextInt(1, 3))
+          .get());
       this.candidateRepository.saveAndFlush(candidate);
     }
 
-//  -----------------------------------Tests-----------------------------------------------
-//  ---------------------------------------------------------------------------------------
+    //  -----------------------------------Tests-----------------------------------------------
+    //  ---------------------------------------------------------------------------------------
 
     Appointment app = new Appointment(
         LocalDateTime.now(),

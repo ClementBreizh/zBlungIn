@@ -33,7 +33,7 @@ public class FeedbackContract extends BaseContract {
   /**
    * defines the name of the column="updated_at".
    */
-  public final static String COL_UPDATED_AT = "updated_at";
+  public static final String COL_UPDATED_AT = "updated_at";
 
 
   /**

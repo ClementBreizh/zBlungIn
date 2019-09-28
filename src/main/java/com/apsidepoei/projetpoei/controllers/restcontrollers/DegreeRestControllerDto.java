@@ -1,21 +1,23 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
+import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
-
 /**
- * @author vianney
+ * Rest controller.
+ * @author vianney.
  *
  */
 @RestController
 @RequestMapping("/api/degrees/dto")
-public class DegreeRestControllerDto{
+public class DegreeRestControllerDto {
 
   @Autowired
   private DegreeRepository repository;
+
   public DegreeRestControllerDto() {
 
   }

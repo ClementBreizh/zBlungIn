@@ -1,10 +1,8 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.contracts;
 
 /**
- * @author vianney
+ * Contract for acquired matters.
+ * @author vianney.
  *
  */
 public class AcquiredMattersContract extends BaseContract {
@@ -20,23 +18,23 @@ public class AcquiredMattersContract extends BaseContract {
   /**
    * defines the name of the column="score".
    */
-  public final static String COL_SCORE = "score";
+  public static final String COL_SCORE = "score";
   /**
    * defines the name of the column="validation_date".
    */
-  public final static String COL_VALIDATION_DATE = "validation_date";
+  public static final  String COL_VALIDATION_DATE = "validation_date";
   /**
    * defines the name of the column="id_matter".
    */
-  public final static String COL_FK_ID_MATTER = "id_matter";
+  public static final  String COL_FK_ID_MATTER = "id_matter";
   /**
    * defines the name of the column="candidate_id".
    */
-  public final static String COL_FK_ID_CANDIDATE = "id_candidate";
+  public static final  String COL_FK_ID_CANDIDATE = "id_candidate";
   /**
    * defines the name of the column="candidate_id".
    */
-  public final static String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
+  public static final  String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
 
   /**
    * Define a table with all column.

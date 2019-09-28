@@ -1,15 +1,16 @@
 package com.apsidepoei.projetpoei.services.fixtures;
 
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.apsidepoei.projetpoei.database.repositories.AcquiredMattersRepository;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Candidate;
 import com.apsidepoei.projetpoei.entities.Matter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @Transactional
@@ -25,9 +26,10 @@ public class MatterFixtureService {
   private AcquiredMattersRepository acquiredMattersRepository;
 
 
-
+  /**
+   * Fixture for matters.
+   */
   public void make() {
-
     Candidate c = candidateRepository.findById(3).get();
     Matter m = matterRepository.findById(1).get();
 
@@ -36,7 +38,7 @@ public class MatterFixtureService {
     AcquiredMatters matters = new AcquiredMatters(m, c);
     acquiredMattersRepository.saveAndFlush(matters);
     System.out.println("AcquiredMatters ok");
-//    c.addMatter(matters);
-//    candidateRepository.saveAndFlush(c);
+    //    c.addMatter(matters);
+    //    candidateRepository.saveAndFlush(c);
   }
 }
