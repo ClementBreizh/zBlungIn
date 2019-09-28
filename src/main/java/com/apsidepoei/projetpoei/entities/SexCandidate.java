@@ -45,6 +45,6 @@ public enum SexCandidate {
         data = null;
       }
     }
-    return null; // or fail
+    return data; // or fail
   }
 }

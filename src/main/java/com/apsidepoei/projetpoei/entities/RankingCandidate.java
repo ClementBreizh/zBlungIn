@@ -39,16 +39,12 @@ public enum RankingCandidate {
     * @return the value.
     */
   @JsonValue
-    public String toValue() {
-    String data = null;
-
+  public String toValue() {
     for (Entry<String, RankingCandidate> entry : namesMap.entrySet()) {
-      if (entry.getValue() == this) {
-        data = entry.getKey();
-      } else {
-        data = null;
-      }
+      if (entry.getValue() == this)
+        return entry.getKey();
     }
-    return data; // or fail
+
+    return null; // or fail
   }
 }

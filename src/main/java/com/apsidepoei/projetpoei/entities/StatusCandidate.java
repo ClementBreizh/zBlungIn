@@ -50,15 +50,10 @@ public enum StatusCandidate {
    */
   @JsonValue
   public String toValue() {
-    String data = null;
-
     for (Entry<String, StatusCandidate> entry : namesMap.entrySet()) {
-      if (entry.getValue() == this) {
-        data = entry.getKey();
-      } else {
-        data = null; // or fail
+      if (entry.getValue() == this)
+        return entry.getKey();
       }
+      return null; // or fail
     }
-    return data;
-  }
 }
