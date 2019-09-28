@@ -1,9 +1,7 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.contracts;
 
 /**
+ * Candidate contract.
  * @author vianney
  *
  */
@@ -23,39 +21,47 @@ public class CandidateContract extends BaseContract {
    * defines the name of the column="rankingCandidate".
    */
   public static final String COL_RANKING_CANDIDATE = "ranking_candidate";
+
   /**
    * defines the name of the column="statusCandidate".
    */
   public static final String COL_STATUS_CANDIDATE = "status_candidate";
+
   /**
    * defines the name of the column="sexCandidate".
    */
   public static final String COL_SEX_CANDIDATE = "sex_candidate";
+
   /**
    * defines the name of the column="feedback_id".
    */
   public static final String COL_FK_ID_FEEDBACK = "feedback_id";
+
   /**
    * defines the name of the column="degrees".
    */
   public static final String COL_DEGREES = "degrees";
+
   /**
    * defines the name of the column="matters".
    */
   public static final String COL_MATTERS = "matters";
+
   /**
    * defines the name of the column="companySession".
    */
-  public static final String COL_FK_ID_COMPANYSESSION = "company_session" ;
+  public static final String COL_FK_ID_COMPANYSESSION = "company_session";
+
   /**
    * defines the name of the column="address_id".
    */
-  public final static String COL_FK_ID_ADDRESS = "address_id";
+  public static final String COL_FK_ID_ADDRESS = "address_id";
 
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE , COL_FK_ID_ADDRESS };
+  public static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE,
+      COL_FK_ID_ADDRESS };
 
   /**
    * Define the sql request used for create the table in database.

@@ -1,7 +1,7 @@
 package com.apsidepoei.projetpoei.database.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.apsidepoei.projetpoei.entities.Address;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 
