@@ -4,7 +4,7 @@ import com.apsidepoei.projetpoei.database.repositories.AddressRepository;
 import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
 import com.apsidepoei.projetpoei.entities.Company;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
