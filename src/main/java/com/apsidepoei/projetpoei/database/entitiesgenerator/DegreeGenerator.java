@@ -110,7 +110,8 @@
 //   * @param nb = number
 //   */
 //  public void generateAndInsertDatasDroppingTable(int nb) throws SQLException {
-//    ConsoleLogger generatedLogger = new ConsoleLogger("Degree generated data tests", Options.DEBUG);
+//    ConsoleLogger generatedLogger = new ConsoleLogger("Degree generated data tests",
+//    Options.DEBUG);
 //    generatedLogger.Log("Lancement des tests de données générées.", Options.DEBUG);
 //
 //    DbManager.getInstance().getDegreeDao().drop();

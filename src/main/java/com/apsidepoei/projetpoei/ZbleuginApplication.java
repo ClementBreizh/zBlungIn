@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @Configuration
-@EnableJpaRepositories(basePackages="com.apsidepoei")
+@EnableJpaRepositories(basePackages = "com.apsidepoei")
 public class ZbleuginApplication {
 
 

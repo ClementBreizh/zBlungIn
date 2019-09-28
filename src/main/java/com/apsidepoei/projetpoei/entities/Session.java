@@ -1,12 +1,12 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.SessionContract;
+
 import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.apsidepoei.projetpoei.database.contracts.SessionContract;
 
 import lombok.ToString;
 
@@ -78,6 +78,7 @@ public class Session extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the startDate
    */
   public LocalDate getStartDate() {
@@ -85,6 +86,7 @@ public class Session extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param startDate the startDate to set
    */
   public void setStartDate(LocalDate startDate) {
@@ -92,6 +94,7 @@ public class Session extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the endDate
    */
   public LocalDate getEndDate() {
@@ -99,6 +102,7 @@ public class Session extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param endDate the endDate to set
    */
   public void setEndDate(LocalDate endDate) {

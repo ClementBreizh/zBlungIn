@@ -1,9 +1,7 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.contracts;
 
 /**
+ * User contract.
  * @author vianney
  *
  */

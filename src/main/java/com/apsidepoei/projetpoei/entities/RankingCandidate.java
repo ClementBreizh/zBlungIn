@@ -1,17 +1,14 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
- * @author vianney
+ * Ranking candidate enumeration.
+ * @author vianney.
  *
  */
 public enum RankingCandidate {
@@ -22,28 +19,36 @@ public enum RankingCandidate {
     RANK_3,
     RANK_4;
 
-    private static Map<String, RankingCandidate> namesMap = new HashMap<String, RankingCandidate>(5);
+  private static Map<String, RankingCandidate> namesMap = new HashMap<String, RankingCandidate>(5);
 
-    static {
-        namesMap.put("0 - statut non déterminé", RANK_0);
-        namesMap.put("1 - tout est ok", RANK_1);
-        namesMap.put("2 - ok sauf documents à revoir", RANK_2);
-        namesMap.put("3 - pas mal de choses à revoir", RANK_3);
-        namesMap.put("4 - ne correspond pas au poste", RANK_4);
-    }
+  static {
+    namesMap.put("0 - statut non déterminé", RANK_0);
+    namesMap.put("1 - tout est ok", RANK_1);
+    namesMap.put("2 - ok sauf documents à revoir", RANK_2);
+    namesMap.put("3 - pas mal de choses à revoir", RANK_3);
+    namesMap.put("4 - ne correspond pas au poste", RANK_4);
+  }
 
-    @JsonCreator
+  @JsonCreator
     public static RankingCandidate forValue(String value) {
-        return namesMap.get(value);
-    }
+    return namesMap.get(value);
+  }
 
-    @JsonValue
+  /**
+    * Return the value of this enumeration.
+    * @return the value.
+    */
+  @JsonValue
     public String toValue() {
-        for (Entry<String, RankingCandidate> entry : namesMap.entrySet()) {
-            if (entry.getValue() == this)
-                return entry.getKey();
-        }
+    String data = null;
 
-        return null; // or fail
+    for (Entry<String, RankingCandidate> entry : namesMap.entrySet()) {
+      if (entry.getValue() == this) {
+        data = entry.getKey();
+      } else {
+        data = null;
+      }
     }
+    return data; // or fail
+  }
 }

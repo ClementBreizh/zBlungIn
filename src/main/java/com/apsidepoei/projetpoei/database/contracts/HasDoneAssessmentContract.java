@@ -1,9 +1,7 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.database.contracts;
 
 /**
+ * Contract.
  * @author vianney
  *
  */
@@ -20,24 +18,24 @@ public class HasDoneAssessmentContract extends BaseContract {
   /**
    * defines the name of the column="score".
    */
-  public final static String COL_SCORE = "score";
+  private static final String COL_SCORE = "score";
   /**
    * defines the name of the column="validation_date".
    */
-  public final static String COL_VALIDATION_DATE = "validation_date";
+  private static final String COL_VALIDATION_DATE = "validation_date";
   /**
    * defines the name of the column="assessment_id".
    */
-  public final static String COL_FK_ID_ASSESSMENT = "id_assessment";
+  public static final String COL_FK_ID_ASSESSMENT = "id_assessment";
   /**
    * defines the name of the column="candidate_id".
    */
-  public final static String COL_FK_ID_CANDIDATE = "id_candidate";
+  public static final String COL_FK_ID_CANDIDATE = "id_candidate";
 
   /**
    * defines the name of the column="candidate_id".
    */
-  public final static String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
+  public static final String COL_COLUMN_ID_CANDIDATE = PersonContract.COL_ID;
   /**
    * Define a table with all column.
    */

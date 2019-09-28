@@ -1,5 +1,7 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
+
 import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
@@ -7,11 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.apsidepoei.projetpoei.database.contracts.FeedbackContract;
-
 import lombok.ToString;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * This class is the Feedback entity.
@@ -57,10 +57,11 @@ public class Feedback extends EntityDb {
 
 
   /**
-   * @param typeOfContract
-   * @param durationOfContract
-   * @param comment
-   * @param updatedAt
+   * Constructor.
+   * @param typeOfContract define the contrat.
+   * @param durationOfContract the duration for the contract.
+   * @param comment is a comment for the feedback.
+   * @param updatedAt is the updated date.
    */
   public Feedback(String typeOfContract, Integer durationOfContract, String comment,
       LocalDate updatedAt) {
