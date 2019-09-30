@@ -1,5 +1,8 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
+import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
+import com.apsidepoei.projetpoei.database.repositories.UserRepository;
+import com.apsidepoei.projetpoei.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
-import com.apsidepoei.projetpoei.database.repositories.UserRepository;
-import com.apsidepoei.projetpoei.entities.User;
-
 /**
+ * Rest controller.
  * @author vianney
  *
  */
@@ -35,6 +35,7 @@ public class UserRestController extends BaseRestController<User, Integer> {
       @RequestParam(defaultValue = "") final String homePhone,
       @RequestParam(defaultValue = "") final String login){
     return this.getRepository().findAll(pageable,firstname, lastname, email, cellPhone, homePhone, login);
+
   }
 
 

@@ -1,5 +1,7 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
+import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
@@ -9,11 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
-import com.apsidepoei.projetpoei.database.contracts.MatterContract;
-import lombok.ToString;
 
 /**
  * This class is the relation entity Assessment and Candidate.
@@ -28,11 +28,13 @@ import lombok.ToString;
 public class AcquiredMatters extends EntityDb {
 
   @ManyToOne(targetEntity = Matter.class, optional = false)
-  @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_MATTER, referencedColumnName = MatterContract.COL_ID)
+  @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_MATTER,
+      referencedColumnName = MatterContract.COL_ID)
   private Matter matter;
 
   @ManyToOne(targetEntity = Candidate.class, optional = false)
-  @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_CANDIDATE, referencedColumnName = AcquiredMattersContract.COL_COLUMN_ID_CANDIDATE)
+  @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_CANDIDATE,
+      referencedColumnName = AcquiredMattersContract.COL_COLUMN_ID_CANDIDATE)
   private Candidate candidate;
 
   @Column(name = AcquiredMattersContract.COL_SCORE, nullable = true)
@@ -82,56 +84,64 @@ public class AcquiredMatters extends EntityDb {
   // GETTER/SETTER
 
   /**
-   * @return the candidate
+   * Return the candidate.
+   * @return id the candidate.
    */
   public Candidate getCandidate() {
     return candidate;
   }
 
   /**
-   * @return the matter
+   * Return the matter.
+   * @return is the matter.
    */
   public Matter getMatter() {
     return matter;
   }
 
   /**
-   * @param matter the matter to set
+   * Set the matter to set.
+   * @param matter is a matter to set.
    */
   public void setMatter(Matter matter) {
     this.matter = matter;
   }
 
   /**
-   * @param candidate the candidate to set
+   * Set the candidate.
+   * @param candidate is the candidate to set.
    */
   public void setCandidate(Candidate candidate) {
     this.candidate = candidate;
   }
 
   /**
-   * @return the score
+   * Return the score.
+   * @return is the the score.
    */
   public Float getScore() {
     return score;
   }
 
   /**
-   * @param score the score to set
+   * Set the score.
+   * @param score is the score to set.
    */
   public void setScore(Float score) {
     this.score = score;
   }
 
   /**
-   * @return the validationLocalDate
+   * Return the validation date.
+   * @return is the validation date.
    */
   public LocalDate getValidationLocalDate() {
     return validationLocalDate;
   }
 
   /**
-   * @param validationLocalDate the validationLocalDate to set
+   * Set the validation date.
+   * @param validationLocalDate is the validationLocalDate to set.
    */
   public void setValidationLocalDate(LocalDate validationLocalDate) {
     this.validationLocalDate = validationLocalDate;

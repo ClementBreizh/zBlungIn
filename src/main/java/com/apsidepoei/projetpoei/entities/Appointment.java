@@ -1,5 +1,9 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
+import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +11,7 @@ import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -14,14 +19,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.ToString;
+
 import org.hibernate.annotations.Type;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import com.apsidepoei.projetpoei.database.contracts.AppointmentContract;
-import com.apsidepoei.projetpoei.database.contracts.PersonContract;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.ToString;
 
 /**
  * This class is the Appointment entity.
@@ -60,7 +62,8 @@ public class Appointment extends EntityDb {
   private List<Person> persons;
 
   @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
-  @JoinColumn(name = AppointmentContract.COL_ORGANIZER, referencedColumnName = PersonContract.COL_ID, nullable = false)
+  @JoinColumn(name = AppointmentContract.COL_ORGANIZER,
+      referencedColumnName = PersonContract.COL_ID, nullable = false)
   @Lazy(value = true)
   @JsonIgnoreProperties({"appointments"})
   private Person organizer;
@@ -74,11 +77,13 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * @param appointmentDate
-   * @param organizer
-   * @param appointmentType
+   * Constructor with only associations.
+   * @param appointmentDate is the date of the appointment.
+   * @param organizer is the organizer.
+   * @param appointmentType is the type.
    */
-  public Appointment(LocalDateTime appointmentDate, Person organizer, AppointmentType appointmentType) {
+  public Appointment(LocalDateTime appointmentDate,
+                     Person organizer, AppointmentType appointmentType) {
     super();
     this.appointmentDate = appointmentDate;
     this.organizer = organizer;
@@ -87,11 +92,12 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * @param informations
-   * @param appointmentType
-   * @param appointmentDate
-   * @param report
-   * @param status
+   * Constructor  with  non null informations.
+   * @param informations is the informations of this appointment.
+   * @param appointmentType is the type.
+   * @param appointmentDate is the date.
+   * @param report is the comment after the appointment.
+   * @param status is the status of the appointment.
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
       Boolean status, Person organizer, AppointmentType appointmentType) {
@@ -106,13 +112,14 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * @param informations
-   * @param appointmentType
-   * @param appointmentDate
-   * @param report
-   * @param status
-   * @param persons
-   * @param organizer
+   * Constructor with all informations.
+   * @param informations is the informations of this appointment.
+   * @param appointmentType is the type.
+   * @param appointmentDate is the date.
+   * @param report is the comment after the appointment.
+   * @param status is the status of the appointment.
+   * @param persons is a list of guests.
+   * @param organizer is the organizer.
    */
   public Appointment(String informations, LocalDateTime appointmentDate, String report,
       Boolean status, List<Person> persons, Person organizer, AppointmentType appointmentType) {
@@ -139,7 +146,7 @@ public class Appointment extends EntityDb {
   /**
    * Set the informations.
    *
-   * @param informations = the informations
+   * @param informations = the informations.
    */
   public void setInformations(String informations) {
     this.informations = informations;
@@ -157,7 +164,7 @@ public class Appointment extends EntityDb {
   /**
    * Set the dateTime.
    *
-   * @param dateTime = the date and time
+   * @param appointmentDate = the date and time
    */
   public void setAppointmentDate(LocalDateTime appointmentDate) {
     this.appointmentDate = appointmentDate;
@@ -188,26 +195,33 @@ public class Appointment extends EntityDb {
   public Boolean getStatus() {
     return status;
   }
-/**
- * Set the status for this appointment
- * @param status is the status for the appointment.
- */
+
+  /**
+   * Set the status for this appointment.
+   * @param status is the status for the appointment.
+   */
   public void setStatus(Boolean status) {
     this.status = status;
   }
-/**
- * Getter fot the persons list in this appointment.
- * @return a list of persons.
- */
+
+  /**
+   * Getter fot the persons list in this appointment.
+   * @return a list of persons.
+   */
   public List<Person> getPersons() {
     return persons;
   }
 
+  /**
+   * Add a person to the giests list.
+   * @param person is a guest a the appointment.
+   */
   public void addPerson(Person person) {
     if (!this.persons.contains(person)) {
       this.persons.add(person);
     }
   }
+
   /**
    * Setter for the persons list.
    * @param persons is a list of persons, concerned in this appointment.
@@ -225,14 +239,16 @@ public class Appointment extends EntityDb {
   }
 
   /**
-   * @return the appointmentType
+   * Return the type.
+   * @return the appointmentType.
    */
   public AppointmentType getAppointmentType() {
     return appointmentType;
   }
 
   /**
-   * @param appointmentType the appointmentType to set
+   * Setter for the type.
+   * @param appointmentType the appointmentType to set.
    */
   public void setAppointmentType(AppointmentType appointmentType) {
     this.appointmentType = appointmentType;

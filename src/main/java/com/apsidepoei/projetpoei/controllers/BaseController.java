@@ -20,9 +20,9 @@ public abstract class BaseController {
 
   /**
    * Generic mapping method.
-   * @return
+   * @return the path.
    */
-  @GetMapping(path= "/index")
+  @GetMapping(path = "/index")
   public String getIndex() {
     return path + "/index";
   }

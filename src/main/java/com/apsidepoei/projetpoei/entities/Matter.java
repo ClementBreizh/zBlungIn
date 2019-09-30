@@ -1,11 +1,11 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.MatterContract;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 
 import lombok.ToString;
 

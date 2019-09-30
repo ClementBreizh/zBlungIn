@@ -1,22 +1,29 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers.base;
 
-import java.util.Optional;
 import com.apsidepoei.projetpoei.entities.ResourceDb;
 import com.apsidepoei.projetpoei.exceptions.NotFoundException;
+
+import java.util.Optional;
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.*;
-
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * @author vianney
+ * Generic REST Controller.
  *
+ * @author vianney
  */
 
-public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implements CrudRestController<T, ID> {
+public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
+    implements CrudRestController<T, ID> {
 
   protected JpaRepository<T, ID> repository;
 
@@ -25,7 +32,7 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
     this.repository = repository;
   }
 
-  @GetMapping(value = {"","/","/index"})
+  @GetMapping(value = {"", "/", "/index"})
   @Override
   public Page<T> getAll(final Pageable pageable) {
     return repository.findAll(pageable);
@@ -33,13 +40,13 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
 
   @GetMapping(value = {"/{id}"})
   @Override
-  public Optional<T> getById(@PathVariable(name="id") ID id) {
+  public Optional<T> getById(@PathVariable(name = "id") ID id) {
     return repository.findById(id);
   }
 
   @DeleteMapping(value = {"/{id}"})
   @Override
-  public void deleteById(@PathVariable(name="id") ID id) {
+  public void deleteById(@PathVariable(name = "id") ID id) {
     repository.deleteById(id);
   }
 
@@ -50,26 +57,25 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
       throw new NotFoundException();
     }
     item.setId(id);
-    return repository.save(item);
+    return this.save(item);
   }
 
 
-
-  @DeleteMapping(value = {"","/","/index"})
+  @DeleteMapping(value = {"", "/", "/index"})
   @Override
   public void deleteAll() {
     repository.deleteAll();
   }
 
-  @PostMapping(value= {"","/","/index"})
+  @PostMapping(value = {"", "/", "/index"})
   @Override
-  public T save(@Valid @RequestBody T item) {
-    return repository.save(item);
+  public T create(@Valid @RequestBody T item) {
+    return this.save(item);
   }
 
-  @PostMapping(value= {"/test"})
+  @PostMapping(value = {"/test"})
   @Override
-  public T savetest(@RequestBody T  item) {
+  public T savetest(@RequestBody T item) {
     return repository.save(item);
   }
 
@@ -77,5 +83,9 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID> implement
   @Override
   public Long count() {
     return repository.count();
+  }
+
+  protected T save(final T item) {
+    return repository.save(item);
   }
 }

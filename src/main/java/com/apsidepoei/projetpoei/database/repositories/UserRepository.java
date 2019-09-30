@@ -1,12 +1,12 @@
 package com.apsidepoei.projetpoei.database.repositories;
 
+import com.apsidepoei.projetpoei.entities.User;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import com.apsidepoei.projetpoei.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
@@ -19,6 +19,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
       + "AND e.login LIKE %:login%")
   Page<User> findAll(Pageable pageable, @Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("cellPhone") String cellPhone, @Param("homePhone") String homePhone, @Param("login") String login);
 
-  @Query("SELECT e FROM #{#entityName} e")
-  Page<User> findAll(Pageable pageable);
 }

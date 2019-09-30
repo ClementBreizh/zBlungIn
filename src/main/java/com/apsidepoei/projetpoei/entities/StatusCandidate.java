@@ -1,17 +1,15 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
- * @author vianney
+ * Enumeration for the status of the candidate.
+ * @author vianney.
  *
  */
 public enum StatusCandidate {
@@ -45,13 +43,17 @@ public enum StatusCandidate {
     return namesMap.get(value);
   }
 
+  /**
+   * Return the value for the enumeration.
+   *
+   * @return the value.
+   */
   @JsonValue
   public String toValue() {
     for (Entry<String, StatusCandidate> entry : namesMap.entrySet()) {
       if (entry.getValue() == this)
         return entry.getKey();
+      }
+      return null; // or fail
     }
-
-    return null; // or fail
-  }
 }

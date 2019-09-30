@@ -1,15 +1,16 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
+
 import java.time.LocalDate;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.apsidepoei.projetpoei.database.contracts.AssessmentContract;
 import lombok.ToString;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @ToString
@@ -40,9 +41,9 @@ public class Assessment extends EntityDb {
   }
 
   /**
-   * @param category
-   * @param updatingDate
-   * @param candidate
+   * Constructor.
+   * @param category is a string category.
+   * @param updatingDate is a date.
    */
   public Assessment(AssessmentSubject category, LocalDate updatingDate) {
     super();
@@ -51,13 +52,14 @@ public class Assessment extends EntityDb {
   }
 
   /**
-   * @param category
-   * @param updatingDate
-   * @param score
-   * @param validationDate
-   * @param candidate
+   * Constructor.
+   * @param category is a category.
+   * @param updatingDate the date where the assessment were updated.
+   * @param score the score for the assessment.
+   * @param validationDate the validations date for the assessment.
    */
-  public Assessment(AssessmentSubject category, LocalDate updatingDate, Integer score, LocalDate validationDate) {
+  public Assessment(AssessmentSubject category, LocalDate updatingDate, Integer score,
+                    LocalDate validationDate) {
     super();
     this.category = category;
     this.updatingDate = updatingDate;
@@ -96,6 +98,7 @@ public class Assessment extends EntityDb {
   }
 
   /**
+   * Return a score number.
    * @return the score
    */
   public Integer getScore() {
@@ -103,6 +106,7 @@ public class Assessment extends EntityDb {
   }
 
   /**
+   * Set a score.
    * @param score the score to set
    */
   public void setScore(Integer score) {
@@ -110,6 +114,7 @@ public class Assessment extends EntityDb {
   }
 
   /**
+   * Return the validation date.
    * @return the validationDate
    */
   public LocalDate getValidationDate() {

@@ -1,23 +1,21 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.UserContract;
+
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.apsidepoei.projetpoei.database.contracts.UserContract;
-import com.apsidepoei.projetpoei.entities.RoleUser;
-import com.apsidepoei.projetpoei.entities.Person;
 
 import lombok.ToString;
 
 /**
+ * User entity.
  * @author vianney
  *
  */
 @Entity
+@DiscriminatorValue("User")
 @ToString
 @Table(name = UserContract.TABLE)
 public class User extends Person {
@@ -40,14 +38,16 @@ public class User extends Person {
   }
 
   /**
-   * @param firstname
-   * @param lastname
-   * @param email
-   * @param cellPhone
-   * @param login
-   * @param password
+   * Constructor.
+   * @param firstname is a string.
+   * @param lastname is a string.
+   * @param email is a string.
+   * @param cellPhone is a string.
+   * @param login is the string.
+   * @param password is the string.
    */
-  public User(String firstname, String lastname, String email, String cellPhone, String login, String password) {
+  public User(String firstname, String lastname, String email, String cellPhone,
+              String login, String password) {
     super(firstname, lastname, email, cellPhone);
     this.login = login;
     this.password = password;
@@ -65,7 +65,9 @@ public class User extends Person {
    * @param role      = the role
 
    */
-  public User(String firstname, String lastname, String email, String cellPhone, String homePhone, String commentary, Boolean mainContact, String login, String password, RoleUser role) {
+  public User(String firstname, String lastname, String email, String cellPhone,
+              String homePhone,String commentary, Boolean mainContact, String login,
+              String password, RoleUser role) {
     super(firstname, lastname, email, cellPhone, homePhone, commentary, mainContact);
     this.login = login;
     this.password = password;
@@ -76,6 +78,7 @@ public class User extends Person {
 
 
   /**
+   * Getter.
    * @return the name
    */
   public String getLogin() {
@@ -83,13 +86,15 @@ public class User extends Person {
   }
 
   /**
-   * @param name the name to set
+   * Setter.
+   * @param login the name to set
    */
   public void setLogin(String login) {
     this.login = login;
   }
 
   /**
+   * Getter.
    * @return the password
    */
   public String getPassword() {
@@ -97,6 +102,7 @@ public class User extends Person {
   }
 
   /**
+   * Setter.
    * @param password the password to set
    */
   public void setPassword(String password) {
@@ -104,6 +110,7 @@ public class User extends Person {
   }
 
   /**
+   * Getter.
    * @return the role
    */
   public RoleUser getRole() {
@@ -111,6 +118,7 @@ public class User extends Person {
   }
 
   /**
+   * Setter.
    * @return the role label
    */
   public String getRoleLabel() {
@@ -118,6 +126,7 @@ public class User extends Person {
   }
 
   /**
+   * Getter.
    * @param role is the role to set
    */
   public void setRole(RoleUser role) {

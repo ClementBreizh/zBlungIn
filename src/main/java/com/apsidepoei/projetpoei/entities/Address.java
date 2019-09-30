@@ -1,15 +1,16 @@
 package com.apsidepoei.projetpoei.entities;
 
+import com.apsidepoei.projetpoei.database.contracts.AddressContract;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import lombok.ToString;
+
 /**
  * This class is the Address entity.
- *
  * @author vianney
  *
  */

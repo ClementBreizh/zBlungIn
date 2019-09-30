@@ -77,7 +77,7 @@ public class CandidateRestControllerTest extends BaseRestControllerTest<Candidat
   protected boolean compareTo(Candidate item1, Candidate item2) {
     return item1.getId().equals(item2.getId()) && item1.getRanking().equals(item2.getRanking())
         && item1.getFeedback().equals(item2.getFeedback()) && item1.getDegrees().equals(item2.getDegrees())
-        && item1.getMatters().equals(item2.getMatters()) && item1.getSessions().equals(item2.getSessions());
+        && item1.getMatters().equals(item2.getMatters()) && item1.getCompanySession().equals(item2.getCompanySession());
   }
 
   /**

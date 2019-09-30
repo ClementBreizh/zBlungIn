@@ -1,17 +1,15 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * @author vianney
+ * Enumeration for the sex.
+ * @author vianney.
  *
  */
 public enum SexCandidate {
@@ -33,13 +31,20 @@ public enum SexCandidate {
     return namesMap.get(value);
   }
 
+  /**
+   * Return the value of the enumeration.
+   * @return the value.
+   */
   @JsonValue
   public String toValue() {
+    String data = null;
     for (Entry<String, SexCandidate> entry : namesMap.entrySet()) {
-      if (entry.getValue() == this)
-        return entry.getKey();
+      if (entry.getValue() == this) {
+        data = entry.getKey();
+      } else {
+        data = null;
+      }
     }
-
-    return null; // or fail
+    return data; // or fail
   }
 }
