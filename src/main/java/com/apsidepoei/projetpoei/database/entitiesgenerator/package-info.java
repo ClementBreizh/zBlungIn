@@ -1,1 +1,0 @@
-package com.apsidepoei.projetpoei.database.entitiesgenerator;
