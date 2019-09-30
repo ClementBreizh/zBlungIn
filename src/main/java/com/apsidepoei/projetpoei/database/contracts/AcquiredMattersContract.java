@@ -39,7 +39,7 @@ public class AcquiredMattersContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_SCORE, COL_VALIDATION_DATE};
+  public static final String[] COLS = new String[] { COL_ID, COL_SCORE, COL_VALIDATION_DATE};
 
   /**
    * Define the string used for create the table.

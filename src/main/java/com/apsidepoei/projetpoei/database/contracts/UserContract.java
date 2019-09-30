@@ -30,7 +30,7 @@ public class UserContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_PASSWORD, COL_ROLE};
+  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_PASSWORD, COL_ROLE};
   /**
    * Define the string used for create the table.
    */

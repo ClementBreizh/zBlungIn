@@ -47,7 +47,7 @@ public class PersonContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_EMAIL,
+  public static final String[] COLS = new String[] { COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_EMAIL,
       COL_CELL_PHONE, COL_HOME_PHONE, COL_COMMENTARY};
   /**
    * Define the string used for create the table.
