@@ -1,20 +1,27 @@
-/**
- *
- */
 package com.apsidepoei.projetpoei.entities;
+
+import com.apsidepoei.projetpoei.database.contracts.PersonContract;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-import org.hibernate.annotations.Type;
-
-import com.apsidepoei.projetpoei.database.contracts.PersonContract;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 import lombok.ToString;
 
+import org.hibernate.annotations.Type;
+
 /**
+ * Person entity.
  * @author vianney
  *
  */
@@ -24,6 +31,11 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = PersonContract.COL_ID))
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person extends EntityDb {
+
+
+  private String type;
+
+  @JsonProperty(value = PersonContract.COL_FIRSTNAME)
 
   @Column(name = PersonContract.COL_FIRSTNAME, nullable = false, length = 50)
   private String firstname;
@@ -58,6 +70,11 @@ public class Person extends EntityDb {
     super();
   }
 
+  @PrePersist
+  public void prePersist() {
+    this.type = this.getClass().getSimpleName();
+  }
+
   /**
    * Constructor with id for new Feedback.
    *
@@ -75,13 +92,14 @@ public class Person extends EntityDb {
   }
 
   /**
-   * @param firstname
-   * @param lastname
-   * @param email
-   * @param cellPhone
-   * @param homePhone
-   * @param commentary
-   * @param mainContact
+   * Constructor.
+   * @param firstname is the firstname.
+   * @param lastname is the lastname.
+   * @param email is the email.
+   * @param cellPhone is the cellPhone.
+   * @param homePhone is the homePhone.
+   * @param commentary is the commenraty.
+   * @param mainContact is the contact.
    */
   public Person(String firstname, String lastname, String email, String cellPhone, String homePhone,
       String commentary, Boolean mainContact) {
@@ -99,6 +117,7 @@ public class Person extends EntityDb {
   // GETTER/SETTER
 
   /**
+   * Getter.
    * @return the firstname
    */
   public String getFirstname() {
@@ -106,6 +125,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param firstname the firstname to set
    */
   public void setFirstname(String firstname) {
@@ -113,6 +133,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the lastname
    */
   public String getLastname() {
@@ -120,6 +141,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param lastname the lastname to set
    */
   public void setLastname(String lastname) {
@@ -127,6 +149,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the email
    */
   public String getEmail() {
@@ -134,6 +157,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param email the email to set
    */
   public void setEmail(String email) {
@@ -141,6 +165,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the cellPhone
    */
   public String getCellPhone() {
@@ -148,6 +173,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param cellPhone the cellPhone to set
    */
   public void setCellPhone(String cellPhone) {
@@ -155,6 +181,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the homePhone
    */
   public String getHomePhone() {
@@ -162,6 +189,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param homePhone the homePhone to set
    */
   public void setHomePhone(String homePhone) {
@@ -169,6 +197,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the commentary
    */
   public String getCommentary() {
@@ -176,6 +205,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param commentary the commentary to set
    */
   public void setCommentary(String commentary) {
@@ -183,6 +213,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the mainContact
    */
   public Boolean getMainContact() {
@@ -190,6 +221,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param mainContact the mainContact to set
    */
   public void setMainContact(Boolean mainContact) {
@@ -197,6 +229,7 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Getter.
    * @return the appointments
    */
   public List<Appointment> getAppointments() {
@@ -204,12 +237,18 @@ public class Person extends EntityDb {
   }
 
   /**
+   * Setter.
    * @param appointments the appointments to set
    */
   public void setAppointments(List<Appointment> appointments) {
     this.appointments = appointments;
   }
 
+  /**
+   * Add an appointment to a person.
+   * @param appointment is the appointment.
+   * @return the person updated.
+   */
   public Person addAppointment(final Appointment appointment) {
     if (!this.appointments.contains(appointment)) {
       this.appointments.add(appointment);

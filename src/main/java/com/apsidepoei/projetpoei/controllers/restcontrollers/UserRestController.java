@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.UserRepository;
-import com.apsidepoei.projetpoei.entities.Person;
 import com.apsidepoei.projetpoei.entities.User;
 
 /**
@@ -29,14 +28,15 @@ public class UserRestController extends BaseRestController<User, Integer> {
   @GetMapping("filtered")
   public Page<User> getAllFiltered(
       final Pageable pageable,
-      @RequestParam(defaultValue = "") final String login,
-      @RequestParam(defaultValue = "") final String lastname,
       @RequestParam(defaultValue = "") final String firstname,
+      @RequestParam(defaultValue = "") final String lastname,
       @RequestParam(defaultValue = "") final String email,
       @RequestParam(defaultValue = "") final String cellPhone,
-      @RequestParam(defaultValue = "") final String homePhone){
-    return this.getRepository().findAll(pageable, login, lastname, firstname, email, cellPhone, homePhone);
+      @RequestParam(defaultValue = "") final String homePhone,
+      @RequestParam(defaultValue = "") final String login){
+    return this.getRepository().findAll(pageable,firstname, lastname, email, cellPhone, homePhone, login);
   }
+
 
   protected UserRepository getRepository() {
     return (UserRepository) this.repository;
