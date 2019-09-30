@@ -46,7 +46,7 @@ public class AddressContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_STREET, COL_POSTAL_CODE,
+  protected static final String[] COLS = new String[] { COL_ID, COL_STREET, COL_POSTAL_CODE,
     COL_CITY };
 
   /**

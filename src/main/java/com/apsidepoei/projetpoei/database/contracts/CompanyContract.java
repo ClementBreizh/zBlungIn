@@ -44,7 +44,7 @@ public class CompanyContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_ANTENNANAME, COL_SIRET,
+  protected static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_ANTENNANAME, COL_SIRET,
       COL_APECODE };
 
 

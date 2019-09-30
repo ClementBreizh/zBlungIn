@@ -39,7 +39,7 @@ public class FeedbackContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] { COL_ID, COL_TYPE_OF_CONTRACT,
+  protected static final String[] COLS = new String[] { COL_ID, COL_TYPE_OF_CONTRACT,
       COL_DURATION_OF_CONTRACT, COL_COMMENT, };
 
   /**
