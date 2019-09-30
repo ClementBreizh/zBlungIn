@@ -49,7 +49,7 @@ public class AppointmentContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  public static final String[] COLS = new String[] {
+  protected static final String[] COLS = new String[] {
       COL_ID, COL_INFORMATIONS, COL_APPOINTMENTDATE, COL_REPORT
   };
 
