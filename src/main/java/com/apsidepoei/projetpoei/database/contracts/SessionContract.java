@@ -35,7 +35,7 @@ public class SessionContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_DATE_START,
+  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_DATE_START,
       COL_DATE_END };
 
   /**

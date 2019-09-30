@@ -32,7 +32,7 @@ public class DegreeContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_LEVEL };
+  public static final String[] COLS = new String[] { COL_ID, COL_NAME, COL_LEVEL };
 
   /**
    * Define the string used for create the table.

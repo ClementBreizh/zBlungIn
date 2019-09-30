@@ -60,7 +60,7 @@ public class CandidateContract extends BaseContract {
   /**
    * Define a table with all column.
    */
-  protected static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE,
+  public static final String[] COLS = new String[] { COL_ID, COL_RANKING_CANDIDATE,
       COL_FK_ID_ADDRESS };
 
   /**
