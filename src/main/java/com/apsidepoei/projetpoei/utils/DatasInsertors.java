@@ -499,15 +499,17 @@ public class DatasInsertors {
       this.candidateRepository.saveAndFlush(candidate);
     }
 
+    personList2.add(personRepository.findById(nbEntities + 4).get());
+    personList2.add(personRepository.findById(nbEntities + 6).get());
+    personList2.add(personRepository.findById(nbEntities + 7).get());
+    personList2.add(personRepository.findById(nbEntities + 8).get());
 
-//    personList2.add(personRepository.findById(nbEntities + 4).get());
-//    personList2.add(personRepository.findById(nbEntities + 6).get());
-//    personList2.add(personRepository.findById(nbEntities + 7).get());
-//    personList2.add(personRepository.findById(nbEntities + 8).get());
-//
-//    Company comp = companyRepository.findById(1).get();
-//    comp.setContacts(personList2);
-//    companyRepository.saveAndFlush(comp);
+    for (int i = 0; i < nbEntities; i++) {
+      Company comp = companyRepository.findById(1).get();
+
+      comp.setContacts(personList2);
+      companyRepository.saveAndFlush(comp);
+    }
 
 
     //  -----------------------------------Tests-----------------------------------------------
@@ -535,9 +537,6 @@ public class DatasInsertors {
       app.addPerson(candidateRepository.findById(faker.random().nextInt(2, nbEntities)).get());
       appointmentRepository.saveAndFlush(app);
     }
-
-
-
 
     log.debug("Fixtures totalement chargées");
   }
