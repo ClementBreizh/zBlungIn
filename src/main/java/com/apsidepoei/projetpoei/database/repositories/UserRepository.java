@@ -10,22 +10,13 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-  //  @Query("SELECT e FROM #{#entityName} e WHERE
-  //  (:lastname is NULL OR e.lastname LIKE %:lastname%)")
-  //  Page<User> findByLastname(Pageable pageable, @Param("lastname") String lastname);
-
   @Query("SELECT e FROM #{#entityName} e "
-      + "WHERE e.login LIKE %:login% "
+      + "WHERE e.firstname LIKE %:firstname% "
       + "AND e.lastname LIKE %:lastname% "
-      + "AND e.firstname LIKE %:firstname% "
       + "AND e.email LIKE %:email% "
       + "AND e.cellPhone LIKE %:cellPhone% "
-      + "AND e.homePhone LIKE %:homePhone%")
-  Page<User> findAll(Pageable pageable,
-                     @Param("login") String login,
-                     @Param("lastname") String lastname,
-                     @Param("firstname") String firstname,
-                     @Param("email") String email,
-                     @Param("cellPhone") String cellPhone,
-                     @Param("homePhone") String homePhone);
+      + "AND (e.homePhone = NULL OR e.homePhone LIKE %:homePhone%) "
+      + "AND e.login LIKE %:login%")
+  Page<User> findAll(Pageable pageable, @Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("cellPhone") String cellPhone, @Param("homePhone") String homePhone, @Param("login") String login);
+
 }

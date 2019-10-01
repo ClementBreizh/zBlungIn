@@ -5,6 +5,8 @@ import com.apsidepoei.projetpoei.database.repositories.CompanyRepository;
 import com.apsidepoei.projetpoei.entities.Company;
 import com.apsidepoei.projetpoei.services.CompanyService;
 
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/companies")
+@Api(tags = "Entreprises")
 public class CompanyRestController extends BaseRestController<Company, Integer> {
   @Autowired
   private CompanyService service;

@@ -1,5 +1,6 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
+
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.controllers.restcontrollers.dtos.CreateMatterDto;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
@@ -7,6 +8,8 @@ import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Candidate;
 
 import com.apsidepoei.projetpoei.services.CandidateService;
+import io.swagger.annotations.Api;
+
 import com.apsidepoei.projetpoei.exceptions.NotFoundException;
 import com.apsidepoei.projetpoei.services.CreateMatterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +26,13 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/candidates")
+@Api(tags = "Candidats")
 public class CandidateRestController extends BaseRestController<Candidate, Integer> {
   @Autowired
   private CandidateService service;
   
   private final CreateMatterService createMatterService;
-  
+
   public CandidateRestController(@Autowired final CandidateRepository repository, @Autowired final CreateMatterService service) {
     super(repository);
     this.createMatterService = service;
@@ -50,14 +54,14 @@ public class CandidateRestController extends BaseRestController<Candidate, Integ
       @RequestParam(defaultValue = "") final String homePhone) {
     return this.getRepository().findAll(pageable, lastname, firstname, email, cellPhone, homePhone);
   }
-  
+
   @PostMapping("/{id}/matter")
   public AcquiredMatters createAcquiredMatter(
       @PathVariable() int id,
       @Valid @RequestBody CreateMatterDto dto) throws NotFoundException {
-    
+
     final Candidate candidate = this.getRepository().findById(id).orElseThrow(() -> new NotFoundException());
-    
+
     final AcquiredMatters acquiredMatters = new AcquiredMatters(
         dto.getScore(),
         dto.getValidationDate(),

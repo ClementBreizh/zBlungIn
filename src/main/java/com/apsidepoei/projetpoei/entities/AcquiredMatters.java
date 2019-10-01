@@ -1,7 +1,5 @@
 package com.apsidepoei.projetpoei.entities;
 
-import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
-import com.apsidepoei.projetpoei.database.contracts.MatterContract;
 import java.time.LocalDate;
 
 import javax.persistence.AttributeOverride;
@@ -11,8 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
+import com.apsidepoei.projetpoei.database.contracts.MatterContract;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.ToString;
 
 
 /**
@@ -25,8 +28,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @ToString
 @Table(name = AcquiredMattersContract.TABLE)
 @AttributeOverride(name = "id", column = @Column(name = AcquiredMattersContract.COL_ID))
+//@ApiModel()
 public class AcquiredMatters extends EntityDb {
 
+  @ApiModelProperty("My commented field.")
   @ManyToOne(targetEntity = Matter.class, optional = false)
   @JoinColumn(name = AcquiredMattersContract.COL_FK_ID_MATTER,
       referencedColumnName = MatterContract.COL_ID)

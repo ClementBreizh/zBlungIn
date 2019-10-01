@@ -4,6 +4,8 @@ import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestContro
 import com.apsidepoei.projetpoei.database.repositories.AppointmentRepository;
 import com.apsidepoei.projetpoei.entities.Appointment;
 
+import io.swagger.annotations.Api;
+
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/appointments")
+@Api(tags = "Rendez-vous")
 public class AppointmentRestController extends BaseRestController<Appointment, Integer> {
 
   public AppointmentRestController(@Autowired AppointmentRepository repository) {

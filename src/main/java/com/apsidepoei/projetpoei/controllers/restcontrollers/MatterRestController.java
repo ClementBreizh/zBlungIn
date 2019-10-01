@@ -3,6 +3,9 @@ package com.apsidepoei.projetpoei.controllers.restcontrollers;
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.MatterRepository;
 import com.apsidepoei.projetpoei.entities.Matter;
+
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/matters")
+@Api(tags = "Langages")
 public class MatterRestController extends BaseRestController<Matter, Integer> {
   public MatterRestController(@Autowired MatterRepository repository) {
     super(repository);
