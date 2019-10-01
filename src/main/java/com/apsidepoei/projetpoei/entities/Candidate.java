@@ -10,15 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.NonNull;
 import lombok.ToString;
@@ -57,11 +49,8 @@ public class Candidate extends Person {
   @LazyCollection(LazyCollectionOption.FALSE)
   private List<Degree> degrees = new ArrayList<>();
 
-  @JsonIgnore
-  @ManyToMany(targetEntity = AcquiredMatters.class)
-  @JoinTable(name = "candidate_matter", joinColumns = {
-      @JoinColumn(name = CandidateContract.COL_ID) }, inverseJoinColumns = {
-      @JoinColumn(name = AcquiredMattersContract.COL_ID) })
+  @JsonIgnoreProperties({"candidate"})
+  @OneToMany(mappedBy = "candidate")
   private List<AcquiredMatters> matters;
 
   @LazyCollection(LazyCollectionOption.FALSE)
@@ -230,9 +219,10 @@ public class Candidate extends Person {
    * Add the matter.
    * @param matter to add
    */
-  public void addMatter(AcquiredMatters matter) {
+  public void addMatter(@NonNull AcquiredMatters matter) {
     if (!this.matters.contains(matter)) {
       this.matters.add(matter);
+      matter.setCandidate(this);
     }
   }
 
