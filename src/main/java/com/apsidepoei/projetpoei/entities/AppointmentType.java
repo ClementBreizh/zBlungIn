@@ -20,10 +20,10 @@ import java.util.Map.Entry;
 @Getter
 public enum AppointmentType {
   
-  TYPE_0(0, "téléphonique"),
-  TYPE_1(1, "physique"),
+  TYPE_0(0, "Téléphonique"),
+  TYPE_1(1, "Physique"),
   TYPE_2(2, "Skype"),
-  TYPE_3(3, "physique avec tests");
+  TYPE_3(3, "Physique avec tests");
   
   // Maybe should simply use ordinal.
   @NonNull

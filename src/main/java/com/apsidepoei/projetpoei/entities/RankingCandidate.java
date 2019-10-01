@@ -19,11 +19,11 @@ import java.util.Map.Entry;
 @RequiredArgsConstructor
 @Getter
 public enum RankingCandidate {
-  RANK_0(0, "0 - statut non déterminé"),
-  RANK_1(1, "1 - tout est ok"),
-  RANK_2(2, "2 - ok sauf documents à revoir"),
-  RANK_3(3, "3 - pas mal de choses à revoir"),
-  RANK_4(4, "4 - ne correspond pas au poste");
+  RANK_0(0, "N/A"),
+  RANK_1(1, "Rang 1"),
+  RANK_2(2, "Rang 2"),
+  RANK_3(3, "Rang 3"),
+  RANK_4(4, "Rang 4");
   
   // Maybe should simply use ordinal.
   @NonNull

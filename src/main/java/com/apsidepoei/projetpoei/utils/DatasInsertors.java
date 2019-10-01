@@ -499,10 +499,11 @@ public class DatasInsertors {
       this.candidateRepository.saveAndFlush(candidate);
     }
 
-    personList2.add(personRepository.findById(nbEntities + 4).get());
-    personList2.add(personRepository.findById(nbEntities + 6).get());
-    personList2.add(personRepository.findById(nbEntities + 7).get());
-    personList2.add(personRepository.findById(nbEntities + 8).get());
+    //Fait crash le front
+    //    personList2.add(personRepository.findById(nbEntities + 4).get());
+    //    personList2.add(personRepository.findById(nbEntities + 6).get());
+    //    personList2.add(personRepository.findById(nbEntities + 7).get());
+    //    personList2.add(personRepository.findById(nbEntities + 8).get());
 
     for (int i = 0; i < nbEntities; i++) {
       Company comp = companyRepository.findById(1).get();
