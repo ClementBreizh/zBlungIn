@@ -2,6 +2,8 @@ package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
 import com.apsidepoei.projetpoei.database.repositories.DegreeRepository;
 
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/degrees/dto")
+@Api(tags = "Diplômes DTO")
 public class DegreeRestControllerDto {
 
   @Autowired

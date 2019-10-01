@@ -3,6 +3,9 @@ package com.apsidepoei.projetpoei.controllers.restcontrollers.base;
 import com.apsidepoei.projetpoei.entities.ResourceDb;
 import com.apsidepoei.projetpoei.exceptions.NotFoundException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.Optional;
 import javax.validation.Valid;
 
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author vianney
  */
 
+@Api(tags = "Matière validées")
 public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
     implements CrudRestController<T, ID> {
 
@@ -32,6 +36,7 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
     this.repository = repository;
   }
 
+  @ApiOperation(value = "Get all entities")
   @GetMapping(value = {"", "/", "/index"})
   @Override
   public Page<T> getAll(final Pageable pageable) {

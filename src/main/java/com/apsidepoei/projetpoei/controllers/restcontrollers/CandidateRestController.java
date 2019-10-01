@@ -4,6 +4,9 @@ package com.apsidepoei.projetpoei.controllers.restcontrollers;
 import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
 import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
 import com.apsidepoei.projetpoei.entities.Candidate;
+
+import io.swagger.annotations.Api;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/candidates")
+@Api(tags = "Candidats")
 public class CandidateRestController extends BaseRestController<Candidate, Integer> {
 
   public CandidateRestController(@Autowired CandidateRepository repository) {
