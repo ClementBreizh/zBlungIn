@@ -116,8 +116,8 @@ public class DatasInsertors {
   private List<Session> sessionList = new ArrayList<>();
   private List<User> userList = new ArrayList<>();
   private List<Candidate> candidateList = new ArrayList<>();
-
   private List<Degree> degreeListCandidates = new ArrayList<>();
+  private List<Person> personList2 = new ArrayList<>();
 
 
   Faker faker = new Faker(Locale.FRENCH);
@@ -499,19 +499,45 @@ public class DatasInsertors {
       this.candidateRepository.saveAndFlush(candidate);
     }
 
+
+//    personList2.add(personRepository.findById(nbEntities + 4).get());
+//    personList2.add(personRepository.findById(nbEntities + 6).get());
+//    personList2.add(personRepository.findById(nbEntities + 7).get());
+//    personList2.add(personRepository.findById(nbEntities + 8).get());
+//
+//    Company comp = companyRepository.findById(1).get();
+//    comp.setContacts(personList2);
+//    companyRepository.saveAndFlush(comp);
+
+
     //  -----------------------------------Tests-----------------------------------------------
     //  ---------------------------------------------------------------------------------------
 
-    Appointment app = new Appointment(
+    Appointment appointment = new Appointment(
         LocalDateTime.now(),
         personRepository.findById(1).get(),
         AppointmentType.TYPE_1);
-    app.addPerson(personRepository.findById(1).get());
-    app.addPerson(candidateRepository.findById(2).get());
-    app.addPerson(candidateRepository.findById(3).get());
-    app.addPerson(candidateRepository.findById(4).get());
+    appointment.addPerson(personRepository.findById(1).get());
+    appointment.addPerson(candidateRepository.findById(2).get());
+    appointment.addPerson(candidateRepository.findById(3).get());
+    appointment.addPerson(candidateRepository.findById(4).get());
 
-    appointmentRepository.saveAndFlush(app);
+    appointmentRepository.saveAndFlush(appointment);
+
+    for (int i = 1; i < this.nbEntities + 1; i++) {
+      Appointment app = new Appointment(
+          LocalDateTime.now(),
+          personRepository.findById(faker.random().nextInt(1, nbEntities)).get(),
+          AppointmentType.TYPE_1);
+      app.addPerson(personRepository.findById(faker.random().nextInt(1, nbEntities + 5)).get());
+      app.addPerson(candidateRepository.findById(faker.random().nextInt(2, nbEntities)).get());
+      app.addPerson(candidateRepository.findById(faker.random().nextInt(2, nbEntities)).get());
+      app.addPerson(candidateRepository.findById(faker.random().nextInt(2, nbEntities)).get());
+      appointmentRepository.saveAndFlush(app);
+    }
+
+
+
 
     log.debug("Fixtures totalement chargées");
   }
