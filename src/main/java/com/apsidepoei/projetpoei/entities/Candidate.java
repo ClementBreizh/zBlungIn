@@ -148,10 +148,10 @@ public class Candidate extends Person {
    * Return the ranking label.
    * @return the ranking label
    */
-  @JsonIgnore
-  public String getRankingLabel() {
-    return this.ranking.toValue();
-  }
+//  @JsonIgnore
+//  public String getRankingLabel() {
+//    return this.ranking.toValue();
+//  }
 
   /**
    * Set the rankin.
