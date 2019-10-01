@@ -1,6 +1,5 @@
 package com.apsidepoei.projetpoei.entities;
 
-import com.apsidepoei.projetpoei.database.contracts.AcquiredMattersContract;
 import com.apsidepoei.projetpoei.database.contracts.AddressContract;
 import com.apsidepoei.projetpoei.database.contracts.CandidateContract;
 import com.apsidepoei.projetpoei.database.contracts.CompanySessionContract;
