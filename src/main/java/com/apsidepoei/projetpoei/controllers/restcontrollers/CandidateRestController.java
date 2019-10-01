@@ -6,6 +6,7 @@ import com.apsidepoei.projetpoei.database.repositories.CandidateRepository;
 import com.apsidepoei.projetpoei.entities.AcquiredMatters;
 import com.apsidepoei.projetpoei.entities.Candidate;
 
+import com.apsidepoei.projetpoei.services.CandidateService;
 import com.apsidepoei.projetpoei.exceptions.NotFoundException;
 import com.apsidepoei.projetpoei.services.CreateMatterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,20 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/candidates")
 public class CandidateRestController extends BaseRestController<Candidate, Integer> {
+  @Autowired
+  private CandidateService service;
+  
   private final CreateMatterService createMatterService;
   
   public CandidateRestController(@Autowired final CandidateRepository repository, @Autowired final CreateMatterService service) {
     super(repository);
     this.createMatterService = service;
+  }
+  
+  @PutMapping(value = "{id}")
+  @Override
+  public Candidate update(@Valid @RequestBody Candidate item, @PathVariable Integer id) throws NotFoundException {
+    return this.service.update(id, item);
   }
 
   @GetMapping("filtered")
@@ -53,8 +63,6 @@ public class CandidateRestController extends BaseRestController<Candidate, Integ
         dto.getValidationDate(),
         null,
         candidate);
-    
-    System.out.println(this.createMatterService.create(dto.getName(), acquiredMatters));
     
     return this.createMatterService.create(dto.getName(), acquiredMatters);
   }

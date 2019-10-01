@@ -2,10 +2,7 @@ package com.apsidepoei.projetpoei.entities;
 
 import com.apsidepoei.projetpoei.database.contracts.DegreeContract;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 import lombok.ToString;
@@ -26,6 +23,7 @@ public class Degree extends EntityDb {
   private String name;
 
   @Column(name = DegreeContract.COL_LEVEL)
+  @Enumerated(EnumType.STRING)
   private LevelDegree level;
 
   @Column(name = DegreeContract.COL_VALIDATION_DATE, nullable = true, length = 4)
