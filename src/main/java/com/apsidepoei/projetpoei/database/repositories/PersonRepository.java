@@ -24,10 +24,16 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
   Page<Person> findAll(Pageable pageable,
                        @Param("lastname") String lastname,
                        @Param("firstname") String firstname,
-                       @Param("email") String email, @Param("cellPhone") String cellPhone,
+                       @Param("email") String email,
+                       @Param("cellPhone") String cellPhone,
                        @Param("homePhone") String homePhone);
 
-  // @Query(value = "SELECT * FROM person WHERE type = 'person'", nativeQuery = true)
-  @Query(value = "SELECT e FROM #{#entityName} e WHERE e.type = 'Person' ORDER BY e.id ASC")
+  @Query("SELECT e FROM #{#entityName} e WHERE e.type = 'Person' ORDER BY e.id ASC")
   Page<Person> findAll(Pageable pageable);
+
+  @Query("SELECT e FROM #{#entityName} e "
+      + "WHERE e.type IN :types "
+      + "AND (e.lastname LIKE %:value% OR e.firstname LIKE %:value% OR e.email LIKE %:value%)")
+  Page<Person> findByAutocomplete(Pageable pageable, @Param("types") List<String> types, @Param("value") String value);
+
 }

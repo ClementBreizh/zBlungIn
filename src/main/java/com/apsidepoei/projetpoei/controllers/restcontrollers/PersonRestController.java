@@ -1,8 +1,12 @@
 package com.apsidepoei.projetpoei.controllers.restcontrollers;
 
-import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
-import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
-import com.apsidepoei.projetpoei.entities.Person;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.apsidepoei.projetpoei.controllers.restcontrollers.base.BaseRestController;
+import com.apsidepoei.projetpoei.database.repositories.PersonRepository;
+import com.apsidepoei.projetpoei.entities.Person;
+
+import lombok.Data;
 
 /**
  * Res controller.
@@ -36,7 +46,24 @@ public class PersonRestController extends BaseRestController<Person, Integer> {
 
   }
 
+  @GetMapping("/autocomplete")
+  public Page<Person> getForAutocomplete(
+      Pageable pageable,
+      @Valid TotoVeut1Gato dto) {
+    return getRepository().findByAutocomplete(pageable, dto.getTypes(), dto.getValue());
+  }
+
   protected PersonRepository getRepository() {
     return (PersonRepository) this.repository;
+  }
+
+  @Data
+  public static class TotoVeut1Gato {
+    @NotBlank
+    private String value;
+
+    @NotEmpty
+    @Size(min = 1, max = 3)
+    private List<String> types;
   }
 }

@@ -14,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.ToString;
@@ -71,7 +72,8 @@ public class Person extends EntityDb {
   }
 
   @PrePersist
-  public void prePersist() {
+  @PreUpdate
+  public void updatePersist() {
     this.type = this.getClass().getSimpleName();
   }
 
